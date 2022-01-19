@@ -9,10 +9,15 @@
 /* Begin PBXBuildFile section */
 		6A0AB75F2796ECE6009C80E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A0AB75E2796ECE6009C80E9 /* GoogleService-Info.plist */; };
 		6A0AB78927971B6A009C80E9 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6A0AB78827971B6A009C80E9 /* .swiftlint.yml */; };
+		6A0AB79327986002009C80E9 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB79227986002009C80E9 /* UIColor+Extension.swift */; };
+		6A0AB7952798610E009C80E9 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB7942798610E009C80E9 /* UIFont+Extension.swift */; };
+		6A0AB7AD279864AF009C80E9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6A0AB7AC279864AF009C80E9 /* SnapKit */; };
+		6A0AB7AE27986590009C80E9 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6A0AB7AA279863EA009C80E9 /* NotoSansKR-Medium.otf */; };
+		6A0AB7AF27986592009C80E9 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6A0AB7A7279863EA009C80E9 /* NotoSansKR-Regular.otf */; };
+		6A0AB7B1279866F4009C80E9 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB7B0279866F4009C80E9 /* UILabel+Extension.swift */; };
 		6AE4580B279679FD006B142C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4580A279679FD006B142C /* AppDelegate.swift */; };
 		6AE4580D279679FD006B142C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4580C279679FD006B142C /* SceneDelegate.swift */; };
-		6AE4580F279679FD006B142C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4580E279679FD006B142C /* ViewController.swift */; };
-		6AE45812279679FD006B142C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AE45810279679FD006B142C /* Main.storyboard */; };
+		6AE4580F279679FD006B142C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4580E279679FD006B142C /* OnboardingViewController.swift */; };
 		6AE45814279679FF006B142C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AE45813279679FF006B142C /* Assets.xcassets */; };
 		6AE45817279679FF006B142C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AE45815279679FF006B142C /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,11 +25,15 @@
 /* Begin PBXFileReference section */
 		6A0AB75E2796ECE6009C80E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../새싹친구 프로젝트/SeSAC_SPL/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A0AB78827971B6A009C80E9 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		6A0AB79227986002009C80E9 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		6A0AB7942798610E009C80E9 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		6A0AB7A7279863EA009C80E9 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
+		6A0AB7AA279863EA009C80E9 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		6A0AB7B0279866F4009C80E9 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		6AE45807279679FD006B142C /* SeSACFriendsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSACFriendsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE4580A279679FD006B142C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AE4580C279679FD006B142C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6AE4580E279679FD006B142C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6AE45811279679FD006B142C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6AE4580E279679FD006B142C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		6AE45813279679FF006B142C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AE45816279679FF006B142C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6AE45818279679FF006B142C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -35,12 +44,106 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A0AB7AD279864AF009C80E9 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A0AB78A27985F01009C80E9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6AE4580A279679FD006B142C /* AppDelegate.swift */,
+				6AE4580C279679FD006B142C /* SceneDelegate.swift */,
+				6AE45813279679FF006B142C /* Assets.xcassets */,
+				6AE45815279679FF006B142C /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6A0AB78B27985F3F009C80E9 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				6A0AB79027985FBC009C80E9 /* Onboarding */,
+				6A0AB79627986120009C80E9 /* Auth */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		6A0AB78C27985F4C009C80E9 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				6A0AB78F27985FB3009C80E9 /* Model */,
+				6A0AB78E27985FAD009C80E9 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		6A0AB78D27985F53009C80E9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		6A0AB78E27985FAD009C80E9 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		6A0AB78F27985FB3009C80E9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6A0AB79027985FBC009C80E9 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				6AE4580E279679FD006B142C /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		6A0AB79127985FED009C80E9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6A0AB79227986002009C80E9 /* UIColor+Extension.swift */,
+				6A0AB7942798610E009C80E9 /* UIFont+Extension.swift */,
+				6A0AB7B0279866F4009C80E9 /* UILabel+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		6A0AB79627986120009C80E9 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		6A0AB797279863BB009C80E9 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				6A0AB79127985FED009C80E9 /* Extension */,
+				6A0AB7A4279863E0009C80E9 /* Font */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		6A0AB7A4279863E0009C80E9 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				6A0AB7AA279863EA009C80E9 /* NotoSansKR-Medium.otf */,
+				6A0AB7A7279863EA009C80E9 /* NotoSansKR-Regular.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		6AE457FE279679FD006B142C = {
 			isa = PBXGroup;
 			children = (
@@ -61,12 +164,11 @@
 		6AE45809279679FD006B142C /* SeSACFriendsApp */ = {
 			isa = PBXGroup;
 			children = (
-				6AE4580A279679FD006B142C /* AppDelegate.swift */,
-				6AE4580C279679FD006B142C /* SceneDelegate.swift */,
-				6AE4580E279679FD006B142C /* ViewController.swift */,
-				6AE45810279679FD006B142C /* Main.storyboard */,
-				6AE45813279679FF006B142C /* Assets.xcassets */,
-				6AE45815279679FF006B142C /* LaunchScreen.storyboard */,
+				6A0AB797279863BB009C80E9 /* Util */,
+				6A0AB78D27985F53009C80E9 /* Data */,
+				6A0AB78C27985F4C009C80E9 /* Domain */,
+				6A0AB78B27985F3F009C80E9 /* Presentation */,
+				6A0AB78A27985F01009C80E9 /* Resources */,
 				6A0AB75E2796ECE6009C80E9 /* GoogleService-Info.plist */,
 				6AE45818279679FF006B142C /* Info.plist */,
 			);
@@ -90,6 +192,9 @@
 			dependencies = (
 			);
 			name = SeSACFriendsApp;
+			packageProductDependencies = (
+				6A0AB7AC279864AF009C80E9 /* SnapKit */,
+			);
 			productName = SeSACFriendsApp;
 			productReference = 6AE45807279679FD006B142C /* SeSACFriendsApp.app */;
 			productType = "com.apple.product-type.application";
@@ -118,6 +223,9 @@
 				Base,
 			);
 			mainGroup = 6AE457FE279679FD006B142C;
+			packageReferences = (
+				6A0AB7AB279864AF009C80E9 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 6AE45808279679FD006B142C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,9 +242,10 @@
 			files = (
 				6A0AB78927971B6A009C80E9 /* .swiftlint.yml in Resources */,
 				6AE45817279679FF006B142C /* LaunchScreen.storyboard in Resources */,
+				6A0AB7AE27986590009C80E9 /* NotoSansKR-Medium.otf in Resources */,
 				6A0AB75F2796ECE6009C80E9 /* GoogleService-Info.plist in Resources */,
+				6A0AB7AF27986592009C80E9 /* NotoSansKR-Regular.otf in Resources */,
 				6AE45814279679FF006B142C /* Assets.xcassets in Resources */,
-				6AE45812279679FD006B142C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,23 +276,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AE4580F279679FD006B142C /* ViewController.swift in Sources */,
+				6AE4580F279679FD006B142C /* OnboardingViewController.swift in Sources */,
 				6AE4580B279679FD006B142C /* AppDelegate.swift in Sources */,
+				6A0AB7B1279866F4009C80E9 /* UILabel+Extension.swift in Sources */,
 				6AE4580D279679FD006B142C /* SceneDelegate.swift in Sources */,
+				6A0AB7952798610E009C80E9 /* UIFont+Extension.swift in Sources */,
+				6A0AB79327986002009C80E9 /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6AE45810279679FD006B142C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6AE45811279679FD006B142C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6AE45815279679FF006B142C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -323,7 +427,7 @@
 				INFOPLIST_FILE = SeSACFriendsApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -351,7 +455,7 @@
 				INFOPLIST_FILE = SeSACFriendsApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -389,6 +493,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6A0AB7AB279864AF009C80E9 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6A0AB7AC279864AF009C80E9 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A0AB7AB279864AF009C80E9 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6AE457FF279679FD006B142C /* Project object */;
 }
