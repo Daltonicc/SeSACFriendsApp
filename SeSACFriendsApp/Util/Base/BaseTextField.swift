@@ -56,6 +56,7 @@ class BaseTextFieldView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+
     }
 
     func setUpView() {
@@ -69,6 +70,7 @@ class BaseTextFieldView: UIView {
     func setUpConfig() {
 
         statusLabel.isHidden = true
+        mainTextField.isEnabled = true
 
         switch textFieldState {
         case .inactive:
@@ -80,7 +82,7 @@ class BaseTextFieldView: UIView {
         case .disable:
             lineView.backgroundColor = .white
             mainTextField.backgroundColor = .gray3
-            mainTextField.isEnabled = true
+            mainTextField.isEnabled = false
         case .error:
             animatedColor(color: .error)
             statusLabel.isHidden = false

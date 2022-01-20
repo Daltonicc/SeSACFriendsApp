@@ -13,7 +13,12 @@ class OnboardingViewController: UIViewController {
     let label = UILabel()
     let textField = UITextField()
     let button1 = UIButton()
-    var testView = BaseTextFieldView()
+    var testView: BaseTextFieldView = {
+        let view = BaseTextFieldView()
+        view.textFieldState = .error
+        return view
+    }()
+    var testButton = BaseButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +44,7 @@ class OnboardingViewController: UIViewController {
 
     @objc func button1Clicked() {
 
-        testView.textFieldState = .error
+        testView.textFieldState = .disable
     }
 }
 
