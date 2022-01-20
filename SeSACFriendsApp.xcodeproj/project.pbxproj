@@ -15,6 +15,11 @@
 		6A0AB7AE27986590009C80E9 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6A0AB7AA279863EA009C80E9 /* NotoSansKR-Medium.otf */; };
 		6A0AB7AF27986592009C80E9 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6A0AB7A7279863EA009C80E9 /* NotoSansKR-Regular.otf */; };
 		6A0AB7B1279866F4009C80E9 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB7B0279866F4009C80E9 /* UILabel+Extension.swift */; };
+		6A0AB7B327987319009C80E9 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB7B227987319009C80E9 /* UIButton+Extension.swift */; };
+		6A0AB7B527987A65009C80E9 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB7B427987A65009C80E9 /* UITextField+Extension.swift */; };
+		6A0AB7BA2798E8C0009C80E9 /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB7B92798E8C0009C80E9 /* BaseTextField.swift */; };
+		6A0AB7BD27993F32009C80E9 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB7BC27993F32009C80E9 /* BaseButton.swift */; };
+		6A0AB7BF2799410A009C80E9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB7BE2799410A009C80E9 /* UIView+Extension.swift */; };
 		6AE4580B279679FD006B142C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4580A279679FD006B142C /* AppDelegate.swift */; };
 		6AE4580D279679FD006B142C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4580C279679FD006B142C /* SceneDelegate.swift */; };
 		6AE4580F279679FD006B142C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4580E279679FD006B142C /* OnboardingViewController.swift */; };
@@ -30,6 +35,11 @@
 		6A0AB7A7279863EA009C80E9 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		6A0AB7AA279863EA009C80E9 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		6A0AB7B0279866F4009C80E9 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		6A0AB7B227987319009C80E9 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		6A0AB7B427987A65009C80E9 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		6A0AB7B92798E8C0009C80E9 /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
+		6A0AB7BC27993F32009C80E9 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
+		6A0AB7BE2799410A009C80E9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		6AE45807279679FD006B142C /* SeSACFriendsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSACFriendsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE4580A279679FD006B142C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AE4580C279679FD006B142C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +125,9 @@
 				6A0AB79227986002009C80E9 /* UIColor+Extension.swift */,
 				6A0AB7942798610E009C80E9 /* UIFont+Extension.swift */,
 				6A0AB7B0279866F4009C80E9 /* UILabel+Extension.swift */,
+				6A0AB7B227987319009C80E9 /* UIButton+Extension.swift */,
+				6A0AB7B427987A65009C80E9 /* UITextField+Extension.swift */,
+				6A0AB7BE2799410A009C80E9 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -129,6 +142,7 @@
 		6A0AB797279863BB009C80E9 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				6A0AB7BB27990AEC009C80E9 /* Base */,
 				6A0AB79127985FED009C80E9 /* Extension */,
 				6A0AB7A4279863E0009C80E9 /* Font */,
 			);
@@ -142,6 +156,15 @@
 				6A0AB7A7279863EA009C80E9 /* NotoSansKR-Regular.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		6A0AB7BB27990AEC009C80E9 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				6A0AB7B92798E8C0009C80E9 /* BaseTextField.swift */,
+				6A0AB7BC27993F32009C80E9 /* BaseButton.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		6AE457FE279679FD006B142C = {
@@ -276,12 +299,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A0AB7BF2799410A009C80E9 /* UIView+Extension.swift in Sources */,
 				6AE4580F279679FD006B142C /* OnboardingViewController.swift in Sources */,
 				6AE4580B279679FD006B142C /* AppDelegate.swift in Sources */,
 				6A0AB7B1279866F4009C80E9 /* UILabel+Extension.swift in Sources */,
 				6AE4580D279679FD006B142C /* SceneDelegate.swift in Sources */,
+				6A0AB7B527987A65009C80E9 /* UITextField+Extension.swift in Sources */,
 				6A0AB7952798610E009C80E9 /* UIFont+Extension.swift in Sources */,
+				6A0AB7BD27993F32009C80E9 /* BaseButton.swift in Sources */,
 				6A0AB79327986002009C80E9 /* UIColor+Extension.swift in Sources */,
+				6A0AB7B327987319009C80E9 /* UIButton+Extension.swift in Sources */,
+				6A0AB7BA2798E8C0009C80E9 /* BaseTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
