@@ -17,7 +17,11 @@ enum ButtonState: String {
 
 class BaseButton: UIButton {
 
-    var buttonState: ButtonState = .inactive
+    var buttonState: ButtonState = .inactive {
+        didSet {
+            setUpConfig()
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)

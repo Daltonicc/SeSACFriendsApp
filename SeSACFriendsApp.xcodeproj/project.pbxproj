@@ -21,6 +21,7 @@
 		6A0AB7BD27993F32009C80E9 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB7BC27993F32009C80E9 /* BaseButton.swift */; };
 		6A0AB7BF2799410A009C80E9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB7BE2799410A009C80E9 /* UIView+Extension.swift */; };
 		6A0AB7C127994872009C80E9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB7C027994872009C80E9 /* OnboardingView.swift */; };
+		6A0AB7C7279C3BB9009C80E9 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0AB7C6279C3BB9009C80E9 /* OnboardingCollectionViewCell.swift */; };
 		6AE4580B279679FD006B142C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4580A279679FD006B142C /* AppDelegate.swift */; };
 		6AE4580D279679FD006B142C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4580C279679FD006B142C /* SceneDelegate.swift */; };
 		6AE4580F279679FD006B142C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE4580E279679FD006B142C /* OnboardingViewController.swift */; };
@@ -42,6 +43,7 @@
 		6A0AB7BC27993F32009C80E9 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		6A0AB7BE2799410A009C80E9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		6A0AB7C027994872009C80E9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		6A0AB7C6279C3BB9009C80E9 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		6AE45807279679FD006B142C /* SeSACFriendsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSACFriendsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE4580A279679FD006B142C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AE4580C279679FD006B142C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				6AE4580E279679FD006B142C /* OnboardingViewController.swift */,
 				6A0AB7C027994872009C80E9 /* OnboardingView.swift */,
+				6A0AB7C6279C3BB9009C80E9 /* OnboardingCollectionViewCell.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -145,7 +148,7 @@
 		6A0AB797279863BB009C80E9 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				6A0AB7BB27990AEC009C80E9 /* Base */,
+				6A0AB7BB27990AEC009C80E9 /* Custom */,
 				6A0AB79127985FED009C80E9 /* Extension */,
 				6A0AB7A4279863E0009C80E9 /* Font */,
 			);
@@ -161,13 +164,13 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		6A0AB7BB27990AEC009C80E9 /* Base */ = {
+		6A0AB7BB27990AEC009C80E9 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
 				6A0AB7B92798E8C0009C80E9 /* BaseTextField.swift */,
 				6A0AB7BC27993F32009C80E9 /* BaseButton.swift */,
 			);
-			path = Base;
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		6AE457FE279679FD006B142C = {
@@ -302,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A0AB7C7279C3BB9009C80E9 /* OnboardingCollectionViewCell.swift in Sources */,
 				6A0AB7BF2799410A009C80E9 /* UIView+Extension.swift in Sources */,
 				6AE4580F279679FD006B142C /* OnboardingViewController.swift in Sources */,
 				6AE4580B279679FD006B142C /* AppDelegate.swift in Sources */,

@@ -10,42 +10,43 @@ import SnapKit
 
 class OnboardingViewController: UIViewController {
 
-    let label = UILabel()
-    let textField = UITextField()
-    let button1 = UIButton()
-    var testView: BaseTextFieldView = {
-        let view = BaseTextFieldView()
-        view.textFieldState = .error
-        return view
-    }()
-    var testButton = BaseButton()
+    let mainView = OnboardingView()
+
+    override func loadView() {
+        self.view = mainView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
 
-        view.addSubview(testView)
-        view.addSubview(button1)
-        testView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.height.equalTo(200)
-        }
-        button1.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(testView.snp.bottom).offset(30)
-            make.width.height.equalTo(100)
+        mainView.collectionView.delegate = self
+        mainView.collectionView.dataSource = self
+        mainView.collectionView.register(OnboardingCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: OnboardingCollectionViewCell.identifier)
 
-        }
-        button1.addTarget(self, action: #selector(button1Clicked), for: .touchUpInside)
-        button1.setTitle("asdasdasd", for: .normal)
-        button1.backgroundColor = .black
     }
 
-    @objc func button1Clicked() {
+}
 
-        testView.textFieldState = .disable
+extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
     }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnboardingCollectionViewCell.identifier, for: indexPath) as? OnboardingCollectionViewCell else { return UICollectionViewCell() }
+
+        return cell
+
+    }
+
+    func cellLayout() {
+        
+    }
+
 }
 
 /*
