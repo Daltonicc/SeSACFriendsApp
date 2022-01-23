@@ -12,7 +12,7 @@ class OnboardingView: UIView {
 
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "위치 기반으로 빠르게\n 주위 친구들 확인"
+        label.text = "위치 기반으로 빠르게\n주위 친구들 확인"
         label.textAlignment = .center
         label.textColor = .black
         label.font = UIFont(name: Font.notoSansKRm, size: 24)
@@ -26,16 +26,19 @@ class OnboardingView: UIView {
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsHorizontalScrollIndicator = false
         layout.minimumLineSpacing = 5
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 300)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 250)
         return collectionView
     }()
     let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.currentPage = 0
         pageControl.numberOfPages = 3
+        pageControl.pageIndicatorTintColor = .gray3
+        pageControl.currentPageIndicatorTintColor = .black
         return pageControl
     }()
     let startButton: BaseButton = {
@@ -71,15 +74,16 @@ class OnboardingView: UIView {
             make.top.equalTo(self.snp.top).inset(100)
         }
         collectionView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(50)
+            make.center.equalToSuperview()
+//            make.top.equalTo(titleLabel.snp.bottom).offset(50)
             make.width.equalTo(self.snp.width)
-            make.height.equalTo(300)
+            make.height.equalTo(self.snp.height).multipliedBy(0.45)
         }
         pageControl.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(collectionView.snp.bottom).offset(30)
-            make.width.height.equalTo(30)
+//            make.top.equalTo(collectionView.snp.bottom).offset(50)
+            make.bottom.equalTo(startButton.snp.top).offset(-42)
+
         }
         startButton.snp.makeConstraints { make in
             make.bottom.equalTo(self.snp.bottom).inset(42)

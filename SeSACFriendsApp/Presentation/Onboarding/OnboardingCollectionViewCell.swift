@@ -14,7 +14,8 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
 
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .red
+        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = .white
         return imageView
     }()
 
@@ -41,6 +42,16 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
             make.leading.equalTo(self.snp.leading)
             make.trailing.equalTo(self.snp.trailing)
             make.bottom.equalTo(self.snp.bottom)
+        }
+    }
+
+    func cellConfiguration(item: Int) {
+
+        switch item {
+        case 0: imageView.image = UIImage(named: "OnboardingImage1")
+        case 1: imageView.image = UIImage(named: "OnboardingImage2")
+        case 2: imageView.image = UIImage(named: "OnboardingImage3")
+        default: imageView.image = UIImage(named: "OnboardingImage1")
         }
     }
 }
