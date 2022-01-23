@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class Login2View: UIView {
+final class Login2View: UIView, ViewRepresentable {
 
     let titleLabel: UILabel = {
         let label = UILabel()

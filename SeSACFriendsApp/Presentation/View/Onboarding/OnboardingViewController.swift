@@ -14,6 +14,7 @@ final class OnboardingViewController: UIViewController {
     let mainView = OnboardingView()
 
     override func loadView() {
+        super.loadView()
         self.view = mainView
     }
 
@@ -49,7 +50,7 @@ final class OnboardingViewController: UIViewController {
 
         addPressAnimationToButton(sender) { _ in
 
-            print("Complete")
+            self.coordinator?.startVC()
             
         }
     }
@@ -113,5 +114,5 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
  1. SwiftGen
   - 이미지나 폰트 등 에셋 관련 문자열 에러를 최소화하기 위해 시도해본 툴이다.
  2. Moya
-  
+
  */

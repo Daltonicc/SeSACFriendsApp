@@ -7,12 +7,13 @@
 import UIKit
 import SnapKit
 
-class LoginView: UIView {
+final class LoginView: UIView, ViewRepresentable {
 
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "새싹 서비스 이용을 위해\n휴대폰 번호를 입력해 주세요"
         label.textAlignment = .center
+        label.numberOfLines = 0
         label.font = .display1
         return label
     }()
@@ -21,6 +22,7 @@ class LoginView: UIView {
         textField.textFieldState = .inactive
         textField.mainTextField.placeholder = "휴대폰 번호(-없이 숫자만 입력)"
         textField.mainTextField.keyboardType = .numberPad
+        textField.mainTextField.text = "111111111"
         return textField
     }()
     let authButton: CustomButton = {
@@ -50,6 +52,23 @@ class LoginView: UIView {
 
     func setUpConstraint() {
 
+        authButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(30)
+            make.leading.equalTo(self.snp.leading).inset(16)
+            make.trailing.equalTo(self.snp.trailing).inset(16)
+            make.height.equalTo(48)
+        }
+        phoneNumberTextField.snp.makeConstraints { make in
+            make.bottom.equalTo(authButton.snp.top).offset(-72)
+            make.leading.equalTo(self.snp.leading).inset(16)
+            make.trailing.equalTo(self.snp.trailing).inset(16)
+            make.height.equalTo(48)
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(phoneNumberTextField.snp.top).offset(-72)
+            make.centerX.equalToSuperview()
+        }
     }
 
 }

@@ -6,7 +6,12 @@
 //
 
 import Foundation
+import Moya
 
-class LoginViewModel {
+final class LoginViewModel {
+
+    var phoneNumber: Observable<String> = Observable("")
+
+    var yourID: String = ""
     
 }

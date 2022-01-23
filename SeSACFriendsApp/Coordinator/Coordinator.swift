@@ -34,6 +34,9 @@ final class MainCoordinator: Coordinator {
 
     func startVC() {
 
+        let vc = LoginViewController()
+        vc.coordinator = self
+        nav.pushViewController(vc, animated: true)
     }
 
 }
