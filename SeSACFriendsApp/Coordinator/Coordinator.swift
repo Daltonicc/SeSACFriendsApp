@@ -16,7 +16,7 @@ protocol Coordinator {
     func startVC()
 }
 
-class MainCoordinator: Coordinator {
+final class MainCoordinator: Coordinator {
 
     var childCoordinators = [Coordinator]()
     var nav: UINavigationController

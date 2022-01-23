@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class OnboardingView: UIView {
+final class OnboardingView: UIView {
 
     let titleLabel: UILabel = {
         let label = UILabel()

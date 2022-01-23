@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class OnboardingViewController: UIViewController {
+final class OnboardingViewController: UIViewController {
 
     weak var coordinator: MainCoordinator?
     let mainView = OnboardingView()
@@ -30,6 +30,20 @@ class OnboardingViewController: UIViewController {
         mainView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
 
     }
+
+//    func bindCollectionView() {
+//
+//        let onBoardingImages = Observable.of("OnboardingImage1", "OnboardingImage2", "OnboardingImage3")
+//
+//        onBoardingImages
+//            .bind(to: mainView.collectionView.rx.items(cellIdentifier: OnboardingCollectionViewCell.identifier, cellType: OnboardingCollectionViewCell.self)) {
+//                index, image, cell in
+//
+//                cell.imageView = UIImage(named: String(image))
+//            }
+//
+//
+//    }
 
     @objc func startButtonClicked(sender: UIButton) {
 
@@ -94,4 +108,10 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
  1. 텍스트 필드의 보더 중에서 바텀에만 보더를 주고 싶었는데 코드를 구현해도 제대로 보더 표시가 안됐던 이슈 존재.
   -> 해결: viewDidLoad가 아닌 viewDidLayoutSubviews에서 관련 코드를 구현해줘야 함. addSubview가 끝난다음에 호출해야 하기 때문.
 
+
+ 새로 시도해본 거
+ 1. SwiftGen
+  - 이미지나 폰트 등 에셋 관련 문자열 에러를 최소화하기 위해 시도해본 툴이다.
+ 2. Moya
+  
  */
