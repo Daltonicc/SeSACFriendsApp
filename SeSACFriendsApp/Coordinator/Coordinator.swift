@@ -13,7 +13,9 @@ protocol Coordinator {
     var childCoordinators: [Coordinator] { get set}
     var nav: UINavigationController { get set }
 
-    func startVC()
+    func startOnboardingVC()
+    func startLoginVC()
+    func startLogin2VC()
 }
 
 final class MainCoordinator: Coordinator {
@@ -32,9 +34,16 @@ final class MainCoordinator: Coordinator {
         nav.pushViewController(vc, animated: true)
     }
 
-    func startVC() {
+    func startLoginVC() {
 
         let vc = LoginViewController()
+        vc.coordinator = self
+        nav.pushViewController(vc, animated: true)
+    }
+
+    func startLogin2VC() {
+
+        let vc = Login2ViewController()
         vc.coordinator = self
         nav.pushViewController(vc, animated: true)
     }

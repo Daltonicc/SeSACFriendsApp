@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class OnboardingViewController: UIViewController {
+final class OnboardingViewController: BaseViewController {
 
     weak var coordinator: MainCoordinator?
     let mainView = OnboardingView()
@@ -20,8 +20,10 @@ final class OnboardingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
-        view.backgroundColor = .white
+    override func setViewConfig() {
+        super.setViewConfig()
 
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
@@ -29,7 +31,6 @@ final class OnboardingViewController: UIViewController {
         mainView.collectionView.isPagingEnabled = true
 
         mainView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
-
     }
 
 //    func bindCollectionView() {
@@ -50,7 +51,7 @@ final class OnboardingViewController: UIViewController {
 
         addPressAnimationToButton(sender) { _ in
 
-            self.coordinator?.startVC()
+            self.coordinator?.startLoginVC()
             
         }
     }

@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: BaseViewController {
 
     weak var coordinator: MainCoordinator?
     let mainView = LoginView()
@@ -23,18 +23,19 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
+        textfieldConfig()
+    }
+
+    override func setViewConfig() {
+        super.setViewConfig()
 
         mainView.authButton.addTarget(self, action: #selector(sendButtonClicked(_:)), for: .touchUpInside)
-
-        textfieldConfig()
     }
 
     func textfieldConfig() {
 
         viewModel.phoneNumber.bind { phoneNumber in
 
-            print(phoneNumber)
             self.mainView.phoneNumberTextField.mainTextField.text = phoneNumber.applyPatternOnNumbers(pattern: "###-####-####", replacementCharacter: "#")
         }
 
@@ -50,13 +51,17 @@ final class LoginViewController: UIViewController {
 
         addPressAnimationToButton(sender) { _ in
 
-            PhoneAuthProvider.provider().verifyPhoneNumber("+82) \(self.mainView.phoneNumberTextField.mainTextField.text ?? "")", uiDelegate: nil) { verificationID, error in
-                if let error = error {
-                     print(error.localizedDescription)
-                     return
-                }
-                self.viewModel.yourID = verificationID!
-            }
+            //UI다 짜면 활성화
+//            PhoneAuthProvider.provider().verifyPhoneNumber("+82) \(self.mainView.phoneNumberTextField.mainTextField.text ?? "")", uiDelegate: nil) { verificationID, error in
+//                if let error = error {
+//                     print(error.localizedDescription)
+//                     return
+//                }
+//                self.viewModel.yourID = verificationID!
+//            }
+
+            self.coordinator?.startLogin2VC()
+
         }
     }
 }
