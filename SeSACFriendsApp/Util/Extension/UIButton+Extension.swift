@@ -9,9 +9,4 @@ import UIKit
 
 extension UIButton {
 
-    func buttonConfig(title: String, color: UIColor, isEnabled: Bool) {
-        setTitle(title, for: .normal)
-        self.isEnabled = isEnabled
-        tintColor = color
-    }
 }

@@ -10,6 +10,7 @@ import SnapKit
 
 class OnboardingViewController: UIViewController {
 
+    weak var coordinator: MainCoordinator?
     let mainView = OnboardingView()
 
     override func loadView() {
@@ -26,6 +27,17 @@ class OnboardingViewController: UIViewController {
         mainView.collectionView.register(OnboardingCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: OnboardingCollectionViewCell.identifier)
         mainView.collectionView.isPagingEnabled = true
 
+        mainView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
+
+    }
+
+    @objc func startButtonClicked(sender: UIButton) {
+
+        addPressAnimationToButton(sender) { _ in
+
+            print("Complete")
+            
+        }
     }
 
 }

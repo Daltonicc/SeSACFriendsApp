@@ -17,7 +17,7 @@ enum TextFieldState: String {
     case success
 }
 
-class BaseTextFieldView: UIView {
+class CustomTextFieldView: UIView {
 
     var mainTextField: UITextField = {
         let textfield = UITextField()

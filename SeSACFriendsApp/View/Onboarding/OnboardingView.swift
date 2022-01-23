@@ -41,8 +41,8 @@ class OnboardingView: UIView {
         pageControl.currentPageIndicatorTintColor = .black
         return pageControl
     }()
-    let startButton: BaseButton = {
-        let button = BaseButton()
+    let startButton: CustomButton = {
+        let button = CustomButton()
         button.buttonState = .fill
         button.setTitle("시작하기", for: .normal)
         return button
