@@ -10,7 +10,7 @@ import SnapKit
 
 final class OnboardingViewController: BaseViewController {
 
-    weak var coordinator: OnboardingCoordinator?
+    weak var coordinator: HomeCoordinator?
     let mainView = OnboardingView()
 
     override func loadView() {
@@ -51,7 +51,7 @@ final class OnboardingViewController: BaseViewController {
 
         addPressAnimationToButton(sender) { _ in
 
-//            self.coordinator?.startLoginVC()
+            self.coordinator?.showLoginAuthView()
             
         }
     }

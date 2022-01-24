@@ -22,7 +22,7 @@ final class LoginView: UIView, ViewRepresentable {
         textField.textFieldState = .inactive
         textField.mainTextField.placeholder = "휴대폰 번호(-없이 숫자만 입력)"
         textField.mainTextField.keyboardType = .numberPad
-        textField.mainTextField.text = "111111111"
+        textField.mainTextField.text = ""
         return textField
     }()
     let authButton: CustomButton = {

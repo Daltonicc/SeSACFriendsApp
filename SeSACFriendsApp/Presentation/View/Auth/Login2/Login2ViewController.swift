@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class Login2ViewController: BaseViewController {
 
-//    weak var coordinator: MainCoordinator?
+    weak var coordinator: HomeCoordinator?
     let mainView = Login2View()
     let viewModel = LoginViewModel()
 
@@ -19,6 +20,12 @@ final class Login2ViewController: BaseViewController {
         self.view = mainView
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.view.makeToast("전화 번호 인증 시작", point: CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2), title: nil, image: nil, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -51,6 +58,23 @@ final class Login2ViewController: BaseViewController {
 
     @objc func authButtonClicked(_ sender: UIButton) {
 
+        let credential = PhoneAuthProvider.provider().credential(withVerificationID: LoginViewModel.yourID, verificationCode: mainView.numberTextField.mainTextField.text ?? "")
+
+        addPressAnimationToButton(sender) { _ in
+            Auth.auth().signIn(with: credential) { success, error in
+                if error == nil {
+                    let alert = UIAlertController(title: "로그인 성공!", message: nil, preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+                    alert.addAction(ok)
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "로그인 실패", message: "인증키를 다시 확인해주세요", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+                    alert.addAction(ok)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
     }
 }
 

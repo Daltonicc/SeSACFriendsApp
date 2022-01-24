@@ -7,10 +7,11 @@
 
 import UIKit
 import FirebaseAuth
+import Toast
 
 final class LoginViewController: BaseViewController {
 
-//    weak var coordinator: MainCoordinator?
+    weak var coordinator: HomeCoordinator?
     let mainView = LoginView()
     var viewModel = LoginViewModel()
 
@@ -37,9 +38,21 @@ final class LoginViewController: BaseViewController {
 
         viewModel.phoneNumber.bind { phoneNumber in
 
-            self.mainView.phoneNumberTextField.mainTextField.text = phoneNumber.applyPatternOnNumbers(pattern: "###-####-####", replacementCharacter: "#")
-        }
+            let textField = self.mainView.phoneNumberTextField.mainTextField
 
+            if phoneNumber.count > 12 {
+                textField.text = phoneNumber.applyPatternOnNumbers(pattern: "###-####-####", replacementCharacter: "#")
+            } else {
+                textField.text = phoneNumber.applyPatternOnNumbers(pattern: "###-###-####", replacementCharacter: "#")
+            }
+
+            if phoneNumber.count >= 12 {
+                self.mainView.authButton.buttonState = .fill
+            } else {
+                self.mainView.authButton.buttonState = .disable
+            }
+
+        }
         mainView.phoneNumberTextField.mainTextField.addTarget(self, action: #selector(phoneNumberTextFieldDidChange(textfield:)), for: .editingChanged)
     }
 
@@ -53,16 +66,21 @@ final class LoginViewController: BaseViewController {
 
         addPressAnimationToButton(sender) { _ in
 
-            //UI다 짜면 활성화
-//            PhoneAuthProvider.provider().verifyPhoneNumber("+82) \(self.mainView.phoneNumberTextField.mainTextField.text ?? "")", uiDelegate: nil) { verificationID, error in
-//                if let error = error {
-//                     print(error.localizedDescription)
-//                     return
-//                }
-//                self.viewModel.yourID = verificationID!
-//            }
+            // 버튼 상태가 fill 아니면 바로 리턴
+            guard self.mainView.authButton.buttonState == .fill else {
 
-//            self.coordinator?.startLogin2VC()
+
+                return
+            }
+
+            PhoneAuthProvider.provider().verifyPhoneNumber("+82) \(self.mainView.phoneNumberTextField.mainTextField.text ?? "")", uiDelegate: nil) { verificationID, error in
+                if let error = error {
+                     print(error.localizedDescription)
+                     return
+                }
+                LoginViewModel.yourID = verificationID!
+            }
+            self.coordinator?.showLogin2AuthView()
 
         }
     }
@@ -74,5 +92,16 @@ extension LoginViewController: UITextFieldDelegate {
         if (textField.text?.count ?? 0 > maxLength) {
             textField.deleteBackward()
         }
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+
+        mainView.phoneNumberTextField.textFieldState = .focus
+        
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+        mainView.phoneNumberTextField.textFieldState = .active
     }
 }

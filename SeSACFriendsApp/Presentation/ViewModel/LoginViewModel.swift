@@ -10,8 +10,9 @@ import Moya
 
 final class LoginViewModel {
 
+    static var yourID: String = ""
+
     var phoneNumber: Observable<String> = Observable("")
     var authNumber: Observable<String> = Observable("")
-    var yourID: String = ""
-    
+
 }

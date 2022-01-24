@@ -25,9 +25,14 @@ final class AppCoordinator: NSObject, Coordinator {
 
         window.rootViewController = presenter
 
-        let coordinator = OnboardingCoordinator(presenter: presenter)
+        let coordinator = HomeCoordinator(presenter: presenter)
         childCoordinators.append(coordinator)
-        coordinator.start()
+
+        //최초 로그인 시에 온보딩 뷰
+        coordinator.startOnboardingView()
+
+        //아니면 바로 휴대폰 인증 뷰
+        // coordinator.start()
 
         window.makeKeyAndVisible()
     }
