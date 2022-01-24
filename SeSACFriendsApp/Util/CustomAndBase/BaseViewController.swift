@@ -13,9 +13,12 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
 
         setViewConfig()
+        textfieldConfig()
     }
 
     func setViewConfig() {
         view.backgroundColor = .white
     }
+
+    func textfieldConfig() {}
 }

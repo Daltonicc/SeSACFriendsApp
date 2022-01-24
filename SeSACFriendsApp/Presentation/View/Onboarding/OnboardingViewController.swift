@@ -10,7 +10,7 @@ import SnapKit
 
 final class OnboardingViewController: BaseViewController {
 
-    weak var coordinator: MainCoordinator?
+    weak var coordinator: OnboardingCoordinator?
     let mainView = OnboardingView()
 
     override func loadView() {
@@ -51,7 +51,7 @@ final class OnboardingViewController: BaseViewController {
 
         addPressAnimationToButton(sender) { _ in
 
-            self.coordinator?.startLoginVC()
+//            self.coordinator?.startLoginVC()
             
         }
     }
@@ -115,5 +115,6 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
  1. SwiftGen
   - 이미지나 폰트 등 에셋 관련 문자열 에러를 최소화하기 위해 시도해본 툴이다.
  2. Moya
-
+ 3. 클래스 상속
+  - BaseViewController에 고정적으로 실행해야하는 메서드를 넣어놨고 해당 클래스를 상속함으로써 코드 절약 가능.
  */

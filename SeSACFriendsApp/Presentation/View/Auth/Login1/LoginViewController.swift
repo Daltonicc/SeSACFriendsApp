@@ -10,9 +10,9 @@ import FirebaseAuth
 
 final class LoginViewController: BaseViewController {
 
-    weak var coordinator: MainCoordinator?
+//    weak var coordinator: MainCoordinator?
     let mainView = LoginView()
-    let viewModel = LoginViewModel()
+    var viewModel = LoginViewModel()
 
     override func loadView() {
         super.loadView()
@@ -23,16 +23,17 @@ final class LoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        textfieldConfig()
     }
 
     override func setViewConfig() {
         super.setViewConfig()
 
         mainView.authButton.addTarget(self, action: #selector(sendButtonClicked(_:)), for: .touchUpInside)
+        mainView.phoneNumberTextField.mainTextField.delegate = self
     }
 
-    func textfieldConfig() {
+    override func textfieldConfig() {
+        super.textfieldConfig()
 
         viewModel.phoneNumber.bind { phoneNumber in
 
@@ -45,6 +46,7 @@ final class LoginViewController: BaseViewController {
     @objc func phoneNumberTextFieldDidChange(textfield: UITextField) {
 
         viewModel.phoneNumber.value = textfield.text ?? ""
+        checkMaxLength(textField: textfield, maxLength: 13)
     }
 
     @objc func sendButtonClicked(_ sender: UIButton) {
@@ -60,8 +62,17 @@ final class LoginViewController: BaseViewController {
 //                self.viewModel.yourID = verificationID!
 //            }
 
-            self.coordinator?.startLogin2VC()
+//            self.coordinator?.startLogin2VC()
 
+        }
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+
+    func checkMaxLength(textField: UITextField, maxLength: Int) {
+        if (textField.text?.count ?? 0 > maxLength) {
+            textField.deleteBackward()
         }
     }
 }

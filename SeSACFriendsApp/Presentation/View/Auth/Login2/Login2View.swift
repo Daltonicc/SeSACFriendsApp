@@ -25,7 +25,7 @@ final class Login2View: UIView, ViewRepresentable {
         label.textColor = .gray7
         return label
     }()
-    let phoneNumberTextField: CustomTextFieldView = {
+    let numberTextField: CustomTextFieldView = {
         let textField = CustomTextFieldView()
         textField.textFieldState = .inactive
         textField.mainTextField.placeholder = "인증번호 입력"
@@ -48,7 +48,7 @@ final class Login2View: UIView, ViewRepresentable {
     let authButton: CustomButton = {
         let button = CustomButton()
         button.buttonState = .disable
-        button.setTitle("인증 문자 받기", for: .normal)
+        button.setTitle("인증하고 시작하기", for: .normal)
         return button
     }()
 
@@ -67,12 +67,10 @@ final class Login2View: UIView, ViewRepresentable {
 
         addSubview(titleLabel)
         addSubview(subTitleLabel)
-        addSubview(phoneNumberTextField)
+        addSubview(numberTextField)
         addSubview(resendButton)
         addSubview(authButton)
         addSubview(limitTimeLabel)
-
-//        phoneNumberTextField.addSubview(limitTimeLabel)
     }
 
     func setUpConstraint() {
@@ -84,7 +82,7 @@ final class Login2View: UIView, ViewRepresentable {
             make.trailing.equalTo(self.snp.trailing).inset(16)
             make.height.equalTo(48)
         }
-        phoneNumberTextField.snp.makeConstraints { make in
+        numberTextField.snp.makeConstraints { make in
             make.bottom.equalTo(authButton.snp.top).offset(-72)
             make.leading.equalTo(self.snp.leading).inset(16)
             make.trailing.equalTo(resendButton.snp.leading)
@@ -97,18 +95,13 @@ final class Login2View: UIView, ViewRepresentable {
             make.width.equalTo(72)
         }
         subTitleLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(phoneNumberTextField.snp.top).offset(-72)
+            make.bottom.equalTo(numberTextField.snp.top).offset(-72)
             make.centerX.equalToSuperview()
         }
         titleLabel.snp.makeConstraints { make in
             make.bottom.equalTo(subTitleLabel.snp.top).offset(-8)
             make.centerX.equalToSuperview()
         }
-//        limitTimeLabel.snp.makeConstraints { make in
-//            make.top.equalTo(self.snp.top).inset(5)
-//            make.trailing.equalTo(self.snp.trailing).inset(10)
-//            make.width.equalTo(20)
-//        }
         limitTimeLabel.snp.makeConstraints { make in
             make.bottom.equalTo(authButton.snp.top).offset(-72)
             make.trailing.equalTo(resendButton.snp.leading).offset(-25)

@@ -8,44 +8,11 @@
 import Foundation
 import UIKit
 
-protocol Coordinator {
+protocol Coordinator: AnyObject {
 
-    var childCoordinators: [Coordinator] { get set}
-    var nav: UINavigationController { get set }
+    var presenter: UINavigationController { get set }
 
-    func startOnboardingVC()
-    func startLoginVC()
-    func startLogin2VC()
-}
+    var childCoordinators: [Coordinator] { get set }
 
-final class MainCoordinator: Coordinator {
-
-    var childCoordinators = [Coordinator]()
-    var nav: UINavigationController
-
-    init(nav: UINavigationController) {
-        self.nav = nav
-    }
-
-    func startOnboardingVC() {
-
-        let vc = OnboardingViewController()
-        vc.coordinator = self
-        nav.pushViewController(vc, animated: true)
-    }
-
-    func startLoginVC() {
-
-        let vc = LoginViewController()
-        vc.coordinator = self
-        nav.pushViewController(vc, animated: true)
-    }
-
-    func startLogin2VC() {
-
-        let vc = Login2ViewController()
-        vc.coordinator = self
-        nav.pushViewController(vc, animated: true)
-    }
-
+    func start()
 }

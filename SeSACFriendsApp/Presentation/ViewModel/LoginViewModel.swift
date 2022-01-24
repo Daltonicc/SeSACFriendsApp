@@ -11,6 +11,7 @@ import Moya
 final class LoginViewModel {
 
     var phoneNumber: Observable<String> = Observable("")
+    var authNumber: Observable<String> = Observable("")
     var yourID: String = ""
     
 }
