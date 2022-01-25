@@ -103,8 +103,10 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
  2. Moya
  3. 클래스 상속
   - BaseViewController에 고정적으로 실행해야하는 메서드를 넣어놨고 해당 클래스를 상속함으로써 코드 절약 가능.
+ 4. Clean Architecture - UseCase 활용
 
 
  시도해봐야할 거
- 1. 뷰컨트롤러를 초기화할 때, 아예 뷰랑 뷰모델 넣기
+ 1. 클린아키텍처에서 레포지토리 파트? 어떻게?
+ 2. Moya
  */

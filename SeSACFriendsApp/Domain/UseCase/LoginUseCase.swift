@@ -12,12 +12,13 @@ final class LoginUseCase {
 
     func requestFirebase(textField: UITextField) {
 
+        //상황별 토스트 메세지 띄워주기
         PhoneAuthProvider.provider().verifyPhoneNumber("+82) \(textField.text ?? "")", uiDelegate: nil) { verificationID, error in
             if let error = error {
                  print(error.localizedDescription)
                  return
             }
-            LoginViewModel.yourID = verificationID!
+            LoginViewModel.yourIDForFirebase = verificationID!
         }
     }
     

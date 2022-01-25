@@ -6,13 +6,11 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class Login2ViewController: BaseViewController {
 
-    weak var coordinator: HomeCoordinator?
     let mainView = Login2View()
-    let viewModel = LoginViewModel()
+    let viewModel = Login2ViewModel()
 
     override func loadView() {
         super.loadView()
@@ -23,7 +21,6 @@ final class Login2ViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.view.makeToast("전화 번호 인증 시작", point: CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2), title: nil, image: nil, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -41,13 +38,9 @@ final class Login2ViewController: BaseViewController {
     override func textfieldConfig() {
         super.textfieldConfig()
 
-        viewModel.authNumber.bind { authNumber in
-            
-            self.mainView.numberTextField.mainTextField.text = authNumber.applyPatternOnNumbers(pattern: "######", replacementCharacter: "#")
-        }
+        viewModel.checkValidation(textField: mainView.numberTextField.mainTextField)
         
         mainView.numberTextField.mainTextField.addTarget(self, action: #selector(numberTextFieldDidChange(textfield:)), for: .editingChanged)
-
     }
 
     @objc func numberTextFieldDidChange(textfield: UITextField) {
@@ -58,22 +51,8 @@ final class Login2ViewController: BaseViewController {
 
     @objc func authButtonClicked(_ sender: UIButton) {
 
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: LoginViewModel.yourID, verificationCode: mainView.numberTextField.mainTextField.text ?? "")
-
         addPressAnimationToButton(sender) { _ in
-            Auth.auth().signIn(with: credential) { success, error in
-                if error == nil {
-                    let alert = UIAlertController(title: "로그인 성공!", message: nil, preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
-                    alert.addAction(ok)
-                    self.present(alert, animated: true, completion: nil)
-                } else {
-                    let alert = UIAlertController(title: "로그인 실패", message: "인증키를 다시 확인해주세요", preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
-                    alert.addAction(ok)
-                    self.present(alert, animated: true, completion: nil)
-                }
-            }
+            self.viewModel.checkCredentialNumber(textField: self.mainView.numberTextField.mainTextField)
         }
     }
 }
@@ -84,5 +63,16 @@ extension Login2ViewController: UITextFieldDelegate {
         if (textField.text?.count ?? 0 > maxLength) {
             textField.deleteBackward()
         }
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+
+        mainView.numberTextField.textFieldState = .focus
+
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+        mainView.numberTextField.textFieldState = .active
     }
 }

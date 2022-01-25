@@ -39,7 +39,7 @@ class HomeCoordinator: NSObject, Coordinator {
     func showLogin2AuthView() {
 
         let login2AuthView = Login2ViewController()
-        login2AuthView.coordinator = self
+        login2AuthView.viewModel.coordinator = self
         presenter.pushViewController(login2AuthView, animated: true)
     }
 

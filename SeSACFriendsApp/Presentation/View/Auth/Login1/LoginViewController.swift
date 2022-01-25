@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 import Toast
 
 final class LoginViewController: BaseViewController {
@@ -52,21 +51,10 @@ final class LoginViewController: BaseViewController {
 
         addPressAnimationToButton(sender) { _ in
 
-            // 버튼 상태가 fill 아니면 바로 리턴
-            guard self.mainView.authButton.buttonState == .fill else {
-
-                return
-            }
-
-            PhoneAuthProvider.provider().verifyPhoneNumber("+82) \(self.mainView.phoneNumberTextField.mainTextField.text ?? "")", uiDelegate: nil) { verificationID, error in
-                if let error = error {
-                     print(error.localizedDescription)
-                     return
-                }
-                LoginViewModel.yourID = verificationID!
-            }
-            self.viewModel.coordinator?.showLogin2AuthView()
-
+            self.viewModel.requestFirebaseAuth(
+                button: self.mainView.authButton,
+                textField: self.mainView.phoneNumberTextField.mainTextField
+            )
         }
     }
 }
