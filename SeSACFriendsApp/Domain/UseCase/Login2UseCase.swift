@@ -10,7 +10,7 @@ import FirebaseAuth
 
 final class Login2UseCase {
 
-    func checkCredential(textField: UITextField) {
+    func checkCredential(textField: UITextField, completion: @escaping () -> Void) {
 
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: LoginViewModel.yourIDForFirebase, verificationCode: textField.text ?? "")
 
@@ -22,8 +22,10 @@ final class Login2UseCase {
                       print("idToken error: \(error)")
                       return
                     }
+
                     if let idToken = idToken {
                         UserDefaults.standard.set(idToken, forKey: "uidToken")
+                        completion()
                     }
                     // 상황별 토스트 메시지 띄워주기
                 }

@@ -43,4 +43,32 @@ class HomeCoordinator: NSObject, Coordinator {
         presenter.pushViewController(login2AuthView, animated: true)
     }
 
+    func showNicknameView() {
+
+        let nicknameView = NicknameViewController()
+        nicknameView.viewModel.coordinator = self
+        presenter.pushViewController(nicknameView, animated: true)
+    }
+
+    func showBirthView() {
+
+        let login2AuthView = Login2ViewController()
+        login2AuthView.viewModel.coordinator = self
+        presenter.pushViewController(login2AuthView, animated: true)
+    }
+
+    func showEmailView() {
+
+        let login2AuthView = Login2ViewController()
+        login2AuthView.viewModel.coordinator = self
+        presenter.pushViewController(login2AuthView, animated: true)
+    }
+
+    func showGenderView() {
+
+        let login2AuthView = Login2ViewController()
+        login2AuthView.viewModel.coordinator = self
+        presenter.pushViewController(login2AuthView, animated: true)
+    }
+
 }

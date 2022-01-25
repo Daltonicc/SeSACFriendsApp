@@ -15,8 +15,6 @@ final class LoginViewModel {
 
     static var yourIDForFirebase: String = ""
 
-    let idToken = UserDefaults.standard.object(forKey: "uidToken")
-
     var phoneNumber: Observable<String> = Observable("")
 
     func checkAuthValidation(textField: UITextField, button: CustomButton) {
@@ -37,7 +35,6 @@ final class LoginViewModel {
         }
     }
 
-    // 김성연, 배경원, 이주경, 최광호, 
     // MARK: - UseCase
 
     func requestFirebaseAuth(button: CustomButton, textField: UITextField) {

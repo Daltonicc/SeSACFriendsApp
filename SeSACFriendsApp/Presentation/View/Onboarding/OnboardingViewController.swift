@@ -37,7 +37,7 @@ final class OnboardingViewController: BaseViewController {
 
         addPressAnimationToButton(sender) { _ in
 
-            self.viewModel.coordinator?.showLoginAuthView()
+            self.viewModel.showLoginView()
             
         }
     }

@@ -8,6 +8,13 @@
 import UIKit
 import Toast
 
+/*
+ 구현해야할 것
+ 1. 인증번호 자동으로 가져오기
+ 2. 타이머 기능
+ 3. 상황별 토스트 메세지
+
+ */
 final class LoginViewController: BaseViewController {
 
     weak var coordinator: HomeCoordinator?

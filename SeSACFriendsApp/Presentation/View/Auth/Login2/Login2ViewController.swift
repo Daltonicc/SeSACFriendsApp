@@ -38,8 +38,7 @@ final class Login2ViewController: BaseViewController {
     override func textfieldConfig() {
         super.textfieldConfig()
 
-        viewModel.checkValidation(textField: mainView.numberTextField.mainTextField)
-        
+        viewModel.checkValidation(textField: mainView.numberTextField.mainTextField, button: mainView.authButton)
         mainView.numberTextField.mainTextField.addTarget(self, action: #selector(numberTextFieldDidChange(textfield:)), for: .editingChanged)
     }
 
