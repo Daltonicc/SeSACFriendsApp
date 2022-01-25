@@ -10,7 +10,7 @@ import SnapKit
 
 final class OnboardingViewController: BaseViewController {
 
-    weak var coordinator: HomeCoordinator?
+    var viewModel = OnboardingViewModel()
     let mainView = OnboardingView()
 
     override func loadView() {
@@ -33,25 +33,11 @@ final class OnboardingViewController: BaseViewController {
         mainView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
     }
 
-//    func bindCollectionView() {
-//
-//        let onBoardingImages = Observable.of("OnboardingImage1", "OnboardingImage2", "OnboardingImage3")
-//
-//        onBoardingImages
-//            .bind(to: mainView.collectionView.rx.items(cellIdentifier: OnboardingCollectionViewCell.identifier, cellType: OnboardingCollectionViewCell.self)) {
-//                index, image, cell in
-//
-//                cell.imageView = UIImage(named: String(image))
-//            }
-//
-//
-//    }
-
     @objc func startButtonClicked(sender: UIButton) {
 
         addPressAnimationToButton(sender) { _ in
 
-            self.coordinator?.showLoginAuthView()
+            self.viewModel.coordinator?.showLoginAuthView()
             
         }
     }
@@ -117,4 +103,8 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
  2. Moya
  3. 클래스 상속
   - BaseViewController에 고정적으로 실행해야하는 메서드를 넣어놨고 해당 클래스를 상속함으로써 코드 절약 가능.
+
+
+ 시도해봐야할 거
+ 1. 뷰컨트롤러를 초기화할 때, 아예 뷰랑 뷰모델 넣기
  */

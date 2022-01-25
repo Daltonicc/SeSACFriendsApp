@@ -36,23 +36,9 @@ final class LoginViewController: BaseViewController {
     override func textfieldConfig() {
         super.textfieldConfig()
 
-        viewModel.phoneNumber.bind { phoneNumber in
+        viewModel.checkAuthValidation(textField: mainView.phoneNumberTextField.mainTextField,
+                                      button: mainView.authButton)
 
-            let textField = self.mainView.phoneNumberTextField.mainTextField
-
-            if phoneNumber.count > 12 {
-                textField.text = phoneNumber.applyPatternOnNumbers(pattern: "###-####-####", replacementCharacter: "#")
-            } else {
-                textField.text = phoneNumber.applyPatternOnNumbers(pattern: "###-###-####", replacementCharacter: "#")
-            }
-
-            if phoneNumber.count >= 12 {
-                self.mainView.authButton.buttonState = .fill
-            } else {
-                self.mainView.authButton.buttonState = .disable
-            }
-
-        }
         mainView.phoneNumberTextField.mainTextField.addTarget(self, action: #selector(phoneNumberTextFieldDidChange(textfield:)), for: .editingChanged)
     }
 
@@ -69,7 +55,6 @@ final class LoginViewController: BaseViewController {
             // 버튼 상태가 fill 아니면 바로 리턴
             guard self.mainView.authButton.buttonState == .fill else {
 
-
                 return
             }
 
@@ -80,7 +65,7 @@ final class LoginViewController: BaseViewController {
                 }
                 LoginViewModel.yourID = verificationID!
             }
-            self.coordinator?.showLogin2AuthView()
+            self.viewModel.coordinator?.showLogin2AuthView()
 
         }
     }

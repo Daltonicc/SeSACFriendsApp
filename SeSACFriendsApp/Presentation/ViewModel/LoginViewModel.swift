@@ -6,13 +6,41 @@
 //
 
 import Foundation
-import Moya
+import UIKit
 
 final class LoginViewModel {
+
+    weak var coordinator: HomeCoordinator?
+    let loginUseCase = LoginUseCase()
 
     static var yourID: String = ""
 
     var phoneNumber: Observable<String> = Observable("")
     var authNumber: Observable<String> = Observable("")
 
+    func checkAuthValidation(textField: UITextField, button: CustomButton) {
+
+        phoneNumber.bind { phoneNumber in
+
+            if phoneNumber.count > 12 {
+                textField.text = phoneNumber.applyPatternOnNumbers(pattern: "###-####-####", replacementCharacter: "#")
+            } else {
+                textField.text = phoneNumber.applyPatternOnNumbers(pattern: "###-###-####", replacementCharacter: "#")
+            }
+
+            if phoneNumber.count >= 12 {
+                button.buttonState = .fill
+            } else {
+                button.buttonState = .disable
+            }
+        }
+    }
+
+    func requestFirebaseAuth(button: CustomButton, textField: UITextField) {
+
+        // 버튼 상태가 fill 아니면 바로 리턴
+        guard button.buttonState == .fill else { return }
+        loginUseCase.requestFirebase(textField: textField)
+        coordinator?.showLogin2AuthView()
+    }
 }

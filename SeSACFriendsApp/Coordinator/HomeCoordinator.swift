@@ -25,14 +25,14 @@ class HomeCoordinator: NSObject, Coordinator {
     func startOnboardingView() {
 
         let onboardingView = OnboardingViewController()
-        onboardingView.coordinator = self
+        onboardingView.viewModel.coordinator = self
         presenter.pushViewController(onboardingView, animated: true)
     }
 
     func showLoginAuthView() {
 
         let loginAuthView = LoginViewController()
-        loginAuthView.coordinator = self
+        loginAuthView.viewModel.coordinator = self
         presenter.pushViewController(loginAuthView, animated: true)
     }
 
