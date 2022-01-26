@@ -25,7 +25,7 @@ final class AppCoordinator: NSObject, Coordinator {
 
         window.rootViewController = presenter
 
-        let coordinator = HomeCoordinator(presenter: presenter)
+        let coordinator = AuthCoordinator(presenter: presenter)
         childCoordinators.append(coordinator)
 
         //최초 로그인 시에 온보딩 뷰

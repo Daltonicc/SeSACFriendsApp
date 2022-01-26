@@ -11,7 +11,7 @@ import SwiftUI
 
 final class Login2ViewModel {
 
-    weak var coordinator: HomeCoordinator?
+    weak var coordinator: AuthCoordinator?
     let login2UseCase = Login2UseCase()
 
     var authNumber: Observable<String> = Observable("")
@@ -36,14 +36,15 @@ final class Login2ViewModel {
 
     func checkCredentialNumber(textField: UITextField) {
 
-        login2UseCase.checkCredential(textField: textField) {
-
-            // 받아온 id토큰으로 API통신 회원정보 있는지 체크.
-            // 없으면 닉네임뷰로
-            self.coordinator?.showNicknameView()
-
-            // 있으면 바로 홈으로.
-
-        }
+//        login2UseCase.checkCredential(textField: textField) {
+//
+//            // 받아온 id토큰으로 API통신 회원정보 있는지 체크.
+//            // 없으면 닉네임뷰로
+//            self.coordinator?.showNicknameView()
+//
+//            // 있으면 바로 홈으로.
+//
+//        }
+        coordinator?.showNicknameView()
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 final class LoginViewModel {
 
-    weak var coordinator: HomeCoordinator?
+    weak var coordinator: AuthCoordinator?
     let loginUseCase = LoginUseCase()
 
     static var yourIDForFirebase: String = ""
@@ -41,7 +41,7 @@ final class LoginViewModel {
 
         // 버튼 상태가 fill 아니면 바로 리턴
         guard button.buttonState == .fill else { return }
-        loginUseCase.requestFirebase(textField: textField)
+//        loginUseCase.requestFirebase(textField: textField)
         coordinator?.showLogin2AuthView()
     }
 }

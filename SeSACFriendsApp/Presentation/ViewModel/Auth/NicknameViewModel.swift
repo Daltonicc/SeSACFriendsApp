@@ -9,7 +9,7 @@ import UIKit
 
 final class NicknameViewModel {
 
-    weak var coordinator: HomeCoordinator?
+    weak var coordinator: AuthCoordinator?
 
     var nickname: Observable<String> = Observable("")
 
@@ -24,6 +24,15 @@ final class NicknameViewModel {
             } else {
                 button.buttonState = .disable
             }
+        }
+    }
+
+    func checkButtonState(button: CustomButton) {
+
+        if button.buttonState == .fill {
+            coordinator?.showBirthView()
+        } else {
+            //토스트 메세지!
         }
     }
 }

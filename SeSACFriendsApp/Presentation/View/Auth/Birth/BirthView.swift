@@ -22,7 +22,8 @@ final class BirthView: UIView, ViewRepresentable {
         let textField = CustomTextFieldView()
         textField.textFieldState = .inactive
         textField.mainTextField.isEnabled = false
-        textField.mainTextField.text = ""
+        textField.mainTextField.placeholder = ""
+        textField.mainTextField.text = "1990"
         return textField
     }()
     let yearLabel: UILabel = {
@@ -36,7 +37,7 @@ final class BirthView: UIView, ViewRepresentable {
         let textField = CustomTextFieldView()
         textField.textFieldState = .inactive
         textField.mainTextField.isEnabled = false
-        textField.mainTextField.text = ""
+        textField.mainTextField.text = "1"
         return textField
     }()
     let monthLabel: UILabel = {
@@ -50,7 +51,7 @@ final class BirthView: UIView, ViewRepresentable {
         let textField = CustomTextFieldView()
         textField.textFieldState = .inactive
         textField.mainTextField.isEnabled = false
-        textField.mainTextField.text = ""
+        textField.mainTextField.text = "1"
         return textField
     }()
     let dayLabel: UILabel = {
@@ -108,33 +109,33 @@ final class BirthView: UIView, ViewRepresentable {
             make.bottom.equalTo(nextButton.snp.top).offset(-72)
             make.leading.equalTo(self.snp.leading).inset(16)
             make.height.equalTo(48)
-            make.width.equalTo(self).multipliedBy(0.3)
+            make.width.equalTo(self).multipliedBy(0.27)
         }
         yearLabel.snp.makeConstraints { make in
             make.bottom.equalTo(nextButton.snp.top).offset(-72)
-            make.leading.equalTo(yearTextField.snp.trailing)
+            make.leading.equalTo(yearTextField.snp.trailing).offset(-10)
             make.height.equalTo(48)
         }
         monthTextField.snp.makeConstraints { make in
             make.bottom.equalTo(nextButton.snp.top).offset(-72)
             make.leading.equalTo(yearLabel.snp.trailing).offset(5)
             make.height.equalTo(48)
-            make.width.equalTo(self).multipliedBy(0.3)
+            make.width.equalTo(self).multipliedBy(0.27)
         }
         monthLabel.snp.makeConstraints { make in
             make.bottom.equalTo(nextButton.snp.top).offset(-72)
-            make.leading.equalTo(monthTextField.snp.trailing).offset(5)
+            make.leading.equalTo(monthTextField.snp.trailing).offset(-10)
             make.height.equalTo(48)
         }
         dayTextField.snp.makeConstraints { make in
             make.bottom.equalTo(nextButton.snp.top).offset(-72)
             make.leading.equalTo(monthLabel.snp.trailing)
             make.height.equalTo(48)
-            make.width.equalTo(self).multipliedBy(0.3)
+            make.width.equalTo(self).multipliedBy(0.28)
         }
         dayLabel.snp.makeConstraints { make in
             make.bottom.equalTo(nextButton.snp.top).offset(-72)
-            make.leading.equalTo(dayTextField.snp.trailing).offset(5)
+            make.leading.equalTo(dayTextField.snp.trailing).offset(-10)
             make.height.equalTo(48)
         }
         titleLabel.snp.makeConstraints { make in

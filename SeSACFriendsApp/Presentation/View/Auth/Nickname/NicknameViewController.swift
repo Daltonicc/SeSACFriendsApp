@@ -33,10 +33,10 @@ final class NicknameViewController: BaseViewController {
         super.textfieldConfig()
 
         viewModel.checkValidation(textField: mainView.nicknameTextField.mainTextField, button: mainView.nextButton)
-        mainView.nicknameTextField.mainTextField.addTarget(self, action: #selector(numberTextFieldDidChange(textfield:)), for: .editingChanged)
+        mainView.nicknameTextField.mainTextField.addTarget(self, action: #selector(nicknameTextFieldDidChange(textfield:)), for: .editingChanged)
     }
 
-    @objc func numberTextFieldDidChange(textfield: UITextField) {
+    @objc func nicknameTextFieldDidChange(textfield: UITextField) {
 
         viewModel.nickname.value = textfield.text ?? ""
         checkMaxLength(textField: mainView.nicknameTextField.mainTextField, maxLength: 10)
@@ -46,6 +46,7 @@ final class NicknameViewController: BaseViewController {
 
         addPressAnimationToButton(sender) { _ in
 
+            self.viewModel.checkButtonState(button: self.mainView.nextButton)
         }
     }
 }

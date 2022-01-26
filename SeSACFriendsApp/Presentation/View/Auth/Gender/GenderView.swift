@@ -12,18 +12,31 @@ final class GenderView: UIView, ViewRepresentable {
 
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "닉네임을 입력해 주세요"
+        label.text = "성별을 선택해 주세요"
         label.textAlignment = .center
         label.numberOfLines = 0
         label.font = .display1
         return label
     }()
-    let nicknameTextField: CustomTextFieldView = {
-        let textField = CustomTextFieldView()
-        textField.textFieldState = .inactive
-        textField.mainTextField.placeholder = "10자 이내로 입력"
-        textField.mainTextField.text = ""
-        return textField
+    let subTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = "새싹 찾기 기능을 이용하기 위해서 필요해요!"
+        label.font = .title2r
+        label.textColor = .gray7
+        return label
+    }()
+    let manButton: CustomButton = {
+        let button = CustomButton()
+        button.buttonState = .outline
+        button.setImage(UIImage(named: "ManImage"), for: .normal)
+        return button
+    }()
+    let womanButton: CustomButton = {
+        let button = CustomButton()
+        button.buttonState = .outline
+        button.setImage(UIImage(named: "WomanImage"), for: .normal)
+        return button
     }()
     let authButton: CustomButton = {
         let button = CustomButton()
@@ -46,7 +59,9 @@ final class GenderView: UIView, ViewRepresentable {
     func setUpView() {
 
         addSubview(titleLabel)
-        addSubview(nicknameTextField)
+        addSubview(subTitleLabel)
+        addSubview(manButton)
+        addSubview(womanButton)
         addSubview(authButton)
     }
 
@@ -59,14 +74,24 @@ final class GenderView: UIView, ViewRepresentable {
             make.trailing.equalTo(self.snp.trailing).inset(16)
             make.height.equalTo(48)
         }
-        nicknameTextField.snp.makeConstraints { make in
-            make.bottom.equalTo(authButton.snp.top).offset(-72)
+        manButton.snp.makeConstraints { make in
+            make.bottom.equalTo(authButton.snp.top).offset(-32)
             make.leading.equalTo(self.snp.leading).inset(16)
+            make.height.equalTo(120)
+            make.width.equalTo(self).multipliedBy(0.45)
+        }
+        womanButton.snp.makeConstraints { make in
+            make.bottom.equalTo(authButton.snp.top).offset(-32)
+            make.leading.equalTo(manButton.snp.trailing).offset(12)
             make.trailing.equalTo(self.snp.trailing).inset(16)
-            make.height.equalTo(48)
+            make.height.equalTo(120)
+        }
+        subTitleLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(manButton.snp.top).offset(-32)
+            make.centerX.equalToSuperview()
         }
         titleLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(nicknameTextField.snp.top).offset(-72)
+            make.bottom.equalTo(subTitleLabel.snp.top).offset(-8)
             make.centerX.equalToSuperview()
         }
     }

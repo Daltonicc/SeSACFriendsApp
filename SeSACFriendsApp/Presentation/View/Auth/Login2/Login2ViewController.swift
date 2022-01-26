@@ -67,7 +67,6 @@ extension Login2ViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
 
         mainView.numberTextField.textFieldState = .focus
-
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {

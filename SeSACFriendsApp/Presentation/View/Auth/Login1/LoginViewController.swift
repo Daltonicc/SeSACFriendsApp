@@ -17,7 +17,7 @@ import Toast
  */
 final class LoginViewController: BaseViewController {
 
-    weak var coordinator: HomeCoordinator?
+    weak var coordinator: AuthCoordinator?
     let mainView = LoginView()
     var viewModel = LoginViewModel()
 

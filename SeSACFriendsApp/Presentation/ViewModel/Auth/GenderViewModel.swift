@@ -9,5 +9,5 @@ import UIKit
 
 final class GenderViewModel {
 
-    weak var coordinator: HomeCoordinator?
+    weak var coordinator: AuthCoordinator?
 }

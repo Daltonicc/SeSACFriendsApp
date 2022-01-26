@@ -22,10 +22,28 @@ final class BirthViewController: BaseViewController {
     }
 
     override func setViewConfig() {
+        super.setViewConfig()
 
+        mainView.nextButton.addTarget(self, action: #selector(nextButtonClicked(_:)), for: .touchUpInside)
     }
 
     override func textfieldConfig() {
+        super.textfieldConfig()
 
+//        viewModel.checkValidation(textField: mainView.yearTextField.mainTextField, button: mainView.nextButton)
+//        mainView.yearTextField.mainTextField.addTarget(self, action: #selector(yearTextFieldDidChange(textfield:)), for: .editingChanged)
+    }
+
+    @objc func yearTextFieldDidChange(textfield: UITextField) {
+
+        viewModel.birthYear.value = textfield.text ?? ""
+    }
+
+    @objc func nextButtonClicked(_ sender: UIButton) {
+
+        addPressAnimationToButton(sender) { _ in
+
+            self.viewModel.checkButtonState(button: self.mainView.nextButton)
+        }
     }
 }

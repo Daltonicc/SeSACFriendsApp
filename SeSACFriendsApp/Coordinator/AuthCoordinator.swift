@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeCoordinator: NSObject, Coordinator {
+class AuthCoordinator: NSObject, Coordinator {
 
     var presenter: UINavigationController
 
@@ -52,23 +52,23 @@ class HomeCoordinator: NSObject, Coordinator {
 
     func showBirthView() {
 
-        let login2AuthView = Login2ViewController()
-        login2AuthView.viewModel.coordinator = self
-        presenter.pushViewController(login2AuthView, animated: true)
+        let birthView = BirthViewController()
+        birthView.viewModel.coordinator = self
+        presenter.pushViewController(birthView, animated: true)
     }
 
     func showEmailView() {
 
-        let login2AuthView = Login2ViewController()
-        login2AuthView.viewModel.coordinator = self
-        presenter.pushViewController(login2AuthView, animated: true)
+        let emailView = EmailViewController()
+        emailView.viewModel.coordinator = self
+        presenter.pushViewController(emailView, animated: true)
     }
 
     func showGenderView() {
 
-        let login2AuthView = Login2ViewController()
-        login2AuthView.viewModel.coordinator = self
-        presenter.pushViewController(login2AuthView, animated: true)
+        let genderView = GenderViewController()
+        genderView.viewModel.coordinator = self
+        presenter.pushViewController(genderView, animated: true)
     }
 
 }
