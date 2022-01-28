@@ -7,6 +7,8 @@
 
 import UIKit
 import Toast
+import RxSwift
+import RxCocoa
 
 /*
  구현해야할 것
@@ -20,6 +22,8 @@ final class LoginViewController: BaseViewController {
     weak var coordinator: AuthCoordinator?
     let mainView = LoginView()
     var viewModel = LoginViewModel()
+
+    let disposeBag = DisposeBag()
 
     override func loadView() {
         super.loadView()
@@ -35,8 +39,18 @@ final class LoginViewController: BaseViewController {
     override func setViewConfig() {
         super.setViewConfig()
 
-        mainView.authButton.addTarget(self, action: #selector(sendButtonClicked(_:)), for: .touchUpInside)
         mainView.phoneNumberTextField.mainTextField.delegate = self
+
+        mainView.authButton.rx.tap
+            .bind {
+                self.addPressAnimationToButton(self.mainView.authButton) { _ in
+                    self.viewModel.requestFirebaseAuth(
+                        button: self.mainView.authButton,
+                        textField: self.mainView.phoneNumberTextField.mainTextField
+                    )
+                }
+            }
+            .disposed(by: disposeBag)
     }
 
     override func textfieldConfig() {
@@ -52,17 +66,6 @@ final class LoginViewController: BaseViewController {
 
         viewModel.phoneNumber.value = textfield.text ?? ""
         checkMaxLength(textField: textfield, maxLength: 13)
-    }
-
-    @objc func sendButtonClicked(_ sender: UIButton) {
-
-        addPressAnimationToButton(sender) { _ in
-
-            self.viewModel.requestFirebaseAuth(
-                button: self.mainView.authButton,
-                textField: self.mainView.phoneNumberTextField.mainTextField
-            )
-        }
     }
 }
 

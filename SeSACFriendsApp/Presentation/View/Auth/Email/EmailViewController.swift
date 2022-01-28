@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class EmailViewController: BaseViewController {
 
     let mainView = EmailView()
     var viewModel = EmailViewModel()
+
+    let disposeBag = DisposeBag()
 
     override func loadView() {
         super.loadView()
@@ -24,9 +28,15 @@ final class EmailViewController: BaseViewController {
     override func setViewConfig() {
         super.setViewConfig()
 
-        mainView.nextButton.addTarget(self, action: #selector(nextButtonClicked(_:)), for: .touchUpInside)
         mainView.emailTextField.mainTextField.delegate = self
 
+        mainView.nextButton.rx.tap
+            .bind {
+                self.addPressAnimationToButton(self.mainView.nextButton) { _ in
+                    self.viewModel.checkButtonState(button: self.mainView.nextButton)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 
     override func textfieldConfig() {
@@ -42,14 +52,6 @@ final class EmailViewController: BaseViewController {
 
         //최대 길이 제한 안줘도 될듯.
         checkMaxLength(textField: mainView.emailTextField.mainTextField, maxLength: 50)
-    }
-
-    @objc func nextButtonClicked(_ sender: UIButton) {
-
-        addPressAnimationToButton(sender) { _ in
-
-            self.viewModel.checkButtonState(button: self.mainView.nextButton)
-        }
     }
 }
 

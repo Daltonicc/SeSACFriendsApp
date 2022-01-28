@@ -7,11 +7,15 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class OnboardingViewController: BaseViewController {
 
     var viewModel = OnboardingViewModel()
     let mainView = OnboardingView()
+
+    let disposeBag = DisposeBag()
 
     override func loadView() {
         super.loadView()
@@ -30,18 +34,15 @@ final class OnboardingViewController: BaseViewController {
         mainView.collectionView.register(OnboardingCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: OnboardingCollectionViewCell.identifier)
         mainView.collectionView.isPagingEnabled = true
 
-        mainView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
+        mainView.startButton.rx.tap
+            .bind {
+                self.addPressAnimationToButton(self.mainView.startButton) { _ in
+                    self.viewModel.showLoginView()
+                }
+            }
+            .disposed(by: disposeBag)
+
     }
-
-    @objc func startButtonClicked(sender: UIButton) {
-
-        addPressAnimationToButton(sender) { _ in
-
-            self.viewModel.showLoginView()
-            
-        }
-    }
-
 }
 
 extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDataSource {

@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class Login2ViewController: BaseViewController {
 
     let mainView = Login2View()
     let viewModel = Login2ViewModel()
+
+    let disposeBag = DisposeBag()
 
     override func loadView() {
         super.loadView()
@@ -31,8 +35,14 @@ final class Login2ViewController: BaseViewController {
         super.setViewConfig()
 
         mainView.numberTextField.mainTextField.delegate = self
-        mainView.authButton.addTarget(self, action: #selector(authButtonClicked(_:)), for: .touchUpInside)
 
+        mainView.authButton.rx.tap
+            .bind {
+                self.addPressAnimationToButton(self.mainView.authButton) { _ in
+                    self.viewModel.checkCredentialNumber(textField: self.mainView.numberTextField.mainTextField)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 
     override func textfieldConfig() {
@@ -46,13 +56,6 @@ final class Login2ViewController: BaseViewController {
 
         viewModel.authNumber.value = textfield.text ?? ""
         checkMaxLength(textField: textfield, maxLength: 6)
-    }
-
-    @objc func authButtonClicked(_ sender: UIButton) {
-
-        addPressAnimationToButton(sender) { _ in
-            self.viewModel.checkCredentialNumber(textField: self.mainView.numberTextField.mainTextField)
-        }
     }
 }
 

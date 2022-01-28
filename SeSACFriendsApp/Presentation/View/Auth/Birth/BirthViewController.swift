@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class BirthViewController: BaseViewController {
 
     let mainView = BirthView()
     var viewModel = BirthViewModel()
+
+    let disposeBag = DisposeBag()
 
     override func loadView() {
         super.loadView()
@@ -24,7 +28,13 @@ final class BirthViewController: BaseViewController {
     override func setViewConfig() {
         super.setViewConfig()
 
-        mainView.nextButton.addTarget(self, action: #selector(nextButtonClicked(_:)), for: .touchUpInside)
+        mainView.nextButton.rx.tap
+            .bind {
+                self.addPressAnimationToButton(self.mainView.nextButton) { _ in
+                    self.viewModel.checkButtonState(button: self.mainView.nextButton)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 
     override func textfieldConfig() {
@@ -37,13 +47,5 @@ final class BirthViewController: BaseViewController {
     @objc func yearTextFieldDidChange(textfield: UITextField) {
 
         viewModel.birthYear.value = textfield.text ?? ""
-    }
-
-    @objc func nextButtonClicked(_ sender: UIButton) {
-
-        addPressAnimationToButton(sender) { _ in
-
-            self.viewModel.checkButtonState(button: self.mainView.nextButton)
-        }
     }
 }

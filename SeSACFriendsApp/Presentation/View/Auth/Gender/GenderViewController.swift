@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class GenderViewController: BaseViewController {
 
     let mainView = GenderView()
     var viewModel = GenderViewModel()
+
+    let disposeBag = DisposeBag()
 
     override func loadView() {
         super.loadView()
@@ -25,6 +29,11 @@ final class GenderViewController: BaseViewController {
 
     override func setViewConfig() {
 
+//        mainView.nextButton.rx.tap
+//            .bind {
+//
+//            }
+//            .disposed(by: disposeBag)
     }
 
     override func textfieldConfig() {
