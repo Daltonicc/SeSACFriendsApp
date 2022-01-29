@@ -35,7 +35,7 @@ final class Login2ViewModel {
             .disposed(by: disposeBag)
     }
 
-    // MARK: - UseCase
+    // MARK: - UseCase, Repository
 
     func checkCredentialNumber(textField: UITextField) {
 

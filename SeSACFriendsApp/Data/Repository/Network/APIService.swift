@@ -10,7 +10,7 @@ import Moya
 
 enum SeSACFriendsAPI {
     case loginToFriendsApp
-    case registerFriend(_ phoneNumber: String?, _ fcmToken: String?, _ nick: String?, _ birth: String?, _ email: String?, _ gender: String?)
+    case registerFriend(_ phoneNumber: String?, _ fcmToken: String?, _ nick: String?, _ birth: String?, _ email: String?, _ gender: Int?)
 }
 
 extension SeSACFriendsAPI: TargetType {
@@ -40,13 +40,13 @@ extension SeSACFriendsAPI: TargetType {
         case .registerFriend(let phoneNumber, let fcmToken, let nick, let birth, let email, let gender):
             let parameter: [String: Any] = [
                 "phoneNumber": phoneNumber ?? "",
-                "FCMToken": fcmToken ?? "",
+                "FCMtoken": fcmToken ?? "",
                 "nick": nick ?? "",
                 "birth": birth ?? "",
                 "email": email ?? "",
                 "gender": gender ?? 0
             ]
-            return .requestParameters(parameters: parameter, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: parameter, encoding: URLEncoding.httpBody)
         }
     }
 
@@ -55,12 +55,12 @@ extension SeSACFriendsAPI: TargetType {
         case .loginToFriendsApp:
             return [
                 "Content-Type": "application/x-www-form-urlencoded",
-                "idToken": UserDefaults.standard.string(forKey: "uidToken")!
+                "idtoken": UserDefaults.standard.string(forKey: "uidToken")!
             ]
         case .registerFriend:
             return [
                 "Content-Type": "application/x-www-form-urlencoded",
-                "idToken": UserDefaults.standard.string(forKey: "uidToken")!
+                "idtoken": UserDefaults.standard.string(forKey: "uidToken")!
             ]
         }
 

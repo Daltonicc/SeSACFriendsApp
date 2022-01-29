@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseMessaging
 import UserNotifications
 
 @main
@@ -16,8 +17,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
 
-        UNUserNotificationCenter.current().requestAuthorization(options: [.badge,.sound,.alert], completionHandler: { (granted,error) in })
+        if #available(iOS 10.0 , *) {
+            UNUserNotificationCenter.current().delegate = self
+
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in }
+
+        } else {
+
+        }
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.badge,.sound,.alert], completionHandler: { (granted,error) in })
         application.registerForRemoteNotifications()
+
+        // 메시지 대리자 설정
+        Messaging.messaging().delegate = self
+
+        //현재 등록된 토큰 가져오기
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error fetching FCM registration token: \(error)")
+            } else if let token = token {
+                print("FCM registration token: \(token)")
+                UserDefaults.standard.set(token, forKey: "FCMToken")
+            }
+        }
 
         return true
     }
@@ -36,4 +59,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+
+    func application(application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
+    }
+}
+
+extension AppDelegate: MessagingDelegate {
+
+    // 토큰 갱신 모니터링
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("Firebase registration token: \(String(describing: fcmToken))")
+
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        NotificationCenter.default.post(
+            name: Notification.Name("FCMToken"),
+            object: nil,
+            userInfo: dataDict
+        )
+    }
 }

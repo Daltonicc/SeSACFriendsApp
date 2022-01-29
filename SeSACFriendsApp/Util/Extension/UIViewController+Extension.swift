@@ -28,18 +28,21 @@ extension UIViewController {
 
     func changeDateFormatting(date: Date, dateFormat: String) -> String {
 
-        let getDate = date.addingTimeInterval(60 * 60 * 9)
+//        let getDate = date.addingTimeInterval(60 * 60 * 9)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
-        return dateFormatter.string(from: getDate)
+        return dateFormatter.string(from: date)
+
     }
 
-    func changeDateForSave(date: Date) -> String {
+    func changeDateForSave(date: Date) {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        let newDate = String(dateFormatter.string(from: date))
-        UserDefaults.standard.set(newDate, forKey: "birth")
-        return newDate
+        let new = dateFormatter.string(from: date)
+        print(new)
+
+//        BirthViewModel.birth = new
+        UserDefaults.standard.set(new, forKey: "birth")
     }
 }

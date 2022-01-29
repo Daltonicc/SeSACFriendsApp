@@ -13,7 +13,6 @@ import RxCocoa
  구현해야할 것
 
  1. 상황별 토스트 메세지
- 2. 이메일 유효성 검사
 
  */
 final class BirthViewController: BaseViewController {

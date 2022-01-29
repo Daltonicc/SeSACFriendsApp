@@ -25,6 +25,7 @@ final class Login2UseCase {
 
                     if let idToken = idToken {
                         UserDefaults.standard.set(idToken, forKey: "uidToken")
+                        print("Firebase IDToken: \(idToken)")
                         completion()
                     }
                     // 상황별 토스트 메시지 띄워주기

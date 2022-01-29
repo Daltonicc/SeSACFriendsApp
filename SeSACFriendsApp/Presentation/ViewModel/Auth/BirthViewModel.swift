@@ -13,6 +13,8 @@ final class BirthViewModel {
 
     weak var coordinator: AuthCoordinator?
 
+    static var birth = Date()
+
     let disposeBag = DisposeBag()
 
     func checkValidation(yearTextField: UITextField, monthTextField: UITextField, dayTextField: UITextField, button: CustomButton) {

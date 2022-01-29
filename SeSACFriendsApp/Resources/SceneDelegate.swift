@@ -22,9 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.makeKeyAndVisible()
 
-        window?.rootViewController = UINavigationController(rootViewController: GenderViewController())
-//        appCoordinator = AppCoordinator(window: window!)
-//        appCoordinator?.start()
+//        window?.rootViewController = UINavigationController(rootViewController: GenderViewController())
+        appCoordinator = AppCoordinator(window: window!)
+        appCoordinator?.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

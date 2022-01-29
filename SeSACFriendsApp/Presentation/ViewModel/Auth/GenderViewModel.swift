@@ -12,11 +12,13 @@ import RxCocoa
 final class GenderViewModel {
 
     weak var coordinator: AuthCoordinator?
+    let repository = GenderRepository()
 
     let disposeBag = DisposeBag()
+    
     var genderNumber = -1
 
-    func checkValidation(manButton: CustomButton, womanButton: CustomButton) {
+    func checkValidation(manButton: CustomButton, womanButton: CustomButton, nextButton: CustomButton) {
 
         manButton.rx.tap
             .bind {
@@ -24,6 +26,7 @@ final class GenderViewModel {
                     manButton.backgroundColor = .whiteGreen
                     womanButton.backgroundColor = .white
                     self.genderNumber = 1
+                    nextButton.buttonState = .fill
                     UserDefaults.standard.set(self.genderNumber, forKey: "gender")
                 }
             }
@@ -35,9 +38,21 @@ final class GenderViewModel {
                     womanButton.backgroundColor = .whiteGreen
                     manButton.backgroundColor = .white
                     self.genderNumber = 0
+                    nextButton.buttonState = .fill
                     UserDefaults.standard.set(self.genderNumber, forKey: "gender")
                 }
             }
             .disposed(by: disposeBag)
-    } 
+    }
+
+    func checkButtonState(button: CustomButton) {
+
+        if button.buttonState == .fill {
+
+            repository.requestRegisterUser()
+
+        } else {
+            //토스트 메세지!
+        }
+    }
 }
