@@ -36,6 +36,8 @@
 		6AA137B627A500DE0076CF40 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 6AA137B527A500DE0076CF40 /* Moya */; };
 		6AA137B827A501C00076CF40 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA137B727A501C00076CF40 /* APIKey.swift */; };
 		6AA137BA27A506DF0076CF40 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA137B927A506DF0076CF40 /* Auth.swift */; };
+		6AA137BE27A5344A0076CF40 /* Login2Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA137BD27A5344A0076CF40 /* Login2Repository.swift */; };
+		6AA137C027A534520076CF40 /* GenderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA137BF27A534520076CF40 /* GenderRepository.swift */; };
 		6AAC7087279D8C41003FCD27 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6AAC7086279D8C41003FCD27 /* SnapKit */; };
 		6AAC708F279D8C6E003FCD27 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 6AAC708E279D8C6E003FCD27 /* RxCocoa */; };
 		6AAC7091279D8C6E003FCD27 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6AAC7090279D8C6E003FCD27 /* RxSwift */; };
@@ -100,6 +102,8 @@
 		6AA137B227A500AA0076CF40 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		6AA137B727A501C00076CF40 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		6AA137B927A506DF0076CF40 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		6AA137BD27A5344A0076CF40 /* Login2Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login2Repository.swift; sourceTree = "<group>"; };
+		6AA137BF27A534520076CF40 /* GenderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderRepository.swift; sourceTree = "<group>"; };
 		6AAC7093279D9372003FCD27 /* ViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRepresentable.swift; sourceTree = "<group>"; };
 		6AAC7098279DA9E9003FCD27 /* SeSACFriendsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSACFriendsApp.entitlements; sourceTree = "<group>"; };
 		6AAC7099279DADA8003FCD27 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -315,6 +319,32 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		6AA137BB27A5340D0076CF40 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				6AA137BC27A534310076CF40 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		6AA137BC27A534310076CF40 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				6A92DD88279D843D005A66E4 /* Network */,
+				6AA137C127A534800076CF40 /* Auth */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		6AA137C127A534800076CF40 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				6AA137BD27A5344A0076CF40 /* Login2Repository.swift */,
+				6AA137BF27A534520076CF40 /* GenderRepository.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		6AAC7092279D9364003FCD27 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,10 +457,10 @@
 			isa = PBXGroup;
 			children = (
 				6AAC7098279DA9E9003FCD27 /* SeSACFriendsApp.entitlements */,
-				6A92DD88279D843D005A66E4 /* Network */,
 				6A0AB797279863BB009C80E9 /* Util */,
 				6A1C976A279D4C6B00D6490A /* Presentation */,
 				6A1C976B279D57ED00D6490A /* Domain */,
+				6AA137BB27A5340D0076CF40 /* Data */,
 				6A0AB7C8279CFC49009C80E9 /* Coordinator */,
 				6A0AB78A27985F01009C80E9 /* Resources */,
 				6A0AB75E2796ECE6009C80E9 /* GoogleService-Info.plist */,
@@ -556,6 +586,7 @@
 				6A0AB7C7279C3BB9009C80E9 /* OnboardingCollectionViewCell.swift in Sources */,
 				6AAC70B6279FF24F003FCD27 /* Login2UseCase.swift in Sources */,
 				6A1C9769279D4A7B00D6490A /* UICollectionViewCell+Extension.swift in Sources */,
+				6AA137BE27A5344A0076CF40 /* Login2Repository.swift in Sources */,
 				6A0AB7BF2799410A009C80E9 /* UIView+Extension.swift in Sources */,
 				6AE4580F279679FD006B142C /* OnboardingViewController.swift in Sources */,
 				6A0AB7CC279D06D6009C80E9 /* UIViewController+Extension.swift in Sources */,
@@ -583,6 +614,7 @@
 				6A0AB7952798610E009C80E9 /* UIFont+Extension.swift in Sources */,
 				6AAC70D227A020CA003FCD27 /* GenderView.swift in Sources */,
 				6AAC709A279DADA8003FCD27 /* String+Extension.swift in Sources */,
+				6AA137C027A534520076CF40 /* GenderRepository.swift in Sources */,
 				6AAC70C827A01F43003FCD27 /* GenderViewModel.swift in Sources */,
 				6A0AB7BD27993F32009C80E9 /* CustomButton.swift in Sources */,
 				6AAC70C027A01E97003FCD27 /* NicknameViewController.swift in Sources */,
