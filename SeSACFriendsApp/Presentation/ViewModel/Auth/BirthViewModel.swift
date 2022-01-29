@@ -21,11 +21,11 @@ final class BirthViewModel {
 
             textField.text = year
 
-//            if Int(year)! <= 2003 {
-//                button.buttonState = .fill
-//            } else {
-//                button.buttonState = .disable
-//            }
+            if Int(year)! <= 2003 {
+                button.buttonState = .fill
+            } else {
+                button.buttonState = .disable
+            }
         }
     }
 

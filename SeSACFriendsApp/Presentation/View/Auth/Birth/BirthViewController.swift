@@ -35,17 +35,37 @@ final class BirthViewController: BaseViewController {
                 }
             }
             .disposed(by: disposeBag)
+
+        mainView.datePicker.addTarget(self, action: #selector(handleDatePicker(_:)), for: .valueChanged)
+
     }
 
     override func textfieldConfig() {
         super.textfieldConfig()
 
 //        viewModel.checkValidation(textField: mainView.yearTextField.mainTextField, button: mainView.nextButton)
-//        mainView.yearTextField.mainTextField.addTarget(self, action: #selector(yearTextFieldDidChange(textfield:)), for: .editingChanged)
+        mainView.yearTextField.mainTextField.addTarget(self, action: #selector(yearTextFieldDidChange(textfield:)), for: .editingChanged)
+    }
+
+    func changeDateFormatting(date: Date, dateFormat: String) -> String {
+
+        let getDate = date.addingTimeInterval(60 * 60 * 9)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+
+        return dateFormatter.string(from: getDate)
     }
 
     @objc func yearTextFieldDidChange(textfield: UITextField) {
 
         viewModel.birthYear.value = textfield.text ?? ""
+    }
+
+    @objc func handleDatePicker(_ sender: UIDatePicker) {
+        print(sender.date)
+
+        mainView.yearTextField.mainTextField.text = changeDateFormatting(date: sender.date, dateFormat: "yyyy")
+        mainView.monthTextField.mainTextField.text = changeDateFormatting(date: sender.date, dateFormat: "MM")
+        mainView.dayTextField.mainTextField.text = changeDateFormatting(date: sender.date, dateFormat: "dd")
     }
 }

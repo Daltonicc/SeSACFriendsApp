@@ -13,22 +13,20 @@ final class NicknameViewModel {
 
     weak var coordinator: AuthCoordinator?
 
-    var nickname: Observable<String> = Observable("")
-
     let disposeBag = DisposeBag()
 
     func checkValidation(textField: UITextField, button: CustomButton) {
 
-        nickname.bind { nickname in
-
-            textField.text = nickname
-
-            if nickname.count >= 1 {
-                button.buttonState = .fill
-            } else {
-                button.buttonState = .disable
+        textField.rx.text
+            .bind { str in
+                guard let str = str else { return }
+                if str.count >= 1 {
+                    button.buttonState = .fill
+                } else {
+                    button.buttonState = .disable
+                }
             }
-        }
+            .disposed(by: disposeBag)
     }
 
     func checkButtonState(button: CustomButton) {

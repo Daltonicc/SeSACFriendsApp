@@ -69,6 +69,10 @@ final class BirthView: UIView, ViewRepresentable {
     }()
     let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.datePickerMode = .date
+        datePicker.locale = Locale(identifier: "ko-KR")
+        datePicker.setValue(UIColor.gray3, forKey: "backgroundColor")
         return datePicker
     }()
 
@@ -144,7 +148,9 @@ final class BirthView: UIView, ViewRepresentable {
         }
         datePicker.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(30)
+            make.leading.equalTo(self.snp.leading)
+            make.trailing.equalTo(self.snp.trailing)
+            make.bottom.equalTo(self.snp.bottom)
         }
     }
 }
