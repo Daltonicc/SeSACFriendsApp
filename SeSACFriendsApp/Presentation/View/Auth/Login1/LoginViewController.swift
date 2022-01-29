@@ -64,7 +64,6 @@ final class LoginViewController: BaseViewController {
 
     @objc func phoneNumberTextFieldDidChange(textfield: UITextField) {
 
-        viewModel.phoneNumber.value = textfield.text ?? ""
         checkMaxLength(textField: textfield, maxLength: 13)
     }
 }

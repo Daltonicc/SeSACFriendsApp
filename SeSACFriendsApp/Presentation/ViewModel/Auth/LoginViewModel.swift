@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class LoginViewModel {
 
@@ -15,24 +17,26 @@ final class LoginViewModel {
 
     static var yourIDForFirebase: String = ""
 
-    var phoneNumber: Observable<String> = Observable("")
+    let disposeBag = DisposeBag()
 
     func checkAuthValidation(textField: UITextField, button: CustomButton) {
 
-        phoneNumber.bind { phoneNumber in
+        textField.rx.text
+            .bind { str in
+                guard let str = str else { return }
+                if str.count > 12 {
+                    textField.text = str.applyPatternOnNumbers(pattern: "###-####-####", replacementCharacter: "#")
+                } else {
+                    textField.text = str.applyPatternOnNumbers(pattern: "###-###-####", replacementCharacter: "#")
+                }
 
-            if phoneNumber.count > 12 {
-                textField.text = phoneNumber.applyPatternOnNumbers(pattern: "###-####-####", replacementCharacter: "#")
-            } else {
-                textField.text = phoneNumber.applyPatternOnNumbers(pattern: "###-###-####", replacementCharacter: "#")
+                if str.count >= 12 {
+                    button.buttonState = .fill
+                } else {
+                    button.buttonState = .disable
+                }
             }
-
-            if phoneNumber.count >= 12 {
-                button.buttonState = .fill
-            } else {
-                button.buttonState = .disable
-            }
-        }
+            .disposed(by: disposeBag)
     }
 
     // MARK: - UseCase
@@ -41,7 +45,7 @@ final class LoginViewModel {
 
         // 버튼 상태가 fill 아니면 바로 리턴
         guard button.buttonState == .fill else { return }
-//        loginUseCase.requestFirebase(textField: textField)
+        loginUseCase.requestFirebase(textField: textField)
         coordinator?.showLogin2AuthView()
     }
 }

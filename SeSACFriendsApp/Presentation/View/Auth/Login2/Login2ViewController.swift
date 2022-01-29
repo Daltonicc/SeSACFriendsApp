@@ -54,7 +54,6 @@ final class Login2ViewController: BaseViewController {
 
     @objc func numberTextFieldDidChange(textfield: UITextField) {
 
-        viewModel.authNumber.value = textfield.text ?? ""
         checkMaxLength(textField: textfield, maxLength: 6)
     }
 }

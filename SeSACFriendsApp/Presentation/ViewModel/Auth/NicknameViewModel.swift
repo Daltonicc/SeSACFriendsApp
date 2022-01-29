@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class NicknameViewModel {
 
     weak var coordinator: AuthCoordinator?
 
     var nickname: Observable<String> = Observable("")
+
+    let disposeBag = DisposeBag()
 
     func checkValidation(textField: UITextField, button: CustomButton) {
 
