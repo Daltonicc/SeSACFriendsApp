@@ -26,4 +26,20 @@ extension UIViewController {
         }
     }
 
+    func changeDateFormatting(date: Date, dateFormat: String) -> String {
+
+        let getDate = date.addingTimeInterval(60 * 60 * 9)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.string(from: getDate)
+    }
+
+    func changeDateForSave(date: Date) -> String {
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        let newDate = String(dateFormatter.string(from: date))
+        UserDefaults.standard.set(newDate, forKey: "birth")
+        return newDate
+    }
 }

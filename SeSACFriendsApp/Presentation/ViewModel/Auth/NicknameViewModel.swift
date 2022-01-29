@@ -22,6 +22,7 @@ final class NicknameViewModel {
                 guard let str = str else { return }
                 if str.count >= 1 {
                     button.buttonState = .fill
+                    UserDefaults.standard.set(str, forKey: "nickname")
                 } else {
                     button.buttonState = .disable
                 }

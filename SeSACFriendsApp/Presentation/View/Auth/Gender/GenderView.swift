@@ -38,7 +38,7 @@ final class GenderView: UIView, ViewRepresentable {
         button.setImage(UIImage(named: "WomanImage"), for: .normal)
         return button
     }()
-    let authButton: CustomButton = {
+    let nextButton: CustomButton = {
         let button = CustomButton()
         button.buttonState = .disable
         button.setTitle("다음", for: .normal)
@@ -62,12 +62,12 @@ final class GenderView: UIView, ViewRepresentable {
         addSubview(subTitleLabel)
         addSubview(manButton)
         addSubview(womanButton)
-        addSubview(authButton)
+        addSubview(nextButton)
     }
 
     func setUpConstraint() {
 
-        authButton.snp.makeConstraints { make in
+        nextButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(30)
             make.leading.equalTo(self.snp.leading).inset(16)
@@ -75,13 +75,13 @@ final class GenderView: UIView, ViewRepresentable {
             make.height.equalTo(48)
         }
         manButton.snp.makeConstraints { make in
-            make.bottom.equalTo(authButton.snp.top).offset(-32)
+            make.bottom.equalTo(nextButton.snp.top).offset(-32)
             make.leading.equalTo(self.snp.leading).inset(16)
             make.height.equalTo(120)
             make.width.equalTo(self).multipliedBy(0.45)
         }
         womanButton.snp.makeConstraints { make in
-            make.bottom.equalTo(authButton.snp.top).offset(-32)
+            make.bottom.equalTo(nextButton.snp.top).offset(-32)
             make.leading.equalTo(manButton.snp.trailing).offset(12)
             make.trailing.equalTo(self.snp.trailing).inset(16)
             make.height.equalTo(120)

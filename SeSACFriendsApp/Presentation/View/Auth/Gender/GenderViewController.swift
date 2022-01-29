@@ -29,14 +29,12 @@ final class GenderViewController: BaseViewController {
 
     override func setViewConfig() {
 
-//        mainView.nextButton.rx.tap
-//            .bind {
-//
-//            }
-//            .disposed(by: disposeBag)
-    }
+        viewModel.checkValidation(manButton: mainView.manButton, womanButton: mainView.womanButton)
 
-    override func textfieldConfig() {
+        mainView.nextButton.rx.tap
+            .bind {
 
+            }
+            .disposed(by: disposeBag)
     }
 }

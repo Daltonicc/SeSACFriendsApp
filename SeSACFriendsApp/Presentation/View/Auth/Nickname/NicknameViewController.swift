@@ -9,6 +9,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+/*
+ 구현해야할 것
+
+ 1. 상황별 토스트 메세지
+
+ */
+
 final class NicknameViewController: BaseViewController {
 
     let mainView = NicknameView()
@@ -48,7 +55,6 @@ final class NicknameViewController: BaseViewController {
 
     @objc func nicknameTextFieldDidChange(textfield: UITextField) {
 
-        viewModel.nickname.value = textfield.text ?? ""
         checkMaxLength(textField: mainView.nicknameTextField.mainTextField, maxLength: 10)
     }
 }

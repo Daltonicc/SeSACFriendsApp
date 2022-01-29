@@ -6,26 +6,31 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+
+// 유효성 검사 로직 필요
 
 final class EmailViewModel {
 
     weak var coordinator: AuthCoordinator?
 
-    var email: Observable<String> = Observable("")
+    let disposeBag = DisposeBag()
 
     func checkValidation(textField: UITextField, button: CustomButton) {
 
-        email.bind { email in
-
-            textField.text = email
-
-            //유효성 검사 로직 짜야함.
-            if email.count >= 1 {
-                button.buttonState = .fill
-            } else {
-                button.buttonState = .disable
+        textField.rx.text
+            .bind { str in
+                guard let str = str else { return }
+                if str.count >= 11 {
+                    button.buttonState = .fill
+                    UserDefaults.standard.set(str, forKey: "email")
+                } else {
+                    button.buttonState = .disable
+                }
             }
-        }
+            .disposed(by: disposeBag)
+
     }
 
     func checkButtonState(button: CustomButton) {

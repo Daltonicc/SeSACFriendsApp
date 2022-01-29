@@ -48,8 +48,6 @@ final class EmailViewController: BaseViewController {
 
     @objc func emailTextFieldDidChange(textfield: UITextField) {
 
-        viewModel.email.value = textfield.text ?? ""
-
         //최대 길이 제한 안줘도 될듯.
         checkMaxLength(textField: mainView.emailTextField.mainTextField, maxLength: 50)
     }

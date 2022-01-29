@@ -9,6 +9,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+/*
+ 구현해야할 것
+
+ 1. 상황별 토스트 메세지
+
+ */
+
 final class Login2ViewController: BaseViewController {
 
     let mainView = Login2View()

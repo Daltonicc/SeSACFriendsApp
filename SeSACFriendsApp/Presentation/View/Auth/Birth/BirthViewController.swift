@@ -9,6 +9,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+/*
+ 구현해야할 것
+
+ 1. 상황별 토스트 메세지
+ 2. 이메일 유효성 검사
+
+ */
 final class BirthViewController: BaseViewController {
 
     let mainView = BirthView()
@@ -31,41 +38,33 @@ final class BirthViewController: BaseViewController {
         mainView.nextButton.rx.tap
             .bind {
                 self.addPressAnimationToButton(self.mainView.nextButton) { _ in
-                    self.viewModel.checkButtonState(button: self.mainView.nextButton)
+                    self.viewModel.checkButtonState(yearTextField: self.mainView.yearTextField.mainTextField,
+                                                    monthTextField: self.mainView.monthTextField.mainTextField,
+                                                    dayTextField: self.mainView.dayTextField.mainTextField,
+                                                    button: self.mainView.nextButton)
                 }
             }
             .disposed(by: disposeBag)
 
         mainView.datePicker.addTarget(self, action: #selector(handleDatePicker(_:)), for: .valueChanged)
-
     }
 
     override func textfieldConfig() {
         super.textfieldConfig()
 
-//        viewModel.checkValidation(textField: mainView.yearTextField.mainTextField, button: mainView.nextButton)
-        mainView.yearTextField.mainTextField.addTarget(self, action: #selector(yearTextFieldDidChange(textfield:)), for: .editingChanged)
-    }
-
-    func changeDateFormatting(date: Date, dateFormat: String) -> String {
-
-        let getDate = date.addingTimeInterval(60 * 60 * 9)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = dateFormat
-
-        return dateFormatter.string(from: getDate)
-    }
-
-    @objc func yearTextFieldDidChange(textfield: UITextField) {
-
-        viewModel.birthYear.value = textfield.text ?? ""
     }
 
     @objc func handleDatePicker(_ sender: UIDatePicker) {
-        print(sender.date)
 
         mainView.yearTextField.mainTextField.text = changeDateFormatting(date: sender.date, dateFormat: "yyyy")
         mainView.monthTextField.mainTextField.text = changeDateFormatting(date: sender.date, dateFormat: "MM")
         mainView.dayTextField.mainTextField.text = changeDateFormatting(date: sender.date, dateFormat: "dd")
+
+        viewModel.checkValidation(yearTextField: mainView.yearTextField.mainTextField,
+                                  monthTextField: mainView.monthTextField.mainTextField,
+                                  dayTextField: mainView.dayTextField.mainTextField,
+                                  button: mainView.nextButton)
+
+        changeDateForSave(date: sender.date)
     }
 }
