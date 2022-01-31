@@ -9,8 +9,9 @@ import UIKit
 
 class AuthCoordinator: NSObject, Coordinator {
 
-    var presenter: UINavigationController
+    weak var parentCoordinator: AppCoordinator?
 
+    var presenter: UINavigationController
     var childCoordinators: [Coordinator]
 
     init(presenter: UINavigationController) {
@@ -71,4 +72,9 @@ class AuthCoordinator: NSObject, Coordinator {
         presenter.pushViewController(genderView, animated: true)
     }
 
+    func finish() {
+        parentCoordinator?.childDidFinish(self)
+    }
 }
+
+

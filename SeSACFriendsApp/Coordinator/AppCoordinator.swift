@@ -10,7 +10,6 @@ import UIKit
 final class AppCoordinator: NSObject, Coordinator {
 
     var presenter: UINavigationController
-
     var childCoordinators: [Coordinator]
 
     let window: UIWindow
@@ -31,10 +30,29 @@ final class AppCoordinator: NSObject, Coordinator {
         //최초 로그인 시에 온보딩 뷰
         coordinator.startOnboardingView()
 
-        //아니면 바로 휴대폰 인증 뷰
-        // coordinator.start()
-
         window.makeKeyAndVisible()
     }
 
+    func startHome() {
+
+        //홈뷰로 이동
+        let tabBarController = HomeTabBarController()
+        window.rootViewController = tabBarController
+
+        let coordinator = HomeCoordinator(presenter: presenter)
+        childCoordinators.append(coordinator)
+
+        coordinator.start()
+    }
+
+    func childDidFinish(_ child: Coordinator?) {
+
+        for (index, coordinator) in childCoordinators.enumerated() {
+            if coordinator === child {
+                childCoordinators.remove(at: index)
+                break
+            }
+        }
+    }
 }
+

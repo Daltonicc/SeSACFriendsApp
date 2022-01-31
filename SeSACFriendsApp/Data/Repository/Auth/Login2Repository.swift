@@ -19,6 +19,7 @@ final class Login2Repository {
                 let data = try? Response.map(GetUser.self)
                 let statusCode = Response.statusCode
                 print("상태코드 :\(statusCode)")
+                print(data)
 
                 completion(statusCode)
                 
