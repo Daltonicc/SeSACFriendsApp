@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AuthCoordinator: NSObject, Coordinator {
+final class AuthCoordinator: NSObject, Coordinator {
 
     weak var parentCoordinator: AppCoordinator?
 
@@ -73,8 +73,10 @@ class AuthCoordinator: NSObject, Coordinator {
     }
 
     func finish() {
-        parentCoordinator?.childDidFinish(self)
+
+        parentCoordinator?.childDidFinish(self, completion: {
+            self.parentCoordinator?.startHome()
+        })
+
     }
 }
-
-

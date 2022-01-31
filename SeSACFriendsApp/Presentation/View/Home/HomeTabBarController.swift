@@ -12,6 +12,7 @@ final class HomeTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpTabBar()
     }
 
     func setUpTabBar() {
@@ -31,5 +32,7 @@ final class HomeTabBarController: UITabBarController {
         let myProfileViewController = UINavigationController(rootViewController: MyProfileViewController())
 //        myProfileViewController = UIImage(named: "Fourth")
         myProfileViewController.tabBarItem.title = "내정보"
+
+        viewControllers = [homeViewController, shopViewController, friendsViewController, myProfileViewController]
     }
 }

@@ -49,8 +49,10 @@ final class LoginViewModel {
     func requestFirebaseAuth(button: CustomButton, textField: UITextField) {
 
         // 버튼 상태가 fill 아니면 바로 리턴
-        guard button.buttonState == .fill else { return }
-        useCase.requestFirebase(textField: textField)
-        coordinator?.showLogin2AuthView()
+//        guard button.buttonState == .fill else { return }
+//        useCase.requestFirebase(textField: textField)
+//        coordinator?.showLogin2AuthView()
+
+        self.coordinator?.finish()
     }
 }

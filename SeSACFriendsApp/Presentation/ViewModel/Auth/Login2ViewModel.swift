@@ -46,11 +46,12 @@ final class Login2ViewModel {
             // 있으면 바로 홈으로.
             self.repository.getUserInfo { statusCode in
                 switch statusCode {
-                case 200: print(statusCode) // 홈 탭으로 이동.
-                case 201: self.coordinator?.showNicknameView()
+                case 200: self.coordinator?.finish() // 홈 탭으로 이동
+                case 201: self.coordinator?.showNicknameView() // 닉네임뷰로 이동
                 default: print(statusCode)
                 }
             }
         }
+        
     }
 }

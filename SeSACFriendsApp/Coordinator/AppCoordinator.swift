@@ -27,6 +27,8 @@ final class AppCoordinator: NSObject, Coordinator {
         let coordinator = AuthCoordinator(presenter: presenter)
         childCoordinators.append(coordinator)
 
+        coordinator.parentCoordinator = self
+
         //최초 로그인 시에 온보딩 뷰
         coordinator.startOnboardingView()
 
@@ -35,24 +37,23 @@ final class AppCoordinator: NSObject, Coordinator {
 
     func startHome() {
 
-        //홈뷰로 이동
-        let tabBarController = HomeTabBarController()
-        window.rootViewController = tabBarController
-
-        let coordinator = HomeCoordinator(presenter: presenter)
+        let coordinator = TabBarCoordinator(presenter: presenter)
         childCoordinators.append(coordinator)
 
+        coordinator.parentCoordinator = self
         coordinator.start()
+
     }
 
-    func childDidFinish(_ child: Coordinator?) {
-
+    func childDidFinish(_ child: Coordinator?, completion: () -> Void) {
+        print("차일드 코디 확인1: \(childCoordinators)")
         for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {
                 childCoordinators.remove(at: index)
+                print("차일드 코디 확인2: \(childCoordinators)")
+                completion()
                 break
             }
         }
     }
 }
-
