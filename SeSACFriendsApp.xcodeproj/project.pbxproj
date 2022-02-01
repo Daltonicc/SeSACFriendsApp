@@ -51,6 +51,7 @@
 		6AA137DD27A7BCA40076CF40 /* ShopCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA137DC27A7BCA40076CF40 /* ShopCoordinator.swift */; };
 		6AA137DF27A7BCAD0076CF40 /* FriendsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA137DE27A7BCAD0076CF40 /* FriendsCoordinator.swift */; };
 		6AA137E127A7BCB70076CF40 /* MyProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA137E027A7BCB70076CF40 /* MyProfileCoordinator.swift */; };
+		6AA137E727A9433C0076CF40 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA137E627A9433C0076CF40 /* MyProfileView.swift */; };
 		6AAC7087279D8C41003FCD27 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6AAC7086279D8C41003FCD27 /* SnapKit */; };
 		6AAC708F279D8C6E003FCD27 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 6AAC708E279D8C6E003FCD27 /* RxCocoa */; };
 		6AAC7091279D8C6E003FCD27 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6AAC7090279D8C6E003FCD27 /* RxSwift */; };
@@ -127,6 +128,7 @@
 		6AA137DC27A7BCA40076CF40 /* ShopCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCoordinator.swift; sourceTree = "<group>"; };
 		6AA137DE27A7BCAD0076CF40 /* FriendsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCoordinator.swift; sourceTree = "<group>"; };
 		6AA137E027A7BCB70076CF40 /* MyProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileCoordinator.swift; sourceTree = "<group>"; };
+		6AA137E627A9433C0076CF40 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		6AAC7093279D9372003FCD27 /* ViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRepresentable.swift; sourceTree = "<group>"; };
 		6AAC7098279DA9E9003FCD27 /* SeSACFriendsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSACFriendsApp.entitlements; sourceTree = "<group>"; };
 		6AAC7099279DADA8003FCD27 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -377,10 +379,10 @@
 			isa = PBXGroup;
 			children = (
 				6AA137CB27A78E1C0076CF40 /* HomeTabBarController.swift */,
-				6AA137CD27A7954C0076CF40 /* HomeViewController.swift */,
-				6AA137CF27A795970076CF40 /* ShopViewController.swift */,
-				6AA137D127A795A90076CF40 /* FriendsViewController.swift */,
-				6AA137D327A795C10076CF40 /* MyProfileViewController.swift */,
+				6AA137E227A942D80076CF40 /* Home */,
+				6AA137E327A942ED0076CF40 /* Shop */,
+				6AA137E427A942F70076CF40 /* Friends */,
+				6AA137E527A942FD0076CF40 /* MyProfile */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -410,6 +412,39 @@
 				6AA137E027A7BCB70076CF40 /* MyProfileCoordinator.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		6AA137E227A942D80076CF40 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6AA137CD27A7954C0076CF40 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6AA137E327A942ED0076CF40 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				6AA137CF27A795970076CF40 /* ShopViewController.swift */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		6AA137E427A942F70076CF40 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				6AA137D127A795A90076CF40 /* FriendsViewController.swift */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		6AA137E527A942FD0076CF40 /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
+				6AA137D327A795C10076CF40 /* MyProfileViewController.swift */,
+				6AA137E627A9433C0076CF40 /* MyProfileView.swift */,
+			);
+			path = MyProfile;
 			sourceTree = "<group>";
 		};
 		6AAC7092279D9364003FCD27 /* Protocol */ = {
@@ -710,6 +745,7 @@
 				6AAC70CC27A020B2003FCD27 /* BirthViewController.swift in Sources */,
 				6AAC70CA27A020A8003FCD27 /* BirthView.swift in Sources */,
 				6AAC70C427A01F31003FCD27 /* BirthViewModel.swift in Sources */,
+				6AA137E727A9433C0076CF40 /* MyProfileView.swift in Sources */,
 				6AA137D727A7AD430076CF40 /* CoordinatorFinishDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
