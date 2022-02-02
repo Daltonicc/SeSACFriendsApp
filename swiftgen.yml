@@ -29,7 +29,7 @@ xcassets:
      - templateName: swift5
        params:
          forceProvidesNamespaces: true
-       output: Images+Generated.swift
+       output: Images+Generated3.swift
 
 
 ## Generate constants for your storyboards and XIBs.

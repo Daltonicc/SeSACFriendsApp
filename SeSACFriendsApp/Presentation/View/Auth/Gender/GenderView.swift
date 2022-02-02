@@ -29,13 +29,13 @@ final class GenderView: UIView, ViewRepresentable {
     let manButton: CustomButton = {
         let button = CustomButton()
         button.buttonState = .outline
-        button.setImage(UIImage(named: "ManImage"), for: .normal)
+        button.setImage(Asset.Auth.manImage.image, for: .normal)
         return button
     }()
     let womanButton: CustomButton = {
         let button = CustomButton()
         button.buttonState = .outline
-        button.setImage(UIImage(named: "WomanImage"), for: .normal)
+        button.setImage(Asset.Auth.womanImage.image, for: .normal)
         return button
     }()
     let nextButton: CustomButton = {

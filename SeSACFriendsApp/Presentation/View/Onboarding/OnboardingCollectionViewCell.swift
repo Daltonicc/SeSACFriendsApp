@@ -46,10 +46,10 @@ final class OnboardingCollectionViewCell: UICollectionViewCell {
     func cellConfiguration(item: Int) {
 
         switch item {
-        case 0: imageView.image = Asset.onboardingImage1.image
-        case 1: imageView.image = Asset.onboardingImage2.image
-        case 2: imageView.image = Asset.onboardingImage3.image
-        default: imageView.image = Asset.onboardingImage1.image
+        case 0: imageView.image = Asset.Onboarding.onboardingImage1.image
+        case 1: imageView.image = Asset.Onboarding.onboardingImage2.image
+        case 2: imageView.image = Asset.Onboarding.onboardingImage3.image
+        default: imageView.image = Asset.Onboarding.onboardingImage1.image
         }
     }
 }
