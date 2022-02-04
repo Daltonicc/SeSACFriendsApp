@@ -39,7 +39,7 @@ internal enum Asset {
     internal static let faq = ImageAsset(name: "FAQ")
     internal static let info = ImageAsset(name: "Info")
     internal static let permit = ImageAsset(name: "Permit")
-    internal static let profile = ImageAsset(name: "Profile")
+    internal static let profile = ImageAsset(name: "SSACProfile")
     internal static let qa = ImageAsset(name: "Q&A")
   }
 }

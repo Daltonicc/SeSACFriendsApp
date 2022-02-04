@@ -20,6 +20,7 @@ final class MyProfileViewController: BaseViewController {
 
         self.view = mainView
 
+        navigationController?.title = "내 정보"
     }
 
     override func viewDidLoad() {
@@ -43,12 +44,15 @@ final class MyProfileViewController: BaseViewController {
 extension MyProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 5
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyProfileTableViewCell.identifier, for: indexPath) as? MyProfileTableViewCell else { return UITableViewCell() }
+
+        cell.cellConfiguration(row: indexPath.row)
+
         return cell
     }
 

@@ -16,6 +16,11 @@ final class MyProfileView: UIView, ViewRepresentable {
     }()
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = Asset.ProfileCategory.profile.image
+        imageView.layer.cornerRadius = 25
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor.gray3.cgColor
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     let yourNameLabel: UILabel = {
@@ -27,6 +32,8 @@ final class MyProfileView: UIView, ViewRepresentable {
     }()
     let profileButton: UIButton = {
         let button = UIButton()
+        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.tintColor = .black
         return button
     }()
 
@@ -59,7 +66,7 @@ final class MyProfileView: UIView, ViewRepresentable {
     func setUpConstraint() {
 
         topView.snp.makeConstraints { make in
-            make.top.equalTo(self)
+            make.top.equalTo(self).inset(70)
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
             make.height.equalTo(96)

@@ -23,6 +23,7 @@ final class AppCoordinator: NSObject, Coordinator {
     func start() {
 
         window.rootViewController = presenter
+        presenter.isNavigationBarHidden = true
 
         let coordinator = AuthCoordinator(presenter: presenter)
         childCoordinators.append(coordinator)
@@ -36,6 +37,8 @@ final class AppCoordinator: NSObject, Coordinator {
     }
 
     func startHome() {
+
+        presenter.viewControllers.removeAll()
 
         let coordinator = TabBarCoordinator(presenter: presenter)
         childCoordinators.append(coordinator)
