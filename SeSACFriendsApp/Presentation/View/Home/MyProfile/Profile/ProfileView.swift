@@ -14,6 +14,7 @@ final class ProfileView: UIView, ViewRepresentable {
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white
+        scrollView.showsVerticalScrollIndicator = true
         return scrollView
     }()
 
@@ -26,6 +27,8 @@ final class ProfileView: UIView, ViewRepresentable {
     let cardBackgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = Asset.ProfileDetail.seSACBackground.image
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
         return imageView
     }()
     let cardSesacImageView: UIImageView = {
@@ -35,6 +38,9 @@ final class ProfileView: UIView, ViewRepresentable {
     }()
     let titleView: UIView = {
         let view = UIView()
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.gray3.cgColor
         return view
     }()
     let nameLabel: UILabel = {
@@ -123,10 +129,12 @@ final class ProfileView: UIView, ViewRepresentable {
         slider.hideLabels = true
         return slider
     }()
-    let withDrawLabel: UIButton = {
+    let withDrawButton: UIButton = {
         let button = UIButton()
         button.setTitle("회원 탈퇴", for: .normal)
         button.titleLabel?.font = .title4r
+        button.tintColor = .black
+        button.titleLabel?.textColor = .black
         return button
     }()
 
@@ -165,37 +173,59 @@ final class ProfileView: UIView, ViewRepresentable {
         detailView.addSubview(ageLabel)
         detailView.addSubview(ageRangeLabel)
         detailView.addSubview(ageRangeSlider)
-        detailView.addSubview(withDrawLabel)
+        detailView.addSubview(withDrawButton)
     }
 
     func setUpConstraint() {
 
         scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(self.safeAreaLayoutGuide)
+            make.edges.equalTo(self)
         }
 
         // MARK: - Card View
 
         cardView.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.leading.equalTo(self).inset(16)
-            make.trailing.equalTo(self).inset(16)
+            make.top.equalTo(scrollView)
+            make.leading.equalTo(scrollView).inset(16)
+            make.trailing.equalTo(scrollView).inset(16)
             make.height.equalTo(252)
+            make.width.equalTo(UIScreen.main.bounds.width - 32)
         }
         cardBackgroundImageView.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.leading.trailing.equalTo(self)
+            make.top.equalTo(cardView)
+            make.leading.trailing.equalTo(cardView)
             make.height.equalTo(194)
         }
-
+        cardSesacImageView.snp.makeConstraints { make in
+            make.bottom.equalTo(cardView).offset(-60)
+            make.centerX.equalTo(cardView)
+            make.width.height.equalTo(184)
+        }
+        titleView.snp.makeConstraints { make in
+            make.top.equalTo(cardBackgroundImageView.snp.bottom)
+            make.leading.trailing.equalTo(cardView)
+            make.height.equalTo(58)
+        }
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleView).inset(16)
+            make.bottom.equalTo(titleView).inset(16)
+            make.leading.equalTo(titleView).inset(16)
+        }
+        detailButton.snp.makeConstraints { make in
+            make.top.equalTo(titleView).inset(16)
+            make.bottom.equalTo(titleView).inset(16)
+            make.trailing.equalTo(titleView).inset(16)
+            make.leading.equalTo(nameLabel.snp.trailing).offset(40)
+            make.width.equalTo(12)
+        }
 
         // MARK: - Detail View
 
         detailView.snp.makeConstraints { make in
             make.top.equalTo(cardView.snp.bottom).offset(10)
-            make.leading.equalTo(self).inset(16)
-            make.trailing.equalTo(self).inset(16)
-            make.bottom.equalTo(self)
+            make.leading.equalTo(scrollView).inset(16)
+            make.trailing.equalTo(scrollView).inset(16)
+            make.bottom.equalTo(scrollView)
         }
 
         genderLabel.snp.makeConstraints { make in
@@ -225,7 +255,7 @@ final class ProfileView: UIView, ViewRepresentable {
         hobbyTextField.snp.makeConstraints { make in
             make.top.equalTo(hobbyLabel)
             make.trailing.equalToSuperview()
-            make.width.equalTo(160)
+            make.width.equalTo(180)
             make.height.equalTo(48)
         }
         numberSearchLabel.snp.makeConstraints { make in
@@ -255,9 +285,9 @@ final class ProfileView: UIView, ViewRepresentable {
             make.top.equalTo(ageLabel.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(10)
         }
-        withDrawLabel.snp.makeConstraints { make in
+        withDrawButton.snp.makeConstraints { make in
             make.top.equalTo(ageRangeSlider.snp.bottom)
-            make.leading.trailing.equalToSuperview()
+            make.leading.equalToSuperview()
             make.height.equalTo(48)
             make.bottom.equalToSuperview()
         }

@@ -33,6 +33,14 @@ final class MyProfileViewController: BaseViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         mainView.tableView.register(MyProfileTableViewCell.self, forCellReuseIdentifier: MyProfileTableViewCell.identifier)
+
+        mainView.profileButton.rx.tap
+            .bind {
+                self.addPressAnimationToButton(self.mainView.profileButton) { _ in
+                    self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 
     override func textfieldConfig() {

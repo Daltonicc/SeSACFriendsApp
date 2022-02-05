@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.makeKeyAndVisible()
 
-//        window?.rootViewController = UINavigationController(rootViewController: GenderViewController())
+//        window?.rootViewController = UINavigationController(rootViewController: ProfileViewController())
         appCoordinator = AppCoordinator(window: window!)
         appCoordinator?.start()
     }

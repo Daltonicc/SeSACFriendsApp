@@ -16,7 +16,7 @@ final class MyProfileView: UIView, ViewRepresentable {
     }()
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Asset.ProfileCategory.profile.image
+        imageView.image = Asset.ProfileCategory.ssacProfile.image
         imageView.layer.cornerRadius = 25
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.gray3.cgColor
