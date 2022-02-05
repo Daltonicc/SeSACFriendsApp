@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - GetUser
-struct GetUser: Codable {
+struct GetUserResponseDTO: Codable {
     let id: String
     let v: Int
     let uid, phoneNumber, email, fcMtoken: String
@@ -36,5 +36,18 @@ struct GetUser: Codable {
         case nick, birth, gender, hobby, comment, reputation, sesac, sesacCollection, background, backgroundCollection, purchaseToken
         case transactionID = "transactionId"
         case reviewedBefore, reportedNum, reportedUser, dodgepenalty, dodgeNum, ageMin, ageMax, searchable, createdAt
+    }
+}
+
+extension GetUserResponseDTO {
+    func toDomain() -> UserData {
+        return .init(yourName: nick,
+                     gender: gender,
+                     hobby: hobby,
+                     sesacImage: sesac,
+                     backgroundImage: background,
+                     numberSearchable: searchable,
+                     ageMin: ageMin,
+                     ageMax: ageMax)
     }
 }

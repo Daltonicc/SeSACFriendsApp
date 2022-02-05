@@ -12,7 +12,6 @@ import RxCocoa
 final class GenderViewModel {
 
     weak var coordinator: AuthCoordinator?
-    let repository = GenderRepository()
     let useCase: GenderUseCase
 
     let disposeBag = DisposeBag()
@@ -55,7 +54,12 @@ final class GenderViewModel {
 
         if button.buttonState == .fill {
 
-            repository.requestRegisterUser()
+            useCase.requestRegisterUserByUseCase { statusCode in
+                switch statusCode {
+                case 200: self.coordinator?.finish() // 홈 탭으로 이동
+                default: print(statusCode)
+                }
+            }
 
         } else {
             //토스트 메세지!

@@ -40,7 +40,9 @@ final class AuthCoordinator: NSObject, Coordinator {
     func showLogin2AuthView() {
 
         let login2AuthView = Login2ViewController()
-        login2AuthView.viewModel.coordinator = self
+        login2AuthView.viewModel = Login2ViewModel(coordinator: self,
+                                                   useCase: Login2UseCase(
+                                                    repository: Login2Repository()))
         presenter.pushViewController(login2AuthView, animated: true)
     }
 

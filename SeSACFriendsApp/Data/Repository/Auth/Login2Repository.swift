@@ -16,10 +16,9 @@ final class Login2Repository {
         provider.request(.loginToFriendsApp) { (result) in
             switch result {
             case let .success(Response):
-                let data = try? Response.map(GetUser.self)
+                let data = try? Response.map(GetUserResponseDTO.self).toDomain()
                 let statusCode = Response.statusCode
                 print("상태코드 :\(statusCode)")
-                print(data)
 
                 completion(statusCode)
                 

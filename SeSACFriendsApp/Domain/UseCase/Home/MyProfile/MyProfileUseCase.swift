@@ -14,4 +14,14 @@ final class MyProfileUseCase {
     init(repository: MyProfileRepository) {
         self.repository = repository
     }
+
+    func getUserData(completion: @escaping (UserData) -> Void) {
+
+        repository.getUserInfo { statusCode, userData in
+            switch statusCode {
+            case 200: completion(userData!)
+            default: print("default")
+            }
+        }
+    }
 }

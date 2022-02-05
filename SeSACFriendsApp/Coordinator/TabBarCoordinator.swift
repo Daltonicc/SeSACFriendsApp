@@ -55,6 +55,7 @@ final class TabBarCoordinator: NSObject, Coordinator {
                                                         repository: MyProfileRepository()))
         childCoordinators.append(myProfileCoordinator)
 
+        tabBarController.tabBar.tintColor = .baseGreen
         tabBarController.viewControllers = [home, shop, friends, myProfile]
 
         presenter.pushViewController(tabBarController, animated: true)

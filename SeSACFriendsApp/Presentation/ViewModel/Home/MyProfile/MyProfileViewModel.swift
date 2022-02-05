@@ -15,9 +15,21 @@ final class MyProfileViewModel {
 
     let useCase: MyProfileUseCase
 
+    var userData: UserData?
+
     init(coordinator: MyProfileCoordinator, useCase: MyProfileUseCase) {
         self.coordinator = coordinator
         self.useCase = useCase
     }
 
+    func getUserInfo(completion: @escaping (UserData) -> Void) {
+        useCase.getUserData { userData in
+            self.userData = userData
+            completion(userData)
+        }
+    }
+
+    func showDetailProfile() {
+        coordinator?.showProfileView(userData: userData!)
+    }
 }

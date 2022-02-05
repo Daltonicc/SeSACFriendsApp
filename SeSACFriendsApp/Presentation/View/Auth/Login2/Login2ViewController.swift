@@ -19,7 +19,7 @@ import RxCocoa
 final class Login2ViewController: BaseViewController {
 
     let mainView = Login2View()
-    let viewModel = Login2ViewModel()
+    var viewModel: Login2ViewModel?
 
     let disposeBag = DisposeBag()
 
@@ -46,7 +46,7 @@ final class Login2ViewController: BaseViewController {
         mainView.authButton.rx.tap
             .bind {
                 self.addPressAnimationToButton(self.mainView.authButton) { _ in
-                    self.viewModel.checkCredentialNumber(textField: self.mainView.numberTextField.mainTextField)
+                    self.viewModel?.checkCredentialNumber(textField: self.mainView.numberTextField.mainTextField)
                 }
             }
             .disposed(by: disposeBag)
@@ -55,7 +55,7 @@ final class Login2ViewController: BaseViewController {
     override func textfieldConfig() {
         super.textfieldConfig()
 
-        viewModel.checkValidation(textField: mainView.numberTextField.mainTextField, button: mainView.authButton)
+        viewModel?.checkValidation(textField: mainView.numberTextField.mainTextField, button: mainView.authButton)
         mainView.numberTextField.mainTextField.addTarget(self, action: #selector(numberTextFieldDidChange(textfield:)), for: .editingChanged)
     }
 

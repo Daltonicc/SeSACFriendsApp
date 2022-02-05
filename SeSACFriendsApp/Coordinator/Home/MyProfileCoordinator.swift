@@ -23,10 +23,11 @@ final class MyProfileCoordinator: NSObject, Coordinator {
         
     }
 
-    func showProfileView() {
+    func showProfileView(userData: UserData) {
 
         let profileView = ProfileViewController()
         profileView.viewModel = ProfileViewModel(coordinator: self,
+                                                 userData: userData,
                                                  useCase: ProfileUseCase(
                                                     repository: ProfileRepository()))
         presenter.pushViewController(profileView, animated: true)

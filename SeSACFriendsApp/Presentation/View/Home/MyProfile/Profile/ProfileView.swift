@@ -57,6 +57,7 @@ final class ProfileView: UIView, ViewRepresentable {
     }()
     let detailButton: UIButton = {
         let button = UIButton()
+        button.tintColor = .black
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         return button
     }()
@@ -75,13 +76,21 @@ final class ProfileView: UIView, ViewRepresentable {
     }()
     let manButton: CustomButton = {
         let button = CustomButton()
-        button.titleLabel?.font = .title4r
+        button.buttonState = .inactive
+        button.layer.borderColor = UIColor.gray4.cgColor
+        button.layer.borderWidth = 1
+        button.titleLabel?.font = .body3r
+        button.setTitleColor(.black, for: .normal)
         button.setTitle("남자", for: .normal)
         return button
     }()
     let womanButton: CustomButton = {
         let button = CustomButton()
-        button.titleLabel?.font = .title4r
+        button.buttonState = .inactive
+        button.layer.borderColor = UIColor.gray4.cgColor
+        button.layer.borderWidth = 1
+        button.titleLabel?.font = .body3r
+        button.setTitleColor(.black, for: .normal)
         button.setTitle("여자", for: .normal)
         return button
     }()
@@ -221,7 +230,7 @@ final class ProfileView: UIView, ViewRepresentable {
             make.bottom.equalTo(titleView).inset(16)
             make.trailing.equalTo(titleView).inset(16)
             make.leading.equalTo(nameLabel.snp.trailing).offset(40)
-            make.width.equalTo(12)
+            make.width.equalTo(16)
         }
 
         // MARK: - Detail View

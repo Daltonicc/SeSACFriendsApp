@@ -14,6 +14,8 @@ final class MyProfileViewController: BaseViewController {
     let mainView = MyProfileView()
     var viewModel: MyProfileViewModel?
 
+    var userData: UserData?
+
     let disposeBag = DisposeBag()
 
     override func loadView() {
@@ -22,10 +24,21 @@ final class MyProfileViewController: BaseViewController {
         self.view = mainView
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewModel?.getUserInfo { userData in
+            self.userData = userData
+            self.mainView.yourNameLabel.text = self.userData?.yourName
+        }
+
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = "내 정보"
+
     }
 
     override func setViewConfig() {
@@ -38,11 +51,11 @@ final class MyProfileViewController: BaseViewController {
         mainView.topButton.rx.tap
             .bind {
                 self.addPressAnimationToButton(self.mainView.topButton) { _ in
-
-                    self.viewModel?.coordinator?.showProfileView()
+                    self.viewModel?.showDetailProfile()
                 }
             }
             .disposed(by: disposeBag)
+
     }
 
     override func textfieldConfig() {

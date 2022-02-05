@@ -10,7 +10,7 @@ import Moya
 
 final class GenderRepository {
 
-    func requestRegisterUser() {
+    func requestRegisterUser(completion: @escaping (Int) -> Void) {
 
         let phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber")!
         let fcmToken = UserDefaults.standard.string(forKey: "FCMToken")!
@@ -19,16 +19,14 @@ final class GenderRepository {
         let email = UserDefaults.standard.string(forKey: "email")!
         let gender = UserDefaults.standard.integer(forKey: "gender")
 
-        print(phoneNumber, fcmToken, nick, birth, email, gender)
-
         let provider = MoyaProvider<SeSACFriendsAPI>()
         provider.request(.registerFriend(phoneNumber, fcmToken, nick, birth, email, gender)) { (result) in
             switch result {
             case let .success(Response):
-                let data = try? Response.map(GetUser.self)
-                print(data)
+                let data = try? Response.map(GetUserResponseDTO.self).toDomain()
                 let statusCode = Response.statusCode
-                print("상태코드 :\(statusCode)")
+
+                completion(statusCode)
 
             case let .failure(MoyaError):
                 let errorCode = MoyaError.errorCode

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 final class ProfileViewModel {
 
@@ -13,8 +15,43 @@ final class ProfileViewModel {
 
     let useCase: ProfileUseCase
 
-    init(coordinator: MyProfileCoordinator, useCase: ProfileUseCase) {
+    var userData: UserData?
+
+    var genderNumber = -1
+
+    let disposeBag = DisposeBag()
+
+    init(coordinator: MyProfileCoordinator, userData: UserData, useCase: ProfileUseCase) {
         self.coordinator = coordinator
         self.useCase = useCase
+        self.userData = userData
     }
+
+    func checkGender(manButton: CustomButton, womanButton: CustomButton) {
+
+        manButton.rx.tap
+            .bind {
+                if manButton.backgroundColor == .white {
+                    manButton.backgroundColor = .baseGreen
+                    manButton.setTitleColor(.white, for: .normal)
+                    womanButton.backgroundColor = .white
+                    womanButton.setTitleColor(.black, for: .normal)
+                    self.genderNumber = 1
+                }
+            }
+            .disposed(by: disposeBag)
+
+        womanButton.rx.tap
+            .bind {
+                if womanButton.backgroundColor == .white {
+                    womanButton.backgroundColor = .baseGreen
+                    womanButton.setTitleColor(.white, for: .normal)
+                    manButton.backgroundColor = .white
+                    manButton.setTitleColor(.black, for: .normal)
+                    self.genderNumber = 0
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
 }

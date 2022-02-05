@@ -31,6 +31,22 @@ final class ProfileViewController: BaseViewController {
     override func setViewConfig() {
         super.setViewConfig()
 
+        mainView.nameLabel.text = viewModel?.userData?.yourName
+        mainView.hobbyTextField.mainTextField.text = viewModel?.userData?.hobby
+        mainView.ageRangeLabel.text = "\(viewModel!.userData!.ageMin) - \(viewModel!.userData!.ageMax)"
+
+        switch viewModel?.userData?.gender {
+        case 0:
+            mainView.womanButton.backgroundColor = .baseGreen
+            mainView.womanButton.setTitleColor(.white, for: .normal)
+        case 1:
+            mainView.manButton.backgroundColor = .baseGreen
+            mainView.manButton.setTitleColor(.white, for: .normal)
+        default: print("Gender Default")
+        }
+
+        viewModel?.checkGender(manButton: mainView.manButton, womanButton: mainView.womanButton)
+
     }
 
     override func textfieldConfig() {

@@ -14,4 +14,10 @@ final class GenderUseCase {
     init(repository: GenderRepository) {
         self.repository = repository
     }
+
+    func requestRegisterUserByUseCase(completion: @escaping (Int) -> Void) {
+        repository.requestRegisterUser { statusCode in
+            completion(statusCode)
+        }
+    }
 }
