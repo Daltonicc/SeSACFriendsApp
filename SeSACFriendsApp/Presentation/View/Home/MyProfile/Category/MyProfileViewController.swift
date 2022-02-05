@@ -12,6 +12,7 @@ import RxCocoa
 final class MyProfileViewController: BaseViewController {
 
     let mainView = MyProfileView()
+    var viewModel: MyProfileViewModel?
 
     let disposeBag = DisposeBag()
 
@@ -34,10 +35,11 @@ final class MyProfileViewController: BaseViewController {
         mainView.tableView.dataSource = self
         mainView.tableView.register(MyProfileTableViewCell.self, forCellReuseIdentifier: MyProfileTableViewCell.identifier)
 
-        mainView.profileButton.rx.tap
+        mainView.topButton.rx.tap
             .bind {
-                self.addPressAnimationToButton(self.mainView.profileButton) { _ in
-                    self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+                self.addPressAnimationToButton(self.mainView.topButton) { _ in
+
+                    self.viewModel?.coordinator?.showProfileView()
                 }
             }
             .disposed(by: disposeBag)

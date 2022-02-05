@@ -17,6 +17,12 @@ final class ProfileView: UIView, ViewRepresentable {
         scrollView.showsVerticalScrollIndicator = true
         return scrollView
     }()
+    let saveBarButton: UIBarButtonItem = {
+        let barButton = UIBarButtonItem()
+        barButton.title = "저장"
+        barButton.tintColor = .black
+        return barButton
+    }()
 
     // MARK: - Card View
 
@@ -132,9 +138,8 @@ final class ProfileView: UIView, ViewRepresentable {
     let withDrawButton: UIButton = {
         let button = UIButton()
         button.setTitle("회원 탈퇴", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .title4r
-        button.tintColor = .black
-        button.titleLabel?.textColor = .black
         return button
     }()
 

@@ -23,6 +23,15 @@ final class MyProfileCoordinator: NSObject, Coordinator {
         
     }
 
+    func showProfileView() {
+
+        let profileView = ProfileViewController()
+        profileView.viewModel = ProfileViewModel(coordinator: self,
+                                                 useCase: ProfileUseCase(
+                                                    repository: ProfileRepository()))
+        presenter.pushViewController(profileView, animated: true)
+    }
+
     func finish() {
 
         parentCoordinator?.childDidFinish(self, completion: {

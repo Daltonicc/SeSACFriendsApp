@@ -9,11 +9,19 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
+    let backBarButton: UIBarButtonItem = {
+        let barButton = UIBarButtonItem()
+        barButton.image = UIImage(systemName: "arrow.left")
+        barButton.tintColor = .black
+        return barButton
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setViewConfig()
         textfieldConfig()
+        navigationItemConfig()
     }
 
     func setViewConfig() {
@@ -21,4 +29,5 @@ class BaseViewController: UIViewController {
     }
 
     func textfieldConfig() {}
+    func navigationItemConfig() {}
 }

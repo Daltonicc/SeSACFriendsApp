@@ -18,7 +18,7 @@ import RxCocoa
 final class GenderViewController: BaseViewController {
 
     let mainView = GenderView()
-    var viewModel = GenderViewModel()
+    var viewModel: GenderViewModel?
 
     let disposeBag = DisposeBag()
 
@@ -37,13 +37,25 @@ final class GenderViewController: BaseViewController {
 
     override func setViewConfig() {
 
-        viewModel.checkValidation(manButton: mainView.manButton, womanButton: mainView.womanButton, nextButton: mainView.nextButton)
+        viewModel?.checkValidation(manButton: mainView.manButton, womanButton: mainView.womanButton, nextButton: mainView.nextButton)
 
         mainView.nextButton.rx.tap
             .bind {
                 self.addPressAnimationToButton(self.mainView.nextButton) { _ in
-                    self.viewModel.checkButtonState(button: self.mainView.nextButton)
+                    self.viewModel?.checkButtonState(button: self.mainView.nextButton)
                 }
+            }
+            .disposed(by: disposeBag)
+    }
+
+    override func navigationItemConfig() {
+
+        navigationItem.leftBarButtonItem = backBarButton
+
+        backBarButton.target = self
+        backBarButton.rx.tap
+            .bind {
+                self.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
     }

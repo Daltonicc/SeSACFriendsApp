@@ -42,15 +42,15 @@ final class MyProfileTableViewCell: UITableViewCell {
     func setUpConstraints() {
 
         iconImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(24)
-            make.top.equalTo(self).inset(24)
-            make.bottom.equalTo(self).inset(24)
-            make.leading.equalTo(self).inset(15)
+            make.width.equalTo(24)
+            make.top.equalTo(contentView).inset(24)
+            make.bottom.equalTo(contentView).inset(24)
+            make.leading.equalTo(contentView).inset(15)
         }
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self).inset(24)
+            make.top.equalTo(contentView).inset(24)
             make.leading.equalTo(iconImageView.snp.trailing).offset(10)
-            make.bottom.equalTo(self).inset(24)
+            make.bottom.equalTo(contentView).inset(24)
             make.width.equalTo(100)
         }
     }

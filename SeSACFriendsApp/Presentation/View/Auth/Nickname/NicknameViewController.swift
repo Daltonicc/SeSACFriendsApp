@@ -53,6 +53,18 @@ final class NicknameViewController: BaseViewController {
         mainView.nicknameTextField.mainTextField.addTarget(self, action: #selector(nicknameTextFieldDidChange(textfield:)), for: .editingChanged)
     }
 
+    override func navigationItemConfig() {
+
+        navigationItem.leftBarButtonItem = backBarButton
+
+        backBarButton.target = self
+        backBarButton.rx.tap
+            .bind {
+                self.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
+    }
+
     @objc func nicknameTextFieldDidChange(textfield: UITextField) {
 
         checkMaxLength(textField: mainView.nicknameTextField.mainTextField, maxLength: 10)

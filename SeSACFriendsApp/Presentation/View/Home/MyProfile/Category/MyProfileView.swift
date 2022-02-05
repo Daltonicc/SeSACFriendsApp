@@ -36,6 +36,10 @@ final class MyProfileView: UIView, ViewRepresentable {
         button.tintColor = .black
         return button
     }()
+    let topButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
 
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -58,6 +62,7 @@ final class MyProfileView: UIView, ViewRepresentable {
         addSubview(topView)
         addSubview(tableView)
 
+        topView.addSubview(topButton)
         topView.addSubview(profileImageView)
         topView.addSubview(yourNameLabel)
         topView.addSubview(profileButton)
@@ -77,6 +82,9 @@ final class MyProfileView: UIView, ViewRepresentable {
             make.trailing.equalTo(self)
             make.bottom.equalTo(self)
         }
+        topButton.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         profileImageView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.top).inset(20)
             make.leading.equalTo(topView.snp.leading).inset(15)
@@ -94,6 +102,7 @@ final class MyProfileView: UIView, ViewRepresentable {
             make.trailing.equalTo(topView.snp.trailing).inset(22.5)
             make.width.equalTo(9)
         }
+
     }
 
 }

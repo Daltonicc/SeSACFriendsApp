@@ -13,10 +13,16 @@ final class GenderViewModel {
 
     weak var coordinator: AuthCoordinator?
     let repository = GenderRepository()
+    let useCase: GenderUseCase
 
     let disposeBag = DisposeBag()
     
     var genderNumber = -1
+
+    init(coordinator: AuthCoordinator, useCase: GenderUseCase) {
+        self.coordinator = coordinator
+        self.useCase = useCase
+    }
 
     func checkValidation(manButton: CustomButton, womanButton: CustomButton, nextButton: CustomButton) {
 

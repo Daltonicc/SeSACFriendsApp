@@ -53,6 +53,18 @@ final class EmailViewController: BaseViewController {
         mainView.emailTextField.mainTextField.addTarget(self, action: #selector(emailTextFieldDidChange(textfield:)), for: .editingChanged)
     }
 
+    override func navigationItemConfig() {
+
+        navigationItem.leftBarButtonItem = backBarButton
+
+        backBarButton.target = self
+        backBarButton.rx.tap
+            .bind {
+                self.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
+    }
+
     @objc func emailTextFieldDidChange(textfield: UITextField) {
 
         //최대 길이 제한 안줘도 될듯.

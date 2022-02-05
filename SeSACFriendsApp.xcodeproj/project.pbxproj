@@ -61,6 +61,13 @@
 		6AA1380827AE1DA80076CF40 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 6AA1380727AE1DA80076CF40 /* Toast */; };
 		6AA1380A27AE22E80076CF40 /* Images+Generated2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA1380927AE22E80076CF40 /* Images+Generated2.swift */; };
 		6AA1380C27AE2BC70076CF40 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA1380B27AE2BC70076CF40 /* ProfileViewController.swift */; };
+		6AA1381027AE682A0076CF40 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA1380F27AE682A0076CF40 /* MyProfileViewModel.swift */; };
+		6AA1381227AE715F0076CF40 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA1381127AE715F0076CF40 /* ProfileViewModel.swift */; };
+		6AA1381627AE71F70076CF40 /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA1381527AE71F70076CF40 /* ProfileUseCase.swift */; };
+		6AA1381827AE72130076CF40 /* MyProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA1381727AE72130076CF40 /* MyProfileUseCase.swift */; };
+		6AA1381A27AE727D0076CF40 /* GenderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA1381927AE727D0076CF40 /* GenderUseCase.swift */; };
+		6AA1381E27AE79200076CF40 /* MyProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA1381D27AE79200076CF40 /* MyProfileRepository.swift */; };
+		6AA1382027AE79270076CF40 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA1381F27AE79270076CF40 /* ProfileRepository.swift */; };
 		6AAC7094279D9372003FCD27 /* ViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC7093279D9372003FCD27 /* ViewRepresentable.swift */; };
 		6AAC709A279DADA8003FCD27 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC7099279DADA8003FCD27 /* String+Extension.swift */; };
 		6AAC709C279DB9D4003FCD27 /* Login2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC709B279DB9D4003FCD27 /* Login2ViewController.swift */; };
@@ -140,6 +147,13 @@
 		6AA137F227AA29750076CF40 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		6AA1380927AE22E80076CF40 /* Images+Generated2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Images+Generated2.swift"; sourceTree = SOURCE_ROOT; };
 		6AA1380B27AE2BC70076CF40 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		6AA1380F27AE682A0076CF40 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
+		6AA1381127AE715F0076CF40 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		6AA1381527AE71F70076CF40 /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
+		6AA1381727AE72130076CF40 /* MyProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileUseCase.swift; sourceTree = "<group>"; };
+		6AA1381927AE727D0076CF40 /* GenderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderUseCase.swift; sourceTree = "<group>"; };
+		6AA1381D27AE79200076CF40 /* MyProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileRepository.swift; sourceTree = "<group>"; };
+		6AA1381F27AE79270076CF40 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		6AAC7093279D9372003FCD27 /* ViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRepresentable.swift; sourceTree = "<group>"; };
 		6AAC7098279DA9E9003FCD27 /* SeSACFriendsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSACFriendsApp.entitlements; sourceTree = "<group>"; };
 		6AAC7099279DADA8003FCD27 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -230,6 +244,7 @@
 		6A0AB78C27985F4C009C80E9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				6AA1380D27AE68150076CF40 /* Home */,
 				6AAC70D527A03ED5003FCD27 /* Onboarding */,
 				6AAC70D627A03EDC003FCD27 /* Auth */,
 			);
@@ -387,6 +402,7 @@
 			children = (
 				6A92DD88279D843D005A66E4 /* Network */,
 				6AA137C127A534800076CF40 /* Auth */,
+				6AA1381B27AE78FD0076CF40 /* Home */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -483,6 +499,57 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		6AA1380D27AE68150076CF40 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6AA1380E27AE681A0076CF40 /* MyProfile */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6AA1380E27AE681A0076CF40 /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
+				6AA1380F27AE682A0076CF40 /* MyProfileViewModel.swift */,
+				6AA1381127AE715F0076CF40 /* ProfileViewModel.swift */,
+			);
+			path = MyProfile;
+			sourceTree = "<group>";
+		};
+		6AA1381327AE71C00076CF40 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6AA1381427AE71E90076CF40 /* MyProfile */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6AA1381427AE71E90076CF40 /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
+				6AA1381527AE71F70076CF40 /* ProfileUseCase.swift */,
+				6AA1381727AE72130076CF40 /* MyProfileUseCase.swift */,
+			);
+			path = MyProfile;
+			sourceTree = "<group>";
+		};
+		6AA1381B27AE78FD0076CF40 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6AA1381C27AE790C0076CF40 /* MyProfile */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6AA1381C27AE790C0076CF40 /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
+				6AA1381D27AE79200076CF40 /* MyProfileRepository.swift */,
+				6AA1381F27AE79270076CF40 /* ProfileRepository.swift */,
+			);
+			path = MyProfile;
+			sourceTree = "<group>";
+		};
 		6AAC7092279D9364003FCD27 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -494,6 +561,7 @@
 		6AAC70AC279FC334003FCD27 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				6AA1381327AE71C00076CF40 /* Home */,
 				6AAC70D727A03F97003FCD27 /* Auth */,
 			);
 			path = UseCase;
@@ -561,6 +629,7 @@
 			children = (
 				6AAC70AD279FC37B003FCD27 /* LoginUseCase.swift */,
 				6AAC70B5279FF24E003FCD27 /* Login2UseCase.swift */,
+				6AA1381927AE727D0076CF40 /* GenderUseCase.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -780,6 +849,7 @@
 				6AA137BE27A5344A0076CF40 /* Login2Repository.swift in Sources */,
 				6A0AB7BF2799410A009C80E9 /* UIView+Extension.swift in Sources */,
 				6AA1380C27AE2BC70076CF40 /* ProfileViewController.swift in Sources */,
+				6AA1381027AE682A0076CF40 /* MyProfileViewModel.swift in Sources */,
 				6AA137D227A795A90076CF40 /* FriendsViewController.swift in Sources */,
 				6AE4580F279679FD006B142C /* OnboardingViewController.swift in Sources */,
 				6A0AB7CC279D06D6009C80E9 /* UIViewController+Extension.swift in Sources */,
@@ -791,6 +861,7 @@
 				6AA1380A27AE22E80076CF40 /* Images+Generated2.swift in Sources */,
 				6AE4580B279679FD006B142C /* AppDelegate.swift in Sources */,
 				6AA137EF27AA230A0076CF40 /* UITableViewCell+Extension.swift in Sources */,
+				6AA1381A27AE727D0076CF40 /* GenderUseCase.swift in Sources */,
 				6A0AB7B1279866F4009C80E9 /* UILabel+Extension.swift in Sources */,
 				6AA137ED27AA22650076CF40 /* MyProfileTableViewCell.swift in Sources */,
 				6AAC7094279D9372003FCD27 /* ViewRepresentable.swift in Sources */,
@@ -802,6 +873,9 @@
 				6AA137CE27A7954C0076CF40 /* HomeViewController.swift in Sources */,
 				6AA137C827A78C780076CF40 /* TabBarCoordinator.swift in Sources */,
 				6A0AB7CA279CFC68009C80E9 /* Coordinator.swift in Sources */,
+				6AA1381227AE715F0076CF40 /* ProfileViewModel.swift in Sources */,
+				6AA1382027AE79270076CF40 /* ProfileRepository.swift in Sources */,
+				6AA1381827AE72130076CF40 /* MyProfileUseCase.swift in Sources */,
 				6AAC709E279DBB36003FCD27 /* BaseViewController.swift in Sources */,
 				6AAC70D027A020C2003FCD27 /* EmailViewController.swift in Sources */,
 				6AAC709C279DB9D4003FCD27 /* Login2ViewController.swift in Sources */,
@@ -826,7 +900,9 @@
 				6A0AB7D1279D0795009C80E9 /* LoginViewController.swift in Sources */,
 				6AA137DD27A7BCA40076CF40 /* ShopCoordinator.swift in Sources */,
 				6AA137D427A795C10076CF40 /* MyProfileViewController.swift in Sources */,
+				6AA1381627AE71F70076CF40 /* ProfileUseCase.swift in Sources */,
 				6AA137F327AA29750076CF40 /* UIImage+Extension.swift in Sources */,
+				6AA1381E27AE79200076CF40 /* MyProfileRepository.swift in Sources */,
 				6AAC70D427A020D5003FCD27 /* GenderViewController.swift in Sources */,
 				6AAC70B4279FCE59003FCD27 /* OnboardingViewModel.swift in Sources */,
 				6A0AB7B327987319009C80E9 /* UIButton+Extension.swift in Sources */,

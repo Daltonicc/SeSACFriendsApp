@@ -48,9 +48,16 @@ final class BirthViewController: BaseViewController {
         mainView.datePicker.addTarget(self, action: #selector(handleDatePicker(_:)), for: .valueChanged)
     }
 
-    override func textfieldConfig() {
-        super.textfieldConfig()
+    override func navigationItemConfig() {
 
+        navigationItem.leftBarButtonItem = backBarButton
+
+        backBarButton.target = self
+        backBarButton.rx.tap
+            .bind {
+                self.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 
     @objc func handleDatePicker(_ sender: UIDatePicker) {

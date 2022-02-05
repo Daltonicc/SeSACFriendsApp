@@ -59,6 +59,18 @@ final class Login2ViewController: BaseViewController {
         mainView.numberTextField.mainTextField.addTarget(self, action: #selector(numberTextFieldDidChange(textfield:)), for: .editingChanged)
     }
 
+    override func navigationItemConfig() {
+
+        navigationItem.leftBarButtonItem = backBarButton
+
+        backBarButton.target = self
+        backBarButton.rx.tap
+            .bind {
+                self.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
+    }
+
     @objc func numberTextFieldDidChange(textfield: UITextField) {
 
         checkMaxLength(textField: textfield, maxLength: 6)
