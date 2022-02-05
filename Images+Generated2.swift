@@ -19,11 +19,33 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
-  internal static let manImage = ImageAsset(name: "ManImage")
-  internal static let onboardingImage1 = ImageAsset(name: "OnboardingImage1")
-  internal static let onboardingImage2 = ImageAsset(name: "OnboardingImage2")
-  internal static let onboardingImage3 = ImageAsset(name: "OnboardingImage3")
-  internal static let womanImage = ImageAsset(name: "WomanImage")
+  internal enum Auth {
+    internal static let manImage = ImageAsset(name: "ManImage")
+    internal static let womanImage = ImageAsset(name: "WomanImage")
+  }
+  internal enum MainTab {
+    internal static let friends = ImageAsset(name: "Friends")
+    internal static let home = ImageAsset(name: "Home")
+    internal static let profile = ImageAsset(name: "Profile")
+    internal static let shop = ImageAsset(name: "Shop")
+  }
+  internal enum Onboarding {
+    internal static let onboardingImage1 = ImageAsset(name: "OnboardingImage1")
+    internal static let onboardingImage2 = ImageAsset(name: "OnboardingImage2")
+    internal static let onboardingImage3 = ImageAsset(name: "OnboardingImage3")
+  }
+  internal enum ProfileCategory {
+    internal static let alert = ImageAsset(name: "Alert")
+    internal static let faq = ImageAsset(name: "FAQ")
+    internal static let info = ImageAsset(name: "Info")
+    internal static let permit = ImageAsset(name: "Permit")
+    internal static let qa = ImageAsset(name: "Q&A")
+    internal static let ssacProfile = ImageAsset(name: "SSACProfile")
+  }
+  internal enum ProfileDetail {
+    internal static let seSACBackground = ImageAsset(name: "SeSACBackground")
+    internal static let seSACImage = ImageAsset(name: "SeSACImage")
+  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

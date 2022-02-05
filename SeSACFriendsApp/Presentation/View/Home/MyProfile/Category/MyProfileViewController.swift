@@ -19,12 +19,12 @@ final class MyProfileViewController: BaseViewController {
         super.loadView()
 
         self.view = mainView
-
-        navigationController?.title = "내 정보"
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationItem.title = "내 정보"
     }
 
     override func setViewConfig() {
