@@ -17,10 +17,14 @@ final class EmailViewModel {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("EmailViewModel Deinit")
+    }
+
     func checkValidation(textField: UITextField, button: CustomButton) {
 
         textField.rx.text
-            .bind { [weak self] str in
+            .bind { str in
                 guard let str = str else { return }
                 if str.count >= 11 {
                     button.buttonState = .fill

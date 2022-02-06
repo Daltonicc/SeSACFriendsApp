@@ -23,6 +23,10 @@ final class GenderViewModel {
         self.useCase = useCase
     }
 
+    deinit {
+        print("GenderViewModel Deinit")
+    }
+
     func checkValidation(manButton: CustomButton, womanButton: CustomButton, nextButton: CustomButton) {
 
         manButton.rx.tap
@@ -57,6 +61,7 @@ final class GenderViewModel {
             useCase.requestRegisterUserByUseCase { [weak self] statusCode in
                 switch statusCode {
                 case 200: self?.coordinator?.finish() // 홈 탭으로 이동
+                case 401: print("401")
                 default: print(statusCode)
                 }
             }

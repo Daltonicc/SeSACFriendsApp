@@ -17,9 +17,15 @@ final class MyProfileUseCase {
 
     func getUserData(completion: @escaping (UserData) -> Void) {
 
-        repository.getUserInfo { [weak self] statusCode, userData in
+        repository.getUserInfo { statusCode, userData in
             switch statusCode {
             case 200: completion(userData!)
+            case 401:
+                FirebaseIDToken.refreshIDToken { [weak self] in
+                    self?.repository.getUserInfo(completion: { statusCode, userData in
+                        completion(userData!)
+                    })
+                }
             default: print("default")
             }
         }

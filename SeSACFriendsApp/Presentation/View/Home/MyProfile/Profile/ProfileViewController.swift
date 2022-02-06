@@ -31,6 +31,7 @@ final class ProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        withdrawButtonConfig()
     }
 
     override func setViewConfig() {
@@ -90,6 +91,15 @@ final class ProfileViewController: BaseViewController {
                 self?.viewModel?.updateUserData {
                     self?.navigationController?.popViewController(animated: true)
                 }
+            }
+            .disposed(by: disposeBag)
+    }
+
+    func withdrawButtonConfig() {
+
+        mainView.withDrawButton.rx.tap
+            .bind { [weak self] in
+                self?.viewModel?.withdrawUserData()
             }
             .disposed(by: disposeBag)
     }

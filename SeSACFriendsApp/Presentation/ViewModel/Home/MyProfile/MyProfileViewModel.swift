@@ -22,6 +22,10 @@ final class MyProfileViewModel {
         self.useCase = useCase
     }
 
+    deinit {
+        print("MyProfileViewModel Deinit")
+    }
+
     func getUserInfo(completion: @escaping (UserData) -> Void) {
         useCase.getUserData { [weak self] userData in
             self?.userData = userData

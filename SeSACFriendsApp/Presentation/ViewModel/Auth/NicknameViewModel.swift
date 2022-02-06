@@ -15,10 +15,14 @@ final class NicknameViewModel {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("NicknameViewModel Deinit")
+    }
+
     func checkValidation(textField: UITextField, button: CustomButton) {
 
         textField.rx.text
-            .bind { [weak self] str in
+            .bind { str in
                 guard let str = str else { return }
                 if str.count >= 1 {
                     button.buttonState = .fill

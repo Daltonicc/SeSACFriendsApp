@@ -24,10 +24,14 @@ final class Login2ViewModel {
         self.useCase = useCase
     }
 
+    deinit {
+        print("Login2ViewModel Deinit")
+    }
+
     func checkValidation(textField: UITextField, button: CustomButton) {
 
         textField.rx.text
-            .bind { [weak self] str in
+            .bind { str in
                 guard let str = str else { return }
                 textField.text = str.applyPatternOnNumbers(pattern: "######", replacementCharacter: "#")
 

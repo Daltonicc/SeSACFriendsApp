@@ -42,7 +42,7 @@
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>remote-notification</string>
+		<string></string>
 	</array>
 </dict>
 </plist>

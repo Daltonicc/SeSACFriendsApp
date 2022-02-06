@@ -33,7 +33,7 @@ final class Login2UseCase {
                         UserDefaultsRepository.saveIDToken(idToken: idToken)
                         print("Firebase IDToken: \(idToken)")
     
-                        self?.repository.getUserInfo { [weak self] statusCode in
+                        self?.repository.getUserInfo { statusCode in
                             completion(statusCode)
                         }
                     }

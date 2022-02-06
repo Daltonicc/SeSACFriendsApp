@@ -17,6 +17,10 @@ final class BirthViewModel {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("BirthViewModel Deinit")
+    }
+
     func checkValidation(yearTextField: UITextField, monthTextField: UITextField, dayTextField: UITextField, button: CustomButton) {
 
         yearTextField.rx.text

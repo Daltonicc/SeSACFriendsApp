@@ -19,10 +19,14 @@ final class LoginViewModel {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("LoginViewModel Deinit")
+    }
+
     func checkAuthValidation(textField: UITextField, button: CustomButton) {
 
         textField.rx.text
-            .bind { [weak self] str in
+            .bind { str in
                 guard let str = str else { return }
                 if str.count > 12 {
                     textField.text = str.applyPatternOnNumbers(pattern: "###-####-####", replacementCharacter: "#")

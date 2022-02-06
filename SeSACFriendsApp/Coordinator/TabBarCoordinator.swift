@@ -83,8 +83,8 @@ final class TabBarCoordinator: NSObject, Coordinator {
 
     func finish() {
 
-        parentCoordinator?.childDidFinish(self, completion: {
-
+        parentCoordinator?.childDidFinish(self, completion: { [weak self] in
+            self?.parentCoordinator?.start()
         })
     }
 }

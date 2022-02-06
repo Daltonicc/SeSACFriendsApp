@@ -16,6 +16,7 @@ enum SeSACFriendsAPI {
 
     // Profile
     case updateUserData(parameter: [String: Any])
+    case withdrawUser
 
 }
 
@@ -34,6 +35,7 @@ extension SeSACFriendsAPI: TargetType {
 
         // Profile
         case .updateUserData: return "/user/update/mypage"
+        case .withdrawUser: return "/user/withdraw"
         }
     }
 
@@ -46,6 +48,7 @@ extension SeSACFriendsAPI: TargetType {
 
         // Profile
         case .updateUserData: return .post
+        case .withdrawUser: return .post
         }
     }
 
@@ -61,6 +64,8 @@ extension SeSACFriendsAPI: TargetType {
         // Profile
         case .updateUserData(let parameter):
             return .requestParameters(parameters: parameter, encoding: URLEncoding.httpBody)
+        case .withdrawUser:
+            return .requestPlain
         }
     }
 

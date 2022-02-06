@@ -16,7 +16,7 @@ final class GenderUseCase {
     }
 
     func requestRegisterUserByUseCase(completion: @escaping (Int) -> Void) {
-        repository.requestRegisterUser { [weak self] statusCode in
+        repository.requestRegisterUser { statusCode in
             completion(statusCode)
         }
     }

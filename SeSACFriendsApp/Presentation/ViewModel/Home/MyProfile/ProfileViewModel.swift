@@ -26,7 +26,7 @@ final class ProfileViewModel {
     }
 
     deinit {
-        print("Profile ViewModel deinit")
+        print("ProfileViewModel Deinit")
     }
 
     func checkGender(manButton: CustomButton, womanButton: CustomButton) {
@@ -91,12 +91,15 @@ final class ProfileViewModel {
             "hobby": userData!.hobby
         ]
 
-        useCase.updateUserData(parameter: parameter) { [weak self] statusCode in
-            switch statusCode {
-            case 200: completion()
-            case 401: print("updateUser Token Error")
-            default: print("updateUser Default")
-            }
+        useCase.updateUserData(parameter: parameter) { statusCode in
+            completion()
+        }
+    }
+
+    func withdrawUserData() {
+
+        useCase.withdrawUserData { [weak self] in
+            self?.coordinator?.finish()
         }
     }
 }
