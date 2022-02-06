@@ -17,7 +17,7 @@ final class MyProfileUseCase {
 
     func getUserData(completion: @escaping (UserData) -> Void) {
 
-        repository.getUserInfo { statusCode, userData in
+        repository.getUserInfo { [weak self] statusCode, userData in
             switch statusCode {
             case 200: completion(userData!)
             default: print("default")

@@ -25,28 +25,32 @@ final class ProfileViewModel {
         self.userData = userData
     }
 
+    deinit {
+        print("Profile ViewModel deinit")
+    }
+
     func checkGender(manButton: CustomButton, womanButton: CustomButton) {
 
         manButton.rx.tap
-            .bind {
+            .bind { [weak self] in
                 if manButton.backgroundColor == .white {
                     manButton.backgroundColor = .baseGreen
                     manButton.setTitleColor(.white, for: .normal)
                     womanButton.backgroundColor = .white
                     womanButton.setTitleColor(.black, for: .normal)
-                    self.userData?.gender = 1
+                    self?.userData?.gender = 1
                 }
             }
             .disposed(by: disposeBag)
 
         womanButton.rx.tap
-            .bind {
+            .bind { [weak self] in
                 if womanButton.backgroundColor == .white {
                     womanButton.backgroundColor = .baseGreen
                     womanButton.setTitleColor(.white, for: .normal)
                     manButton.backgroundColor = .white
                     manButton.setTitleColor(.black, for: .normal)
-                    self.userData?.gender = 0
+                    self?.userData?.gender = 0
                 }
             }
             .disposed(by: disposeBag)
@@ -55,10 +59,10 @@ final class ProfileViewModel {
     func checkHobby(textField: UITextField) {
 
         textField.rx.text
-            .bind { str in
+            .bind { [weak self] str in
                 guard let str = str else { return }
                 if str.count >= 1 {
-                    self.userData?.hobby = str
+                    self?.userData?.hobby = str
                 }
             }
             .disposed(by: disposeBag)
@@ -67,11 +71,11 @@ final class ProfileViewModel {
     func checkNumberSearchable(searchSwitch: UISwitch) {
 
         searchSwitch.rx.controlEvent(.valueChanged)
-            .bind {
+            .bind { [weak self] in
                 if searchSwitch.isOn {
-                    self.userData?.numberSearchable = 1
+                    self?.userData?.numberSearchable = 1
                 } else {
-                    self.userData?.numberSearchable = 0
+                    self?.userData?.numberSearchable = 0
                 }
             }
             .disposed(by: disposeBag)
@@ -87,7 +91,7 @@ final class ProfileViewModel {
             "hobby": userData!.hobby
         ]
 
-        useCase.updateUserData(parameter: parameter) { statusCode in
+        useCase.updateUserData(parameter: parameter) { [weak self] statusCode in
             switch statusCode {
             case 200: completion()
             case 401: print("updateUser Token Error")

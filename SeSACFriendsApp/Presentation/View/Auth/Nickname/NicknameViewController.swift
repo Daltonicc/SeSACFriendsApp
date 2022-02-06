@@ -23,6 +23,10 @@ final class NicknameViewController: BaseViewController {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("Nickname Deinit")
+    }
+
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -36,9 +40,9 @@ final class NicknameViewController: BaseViewController {
         super.setViewConfig()
 
         mainView.nextButton.rx.tap
-            .bind {
-                self.addPressAnimationToButton(self.mainView.nextButton) { _ in
-                    self.viewModel.checkButtonState(button: self.mainView.nextButton)
+            .bind { [weak self] in
+                self?.addPressAnimationToButton(self?.mainView.nextButton ?? CustomButton()) { [weak self] _ in
+                    self?.viewModel.checkButtonState(button: self?.mainView.nextButton ?? CustomButton())
                 }
             }
             .disposed(by: disposeBag)
@@ -59,8 +63,8 @@ final class NicknameViewController: BaseViewController {
 
         backBarButton.target = self
         backBarButton.rx.tap
-            .bind {
-                self.navigationController?.popViewController(animated: true)
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
     }

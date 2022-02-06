@@ -26,25 +26,25 @@ final class GenderViewModel {
     func checkValidation(manButton: CustomButton, womanButton: CustomButton, nextButton: CustomButton) {
 
         manButton.rx.tap
-            .bind {
+            .bind { [weak self] _ in
                 if manButton.backgroundColor == .white {
                     manButton.backgroundColor = .whiteGreen
                     womanButton.backgroundColor = .white
-                    self.genderNumber = 1
+                    self?.genderNumber = 1
                     nextButton.buttonState = .fill
-                    UserDefaultsRepository.saveGender(gender: self.genderNumber)
+                    UserDefaultsRepository.saveGender(gender: self!.genderNumber)
                 }
             }
             .disposed(by: disposeBag)
 
         womanButton.rx.tap
-            .bind {
+            .bind { [weak self] _ in
                 if womanButton.backgroundColor == .white {
                     womanButton.backgroundColor = .whiteGreen
                     manButton.backgroundColor = .white
-                    self.genderNumber = 0
+                    self?.genderNumber = 0
                     nextButton.buttonState = .fill
-                    UserDefaultsRepository.saveGender(gender: self.genderNumber)
+                    UserDefaultsRepository.saveGender(gender: self!.genderNumber)
                 }
             }
             .disposed(by: disposeBag)
@@ -54,9 +54,9 @@ final class GenderViewModel {
 
         if button.buttonState == .fill {
 
-            useCase.requestRegisterUserByUseCase { statusCode in
+            useCase.requestRegisterUserByUseCase { [weak self] statusCode in
                 switch statusCode {
-                case 200: self.coordinator?.finish() // 홈 탭으로 이동
+                case 200: self?.coordinator?.finish() // 홈 탭으로 이동
                 default: print(statusCode)
                 }
             }

@@ -116,7 +116,7 @@ final class ProfileView: UIView, ViewRepresentable {
     let numberSearchSwitch: UISwitch = {
         let numberSwitch = UISwitch()
         numberSwitch.thumbTintColor = .white
-        numberSwitch.onTintColor = .green
+        numberSwitch.onTintColor = .baseGreen
         return numberSwitch
     }()
     let ageLabel: UILabel = {
@@ -129,7 +129,7 @@ final class ProfileView: UIView, ViewRepresentable {
         let label = UILabel()
         label.font = .title3m
         label.text = "18 - 65"
-        label.textColor = .green
+        label.textColor = .baseGreen
         return label
     }()
     let ageRangeSlider: RangeSeekSlider = {
@@ -138,8 +138,8 @@ final class ProfileView: UIView, ViewRepresentable {
         slider.maxValue = 65
         slider.enableStep = true
         slider.step = 1
-        slider.handleColor = .green
-        slider.colorBetweenHandles = .green
+        slider.handleColor = .baseGreen
+        slider.colorBetweenHandles = .baseGreen
         slider.tintColor = .gray2
         slider.hideLabels = true
         return slider

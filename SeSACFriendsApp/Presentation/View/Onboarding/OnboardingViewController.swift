@@ -17,6 +17,10 @@ final class OnboardingViewController: BaseViewController {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("Onboarding Deinit")
+    }
+
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -35,9 +39,9 @@ final class OnboardingViewController: BaseViewController {
         mainView.collectionView.isPagingEnabled = true
 
         mainView.startButton.rx.tap
-            .bind {
-                self.addPressAnimationToButton(self.mainView.startButton) { _ in
-                    self.viewModel.showLoginView()
+            .bind { [weak self] in
+                self?.addPressAnimationToButton(self?.mainView.startButton ?? CustomButton()) { _ in
+                    self?.viewModel.showLoginView()
                 }
             }
             .disposed(by: disposeBag)

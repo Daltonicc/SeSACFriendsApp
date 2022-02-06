@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 import Alamofire
 import RangeSeekSlider
-import MachO
 
 final class ProfileViewController: BaseViewController {
 
@@ -18,6 +17,10 @@ final class ProfileViewController: BaseViewController {
     var viewModel: ProfileViewModel?
 
     let disposeBag = DisposeBag()
+
+    deinit {
+        print("Profile Deinit")
+    }
 
     override func loadView() {
         super.loadView()
@@ -76,16 +79,16 @@ final class ProfileViewController: BaseViewController {
 
         backBarButton.target = self
         backBarButton.rx.tap
-            .bind {
-                self.navigationController?.popViewController(animated: true)
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
 
         mainView.saveBarButton.target = self
         mainView.saveBarButton.rx.tap
-            .bind {
-                self.viewModel?.updateUserData {
-                    self.navigationController?.popViewController(animated: true)
+            .bind { [weak self] in
+                self?.viewModel?.updateUserData {
+                    self?.navigationController?.popViewController(animated: true)
                 }
             }
             .disposed(by: disposeBag)

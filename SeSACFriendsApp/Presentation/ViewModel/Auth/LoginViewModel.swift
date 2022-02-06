@@ -22,7 +22,7 @@ final class LoginViewModel {
     func checkAuthValidation(textField: UITextField, button: CustomButton) {
 
         textField.rx.text
-            .bind { str in
+            .bind { [weak self] str in
                 guard let str = str else { return }
                 if str.count > 12 {
                     textField.text = str.applyPatternOnNumbers(pattern: "###-####-####", replacementCharacter: "#")

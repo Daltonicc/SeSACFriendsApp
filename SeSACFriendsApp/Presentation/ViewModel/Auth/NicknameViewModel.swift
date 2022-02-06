@@ -18,7 +18,7 @@ final class NicknameViewModel {
     func checkValidation(textField: UITextField, button: CustomButton) {
 
         textField.rx.text
-            .bind { str in
+            .bind { [weak self] str in
                 guard let str = str else { return }
                 if str.count >= 1 {
                     button.buttonState = .fill

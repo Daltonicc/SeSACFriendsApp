@@ -23,6 +23,10 @@ final class Login2ViewController: BaseViewController {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("Login2 Deinit")
+    }
+
     override func loadView() {
         super.loadView()
 
@@ -44,9 +48,9 @@ final class Login2ViewController: BaseViewController {
         mainView.numberTextField.mainTextField.delegate = self
 
         mainView.authButton.rx.tap
-            .bind {
-                self.addPressAnimationToButton(self.mainView.authButton) { _ in
-                    self.viewModel?.checkCredentialNumber(textField: self.mainView.numberTextField.mainTextField)
+            .bind { [weak self] in
+                self?.addPressAnimationToButton(self?.mainView.authButton ?? CustomButton()) { _ in
+                    self?.viewModel?.checkCredentialNumber(textField: self?.mainView.numberTextField.mainTextField ?? UITextField())
                 }
             }
             .disposed(by: disposeBag)
@@ -65,8 +69,8 @@ final class Login2ViewController: BaseViewController {
 
         backBarButton.target = self
         backBarButton.rx.tap
-            .bind {
-                self.navigationController?.popViewController(animated: true)
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
     }

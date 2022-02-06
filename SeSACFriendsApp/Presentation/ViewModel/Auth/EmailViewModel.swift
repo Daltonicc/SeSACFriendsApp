@@ -20,7 +20,7 @@ final class EmailViewModel {
     func checkValidation(textField: UITextField, button: CustomButton) {
 
         textField.rx.text
-            .bind { str in
+            .bind { [weak self] str in
                 guard let str = str else { return }
                 if str.count >= 11 {
                     button.buttonState = .fill

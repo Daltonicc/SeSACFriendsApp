@@ -23,6 +23,10 @@ final class EmailViewController: BaseViewController {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("Email Deinit")
+    }
+
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -38,9 +42,9 @@ final class EmailViewController: BaseViewController {
         mainView.emailTextField.mainTextField.delegate = self
 
         mainView.nextButton.rx.tap
-            .bind {
-                self.addPressAnimationToButton(self.mainView.nextButton) { _ in
-                    self.viewModel.checkButtonState(button: self.mainView.nextButton)
+            .bind { [weak self] in
+                self?.addPressAnimationToButton(self?.mainView.nextButton ?? CustomButton()) {[weak self] _ in
+                    self?.viewModel.checkButtonState(button: self?.mainView.nextButton ?? CustomButton())
                 }
             }
             .disposed(by: disposeBag)
@@ -59,8 +63,8 @@ final class EmailViewController: BaseViewController {
 
         backBarButton.target = self
         backBarButton.rx.tap
-            .bind {
-                self.navigationController?.popViewController(animated: true)
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
     }

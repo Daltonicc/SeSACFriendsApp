@@ -22,6 +22,10 @@ final class BirthViewController: BaseViewController {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("Birth Deinit")
+    }
+
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -35,12 +39,12 @@ final class BirthViewController: BaseViewController {
         super.setViewConfig()
 
         mainView.nextButton.rx.tap
-            .bind {
-                self.addPressAnimationToButton(self.mainView.nextButton) { _ in
-                    self.viewModel.checkButtonState(yearTextField: self.mainView.yearTextField.mainTextField,
-                                                    monthTextField: self.mainView.monthTextField.mainTextField,
-                                                    dayTextField: self.mainView.dayTextField.mainTextField,
-                                                    button: self.mainView.nextButton)
+            .bind { [weak self] in
+                self?.addPressAnimationToButton(self?.mainView.nextButton ?? CustomButton()) { [weak self] _ in
+                    self?.viewModel.checkButtonState(yearTextField: self?.mainView.yearTextField.mainTextField ?? UITextField(),
+                                                    monthTextField: self?.mainView.monthTextField.mainTextField ?? UITextField(),
+                                                    dayTextField: self?.mainView.dayTextField.mainTextField ?? UITextField(),
+                                                    button: self?.mainView.nextButton ?? CustomButton())
                 }
             }
             .disposed(by: disposeBag)
@@ -54,8 +58,8 @@ final class BirthViewController: BaseViewController {
 
         backBarButton.target = self
         backBarButton.rx.tap
-            .bind {
-                self.navigationController?.popViewController(animated: true)
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
     }

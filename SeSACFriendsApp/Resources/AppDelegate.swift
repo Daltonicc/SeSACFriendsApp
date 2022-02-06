@@ -92,6 +92,8 @@ extension AppDelegate: MessagingDelegate {
  이슈
  1. 텍스트 필드의 보더 중에서 바텀에만 보더를 주고 싶었는데 코드를 구현해도 제대로 보더 표시가 안됐던 이슈 존재.
   -> 해결: viewDidLoad가 아닌 viewDidLayoutSubviews에서 관련 코드를 구현해줘야 함. addSubview가 끝난다음에 호출해야 하기 때문.
+ 2. 모든 뷰, 뷰모델 각종 클래스 들이 소멸자가 호출되지 않는 현상 존재.
+  -> 해결: 클로저가 뷰컨트롤러들을 강한참조로 잡고 있었기 때문에 발생한 문제. -> 모든 클로저에 weak self 추가해줌.
 
 
  궁금한거

@@ -20,7 +20,7 @@ final class Login2UseCase {
 
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: LoginViewModel.yourIDForFirebase, verificationCode: textField.text ?? "")
 
-        Auth.auth().signIn(with: credential) { success, error in
+        Auth.auth().signIn(with: credential) { [weak self] success, error in
             if error == nil {
                 let currentUser = Auth.auth().currentUser
                 currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
@@ -33,7 +33,7 @@ final class Login2UseCase {
                         UserDefaultsRepository.saveIDToken(idToken: idToken)
                         print("Firebase IDToken: \(idToken)")
     
-                        self.repository.getUserInfo { statusCode in
+                        self?.repository.getUserInfo { [weak self] statusCode in
                             completion(statusCode)
                         }
                     }

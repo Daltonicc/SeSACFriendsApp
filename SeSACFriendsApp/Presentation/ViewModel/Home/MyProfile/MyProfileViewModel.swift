@@ -23,8 +23,8 @@ final class MyProfileViewModel {
     }
 
     func getUserInfo(completion: @escaping (UserData) -> Void) {
-        useCase.getUserData { userData in
-            self.userData = userData
+        useCase.getUserData { [weak self] userData in
+            self?.userData = userData
             completion(userData)
         }
     }

@@ -18,6 +18,10 @@ final class MyProfileViewController: BaseViewController {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("MyProfile Deinit")
+    }
+
     override func loadView() {
         super.loadView()
 
@@ -27,9 +31,9 @@ final class MyProfileViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        viewModel?.getUserInfo { userData in
-            self.userData = userData
-            self.mainView.yourNameLabel.text = self.userData?.yourName
+        viewModel?.getUserInfo { [weak self] userData in
+            self?.userData = userData
+            self?.mainView.yourNameLabel.text = self?.userData?.yourName
         }
 
     }
@@ -49,13 +53,12 @@ final class MyProfileViewController: BaseViewController {
         mainView.tableView.register(MyProfileTableViewCell.self, forCellReuseIdentifier: MyProfileTableViewCell.identifier)
 
         mainView.topButton.rx.tap
-            .bind {
-                self.addPressAnimationToButton(self.mainView.topButton) { _ in
-                    self.viewModel?.showDetailProfile()
+            .bind { [weak self] in
+                self?.addPressAnimationToButton(self?.mainView.topButton ?? CustomButton()) { [weak self] _ in
+                    self?.viewModel?.showDetailProfile()
                 }
             }
             .disposed(by: disposeBag)
-
     }
 
     override func textfieldConfig() {

@@ -26,6 +26,10 @@ final class LoginViewController: BaseViewController {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("Login1 Deinit")
+    }
+
     override func loadView() {
         super.loadView()
 
@@ -43,11 +47,11 @@ final class LoginViewController: BaseViewController {
         mainView.phoneNumberTextField.mainTextField.delegate = self
 
         mainView.authButton.rx.tap
-            .bind {
-                self.addPressAnimationToButton(self.mainView.authButton) { _ in
-                    self.viewModel.requestFirebaseAuth(
-                        button: self.mainView.authButton,
-                        textField: self.mainView.phoneNumberTextField.mainTextField
+            .bind { [weak self] in
+                self?.addPressAnimationToButton(self?.mainView.authButton ?? CustomButton()) { [weak self] _ in
+                    self?.viewModel.requestFirebaseAuth(
+                        button: self?.mainView.authButton ?? CustomButton(),
+                        textField: self?.mainView.phoneNumberTextField.mainTextField ?? UITextField()
                     )
                 }
             }
@@ -69,8 +73,8 @@ final class LoginViewController: BaseViewController {
 
         backBarButton.target = self
         backBarButton.rx.tap
-            .bind {
-                self.navigationController?.popViewController(animated: true)
+            .bind { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
     }
