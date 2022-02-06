@@ -536,8 +536,8 @@
 		6AA1381427AE71E90076CF40 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
-				6AA1381527AE71F70076CF40 /* ProfileUseCase.swift */,
 				6AA1381727AE72130076CF40 /* MyProfileUseCase.swift */,
+				6AA1381527AE71F70076CF40 /* ProfileUseCase.swift */,
 			);
 			path = MyProfile;
 			sourceTree = "<group>";

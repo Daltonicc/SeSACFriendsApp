@@ -14,4 +14,11 @@ final class ProfileUseCase {
     init(repository: ProfileRepository) {
         self.repository = repository
     }
+
+    func updateUserData(parameter: [String: Any], completion: @escaping (Int) -> Void) {
+
+        repository.updateUserData(parameter: parameter) { statusCode in
+            completion(statusCode)
+        }
+    }
 }

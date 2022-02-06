@@ -76,4 +76,23 @@ final class ProfileViewModel {
             }
             .disposed(by: disposeBag)
     }
+
+    func updateUserData(completion: @escaping () -> Void) {
+
+        let parameter: [String: Any] = [
+            "searchable": userData!.numberSearchable,
+            "ageMin": userData!.ageMin,
+            "ageMax": userData!.ageMax,
+            "gender": userData!.gender,
+            "hobby": userData!.hobby
+        ]
+
+        useCase.updateUserData(parameter: parameter) { statusCode in
+            switch statusCode {
+            case 200: completion()
+            case 401: print("updateUser Token Error")
+            default: print("updateUser Default")
+            }
+        }
+    }
 }

@@ -87,27 +87,3 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
     }
 
 }
-
-/*
- 개선사항
- 1. 온보딩뷰 레이아웃(비율로 적절하게. 작은화면에서도 어색함 없게 배치)
-
-
- 이슈
- 1. 텍스트 필드의 보더 중에서 바텀에만 보더를 주고 싶었는데 코드를 구현해도 제대로 보더 표시가 안됐던 이슈 존재.
-  -> 해결: viewDidLoad가 아닌 viewDidLayoutSubviews에서 관련 코드를 구현해줘야 함. addSubview가 끝난다음에 호출해야 하기 때문.
-
-
- 새로 시도해본 거
- 1. SwiftGen
-  - 이미지나 폰트 등 에셋 관련 문자열 에러를 최소화하기 위해 시도해본 툴이다.
- 2. Moya
- 3. 클래스 상속
-  - BaseViewController에 고정적으로 실행해야하는 메서드를 넣어놨고 해당 클래스를 상속함으로써 코드 절약 가능.
- 4. Clean Architecture - UseCase 활용
-
-
- 시도해봐야할 거
- 1. 클린아키텍처에서 레포지토리 파트? 어떻게?
- 2. Moya
- */

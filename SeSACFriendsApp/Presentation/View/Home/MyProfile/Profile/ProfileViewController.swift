@@ -84,7 +84,9 @@ final class ProfileViewController: BaseViewController {
         mainView.saveBarButton.target = self
         mainView.saveBarButton.rx.tap
             .bind {
-                print("저장!")
+                self.viewModel?.updateUserData {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
             .disposed(by: disposeBag)
     }
