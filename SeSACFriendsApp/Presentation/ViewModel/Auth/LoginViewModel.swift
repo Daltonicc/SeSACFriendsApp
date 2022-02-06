@@ -36,7 +36,7 @@ final class LoginViewModel {
                     let phoneNumber = "+82\(str)"
                     var newNumber = phoneNumber.components(separatedBy: ["-"]).joined()
                     newNumber.remove(at: newNumber.index(newNumber.startIndex, offsetBy: 3))
-                    UserDefaults.standard.set(newNumber, forKey: "phoneNumber")
+                    UserDefaultsRepository.savePhoneNumber(phoneNumber: newNumber)
                 } else {
                     button.buttonState = .disable
                 }

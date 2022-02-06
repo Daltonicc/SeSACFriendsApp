@@ -24,7 +24,7 @@ final class EmailViewModel {
                 guard let str = str else { return }
                 if str.count >= 11 {
                     button.buttonState = .fill
-                    UserDefaults.standard.set(str, forKey: "email")
+                    UserDefaultsRepository.saveEmail(email: str)
                 } else {
                     button.buttonState = .disable
                 }

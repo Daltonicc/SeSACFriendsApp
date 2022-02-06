@@ -32,7 +32,7 @@ final class GenderViewModel {
                     womanButton.backgroundColor = .white
                     self.genderNumber = 1
                     nextButton.buttonState = .fill
-                    UserDefaults.standard.set(self.genderNumber, forKey: "gender")
+                    UserDefaultsRepository.saveGender(gender: self.genderNumber)
                 }
             }
             .disposed(by: disposeBag)
@@ -44,7 +44,7 @@ final class GenderViewModel {
                     manButton.backgroundColor = .white
                     self.genderNumber = 0
                     nextButton.buttonState = .fill
-                    UserDefaults.standard.set(self.genderNumber, forKey: "gender")
+                    UserDefaultsRepository.saveGender(gender: self.genderNumber)
                 }
             }
             .disposed(by: disposeBag)

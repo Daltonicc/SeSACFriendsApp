@@ -59,7 +59,6 @@ final class ProfileViewController: BaseViewController {
         viewModel?.checkGender(manButton: mainView.manButton, womanButton: mainView.womanButton)
         viewModel?.checkHobby(textField: mainView.hobbyTextField.mainTextField)
         viewModel?.checkNumberSearchable(searchSwitch: mainView.numberSearchSwitch)
-
     }
 
     override func textfieldConfig() {

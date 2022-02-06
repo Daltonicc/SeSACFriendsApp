@@ -30,7 +30,7 @@ final class Login2UseCase {
                     }
 
                     if let idToken = idToken {
-                        UserDefaults.standard.set(idToken, forKey: "uidToken")
+                        UserDefaultsRepository.saveIDToken(idToken: idToken)
                         print("Firebase IDToken: \(idToken)")
     
                         self.repository.getUserInfo { statusCode in

@@ -42,7 +42,6 @@ extension UIViewController {
         let new = dateFormatter.string(from: date)
         print(new)
 
-//        BirthViewModel.birth = new
-        UserDefaults.standard.set(new, forKey: "birth")
+        UserDefaultsRepository.saveBirth(birth: new)
     }
 }
