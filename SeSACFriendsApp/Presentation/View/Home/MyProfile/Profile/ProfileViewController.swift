@@ -99,7 +99,7 @@ final class ProfileViewController: BaseViewController {
 
         mainView.withDrawButton.rx.tap
             .bind { [weak self] in
-                self?.viewModel?.withdrawUserData()
+                self?.viewModel?.withdrawButtonConfig()
             }
             .disposed(by: disposeBag)
     }

@@ -1,23 +1,22 @@
 //
-//  ProfileRepository.swift
+//  WithdrawRepository.swift
 //  SeSACFriendsApp
 //
-//  Created by 박근보 on 2022/02/05.
+//  Created by 박근보 on 2022/02/06.
 //
 
 import UIKit
 import Moya
 
-final class ProfileRepository {
+final class WithdrawRepository {
 
-    func updateUserData(parameter: [String: Any], completion: @escaping (Int) -> Void) {
+    func withdrawUserData(completion: @escaping (Int) -> Void) {
 
         let provider = MoyaProvider<SeSACFriendsAPI>()
-        provider.request(.updateUserData(parameter: parameter)) { result in
+        provider.request(.withdrawUser) { result in
             switch result {
             case let .success(Response):
                 let statusCode = Response.statusCode
-                print("상태코드 :\(statusCode)")
 
                 completion(statusCode)
 
@@ -27,7 +26,5 @@ final class ProfileRepository {
                 print(MoyaError.localizedDescription)
             }
         }
-
     }
-    
 }

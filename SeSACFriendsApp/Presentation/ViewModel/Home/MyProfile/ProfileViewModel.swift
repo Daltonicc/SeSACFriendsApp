@@ -96,10 +96,8 @@ final class ProfileViewModel {
         }
     }
 
-    func withdrawUserData() {
+    func withdrawButtonConfig() {
 
-        useCase.withdrawUserData { [weak self] in
-            self?.coordinator?.finish()
-        }
+        coordinator?.showWithdrawView()
     }
 }

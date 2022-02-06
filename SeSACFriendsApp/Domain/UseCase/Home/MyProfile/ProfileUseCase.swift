@@ -30,20 +30,5 @@ final class ProfileUseCase {
             }
         }
     }
-
-    func withdrawUserData(completion: @escaping () -> Void) {
-
-        repository.withdrawUserData { statusCode in
-            switch statusCode {
-            case 200: completion()
-            case 401:
-                FirebaseIDToken.refreshIDToken { [weak self] in
-                    self?.repository.withdrawUserData(completion: { statusCode in
-                        completion()
-                    })
-                }
-            default: print("withdraw Default")
-            }
-        }
-    }
+    
 }
