@@ -9,6 +9,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Alamofire
+import RangeSeekSlider
+import MachO
 
 final class ProfileViewController: BaseViewController {
 
@@ -31,6 +33,8 @@ final class ProfileViewController: BaseViewController {
     override func setViewConfig() {
         super.setViewConfig()
 
+        mainView.ageRangeSlider.delegate = self
+
         mainView.nameLabel.text = viewModel?.userData?.yourName
         mainView.hobbyTextField.mainTextField.text = viewModel?.userData?.hobby
         mainView.ageRangeLabel.text = "\(viewModel!.userData!.ageMin) - \(viewModel!.userData!.ageMax)"
@@ -45,13 +49,24 @@ final class ProfileViewController: BaseViewController {
         default: print("Gender Default")
         }
 
+        if viewModel?.userData?.numberSearchable == 1 {
+            mainView.numberSearchSwitch.isOn = true
+        }
+
+        mainView.ageRangeSlider.selectedMinValue = CGFloat(viewModel!.userData!.ageMin)
+        mainView.ageRangeSlider.selectedMaxValue = CGFloat(viewModel!.userData!.ageMax)
+
         viewModel?.checkGender(manButton: mainView.manButton, womanButton: mainView.womanButton)
+        viewModel?.checkHobby(textField: mainView.hobbyTextField.mainTextField)
+        viewModel?.checkNumberSearchable(searchSwitch: mainView.numberSearchSwitch)
 
     }
 
     override func textfieldConfig() {
         super.textfieldConfig()
-        
+
+        mainView.hobbyTextField.mainTextField.delegate = self
+        mainView.hobbyTextField.mainTextField.addTarget(self, action: #selector(nicknameTextFieldDidChange(textfield:)), for: .editingChanged)
     }
 
     override func navigationItemConfig() {
@@ -73,5 +88,41 @@ final class ProfileViewController: BaseViewController {
                 print("저장!")
             }
             .disposed(by: disposeBag)
+    }
+
+    @objc func nicknameTextFieldDidChange(textfield: UITextField) {
+
+        checkMaxLength(textField: mainView.hobbyTextField.mainTextField, maxLength: 10)
+    }
+}
+
+extension ProfileViewController: RangeSeekSliderDelegate {
+
+    func rangeSeekSlider(_ slider: RangeSeekSlider, didChange minValue: CGFloat, maxValue: CGFloat) {
+
+        viewModel?.userData?.ageMin = Int(minValue)
+        viewModel?.userData?.ageMax = Int(maxValue)
+        mainView.ageRangeLabel.text = "\(Int(minValue)) - \(Int(maxValue))"
+    }
+
+}
+
+extension ProfileViewController: UITextFieldDelegate {
+
+    func checkMaxLength(textField: UITextField, maxLength: Int) {
+        if (textField.text?.count ?? 0 > maxLength) {
+            textField.deleteBackward()
+        }
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+
+        mainView.hobbyTextField.textFieldState = .focus
+
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+        mainView.hobbyTextField.textFieldState = .active
     }
 }

@@ -25,6 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        window?.rootViewController = UINavigationController(rootViewController: ProfileViewController())
         appCoordinator = AppCoordinator(window: window!)
         appCoordinator?.start()
+//        appCoordinator?.startHome()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

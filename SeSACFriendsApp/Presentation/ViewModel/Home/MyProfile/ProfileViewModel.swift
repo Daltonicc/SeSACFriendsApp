@@ -17,8 +17,6 @@ final class ProfileViewModel {
 
     var userData: UserData?
 
-    var genderNumber = -1
-
     let disposeBag = DisposeBag()
 
     init(coordinator: MyProfileCoordinator, userData: UserData, useCase: ProfileUseCase) {
@@ -36,7 +34,7 @@ final class ProfileViewModel {
                     manButton.setTitleColor(.white, for: .normal)
                     womanButton.backgroundColor = .white
                     womanButton.setTitleColor(.black, for: .normal)
-                    self.genderNumber = 1
+                    self.userData?.gender = 1
                 }
             }
             .disposed(by: disposeBag)
@@ -48,10 +46,34 @@ final class ProfileViewModel {
                     womanButton.setTitleColor(.white, for: .normal)
                     manButton.backgroundColor = .white
                     manButton.setTitleColor(.black, for: .normal)
-                    self.genderNumber = 0
+                    self.userData?.gender = 0
                 }
             }
             .disposed(by: disposeBag)
     }
-    
+
+    func checkHobby(textField: UITextField) {
+
+        textField.rx.text
+            .bind { str in
+                guard let str = str else { return }
+                if str.count >= 1 {
+                    self.userData?.hobby = str
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+
+    func checkNumberSearchable(searchSwitch: UISwitch) {
+
+        searchSwitch.rx.controlEvent(.valueChanged)
+            .bind {
+                if searchSwitch.isOn {
+                    self.userData?.numberSearchable = 1
+                } else {
+                    self.userData?.numberSearchable = 0
+                }
+            }
+            .disposed(by: disposeBag)
+    }
 }

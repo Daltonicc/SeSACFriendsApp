@@ -9,12 +9,12 @@ import Foundation
 
 struct UserData {
 
-    let yourName: String
-    let gender: Int
-    let hobby: String
-    let sesacImage: Int
-    let backgroundImage: Int
-    let numberSearchable: Int
-    let ageMin: Int
-    let ageMax: Int
+    var yourName: String
+    var gender: Int
+    var hobby: String
+    var sesacImage: Int
+    var backgroundImage: Int
+    var numberSearchable: Int
+    var ageMin: Int
+    var ageMax: Int
 }

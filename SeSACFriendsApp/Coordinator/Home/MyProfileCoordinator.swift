@@ -26,6 +26,8 @@ final class MyProfileCoordinator: NSObject, Coordinator {
     func showProfileView(userData: UserData) {
 
         let profileView = ProfileViewController()
+
+        // 유저 데이터 같이 넘겨주기
         profileView.viewModel = ProfileViewModel(coordinator: self,
                                                  userData: userData,
                                                  useCase: ProfileUseCase(

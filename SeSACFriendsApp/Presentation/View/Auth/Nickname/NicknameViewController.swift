@@ -35,8 +35,6 @@ final class NicknameViewController: BaseViewController {
     override func setViewConfig() {
         super.setViewConfig()
 
-        mainView.nicknameTextField.mainTextField.delegate = self
-
         mainView.nextButton.rx.tap
             .bind {
                 self.addPressAnimationToButton(self.mainView.nextButton) { _ in
@@ -48,6 +46,8 @@ final class NicknameViewController: BaseViewController {
 
     override func textfieldConfig() {
         super.textfieldConfig()
+
+        mainView.nicknameTextField.mainTextField.delegate = self
 
         viewModel.checkValidation(textField: mainView.nicknameTextField.mainTextField, button: mainView.nextButton)
         mainView.nicknameTextField.mainTextField.addTarget(self, action: #selector(nicknameTextFieldDidChange(textfield:)), for: .editingChanged)
