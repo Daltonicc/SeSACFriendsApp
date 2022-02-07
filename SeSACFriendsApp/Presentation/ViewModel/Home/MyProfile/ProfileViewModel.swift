@@ -91,7 +91,7 @@ final class ProfileViewModel {
             "hobby": userData!.hobby
         ]
 
-        useCase.updateUserData(parameter: parameter) { statusCode in
+        useCase.updateUserData(parameter: parameter) {
             completion()
         }
     }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NMapsMap
 
 final class HomeViewController: BaseViewController {
 
@@ -16,6 +17,10 @@ final class HomeViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let mapView = NMFMapView(frame: view.frame)
+        view.addSubview(mapView)
+
     }
 
     override func setViewConfig() {

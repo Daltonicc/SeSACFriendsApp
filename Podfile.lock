@@ -1,16 +1,20 @@
 PODS:
+  - NMapsMap (3.14.1)
   - RangeSeekSlider (1.8.0)
 
 DEPENDENCIES:
+  - NMapsMap
   - RangeSeekSlider
 
 SPEC REPOS:
   trunk:
+    - NMapsMap
     - RangeSeekSlider
 
 SPEC CHECKSUMS:
+  NMapsMap: 79bae4e0d7cc5214dd6dabdb95687a1356616556
   RangeSeekSlider: 650b11fa1edcb92e1e0ede797669d98622570fb5
 
-PODFILE CHECKSUM: b8f151af3efc2514809944f86085ac2092bd5b46
+PODFILE CHECKSUM: c3f7b5c1316aa02b02478da5ab8432ef50d3076d
 
 COCOAPODS: 1.11.2

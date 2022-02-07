@@ -23,6 +23,18 @@ internal enum Asset {
     internal static let manImage = ImageAsset(name: "ManImage")
     internal static let womanImage = ImageAsset(name: "WomanImage")
   }
+  internal enum Home {
+    internal static let basicSeSACImage = ImageAsset(name: "BasicSeSACImage")
+    internal static let basicStatusFriendsImage = ImageAsset(name: "BasicStatusFriendsImage")
+    internal static let goldSeSACImage = ImageAsset(name: "GoldSeSACImage")
+    internal static let gpsImage = ImageAsset(name: "GpsImage")
+    internal static let markerImage = ImageAsset(name: "MarkerImage")
+    internal static let matchedFriendsImage = ImageAsset(name: "MatchedFriendsImage")
+    internal static let mintSeSACImage = ImageAsset(name: "MintSeSACImage")
+    internal static let purpleSeSACImage = ImageAsset(name: "PurpleSeSACImage")
+    internal static let searchingFriendsImage = ImageAsset(name: "SearchingFriendsImage")
+    internal static let strongSeSACImage = ImageAsset(name: "StrongSeSACImage")
+  }
   internal enum MainTab {
     internal static let friends = ImageAsset(name: "Friends")
     internal static let home = ImageAsset(name: "Home")

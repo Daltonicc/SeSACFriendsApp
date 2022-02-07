@@ -6,6 +6,7 @@ target 'SeSACFriendsApp' do
   use_frameworks!
 
     pod 'RangeSeekSlider'
+    pod 'NMapsMap'
 
   # Pods for SeSACFriendsApp
 

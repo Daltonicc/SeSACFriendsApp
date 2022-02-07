@@ -35,6 +35,7 @@ class CustomButton: UIButton {
 
     func setUpConfig() {
 
+        setTitleColor(.black, for: .normal)
         backgroundColor = .white
         tintColor = .black
         layer.cornerRadius = 5

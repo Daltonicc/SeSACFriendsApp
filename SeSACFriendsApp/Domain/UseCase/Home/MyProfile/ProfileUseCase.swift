@@ -15,15 +15,16 @@ final class ProfileUseCase {
         self.repository = repository
     }
 
-    func updateUserData(parameter: [String: Any], completion: @escaping (Int) -> Void) {
+    func updateUserData(parameter: [String: Any], completion: @escaping () -> Void) {
 
         repository.updateUserData(parameter: parameter) { statusCode in
             switch statusCode {
-            case 200: completion(statusCode)
+            case 200: completion()
             case 401:
                 FirebaseIDToken.refreshIDToken { [weak self] in
                     self?.repository.updateUserData(parameter: parameter, completion: { statusCode in
-                        completion(statusCode)
+                        guard statusCode == 200 else { return }
+                        completion()
                     })
                 }
             default: print("updateUser Default")

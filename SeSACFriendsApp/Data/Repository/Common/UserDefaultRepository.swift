@@ -46,7 +46,7 @@ final class UserDefaultsRepository {
         let email = UserDefaults.standard.string(forKey: "email")!
         let gender = UserDefaults.standard.integer(forKey: "gender")
 
-        var parameter: [String: Any] = [
+        let parameter: [String: Any] = [
             "phoneNumber": phoneNumber,
             "FCMtoken": fcmToken,
             "nick": nick,

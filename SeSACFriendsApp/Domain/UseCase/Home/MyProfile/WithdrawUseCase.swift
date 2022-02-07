@@ -23,6 +23,7 @@ final class WithdrawUseCase {
             case 401:
                 FirebaseIDToken.refreshIDToken { [weak self] in
                     self?.repository.withdrawUserData(completion: { statusCode in
+                        guard statusCode == 200 else { return }
                         completion()
                     })
                 }

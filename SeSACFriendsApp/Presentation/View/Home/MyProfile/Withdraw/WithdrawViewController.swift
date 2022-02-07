@@ -11,7 +11,7 @@ import RxCocoa
 
 final class WithdrawViewController: BaseViewController {
 
-    let mainView = WithdrawView()
+    let mainView = CustomAlertView()
 
     var viewModel: WithdrawViewModel?
 

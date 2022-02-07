@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class WithdrawView: UIView, ViewRepresentable {
+final class CustomAlertView: UIView, ViewRepresentable {
 
     let alertView: UIView = {
         let view = UIView()
@@ -95,7 +95,6 @@ final class WithdrawView: UIView, ViewRepresentable {
             make.width.equalTo(okButton)
             make.height.equalTo(48)
         }
-
         okButton.snp.makeConstraints { make in
             make.bottom.trailing.equalToSuperview().offset(-16)
             make.width.equalTo(cancelButton)
