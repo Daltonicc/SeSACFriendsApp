@@ -23,11 +23,15 @@ final class TabBarCoordinator: NSObject, Coordinator {
 
         let tabBarController = UITabBarController()
 
-        let home = tabBarConfig(rootViewController: HomeViewController(),
+        let homeRoot = HomeViewController()
+        let home = tabBarConfig(rootViewController: homeRoot,
                                 tabBartitle: "홈",
                                 tabBarImage: Asset.MainTab.home.image.resized(to: CGSize(width: 20, height: 20)))
         let homeCoordinator = HomeCoordinator(presenter: home)
         homeCoordinator.parentCoordinator = self
+        homeRoot.viewModel = HomeViewModel(coordinator: homeCoordinator,
+                                           useCase: HomeUseCase(
+                                            repository: HomeRepository()))
         childCoordinators.append(homeCoordinator)
 
         let shop = tabBarConfig(rootViewController: ShopViewController(),
