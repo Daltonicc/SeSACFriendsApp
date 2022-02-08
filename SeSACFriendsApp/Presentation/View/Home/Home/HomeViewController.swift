@@ -8,6 +8,8 @@
 import UIKit
 import CoreLocation
 import NMapsMap
+import RxCocoa
+import RxSwift
 
 final class HomeViewController: BaseViewController {
 
@@ -18,6 +20,8 @@ final class HomeViewController: BaseViewController {
     var locationManager: CLLocationManager!
     let centerMarker = NMFMarker()
 
+    let disposeBag = DisposeBag()
+
     override func loadView() {
         super.loadView()
 
@@ -27,6 +31,8 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let moveToUserLocation = NMFCameraUpdate(scrollTo: NMGLatLng(lat: 37.517819364682694, lng: 126.88647317074734))
+        mainView.mapView.mapView.moveCamera(moveToUserLocation)
     }
 
     override func setViewConfig() {
@@ -36,14 +42,30 @@ final class HomeViewController: BaseViewController {
         locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
 
-        mainView.mapView.addCameraDelegate(delegate: self)
+        mainView.mapView.showZoomControls = false
+        mainView.mapView.mapView.addCameraDelegate(delegate: self)
         centerMarker.iconImage = NMFOverlayImage(image: Asset.Home.markerImage.image.resized(to: CGSize(width: 34, height: 45)))
 
+        mainView.gpsButton.rx.tap
+            .bind { [weak self] in
+                self?.mainView.mapView.mapView.positionMode = .compass
+            }
+            .disposed(by: disposeBag)
     }
 
-    override func textfieldConfig() {
-        super.textfieldConfig()
-        
+    func locationAlertConfigure() {
+
+        let alert = UIAlertController(title: "주의!", message: "위치 서비스 기능이 꺼져 있습니다. 새싹찾기 기능 사용을 위해 위치 서비스 기능을 켜주세요.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil)
+        let settingMoveAction = UIAlertAction(title: "설정", style: .default) { _ in
+
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+        }
+
+        alert.addAction(okAction)
+        alert.addAction(settingMoveAction)
+
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -55,10 +77,13 @@ extension HomeViewController: NMFMapViewCameraDelegate {
 
     func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
 
-        let cameraPosition = mapView.cameraPosition
-        centerMarker.position = NMGLatLng(lat: cameraPosition.target.lat, lng: cameraPosition.target.lng)
+        let cameraLatitude = mapView.cameraPosition.target.lat
+        let cameraLongitude = mapView.cameraPosition.target.lng
+        centerMarker.position = NMGLatLng(lat: cameraLatitude, lng: cameraLongitude)
         centerMarker.mapView = mapView
-        print("reason")
+
+        let greedRegion = Int(String(cameraLatitude.changeToGreed) + String(cameraLongitude.changeToGreed))!
+        print(greedRegion)
     }
 }
 
@@ -109,20 +134,5 @@ extension HomeViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
 
         checkUserLocationServicesAuthorization()
-    }
-
-    func locationAlertConfigure() {
-
-        let alert = UIAlertController(title: "주의!", message: "위치 서비스 기능이 꺼져 있습니다. 새싹찾기 기능 사용을 위해 위치 서비스 기능을 켜주세요.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil)
-        let settingMoveAction = UIAlertAction(title: "설정", style: .default) { _ in
-
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-        }
-
-        alert.addAction(okAction)
-        alert.addAction(settingMoveAction)
-
-        self.present(alert, animated: true, completion: nil)
     }
 }

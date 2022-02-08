@@ -11,8 +11,8 @@ import NMapsMap
 
 final class HomeView: UIView, ViewRepresentable {
 
-    let mapView: NMFMapView = {
-        let mapView = NMFMapView()
+    let mapView: NMFNaverMapView = {
+        let mapView = NMFNaverMapView()
         return mapView
     }()
     let genderStackView: UIStackView = {
