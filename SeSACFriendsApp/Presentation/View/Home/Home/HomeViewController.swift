@@ -10,16 +10,16 @@ import NMapsMap
 
 final class HomeViewController: BaseViewController {
 
+    let mainView = HomeView()
+
     override func loadView() {
         super.loadView()
 
+        self.view = mainView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let mapView = NMFMapView(frame: view.frame)
-        view.addSubview(mapView)
 
     }
 
