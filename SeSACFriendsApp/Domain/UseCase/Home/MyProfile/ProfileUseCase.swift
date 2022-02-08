@@ -17,7 +17,7 @@ final class ProfileUseCase {
 
     func updateUserData(parameter: [String: Any], completion: @escaping () -> Void) {
 
-        repository.updateUserData(parameter: parameter) { statusCode in
+        repository.updateUserData(parameter: parameter) { [weak self] statusCode in
             switch statusCode {
             case 200: completion()
             case 401:

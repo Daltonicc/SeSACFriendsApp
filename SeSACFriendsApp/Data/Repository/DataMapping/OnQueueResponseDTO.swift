@@ -44,4 +44,3 @@ extension FromQueueDB {
                      backgroundImage: background)
     }
 }
-

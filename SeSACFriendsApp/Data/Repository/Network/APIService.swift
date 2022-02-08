@@ -14,6 +14,9 @@ enum SeSACFriendsAPI {
     case loginToFriendsApp
     case registerFriend(parameter: [String: Any])
 
+    // Home
+    case findSeSACAroundYou(parameter: [String: Any])
+
     // Profile
     case updateUserData(parameter: [String: Any])
     case withdrawUser
@@ -33,6 +36,9 @@ extension SeSACFriendsAPI: TargetType {
         case .loginToFriendsApp: return "/user"
         case .registerFriend: return "/user"
 
+        // Home
+        case .findSeSACAroundYou: return "/queue/onqueue"
+
         // Profile
         case .updateUserData: return "/user/update/mypage"
         case .withdrawUser: return "/user/withdraw"
@@ -45,6 +51,9 @@ extension SeSACFriendsAPI: TargetType {
         // Auth
         case .loginToFriendsApp: return .get
         case .registerFriend: return .post
+
+        // Home
+        case .findSeSACAroundYou: return .post
 
         // Profile
         case .updateUserData: return .post
@@ -59,6 +68,10 @@ extension SeSACFriendsAPI: TargetType {
         case .loginToFriendsApp:
             return .requestPlain
         case .registerFriend(let parameter):
+            return .requestParameters(parameters: parameter, encoding: URLEncoding.httpBody)
+
+        // Home
+        case .findSeSACAroundYou(let parameter):
             return .requestParameters(parameters: parameter, encoding: URLEncoding.httpBody)
 
         // Profile

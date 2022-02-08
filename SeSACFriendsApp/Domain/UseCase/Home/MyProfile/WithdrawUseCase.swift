@@ -17,7 +17,7 @@ final class WithdrawUseCase {
 
     func withdrawUserData(completion: @escaping () -> Void) {
 
-        repository.withdrawUserData { statusCode in
+        repository.withdrawUserData { [weak self] statusCode in
             switch statusCode {
             case 200: completion()
             case 401:

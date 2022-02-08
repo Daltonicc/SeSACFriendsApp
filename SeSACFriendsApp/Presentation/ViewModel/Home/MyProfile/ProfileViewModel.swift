@@ -90,7 +90,6 @@ final class ProfileViewModel {
             "gender": userData!.gender,
             "hobby": userData!.hobby
         ]
-
         useCase.updateUserData(parameter: parameter) {
             completion()
         }

@@ -20,6 +20,10 @@ final class HomeViewController: BaseViewController {
     var locationManager: CLLocationManager!
     let centerMarker = NMFMarker()
 
+    var requestGreedRegion = 0
+    var requestLatitude: Double = 0
+    var requestLongitude: Double = 0
+
     let disposeBag = DisposeBag()
 
     override func loadView() {
@@ -49,6 +53,12 @@ final class HomeViewController: BaseViewController {
         mainView.gpsButton.rx.tap
             .bind { [weak self] in
                 self?.mainView.mapView.mapView.positionMode = .compass
+                self?.viewModel?.fetchAroundUserData(region: self?.requestGreedRegion ?? 0,
+                                                     latitude: self?.requestLatitude ?? 0,
+                                                     longitude: self?.requestLongitude ?? 0,
+                                                     completion: { latitude, longitude, image in
+                    self?.addAroundFriends(latitude: latitude, longitude: longitude, image: image)
+                })
             }
             .disposed(by: disposeBag)
     }
@@ -67,6 +77,16 @@ final class HomeViewController: BaseViewController {
 
         self.present(alert, animated: true, completion: nil)
     }
+
+    func addAroundFriends(latitude: [Double], longitude: [Double], image: [UIImage]) {
+
+        let sesacMarker = NMFMarker()
+        for i in 0..<latitude.count {
+            sesacMarker.position = NMGLatLng(lat: latitude[i], lng: longitude[i])
+            sesacMarker.iconImage = NMFOverlayImage(image: image[i].resized(to: CGSize(width: 83, height: 83)))
+            sesacMarker.mapView = mainView.mapView.mapView
+        }
+    }
 }
 
 extension HomeViewController: NMFMapViewCameraDelegate {
@@ -77,13 +97,13 @@ extension HomeViewController: NMFMapViewCameraDelegate {
 
     func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
 
-        let cameraLatitude = mapView.cameraPosition.target.lat
-        let cameraLongitude = mapView.cameraPosition.target.lng
-        centerMarker.position = NMGLatLng(lat: cameraLatitude, lng: cameraLongitude)
+        requestLatitude = mapView.cameraPosition.target.lat
+        requestLongitude = mapView.cameraPosition.target.lng
+
+        centerMarker.position = NMGLatLng(lat: requestLatitude, lng: requestLongitude)
         centerMarker.mapView = mapView
 
-        let greedRegion = Int(String(cameraLatitude.changeToGreed) + String(cameraLongitude.changeToGreed))!
-        print(greedRegion)
+        requestGreedRegion = Int(String(requestLatitude.changeToGreedLatitude) + String(requestLongitude.changeToGreedLongitude))!
     }
 }
 

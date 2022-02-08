@@ -8,8 +8,12 @@
 import UIKit
 
 extension Double {
-    var changeToGreed: Int {
+    var changeToGreedLatitude: Int {
         let number = String((self + 90) * 1000)
+        return Int(number.substring(from: 0, to: 4))!
+    }
+    var changeToGreedLongitude: Int {
+        let number = String((self + 180) * 1000)
         return Int(number.substring(from: 0, to: 4))!
     }
 }

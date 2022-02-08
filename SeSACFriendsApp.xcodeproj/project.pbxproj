@@ -422,6 +422,15 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		6A0F58FC27B2E6D600EA9047 /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				6AA137B927A506DF0076CF40 /* GetUserResponseDTO.swift */,
+				6A0F58F827B2D32B00EA9047 /* OnQueueResponseDTO.swift */,
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
 		6A1C976A279D4C6B00D6490A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,8 +454,6 @@
 			children = (
 				6AA137B227A500AA0076CF40 /* APIService.swift */,
 				6AA137B727A501C00076CF40 /* APIKey.swift */,
-				6AA137B927A506DF0076CF40 /* GetUserResponseDTO.swift */,
-				6A0F58F827B2D32B00EA9047 /* OnQueueResponseDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -462,6 +469,7 @@
 		6AA137BC27A534310076CF40 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				6A0F58FC27B2E6D600EA9047 /* DataMapping */,
 				6AA1382327AFA3AB0076CF40 /* Common */,
 				6A92DD88279D843D005A66E4 /* Network */,
 				6AA137C127A534800076CF40 /* Auth */,
