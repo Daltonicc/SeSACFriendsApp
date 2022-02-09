@@ -72,7 +72,7 @@ final class AuthCoordinator: NSObject, Coordinator {
         let genderView = GenderViewController()
         genderView.viewModel = GenderViewModel(coordinator: self,
                                                useCase: GenderUseCase(
-                                                repository: GenderRepository()))
+                                                repository: UserRepository()))
         presenter.pushViewController(genderView, animated: true)
     }
 

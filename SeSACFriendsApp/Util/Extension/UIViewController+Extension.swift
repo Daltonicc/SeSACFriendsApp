@@ -44,4 +44,19 @@ extension UIViewController {
 
         UserDefaultsRepository.saveBirth(birth: new)
     }
+
+    func locationAlertConfigure() {
+
+        let alert = UIAlertController(title: "주의!", message: "위치 서비스 기능이 꺼져 있습니다. 새싹찾기 기능 사용을 위해 위치 서비스 기능을 켜주세요.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil)
+        let settingMoveAction = UIAlertAction(title: "설정", style: .default) { _ in
+
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+        }
+
+        alert.addAction(okAction)
+        alert.addAction(settingMoveAction)
+
+        self.present(alert, animated: true, completion: nil)
+    }
 }

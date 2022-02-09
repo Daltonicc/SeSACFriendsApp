@@ -54,20 +54,20 @@ final class GenderViewModel {
             .disposed(by: disposeBag)
     }
 
-    func checkButtonState(button: CustomButton) {
+    func checkButtonState(button: CustomButton, errorMessage: @escaping (String?) -> Void) {
 
         if button.buttonState == .fill {
 
-            useCase.requestRegisterUserByUseCase { [weak self] statusCode in
-                switch statusCode {
-                case 200: self?.coordinator?.finish() // 홈 탭으로 이동
-                case 401: print("401")
-                default: print(statusCode)
+            useCase.requestRegisterUserByUseCase { (result) in
+                switch result {
+                case .success(_):
+                    self.coordinator?.finish() // 홈탭으로 이동
+                case let .failure(error):
+                    errorMessage(error.errorDescription)
                 }
             }
-
         } else {
-            //토스트 메세지!
+            errorMessage("가입 실패!")
         }
     }
 }

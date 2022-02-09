@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+// API 개선
 final class MyProfileViewController: BaseViewController {
 
     let mainView = MyProfileView()

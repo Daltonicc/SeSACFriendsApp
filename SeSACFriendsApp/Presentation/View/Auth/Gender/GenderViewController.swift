@@ -46,7 +46,12 @@ final class GenderViewController: BaseViewController {
         mainView.nextButton.rx.tap
             .bind { [weak self] in
                 self?.addPressAnimationToButton(self?.mainView.nextButton ?? CustomButton()) { [weak self] _ in
-                    self?.viewModel?.checkButtonState(button: self?.mainView.nextButton ?? CustomButton())
+//                    self?.viewModel?.checkButtonState(button: self?.mainView.nextButton ?? CustomButton())
+                    self?.viewModel?.checkButtonState(
+                        button: self?.mainView.nextButton ?? CustomButton(),
+                        errorMessage: { message in
+                            self?.mainView.makeToast(message)
+                    })
                 }
             }
             .disposed(by: disposeBag)

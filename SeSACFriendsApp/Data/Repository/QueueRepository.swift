@@ -1,14 +1,14 @@
 //
-//  HomeRepository.swift
+//  QueueRepository.swift
 //  SeSACFriendsApp
 //
-//  Created by 박근보 on 2022/02/08.
+//  Created by 박근보 on 2022/02/09.
 //
 
-import UIKit
+import Foundation
 import Moya
 
-final class HomeRepository {
+final class QueueRepository {
 
     func fetchAroundUserData(parameter: [String: Any], completion: @escaping (OtherUserDataList?, Int) -> Void) {
 

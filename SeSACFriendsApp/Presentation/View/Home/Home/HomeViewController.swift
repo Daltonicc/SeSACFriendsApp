@@ -56,32 +56,17 @@ final class HomeViewController: BaseViewController {
                 self?.viewModel?.fetchAroundUserData(region: self?.requestGreedRegion ?? 0,
                                                      latitude: self?.requestLatitude ?? 0,
                                                      longitude: self?.requestLongitude ?? 0,
-                                                     completion: { latitude, longitude, image in
+                                                     completion: { [weak self] latitude, longitude, image in
                     self?.addAroundFriends(latitude: latitude, longitude: longitude, image: image)
                 })
             }
             .disposed(by: disposeBag)
     }
 
-    func locationAlertConfigure() {
-
-        let alert = UIAlertController(title: "주의!", message: "위치 서비스 기능이 꺼져 있습니다. 새싹찾기 기능 사용을 위해 위치 서비스 기능을 켜주세요.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil)
-        let settingMoveAction = UIAlertAction(title: "설정", style: .default) { _ in
-
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-        }
-
-        alert.addAction(okAction)
-        alert.addAction(settingMoveAction)
-
-        self.present(alert, animated: true, completion: nil)
-    }
-
     func addAroundFriends(latitude: [Double], longitude: [Double], image: [UIImage]) {
 
-        let sesacMarker = NMFMarker()
         for i in 0..<latitude.count {
+            let sesacMarker = NMFMarker()
             sesacMarker.position = NMGLatLng(lat: latitude[i], lng: longitude[i])
             sesacMarker.iconImage = NMFOverlayImage(image: image[i].resized(to: CGSize(width: 83, height: 83)))
             sesacMarker.mapView = mainView.mapView.mapView
@@ -90,10 +75,6 @@ final class HomeViewController: BaseViewController {
 }
 
 extension HomeViewController: NMFMapViewCameraDelegate {
-
-    func mapView(_ mapView: NMFMapView, cameraIsChangingByReason reason: Int) {
-
-    }
 
     func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
 
@@ -104,6 +85,16 @@ extension HomeViewController: NMFMapViewCameraDelegate {
         centerMarker.mapView = mapView
 
         requestGreedRegion = Int(String(requestLatitude.changeToGreedLatitude) + String(requestLongitude.changeToGreedLongitude))!
+    }
+
+    func mapViewCameraIdle(_ mapView: NMFMapView) {
+
+        viewModel?.fetchAroundUserData(region: requestGreedRegion,
+                                             latitude: requestLatitude,
+                                             longitude: requestLongitude,
+                                             completion: { [weak self] latitude, longitude, image in
+            self?.addAroundFriends(latitude: latitude, longitude: longitude, image: image)
+        })
     }
 }
 

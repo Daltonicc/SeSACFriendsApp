@@ -9,15 +9,13 @@ import UIKit
 
 final class GenderUseCase {
 
-    let repository: GenderRepository
+    let repository: UserRepository
 
-    init(repository: GenderRepository) {
+    init(repository: UserRepository) {
         self.repository = repository
     }
 
-    func requestRegisterUserByUseCase(completion: @escaping (Int) -> Void) {
-        repository.requestRegisterUser { statusCode in
-            completion(statusCode)
-        }
+    func requestRegisterUserByUseCase(completion: @escaping (Result<UserData?, UserNetworkError>) -> Void) {
+        repository.requestRegisterUser(completion: completion)
     }
 }

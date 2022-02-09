@@ -81,7 +81,7 @@ final class ProfileViewModel {
             .disposed(by: disposeBag)
     }
 
-    func updateUserData(completion: @escaping () -> Void) {
+    func updateUserData() {
 
         let parameter: [String: Any] = [
             "searchable": userData!.numberSearchable,
@@ -90,8 +90,8 @@ final class ProfileViewModel {
             "gender": userData!.gender,
             "hobby": userData!.hobby
         ]
-        useCase.updateUserData(parameter: parameter) {
-            completion()
+        useCase.updateUserData(parameter: parameter) { [weak self] in
+            self?.coordinator?.presenter.popViewController(animated: true)
         }
     }
 
