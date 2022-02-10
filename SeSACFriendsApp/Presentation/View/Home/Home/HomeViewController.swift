@@ -56,14 +56,19 @@ final class HomeViewController: BaseViewController {
                 self?.viewModel?.fetchAroundUserData(region: self?.requestGreedRegion ?? 0,
                                                      latitude: self?.requestLatitude ?? 0,
                                                      longitude: self?.requestLongitude ?? 0,
-                                                     completion: { [weak self] latitude, longitude, image in
-                    self?.addAroundFriends(latitude: latitude, longitude: longitude, image: image)
+                                                     completion: { [weak self] latitude, longitude, image, message in
+                    self?.checkErrorAndThenAddFriends(message: message, latitude: latitude, longitude: longitude, image: image)
                 })
             }
             .disposed(by: disposeBag)
     }
 
-    func addAroundFriends(latitude: [Double], longitude: [Double], image: [UIImage]) {
+    func checkErrorAndThenAddFriends(message: String?, latitude: [Double], longitude: [Double], image: [UIImage]) {
+        //에러 있으면 토스트
+        guard message == nil else {
+            mainView.makeToast(message)
+            return
+        }
 
         for i in 0..<latitude.count {
             let sesacMarker = NMFMarker()
@@ -89,11 +94,11 @@ extension HomeViewController: NMFMapViewCameraDelegate {
 
     func mapViewCameraIdle(_ mapView: NMFMapView) {
 
-        viewModel?.fetchAroundUserData(region: requestGreedRegion,
-                                             latitude: requestLatitude,
-                                             longitude: requestLongitude,
-                                             completion: { [weak self] latitude, longitude, image in
-            self?.addAroundFriends(latitude: latitude, longitude: longitude, image: image)
+        viewModel?.fetchAroundUserData(region: self.requestGreedRegion,
+                                             latitude: self.requestLatitude,
+                                             longitude: self.requestLongitude,
+                                             completion: { [weak self] latitude, longitude, image, message in
+            self?.checkErrorAndThenAddFriends(message: message, latitude: latitude, longitude: longitude, image: image)
         })
     }
 }

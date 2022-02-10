@@ -22,10 +22,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.makeKeyAndVisible()
 
-//        window?.rootViewController = UINavigationController(rootViewController: ProfileViewController())
+        var firstLoginCheck = UserDefaultsRepository.fetchFirstLoginCheck()
+
         appCoordinator = AppCoordinator(window: window!)
-        appCoordinator?.start()
-//        appCoordinator?.startHome()
+
+        if firstLoginCheck {
+            appCoordinator?.startHome()
+        } else {
+            firstLoginCheck = true
+            UserDefaultsRepository.saveFirstLoginCheck(check: firstLoginCheck)
+            appCoordinator?.start()
+        }
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

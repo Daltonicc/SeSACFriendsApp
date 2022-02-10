@@ -28,14 +28,14 @@ final class AppCoordinator: NSObject, Coordinator {
         childCoordinators.append(coordinator)
 
         coordinator.parentCoordinator = self
-
-        //최초 로그인 시에 온보딩 뷰
         coordinator.startOnboardingView()
 
         window.makeKeyAndVisible()
     }
 
     func startHome() {
+
+        window.rootViewController = presenter
 
         presenter.viewControllers.removeAll()
         presenter.isNavigationBarHidden = true

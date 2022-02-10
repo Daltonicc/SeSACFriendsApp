@@ -8,6 +8,7 @@
 import Foundation
 
 enum UserDefaultKey {
+    static let firstLoginCheck = "firstLoginCheck"
     static let credentialId = "credentialId"
     static let fcmToken = "FCMToken"
     static let idToken = "uidToken"

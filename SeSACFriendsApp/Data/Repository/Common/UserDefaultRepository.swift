@@ -9,6 +9,10 @@ import Foundation
 
 final class UserDefaultsRepository {
 
+    static func saveFirstLoginCheck(check: Bool) {
+        UserDefaults.standard.set(check, forKey: UserDefaultKey.firstLoginCheck)
+    }
+
     static func saveidForCredentialFirebase(credentialId: String) {
         UserDefaults.standard.set(credentialId, forKey: UserDefaultKey.credentialId)
     }
@@ -41,6 +45,9 @@ final class UserDefaultsRepository {
         UserDefaults.standard.set(gender, forKey: UserDefaultKey.gender)
     }
 
+    static func fetchFirstLoginCheck() -> Bool {
+        return UserDefaults.standard.bool(forKey: UserDefaultKey.firstLoginCheck)
+    }
     static func fetchUserNickname() -> String {
         return UserDefaults.standard.string(forKey: UserDefaultKey.nickname)!
     }

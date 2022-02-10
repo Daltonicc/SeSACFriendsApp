@@ -31,7 +31,8 @@ final class TabBarCoordinator: NSObject, Coordinator {
         homeCoordinator.parentCoordinator = self
         homeRoot.viewModel = HomeViewModel(coordinator: homeCoordinator,
                                            useCase: HomeUseCase(
-                                            repository: HomeRepository()))
+                                            repository: QueueRepository(),
+                                            firebaseRepository: FirebaseRepository()))
         childCoordinators.append(homeCoordinator)
 
         let shop = tabBarConfig(rootViewController: ShopViewController(),

@@ -46,7 +46,6 @@ final class FirebaseRepository {
 
             }
         }
-
     }
 
     func refreshIDToken(completion: @escaping () -> Void) {

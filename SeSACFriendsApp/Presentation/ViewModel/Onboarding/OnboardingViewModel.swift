@@ -12,7 +12,6 @@ final class OnboardingViewModel {
     weak var coordinator: AuthCoordinator?
 
     func showLoginView() {
-//        coordinator?.showLoginAuthView()
-        coordinator?.finish()
+        coordinator?.showLoginAuthView()
     }
 }

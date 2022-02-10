@@ -18,7 +18,7 @@ final class HomeViewModel {
         self.useCase = useCase
     }
 
-    func fetchAroundUserData(region: Int, latitude: Double, longitude: Double, completion: @escaping ([Double], [Double], [UIImage]) -> Void) {
+    func fetchAroundUserData(region: Int, latitude: Double, longitude: Double, completion: @escaping ([Double], [Double], [UIImage], String?) -> Void) {
 
         var friendsLatitudeArray: [Double] = []
         var friendsLongitudeArray: [Double] = []
@@ -29,17 +29,24 @@ final class HomeViewModel {
             "lat": latitude,
             "long": longitude
         ]
-        useCase.fetchAroundUserData(parameter: parameter) { [weak self] data in
 
-            for i in data!.otherUsers {
-                friendsLatitudeArray.append(i.userLatitude)
-                friendsLongitudeArray.append(i.userLongitude)
+        useCase.fetchAroundUserData(parameter: parameter) { [weak self] (result) in
+            switch result {
+            case let .success(data):
+                for i in data.otherUsers {
+                    friendsLatitudeArray.append(i.userLatitude)
+                    friendsLongitudeArray.append(i.userLongitude)
 
-                let image = self?.sesacImageChangeIntToUIImage(sesacimage: i.sesacImage)
-                friendsSeSACImageArray.append(image!)
+                    let image = self?.sesacImageChangeIntToUIImage(sesacimage: i.sesacImage)
+                    friendsSeSACImageArray.append(image!)
+                }
+                completion(friendsLatitudeArray, friendsLongitudeArray, friendsSeSACImageArray, nil)
+
+            case let .failure(error):
+                completion(friendsLatitudeArray, friendsLongitudeArray, friendsSeSACImageArray, error.errorDescription)
             }
-            completion(friendsLatitudeArray, friendsLongitudeArray, friendsSeSACImageArray)
         }
+
     }
 
     func sesacImageChangeIntToUIImage(sesacimage: Int) -> UIImage {
