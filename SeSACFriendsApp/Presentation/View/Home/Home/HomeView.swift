@@ -33,6 +33,7 @@ final class HomeView: UIView, ViewRepresentable {
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .title4r
         button.layer.cornerRadius = 5
+        button.buttonState = .fill
         return button
     }()
     let manButton: CustomButton = {
@@ -41,6 +42,8 @@ final class HomeView: UIView, ViewRepresentable {
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .title4r
         button.layer.cornerRadius = 0
+        button.buttonState = .base
+
         return button
     }()
     let womanButton: CustomButton = {
@@ -49,6 +52,7 @@ final class HomeView: UIView, ViewRepresentable {
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .title4r
         button.layer.cornerRadius = 5
+        button.buttonState = .base
         return button
     }()
     let gpsButton: CustomButton = {

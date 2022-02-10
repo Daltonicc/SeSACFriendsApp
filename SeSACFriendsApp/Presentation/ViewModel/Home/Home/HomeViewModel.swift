@@ -6,12 +6,18 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class HomeViewModel {
 
     weak var coordinator: HomeCoordinator?
 
     let useCase: HomeUseCase
+
+    let disposeBag = DisposeBag()
+
+    var gender = -1
 
     init(coordinator: HomeCoordinator, useCase: HomeUseCase) {
         self.coordinator = coordinator
@@ -34,11 +40,19 @@ final class HomeViewModel {
             switch result {
             case let .success(data):
                 for i in data.otherUsers {
-                    friendsLatitudeArray.append(i.userLatitude)
-                    friendsLongitudeArray.append(i.userLongitude)
+                    if i.gender == self?.gender {
+                        friendsLatitudeArray.append(i.userLatitude)
+                        friendsLongitudeArray.append(i.userLongitude)
 
-                    let image = self?.sesacImageChangeIntToUIImage(sesacimage: i.sesacImage)
-                    friendsSeSACImageArray.append(image!)
+                        let image = self?.sesacImageChangeIntToUIImage(sesacimage: i.sesacImage)
+                        friendsSeSACImageArray.append(image!)
+                    } else if self?.gender == -1 {
+                        friendsLatitudeArray.append(i.userLatitude)
+                        friendsLongitudeArray.append(i.userLongitude)
+
+                        let image = self?.sesacImageChangeIntToUIImage(sesacimage: i.sesacImage)
+                        friendsSeSACImageArray.append(image!)
+                    }
                 }
                 completion(friendsLatitudeArray, friendsLongitudeArray, friendsSeSACImageArray, nil)
 
@@ -46,7 +60,46 @@ final class HomeViewModel {
                 completion(friendsLatitudeArray, friendsLongitudeArray, friendsSeSACImageArray, error.errorDescription)
             }
         }
+    }
 
+    func checkLookingForGender(allButton: CustomButton, manButton: CustomButton, womanButton: CustomButton, completion: @escaping () -> Void) {
+
+        allButton.rx.tap
+            .bind { [weak self] in
+                // 전체 버튼만 유독 안눌림;
+                if allButton.buttonState == .base {
+                    allButton.buttonState = .fill
+                    womanButton.buttonState = .base
+                    manButton.buttonState = .base
+                    self?.gender = -1
+                    completion()
+                }
+            }
+            .disposed(by: disposeBag)
+
+        manButton.rx.tap
+            .bind { [weak self] in
+                if manButton.buttonState == .base {
+                    manButton.buttonState = .fill
+                    womanButton.buttonState = .base
+                    allButton.buttonState = .base
+                    self?.gender = 1
+                    completion()
+                }
+            }
+            .disposed(by: disposeBag)
+
+        womanButton.rx.tap
+            .bind { [weak self] in
+                if womanButton.buttonState == .base {
+                    womanButton.buttonState = .fill
+                    manButton.buttonState = .base
+                    allButton.buttonState = .base
+                    self?.gender = 0
+                    completion()
+                }
+            }
+            .disposed(by: disposeBag)
     }
 
     func sesacImageChangeIntToUIImage(sesacimage: Int) -> UIImage {

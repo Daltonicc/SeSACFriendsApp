@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 /*
- data 바인딩해서 넘겨주기
+ data 옵셔널 바인딩해서 넘겨주기
  200번 아니면 다 fail로 넘겨주게끔 처리 <- 나중에 validation Type 적용해서 해결해보기.
 
  */

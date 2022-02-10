@@ -26,7 +26,7 @@ final class FirebaseRepository {
 
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: UserDefaultsRepository.fetchCredentialIdForFirebase(), verificationCode: textField.text ?? "")
 
-        Auth.auth().signIn(with: credential) { [weak self] success, error in
+        Auth.auth().signIn(with: credential) { success, error in
             if error == nil {
                 let currentUser = Auth.auth().currentUser
                 currentUser?.getIDTokenForcingRefresh(true) { idToken, error in

@@ -92,6 +92,7 @@ final class ProfileView: UIView, ViewRepresentable {
         button.titleLabel?.font = .body3r
         button.setTitleColor(.black, for: .normal)
         button.setTitle("여자", for: .normal)
+
         return button
     }()
     let hobbyLabel: UILabel = {

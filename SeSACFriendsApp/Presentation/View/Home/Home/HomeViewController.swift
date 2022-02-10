@@ -37,6 +37,9 @@ final class HomeViewController: BaseViewController {
 
         let moveToUserLocation = NMFCameraUpdate(scrollTo: NMGLatLng(lat: 37.517819364682694, lng: 126.88647317074734))
         mainView.mapView.mapView.moveCamera(moveToUserLocation)
+
+        //나중에 지우삼
+        print(UserDefaults.standard.string(forKey: UserDefaultKey.idToken))
     }
 
     override func setViewConfig() {
@@ -61,6 +64,18 @@ final class HomeViewController: BaseViewController {
                 })
             }
             .disposed(by: disposeBag)
+
+        viewModel?.checkLookingForGender(allButton: mainView.allGenderButton,
+                                         manButton: mainView.manButton,
+                                         womanButton: mainView.womanButton,
+                                         completion: { [weak self] in
+            self?.viewModel?.fetchAroundUserData(region: self?.requestGreedRegion ?? 0,
+                                                 latitude: self?.requestLatitude ?? 0,
+                                                 longitude: self?.requestLongitude ?? 0,
+                                                 completion: { [weak self] latitude, longitude, image, message in
+                self?.checkErrorAndThenAddFriends(message: message, latitude: latitude, longitude: longitude, image: image)
+            })
+        })
     }
 
     func checkErrorAndThenAddFriends(message: String?, latitude: [Double], longitude: [Double], image: [UIImage]) {
@@ -69,7 +84,6 @@ final class HomeViewController: BaseViewController {
             mainView.makeToast(message)
             return
         }
-
         for i in 0..<latitude.count {
             let sesacMarker = NMFMarker()
             sesacMarker.position = NMGLatLng(lat: latitude[i], lng: longitude[i])
@@ -103,6 +117,7 @@ extension HomeViewController: NMFMapViewCameraDelegate {
     }
 }
 
+// 위치 권한 메서드
 extension HomeViewController: CLLocationManagerDelegate {
 
     func checkUserLocationServicesAuthorization() {

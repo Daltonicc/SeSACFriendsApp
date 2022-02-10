@@ -11,6 +11,9 @@ import RxCocoa
 import Alamofire
 import RangeSeekSlider
 
+/*
+ ageSlider 범위 이슈 존재.
+ */
 final class ProfileViewController: BaseViewController {
 
     let mainView = ProfileView()
@@ -103,8 +106,8 @@ final class ProfileViewController: BaseViewController {
             mainView.numberSearchSwitch.isOn = true
         }
 
-        mainView.ageRangeSlider.selectedMinValue = CGFloat(viewModel!.userData!.ageMin)
-        mainView.ageRangeSlider.selectedMaxValue = CGFloat(viewModel!.userData!.ageMax)
+        mainView.ageRangeSlider.selectedMinValue = CGFloat(viewModel?.userData?.ageMin ?? 18)
+        mainView.ageRangeSlider.selectedMaxValue = CGFloat(viewModel?.userData?.ageMax ?? 65)
     }
 
     func withdrawButtonConfig() {

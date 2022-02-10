@@ -13,6 +13,7 @@ enum ButtonState: String {
     case outline
     case cancel
     case disable
+    case base
 }
 
 class CustomButton: UIButton {
@@ -45,6 +46,7 @@ class CustomButton: UIButton {
             self.layer.borderColor = UIColor.gray4.cgColor
         case .fill:
             tintColor = .white
+            setTitleColor(.white, for: .normal)
             backgroundColor = .baseGreen
         case .outline:
             self.layer.borderColor = UIColor.baseGreen.cgColor
@@ -54,6 +56,8 @@ class CustomButton: UIButton {
         case .disable:
             tintColor = .gray3
             backgroundColor = .gray6
+        case .base:
+            setTitleColor(.black, for: .normal)
         }
     }
 }
