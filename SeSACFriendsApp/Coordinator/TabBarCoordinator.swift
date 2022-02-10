@@ -54,9 +54,7 @@ final class TabBarCoordinator: NSObject, Coordinator {
                                      tabBarImage: Asset.MainTab.profile.image.resized(to: CGSize(width: 20, height: 20)))
         let myProfileCoordinator = MyProfileCoordinator(presenter: myProfile)
         myProfileCoordinator.parentCoordinator = self
-        myProfileRoot.viewModel = MyProfileViewModel(coordinator: myProfileCoordinator,
-                                                     useCase: MyProfileUseCase(
-                                                        repository: MyProfileRepository()))
+        myProfileRoot.viewModel = MyProfileViewModel(coordinator: myProfileCoordinator)
         childCoordinators.append(myProfileCoordinator)
 
         tabBarController.tabBar.tintColor = .baseGreen

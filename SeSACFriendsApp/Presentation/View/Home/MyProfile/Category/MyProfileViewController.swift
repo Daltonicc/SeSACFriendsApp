@@ -29,16 +29,6 @@ final class MyProfileViewController: BaseViewController {
         self.view = mainView
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        viewModel?.getUserInfo { [weak self] userData in
-            self?.userData = userData
-            self?.mainView.yourNameLabel.text = self?.userData?.yourName
-        }
-
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,6 +42,8 @@ final class MyProfileViewController: BaseViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         mainView.tableView.register(MyProfileTableViewCell.self, forCellReuseIdentifier: MyProfileTableViewCell.identifier)
+
+        self.mainView.yourNameLabel.text = UserDefaultsRepository.fetchUserNickname()
 
         mainView.topButton.rx.tap
             .bind { [weak self] in

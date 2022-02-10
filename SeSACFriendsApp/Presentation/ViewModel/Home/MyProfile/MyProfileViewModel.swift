@@ -13,27 +13,17 @@ final class MyProfileViewModel {
 
     weak var coordinator: MyProfileCoordinator?
 
-    let useCase: MyProfileUseCase
-
     var userData: UserData?
 
-    init(coordinator: MyProfileCoordinator, useCase: MyProfileUseCase) {
+    init(coordinator: MyProfileCoordinator) {
         self.coordinator = coordinator
-        self.useCase = useCase
     }
 
     deinit {
         print("MyProfileViewModel Deinit")
     }
 
-    func getUserInfo(completion: @escaping (UserData) -> Void) {
-        useCase.getUserData { [weak self] userData in
-            self?.userData = userData
-            completion(userData)
-        }
-    }
-
     func showDetailProfile() {
-        coordinator?.showProfileView(userData: userData!)
+        coordinator?.showProfileView()
     }
 }

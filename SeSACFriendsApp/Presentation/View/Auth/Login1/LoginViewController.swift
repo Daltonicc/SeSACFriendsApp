@@ -22,7 +22,7 @@ final class LoginViewController: BaseViewController {
 
     weak var coordinator: AuthCoordinator?
     let mainView = LoginView()
-    var viewModel = LoginViewModel()
+    var viewModel: LoginViewModel?
 
     let disposeBag = DisposeBag()
 
@@ -49,7 +49,7 @@ final class LoginViewController: BaseViewController {
         mainView.authButton.rx.tap
             .bind { [weak self] in
                 self?.addPressAnimationToButton(self?.mainView.authButton ?? CustomButton()) { [weak self] _ in
-                    self?.viewModel.requestFirebaseAuth(
+                    self?.viewModel!.requestFirebaseAuth(
                         button: self?.mainView.authButton ?? CustomButton(),
                         textField: self?.mainView.phoneNumberTextField.mainTextField ?? UITextField()
                     )
@@ -61,7 +61,7 @@ final class LoginViewController: BaseViewController {
     override func textfieldConfig() {
         super.textfieldConfig()
 
-        viewModel.checkAuthValidation(textField: mainView.phoneNumberTextField.mainTextField,
+        viewModel?.checkAuthValidation(textField: mainView.phoneNumberTextField.mainTextField,
                                       button: mainView.authButton)
 
         mainView.phoneNumberTextField.mainTextField.addTarget(self, action: #selector(phoneNumberTextFieldDidChange(textfield:)), for: .editingChanged)

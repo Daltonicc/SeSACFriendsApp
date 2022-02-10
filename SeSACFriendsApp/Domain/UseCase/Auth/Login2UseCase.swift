@@ -6,43 +6,21 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class Login2UseCase {
 
-    let repository: Login2Repository
+    let repository: UserRepository
+    let firebaseRepository: FirebaseRepository
 
-    init(repository: Login2Repository) {
+    init(repository: UserRepository, firebaseRepository: FirebaseRepository) {
         self.repository = repository
+        self.firebaseRepository = firebaseRepository
     }
 
-    func checkCredential(textField: UITextField, completion: @escaping (Int) -> Void) {
+    func checkCredential(textField: UITextField, completion: @escaping (Result<UserData, UserNetworkError>) -> Void) {
 
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: LoginViewModel.yourIDForFirebase, verificationCode: textField.text ?? "")
-
-        Auth.auth().signIn(with: credential) { [weak self] success, error in
-            if error == nil {
-                let currentUser = Auth.auth().currentUser
-                currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-                    if let error = error {
-                      print("idToken error: \(error)")
-                      return
-                    }
-
-                    if let idToken = idToken {
-                        UserDefaultsRepository.saveIDToken(idToken: idToken)
-                        print("Firebase IDToken: \(idToken)")
-    
-                        self?.repository.getUserInfo { statusCode in
-                            completion(statusCode)
-                        }
-                    }
-                    // 상황별 토스트 메시지 띄워주기
-                }
-            } else {
-
-            }
+        firebaseRepository.checkCredential(textField: textField) {
+            self.repository.getUserInfo(completion: completion)
         }
-
     }
 }

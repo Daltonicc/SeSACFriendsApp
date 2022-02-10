@@ -91,4 +91,8 @@ extension SeSACFriendsAPI: TargetType {
             ]
         }
     }
+//      나중에 적용 시키기 - 코드 200만 success로 받아줌.
+//    var validationType: ValidationType {
+//        return .customCodes([200])
+//    }
 }

@@ -23,15 +23,15 @@ final class MyProfileCoordinator: NSObject, Coordinator {
         
     }
 
-    func showProfileView(userData: UserData) {
+    func showProfileView() {
 
         let profileView = ProfileViewController()
 
         // 유저 데이터 같이 넘겨주기
         profileView.viewModel = ProfileViewModel(coordinator: self,
-                                                 userData: userData,
                                                  useCase: ProfileUseCase(
-                                                    repository: ProfileRepository()))
+                                                    repository: UserRepository(),
+                                                    firebaseRepository: FirebaseRepository()))
         presenter.pushViewController(profileView, animated: true)
     }
 
@@ -41,7 +41,8 @@ final class MyProfileCoordinator: NSObject, Coordinator {
 
         withdrawView.viewModel = WithdrawViewModel(coordinator: self,
                                                    useCase: WithdrawUseCase(
-                                                    repository: WithdrawRepository()))
+                                                    repository: UserRepository(),
+                                                    firebaseRepository: FirebaseRepository()))
         withdrawView.modalTransitionStyle = .crossDissolve
         withdrawView.modalPresentationStyle = .overCurrentContext
 

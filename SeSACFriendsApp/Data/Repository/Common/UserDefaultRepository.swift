@@ -9,6 +9,10 @@ import Foundation
 
 final class UserDefaultsRepository {
 
+    static func saveidForCredentialFirebase(credentialId: String) {
+        UserDefaults.standard.set(credentialId, forKey: UserDefaultKey.credentialId)
+    }
+
     static func saveFCMToken(fcmToken: String) {
         UserDefaults.standard.set(fcmToken, forKey: UserDefaultKey.fcmToken)
     }
@@ -35,6 +39,14 @@ final class UserDefaultsRepository {
 
     static func saveGender(gender: Int) {
         UserDefaults.standard.set(gender, forKey: UserDefaultKey.gender)
+    }
+
+    static func fetchUserNickname() -> String {
+        return UserDefaults.standard.string(forKey: UserDefaultKey.nickname)!
+    }
+
+    static func fetchCredentialIdForFirebase() -> String {
+        return UserDefaults.standard.string(forKey: UserDefaultKey.credentialId)!
     }
 
     static func requestRegisterUser() -> [String: Any] {

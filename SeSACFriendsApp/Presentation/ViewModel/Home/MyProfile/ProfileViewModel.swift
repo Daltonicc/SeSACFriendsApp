@@ -19,10 +19,9 @@ final class ProfileViewModel {
 
     let disposeBag = DisposeBag()
 
-    init(coordinator: MyProfileCoordinator, userData: UserData, useCase: ProfileUseCase) {
+    init(coordinator: MyProfileCoordinator, useCase: ProfileUseCase) {
         self.coordinator = coordinator
         self.useCase = useCase
-        self.userData = userData
     }
 
     deinit {
@@ -81,7 +80,20 @@ final class ProfileViewModel {
             .disposed(by: disposeBag)
     }
 
-    func updateUserData() {
+    func getUserData(completion: @escaping (String?) -> Void) {
+
+        useCase.getUserData { [weak self] (result) in
+            switch result {
+            case let .success(data):
+                self?.userData = data
+                completion(nil)
+            case let .failure(error):
+                completion(error.errorDescription)
+            }
+        }
+    }
+
+    func updateUserData(completion: @escaping (String?) -> Void) {
 
         let parameter: [String: Any] = [
             "searchable": userData!.numberSearchable,
@@ -90,8 +102,15 @@ final class ProfileViewModel {
             "gender": userData!.gender,
             "hobby": userData!.hobby
         ]
-        useCase.updateUserData(parameter: parameter) { [weak self] in
-            self?.coordinator?.presenter.popViewController(animated: true)
+
+        useCase.updateUserData(parameter: parameter) { [weak self] error in
+            if let error = error {
+                // 에러가 존재하면 관련 에러 토스트 메세지
+                completion(error.errorDescription)
+            } else {
+                // 에러 없으면 업뎃 성공!
+                self?.coordinator?.presenter.popViewController(animated: true)
+            }
         }
     }
 

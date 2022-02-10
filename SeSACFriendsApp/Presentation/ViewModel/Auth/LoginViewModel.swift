@@ -13,11 +13,14 @@ import RxCocoa
 final class LoginViewModel {
 
     weak var coordinator: AuthCoordinator?
-    let useCase = LoginUseCase()
-
-    static var yourIDForFirebase: String = ""
+    let useCase: LoginUseCase
 
     let disposeBag = DisposeBag()
+
+    init(coordinator: AuthCoordinator, useCase: LoginUseCase) {
+        self.coordinator = coordinator
+        self.useCase = useCase
+    }
 
     deinit {
         print("LoginViewModel Deinit")
@@ -56,7 +59,5 @@ final class LoginViewModel {
         guard button.buttonState == .fill else { return }
         useCase.requestFirebase(textField: textField)
         coordinator?.showLogin2AuthView()
-
-//        self.coordinator?.finish()
     }
 }

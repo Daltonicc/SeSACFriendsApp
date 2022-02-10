@@ -15,7 +15,6 @@ final class Login2ViewModel {
 
     weak var coordinator: AuthCoordinator?
     let useCase: Login2UseCase
-    let repository = Login2Repository()
 
     let disposeBag = DisposeBag()
 
@@ -46,15 +45,21 @@ final class Login2ViewModel {
 
     // MARK: - UseCase, Repository
 
-    func checkCredentialNumber(textField: UITextField) {
+    func checkCredentialNumber(textField: UITextField, errorMessage: @escaping (String?) -> Void) {
             // 받아온 id토큰으로 API통신 회원정보 있는지 체크.
             // 없으면 닉네임뷰로
             // 있으면 바로 홈으로.
-        useCase.checkCredential(textField: textField) { statusCode in
-            switch statusCode {
-            case 200: self.coordinator?.finish() // 홈 탭으로 이동
-            case 406: self.coordinator?.showNicknameView() // 닉네임뷰로 이동
-            default: print(statusCode)
+        useCase.checkCredential(textField: textField) { [weak self] (result) in
+            switch result {
+            case .success(_):
+                self?.coordinator?.finish()
+                
+            case let .failure(error):
+                if error == .notRegisteredUser {
+                    self?.coordinator?.showNicknameView()
+                } else {
+                    errorMessage(error.errorDescription)
+                }
             }
         }
     }

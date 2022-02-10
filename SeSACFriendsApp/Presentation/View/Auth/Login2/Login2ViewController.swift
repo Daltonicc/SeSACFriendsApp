@@ -50,7 +50,11 @@ final class Login2ViewController: BaseViewController {
         mainView.authButton.rx.tap
             .bind { [weak self] in
                 self?.addPressAnimationToButton(self?.mainView.authButton ?? CustomButton()) { _ in
-                    self?.viewModel?.checkCredentialNumber(textField: self?.mainView.numberTextField.mainTextField ?? UITextField())
+                    self?.viewModel?.checkCredentialNumber(
+                        textField: self?.mainView.numberTextField.mainTextField ?? UITextField(),
+                        errorMessage: { [weak self] message in
+                            self?.mainView.makeToast(message)
+                    })
                 }
             }
             .disposed(by: disposeBag)

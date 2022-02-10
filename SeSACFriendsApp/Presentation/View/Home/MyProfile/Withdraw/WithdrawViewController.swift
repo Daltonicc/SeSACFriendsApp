@@ -35,7 +35,9 @@ final class WithdrawViewController: BaseViewController {
         mainView.okButton.rx.tap
             .bind { [weak self] in
                 self?.addPressAnimationToButton(self?.mainView.okButton ?? CustomButton(), completion: { [weak self] _ in
-                    self?.viewModel?.withdrawUserData()
+                    self?.viewModel?.withdrawUserData(completion: { [weak self] message in
+                        self?.mainView.makeToast(message)
+                    })
                 })
             }
             .disposed(by: disposeBag)

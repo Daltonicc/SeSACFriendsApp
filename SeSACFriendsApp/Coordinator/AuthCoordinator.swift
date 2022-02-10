@@ -33,7 +33,9 @@ final class AuthCoordinator: NSObject, Coordinator {
     func showLoginAuthView() {
 
         let loginAuthView = LoginViewController()
-        loginAuthView.viewModel.coordinator = self
+        loginAuthView.viewModel = LoginViewModel(coordinator: self,
+                                                 useCase: LoginUseCase(
+                                                    firebaseRepository: FirebaseRepository()))
         presenter.pushViewController(loginAuthView, animated: true)
     }
 
@@ -42,7 +44,8 @@ final class AuthCoordinator: NSObject, Coordinator {
         let login2AuthView = Login2ViewController()
         login2AuthView.viewModel = Login2ViewModel(coordinator: self,
                                                    useCase: Login2UseCase(
-                                                    repository: Login2Repository()))
+                                                    repository: UserRepository(),
+                                                    firebaseRepository: FirebaseRepository()))
         presenter.pushViewController(login2AuthView, animated: true)
     }
 
@@ -72,7 +75,8 @@ final class AuthCoordinator: NSObject, Coordinator {
         let genderView = GenderViewController()
         genderView.viewModel = GenderViewModel(coordinator: self,
                                                useCase: GenderUseCase(
-                                                repository: UserRepository()))
+                                                repository: UserRepository(),
+                                                firebaseRepository: FirebaseRepository()))
         presenter.pushViewController(genderView, animated: true)
     }
 

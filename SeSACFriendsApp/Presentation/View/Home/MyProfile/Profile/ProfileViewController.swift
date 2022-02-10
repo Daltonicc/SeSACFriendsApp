@@ -28,6 +28,15 @@ final class ProfileViewController: BaseViewController {
         self.view = mainView
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+
+        viewModel?.getUserData(completion: { [weak self] message in
+            self?.mainView.makeToast(message)
+            self?.userDataConfig()
+        })
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,27 +47,6 @@ final class ProfileViewController: BaseViewController {
         super.setViewConfig()
 
         mainView.ageRangeSlider.delegate = self
-
-        mainView.nameLabel.text = viewModel?.userData?.yourName
-        mainView.hobbyTextField.mainTextField.text = viewModel?.userData?.hobby
-        mainView.ageRangeLabel.text = "\(viewModel!.userData!.ageMin) - \(viewModel!.userData!.ageMax)"
-
-        switch viewModel?.userData?.gender {
-        case 0:
-            mainView.womanButton.backgroundColor = .baseGreen
-            mainView.womanButton.setTitleColor(.white, for: .normal)
-        case 1:
-            mainView.manButton.backgroundColor = .baseGreen
-            mainView.manButton.setTitleColor(.white, for: .normal)
-        default: print("Gender Default")
-        }
-
-        if viewModel?.userData?.numberSearchable == 1 {
-            mainView.numberSearchSwitch.isOn = true
-        }
-
-        mainView.ageRangeSlider.selectedMinValue = CGFloat(viewModel!.userData!.ageMin)
-        mainView.ageRangeSlider.selectedMaxValue = CGFloat(viewModel!.userData!.ageMax)
 
         viewModel?.checkGender(manButton: mainView.manButton, womanButton: mainView.womanButton)
         viewModel?.checkHobby(textField: mainView.hobbyTextField.mainTextField)
@@ -88,9 +76,35 @@ final class ProfileViewController: BaseViewController {
         mainView.saveBarButton.target = self
         mainView.saveBarButton.rx.tap
             .bind { [weak self] in
-                self?.viewModel?.updateUserData()
+                self?.viewModel?.updateUserData(completion: { message in
+                    self?.mainView.makeToast(message)
+                })
             }
             .disposed(by: disposeBag)
+    }
+
+    func userDataConfig() {
+
+        mainView.nameLabel.text = viewModel?.userData?.yourName
+        mainView.hobbyTextField.mainTextField.text = viewModel?.userData?.hobby
+        mainView.ageRangeLabel.text = "\(viewModel!.userData!.ageMin) - \(viewModel!.userData!.ageMax)"
+
+        switch viewModel?.userData?.gender {
+        case 0:
+            mainView.womanButton.backgroundColor = .baseGreen
+            mainView.womanButton.setTitleColor(.white, for: .normal)
+        case 1:
+            mainView.manButton.backgroundColor = .baseGreen
+            mainView.manButton.setTitleColor(.white, for: .normal)
+        default: print("Gender Default")
+        }
+
+        if viewModel?.userData?.numberSearchable == 1 {
+            mainView.numberSearchSwitch.isOn = true
+        }
+
+        mainView.ageRangeSlider.selectedMinValue = CGFloat(viewModel!.userData!.ageMin)
+        mainView.ageRangeSlider.selectedMaxValue = CGFloat(viewModel!.userData!.ageMax)
     }
 
     func withdrawButtonConfig() {
