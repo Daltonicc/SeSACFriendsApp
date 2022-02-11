@@ -10,6 +10,7 @@ import CoreLocation
 import NMapsMap
 import RxCocoa
 import RxSwift
+import Toast
 
 final class HomeViewController: BaseViewController {
 
@@ -40,6 +41,7 @@ final class HomeViewController: BaseViewController {
 
         //나중에 지우삼
         print(UserDefaults.standard.string(forKey: UserDefaultKey.idToken))
+
     }
 
     override func setViewConfig() {
@@ -55,41 +57,26 @@ final class HomeViewController: BaseViewController {
 
         mainView.gpsButton.rx.tap
             .bind { [weak self] in
-                self?.mainView.mapView.mapView.positionMode = .compass
                 self?.viewModel?.fetchAroundUserData(region: self?.requestGreedRegion ?? 0,
                                                      latitude: self?.requestLatitude ?? 0,
                                                      longitude: self?.requestLongitude ?? 0,
-                                                     completion: { [weak self] latitude, longitude, image, message in
-                    self?.checkErrorAndThenAddFriends(message: message, latitude: latitude, longitude: longitude, image: image)
+                                                     mapView: self?.mainView.mapView.mapView ?? NMFMapView(),
+                                                     completion: { [weak self] errorMessage in
+                    self?.mainView.makeToast(errorMessage)
                 })
             }
             .disposed(by: disposeBag)
-
+        
         viewModel?.checkLookingForGender(allButton: mainView.allGenderButton,
                                          manButton: mainView.manButton,
                                          womanButton: mainView.womanButton,
-                                         completion: { [weak self] in
-            self?.viewModel?.fetchAroundUserData(region: self?.requestGreedRegion ?? 0,
-                                                 latitude: self?.requestLatitude ?? 0,
-                                                 longitude: self?.requestLongitude ?? 0,
-                                                 completion: { [weak self] latitude, longitude, image, message in
-                self?.checkErrorAndThenAddFriends(message: message, latitude: latitude, longitude: longitude, image: image)
-            })
+                                         region: requestGreedRegion,
+                                         latitude: requestLatitude,
+                                         longitude: requestLongitude,
+                                         mapView: mainView.mapView.mapView,
+                                         completion: { [weak self] errorMessage in
+            self?.mainView.makeToast(errorMessage)
         })
-    }
-
-    func checkErrorAndThenAddFriends(message: String?, latitude: [Double], longitude: [Double], image: [UIImage]) {
-        //에러 있으면 토스트
-        guard message == nil else {
-            mainView.makeToast(message)
-            return
-        }
-        for i in 0..<latitude.count {
-            let sesacMarker = NMFMarker()
-            sesacMarker.position = NMGLatLng(lat: latitude[i], lng: longitude[i])
-            sesacMarker.iconImage = NMFOverlayImage(image: image[i].resized(to: CGSize(width: 83, height: 83)))
-            sesacMarker.mapView = mainView.mapView.mapView
-        }
     }
 }
 
@@ -108,11 +95,12 @@ extension HomeViewController: NMFMapViewCameraDelegate {
 
     func mapViewCameraIdle(_ mapView: NMFMapView) {
 
-        viewModel?.fetchAroundUserData(region: self.requestGreedRegion,
-                                             latitude: self.requestLatitude,
-                                             longitude: self.requestLongitude,
-                                             completion: { [weak self] latitude, longitude, image, message in
-            self?.checkErrorAndThenAddFriends(message: message, latitude: latitude, longitude: longitude, image: image)
+        viewModel?.fetchAroundUserData(region: requestGreedRegion,
+                                             latitude: requestLatitude,
+                                             longitude: requestLongitude,
+                                             mapView: mainView.mapView.mapView,
+                                             completion: { [weak self] message in
+            self?.mainView.makeToast(message)
         })
     }
 }

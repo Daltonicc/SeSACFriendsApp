@@ -43,6 +43,9 @@
 		6A0F590A27B55ADE00EA9047 /* FindHobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F590927B55ADE00EA9047 /* FindHobbyView.swift */; };
 		6A0F590D27B6A59400EA9047 /* RegisterUserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F590C27B6A59400EA9047 /* RegisterUserRequestDTO.swift */; };
 		6A0F590F27B6A5A300EA9047 /* OnQueueRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F590E27B6A5A300EA9047 /* OnQueueRequestDTO.swift */; };
+		6A0F591127B6ABDF00EA9047 /* FirebaseRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591027B6ABDF00EA9047 /* FirebaseRepositoryInterface.swift */; };
+		6A0F591327B6ABE700EA9047 /* UserRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591227B6ABE700EA9047 /* UserRepositoryInterface.swift */; };
+		6A0F591527B6ABF100EA9047 /* QueueRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591427B6ABF100EA9047 /* QueueRepositoryInterface.swift */; };
 		6A1C9769279D4A7B00D6490A /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1C9768279D4A7B00D6490A /* UICollectionViewCell+Extension.swift */; };
 		6A92DD83279D6B68005A66E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A92DD82279D6B68005A66E4 /* Images.xcassets */; };
 		6A92DD85279D6F90005A66E4 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6A92DD84279D6F90005A66E4 /* swiftgen.yml */; };
@@ -154,6 +157,9 @@
 		6A0F590927B55ADE00EA9047 /* FindHobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHobbyView.swift; sourceTree = "<group>"; };
 		6A0F590C27B6A59400EA9047 /* RegisterUserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserRequestDTO.swift; sourceTree = "<group>"; };
 		6A0F590E27B6A5A300EA9047 /* OnQueueRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnQueueRequestDTO.swift; sourceTree = "<group>"; };
+		6A0F591027B6ABDF00EA9047 /* FirebaseRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRepositoryInterface.swift; sourceTree = "<group>"; };
+		6A0F591227B6ABE700EA9047 /* UserRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryInterface.swift; sourceTree = "<group>"; };
+		6A0F591427B6ABF100EA9047 /* QueueRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRepositoryInterface.swift; sourceTree = "<group>"; };
 		6A1C9768279D4A7B00D6490A /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
 		6A92DD82279D6B68005A66E4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6A92DD84279D6F90005A66E4 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
@@ -448,6 +454,9 @@
 		6A0F590B27B616ED00EA9047 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				6A0F591027B6ABDF00EA9047 /* FirebaseRepositoryInterface.swift */,
+				6A0F591227B6ABE700EA9047 /* UserRepositoryInterface.swift */,
+				6A0F591427B6ABF100EA9047 /* QueueRepositoryInterface.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -941,12 +950,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A0F591327B6ABE700EA9047 /* UserRepositoryInterface.swift in Sources */,
 				6A0AB7D5279D0919009C80E9 /* Observable.swift in Sources */,
 				6A0AB7C7279C3BB9009C80E9 /* OnboardingCollectionViewCell.swift in Sources */,
 				6AAC70B6279FF24F003FCD27 /* Login2UseCase.swift in Sources */,
 				6A1C9769279D4A7B00D6490A /* UICollectionViewCell+Extension.swift in Sources */,
 				6A0AB7BF2799410A009C80E9 /* UIView+Extension.swift in Sources */,
 				6AA1380C27AE2BC70076CF40 /* ProfileViewController.swift in Sources */,
+				6A0F591127B6ABDF00EA9047 /* FirebaseRepositoryInterface.swift in Sources */,
 				6AA1381027AE682A0076CF40 /* MyProfileViewModel.swift in Sources */,
 				6AA137D227A795A90076CF40 /* FriendsViewController.swift in Sources */,
 				6AE4580F279679FD006B142C /* OnboardingViewController.swift in Sources */,
@@ -967,6 +978,7 @@
 				6AAC70CE27A020BA003FCD27 /* EmailView.swift in Sources */,
 				6AA1382D27AFF5C00076CF40 /* CustomAlertView.swift in Sources */,
 				6AA137B327A500AA0076CF40 /* APIService.swift in Sources */,
+				6A0F591527B6ABF100EA9047 /* QueueRepositoryInterface.swift in Sources */,
 				6AA137D027A795970076CF40 /* ShopViewController.swift in Sources */,
 				6AA137CE27A7954C0076CF40 /* HomeViewController.swift in Sources */,
 				6AA137C827A78C780076CF40 /* TabBarCoordinator.swift in Sources */,

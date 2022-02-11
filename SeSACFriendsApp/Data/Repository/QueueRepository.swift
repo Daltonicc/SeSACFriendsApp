@@ -8,7 +8,7 @@
 import Foundation
 import Moya
 
-final class QueueRepository {
+final class QueueRepository: QueueRepositoryInterface {
 
     func fetchAroundUserData(parameter: [String: Any], completion: @escaping (Result<OtherUserDataList, QueueNetworkError>) -> Void) {
 

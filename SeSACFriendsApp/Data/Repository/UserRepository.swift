@@ -14,7 +14,7 @@ import Moya
 
  */
 
-final class UserRepository {
+final class UserRepository: UserRepositoryInterface {
 
     func getUserInfo(completion: @escaping (Result<UserData, UserNetworkError>) -> Void) {
 

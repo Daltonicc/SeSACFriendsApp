@@ -9,9 +9,9 @@ import UIKit
 
 final class LoginUseCase {
 
-    let firebaseRepository: FirebaseRepository
+    let firebaseRepository: FirebaseRepositoryInterface
 
-    init(firebaseRepository: FirebaseRepository) {
+    init(firebaseRepository: FirebaseRepositoryInterface) {
         self.firebaseRepository = firebaseRepository
     }
 

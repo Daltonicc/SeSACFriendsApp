@@ -63,6 +63,5 @@ final class FindHobby: UIView, ViewRepresentable {
 
     func setUpConstraint() {
 
-
     }
 }

@@ -10,10 +10,10 @@ import UIKit
 final class ProfileUseCase {
 
     // Interface(사용설명서), RepositoryInterface로 접근.
-    let repository: UserRepository
-    let firebaseRepository: FirebaseRepository
+    let repository: UserRepositoryInterface
+    let firebaseRepository: FirebaseRepositoryInterface
 
-    init(repository: UserRepository, firebaseRepository: FirebaseRepository) {
+    init(repository: UserRepositoryInterface, firebaseRepository: FirebaseRepositoryInterface) {
         self.repository = repository
         self.firebaseRepository = firebaseRepository
     }

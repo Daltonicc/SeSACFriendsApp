@@ -9,10 +9,10 @@ import UIKit
 
 final class HomeUseCase {
 
-    let repository: QueueRepository
-    let firebaseRepository: FirebaseRepository
+    let repository: QueueRepositoryInterface
+    let firebaseRepository: FirebaseRepositoryInterface
 
-    init(repository: QueueRepository, firebaseRepository: FirebaseRepository) {
+    init(repository: QueueRepositoryInterface, firebaseRepository: FirebaseRepositoryInterface) {
         self.repository = repository
         self.firebaseRepository = firebaseRepository
     }

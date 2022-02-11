@@ -9,10 +9,10 @@ import UIKit
 
 final class WithdrawUseCase {
 
-    let repository: UserRepository
-    let firebaseRepository: FirebaseRepository
+    let repository: UserRepositoryInterface
+    let firebaseRepository: FirebaseRepositoryInterface
 
-    init(repository: UserRepository, firebaseRepository: FirebaseRepository) {
+    init(repository: UserRepositoryInterface, firebaseRepository: FirebaseRepositoryInterface) {
         self.repository = repository
         self.firebaseRepository = firebaseRepository
     }

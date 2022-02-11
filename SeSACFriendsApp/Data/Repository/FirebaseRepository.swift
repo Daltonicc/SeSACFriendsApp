@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-final class FirebaseRepository {
+final class FirebaseRepository: FirebaseRepositoryInterface {
 
     func requestFirebaseAuth(textField: UITextField) {
 

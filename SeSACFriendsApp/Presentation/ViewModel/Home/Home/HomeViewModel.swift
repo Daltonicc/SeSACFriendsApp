@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import NMapsMap
 
 final class HomeViewModel {
 
@@ -18,23 +19,24 @@ final class HomeViewModel {
     let disposeBag = DisposeBag()
 
     var gender = -1
+    var markerList: [NMFMarker] = []
 
     init(coordinator: HomeCoordinator, useCase: HomeUseCase) {
         self.coordinator = coordinator
         self.useCase = useCase
     }
 
-    func fetchAroundUserData(region: Int, latitude: Double, longitude: Double, completion: @escaping ([Double], [Double], [UIImage], String?) -> Void) {
-
-        var friendsLatitudeArray: [Double] = []
-        var friendsLongitudeArray: [Double] = []
-        var friendsSeSACImageArray: [UIImage] = []
+    func fetchAroundUserData(region: Int, latitude: Double, longitude: Double, mapView: NMFMapView, completion: @escaping (String?) -> Void) {
 
         let parameter: [String: Any] = [
             "region": region,
             "lat": latitude,
             "long": longitude
         ]
+
+        var friendsLatitudeArray: [Double] = []
+        var friendsLongitudeArray: [Double] = []
+        var friendsSeSACImageArray: [UIImage] = []
 
         useCase.fetchAroundUserData(parameter: parameter) { [weak self] (result) in
             switch result {
@@ -43,26 +45,43 @@ final class HomeViewModel {
                     if i.gender == self?.gender {
                         friendsLatitudeArray.append(i.userLatitude)
                         friendsLongitudeArray.append(i.userLongitude)
-
                         let image = self?.sesacImageChangeIntToUIImage(sesacimage: i.sesacImage)
                         friendsSeSACImageArray.append(image!)
                     } else if self?.gender == -1 {
                         friendsLatitudeArray.append(i.userLatitude)
                         friendsLongitudeArray.append(i.userLongitude)
-
                         let image = self?.sesacImageChangeIntToUIImage(sesacimage: i.sesacImage)
                         friendsSeSACImageArray.append(image!)
                     }
                 }
-                completion(friendsLatitudeArray, friendsLongitudeArray, friendsSeSACImageArray, nil)
+                self?.AddFriends(mapView: mapView, latitude: friendsLatitudeArray, longitude: friendsLongitudeArray, image: friendsSeSACImageArray)
+
+                completion(nil)
 
             case let .failure(error):
-                completion(friendsLatitudeArray, friendsLongitudeArray, friendsSeSACImageArray, error.errorDescription)
+                completion(error.errorDescription)
             }
         }
     }
 
-    func checkLookingForGender(allButton: CustomButton, manButton: CustomButton, womanButton: CustomButton, completion: @escaping () -> Void) {
+    func AddFriends(mapView: NMFMapView, latitude: [Double], longitude: [Double], image: [UIImage]) {
+
+        // 기존 마커 제거
+        for i in 0..<markerList.count {
+            markerList[i].mapView = nil
+        }
+
+        // 새로운 마커 추가
+        for i in 0..<latitude.count {
+            let sesacMarker = NMFMarker()
+            sesacMarker.position = NMGLatLng(lat: latitude[i], lng: longitude[i])
+            sesacMarker.iconImage = NMFOverlayImage(image: image[i].resized(to: CGSize(width: 83, height: 83)))
+            markerList.append(sesacMarker)
+            sesacMarker.mapView = mapView
+        }
+    }
+
+    func checkLookingForGender(allButton: CustomButton, manButton: CustomButton, womanButton: CustomButton, region: Int, latitude: Double, longitude: Double, mapView: NMFMapView, completion: @escaping (String?) -> Void) {
 
         allButton.rx.tap
             .bind { [weak self] in
@@ -72,7 +91,7 @@ final class HomeViewModel {
                     womanButton.buttonState = .base
                     manButton.buttonState = .base
                     self?.gender = -1
-                    completion()
+                    self?.fetchAroundUserData(region: region, latitude: latitude, longitude: longitude, mapView: mapView, completion: completion)
                 }
             }
             .disposed(by: disposeBag)
@@ -84,7 +103,7 @@ final class HomeViewModel {
                     womanButton.buttonState = .base
                     allButton.buttonState = .base
                     self?.gender = 1
-                    completion()
+                    self?.fetchAroundUserData(region: region, latitude: latitude, longitude: longitude, mapView: mapView, completion: completion)
                 }
             }
             .disposed(by: disposeBag)
@@ -96,7 +115,7 @@ final class HomeViewModel {
                     manButton.buttonState = .base
                     allButton.buttonState = .base
                     self?.gender = 0
-                    completion()
+                    self?.fetchAroundUserData(region: region, latitude: latitude, longitude: longitude, mapView: mapView, completion: completion)
                 }
             }
             .disposed(by: disposeBag)
