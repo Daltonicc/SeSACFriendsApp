@@ -9,6 +9,7 @@ import UIKit
 
 final class ProfileUseCase {
 
+    // Interface(사용설명서), RepositoryInterface로 접근.
     let repository: UserRepository
     let firebaseRepository: FirebaseRepository
 
