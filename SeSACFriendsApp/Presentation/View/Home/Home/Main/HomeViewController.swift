@@ -69,6 +69,14 @@ final class HomeViewController: BaseViewController {
                 })
             }
             .disposed(by: disposeBag)
+
+        mainView.statusButton.rx.tap
+            .bind { [weak self] in
+                self?.addPressAnimationToButton(self?.mainView.statusButton ?? CustomButton()) { [weak self] _ in
+                    self?.viewModel?.showFindHobbyView()
+                }
+            }
+            .disposed(by: disposeBag)
         
         viewModel?.checkLookingForGender(allButton: mainView.allGenderButton,
                                          manButton: mainView.manButton,
@@ -82,14 +90,6 @@ final class HomeViewController: BaseViewController {
                 self?.mainView.makeToast(errorMessage)
             })
         })
-
-        mainView.statusButton.rx.tap
-            .bind { [weak self] in
-                self?.addPressAnimationToButton(self?.mainView.statusButton ?? CustomButton()) { [weak self] _ in
-                    self?.viewModel?.showFindHobbyView()
-                }
-            }
-            .disposed(by: disposeBag)
 
     }
 }

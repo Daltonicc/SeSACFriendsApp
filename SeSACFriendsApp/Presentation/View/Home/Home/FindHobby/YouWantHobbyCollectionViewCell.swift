@@ -12,10 +12,26 @@ import SnapKit
 
 final class YouWantHobbyCollectionViewCell: UICollectionViewCell {
 
-    let imageView: UIImageView = {
+    let cellView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 5
+        view.layer.borderColor = UIColor.baseGreen.cgColor
+        view.layer.borderWidth = 1
+        return view
+    }()
+    let youWantHobbyLabel: UILabel = {
+        let label = UILabel()
+        label.font = .title4r
+        label.textColor = .baseGreen
+        label.text = "aaaaaaa"
+        label.textAlignment = .center
+        return label
+    }()
+    let cancelImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "xmark")
+        imageView.tintColor = .baseGreen
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .white
         return imageView
     }()
 
@@ -32,16 +48,25 @@ final class YouWantHobbyCollectionViewCell: UICollectionViewCell {
 
     func setUpCell() {
 
-        contentView.addSubview(imageView)
+        contentView.addSubview(cellView)
+        cellView.addSubview(youWantHobbyLabel)
+        cellView.addSubview(cancelImage)
+
     }
 
     func setUpConstraints() {
 
-        imageView.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top)
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing)
-            make.bottom.equalTo(self.snp.bottom)
+        cellView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        youWantHobbyLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(8)
+        }
+        cancelImage.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(youWantHobbyLabel.snp.trailing).offset(5)
+            make.width.height.equalTo(16)
         }
     }
 }

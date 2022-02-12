@@ -44,6 +44,7 @@ final class CustomButton: UIButton {
         switch buttonState {
         case .inactive:
             self.layer.borderColor = UIColor.gray4.cgColor
+            setTitleColor(.black, for: .normal)
         case .fill:
             tintColor = .white
             setTitleColor(.white, for: .normal)

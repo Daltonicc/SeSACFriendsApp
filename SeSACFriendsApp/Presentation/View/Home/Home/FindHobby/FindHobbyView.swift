@@ -21,14 +21,13 @@ final class FindHobbyView: UIView, ViewRepresentable {
         label.font = .title6r
         return label
     }()
-    let aroundHobbyCollectionView: UICollectionView = {
+    let aroundHobbyCollectionView: BaseCollectionView = {
         let layout = LeftAlignedCollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = BaseCollectionView(frame: .zero, collectionViewLayout: layout)
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.scrollDirection = .vertical
-        collectionView.collectionViewLayout = layout
         return collectionView
     }()
     let youWantHobbyLabel: UILabel = {
@@ -37,14 +36,13 @@ final class FindHobbyView: UIView, ViewRepresentable {
         label.font = .title6r
         return label
     }()
-    let youWantHobbyCollectionView: UICollectionView = {
+    let youWantHobbyCollectionView: BaseCollectionView = {
         let layout = LeftAlignedCollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = BaseCollectionView(frame: .zero, collectionViewLayout: layout)
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.scrollDirection = .vertical
-        collectionView.collectionViewLayout = layout
         return collectionView
     }()
     let findSeSACButton: CustomButton = {

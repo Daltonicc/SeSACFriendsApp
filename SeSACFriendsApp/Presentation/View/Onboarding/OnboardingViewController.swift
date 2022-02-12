@@ -35,7 +35,7 @@ final class OnboardingViewController: BaseViewController {
 
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
-        mainView.collectionView.register(OnboardingCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: OnboardingCollectionViewCell.identifier)
+        mainView.collectionView.register(OnboardingCollectionViewCell.self, forCellWithReuseIdentifier: OnboardingCollectionViewCell.identifier)
         mainView.collectionView.isPagingEnabled = true
 
         mainView.startButton.rx.tap

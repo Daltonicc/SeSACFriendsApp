@@ -21,6 +21,10 @@ final class HomeViewModel {
     var gender = -1
     var markerList: [NMFMarker] = []
 
+    var yourRegion: Int = 0
+    var yourLatitude: Double = 0
+    var yourLongitude: Double = 0
+
     init(coordinator: HomeCoordinator, useCase: HomeUseCase) {
         self.coordinator = coordinator
         self.useCase = useCase
@@ -33,6 +37,10 @@ final class HomeViewModel {
             "lat": latitude,
             "long": longitude
         ]
+
+        yourRegion = region
+        yourLatitude = latitude
+        yourLongitude = longitude
 
         var friendsLatitudeArray: [Double] = []
         var friendsLongitudeArray: [Double] = []
@@ -124,7 +132,7 @@ final class HomeViewModel {
     }
 
     func showFindHobbyView() {
-        coordinator?.showFindHobbyView()
+        coordinator?.showFindHobbyView(region: yourRegion, yourLatitude: yourLatitude, yourLongitude: yourLongitude)
     }
 
     func sesacImageChangeIntToUIImage(sesacimage: Int) -> UIImage {

@@ -51,6 +51,7 @@
 		6A0F591D27B6C3BB00EA9047 /* FindHobbyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591C27B6C3BB00EA9047 /* FindHobbyUseCase.swift */; };
 		6A0F591F27B6C40C00EA9047 /* AroundHobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591E27B6C40C00EA9047 /* AroundHobbyCollectionViewCell.swift */; };
 		6A0F592127B6C42C00EA9047 /* YouWantHobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F592027B6C42C00EA9047 /* YouWantHobbyCollectionViewCell.swift */; };
+		6A0F592327B7939A00EA9047 /* BaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F592227B7939A00EA9047 /* BaseCollectionView.swift */; };
 		6A1C9769279D4A7B00D6490A /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1C9768279D4A7B00D6490A /* UICollectionViewCell+Extension.swift */; };
 		6A92DD83279D6B68005A66E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A92DD82279D6B68005A66E4 /* Images.xcassets */; };
 		6A92DD85279D6F90005A66E4 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6A92DD84279D6F90005A66E4 /* swiftgen.yml */; };
@@ -170,6 +171,7 @@
 		6A0F591C27B6C3BB00EA9047 /* FindHobbyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHobbyUseCase.swift; sourceTree = "<group>"; };
 		6A0F591E27B6C40C00EA9047 /* AroundHobbyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundHobbyCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A0F592027B6C42C00EA9047 /* YouWantHobbyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouWantHobbyCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A0F592227B7939A00EA9047 /* BaseCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionView.swift; sourceTree = "<group>"; };
 		6A1C9768279D4A7B00D6490A /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
 		6A92DD82279D6B68005A66E4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6A92DD84279D6F90005A66E4 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				6A0AB7BC27993F32009C80E9 /* CustomButton.swift */,
 				6AAC709D279DBB36003FCD27 /* BaseViewController.swift */,
 				6A0F591627B6C25000EA9047 /* CollectionViewFlowLayout.swift */,
+				6A0F592227B7939A00EA9047 /* BaseCollectionView.swift */,
 			);
 			path = BaseAndCustom;
 			sourceTree = "<group>";
@@ -1067,6 +1070,7 @@
 				6A0AB7B327987319009C80E9 /* UIButton+Extension.swift in Sources */,
 				6A0AB7DC279D10E1009C80E9 /* LoginView.swift in Sources */,
 				6A0F590827B55A8400EA9047 /* FindHobbyViewController.swift in Sources */,
+				6A0F592327B7939A00EA9047 /* BaseCollectionView.swift in Sources */,
 				6A0AB7BA2798E8C0009C80E9 /* CustomTextField.swift in Sources */,
 				6AA1383127AFFAEF0076CF40 /* WithdrawViewModel.swift in Sources */,
 				6AA137DF27A7BCAD0076CF40 /* FriendsCoordinator.swift in Sources */,
