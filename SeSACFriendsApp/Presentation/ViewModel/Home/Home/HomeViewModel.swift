@@ -81,7 +81,7 @@ final class HomeViewModel {
         }
     }
 
-    func checkLookingForGender(allButton: CustomButton, manButton: CustomButton, womanButton: CustomButton, region: Int, latitude: Double, longitude: Double, mapView: NMFMapView, completion: @escaping (String?) -> Void) {
+    func checkLookingForGender(allButton: CustomButton, manButton: CustomButton, womanButton: CustomButton, completion: @escaping () -> Void) {
 
         allButton.rx.tap
             .bind { [weak self] in
@@ -91,7 +91,7 @@ final class HomeViewModel {
                     womanButton.buttonState = .base
                     manButton.buttonState = .base
                     self?.gender = -1
-                    self?.fetchAroundUserData(region: region, latitude: latitude, longitude: longitude, mapView: mapView, completion: completion)
+                    completion()
                 }
             }
             .disposed(by: disposeBag)
@@ -103,7 +103,8 @@ final class HomeViewModel {
                     womanButton.buttonState = .base
                     allButton.buttonState = .base
                     self?.gender = 1
-                    self?.fetchAroundUserData(region: region, latitude: latitude, longitude: longitude, mapView: mapView, completion: completion)
+                    completion()
+
                 }
             }
             .disposed(by: disposeBag)
@@ -115,10 +116,15 @@ final class HomeViewModel {
                     manButton.buttonState = .base
                     allButton.buttonState = .base
                     self?.gender = 0
-                    self?.fetchAroundUserData(region: region, latitude: latitude, longitude: longitude, mapView: mapView, completion: completion)
+                    completion()
+                    
                 }
             }
             .disposed(by: disposeBag)
+    }
+
+    func showFindHobbyView() {
+        coordinator?.showFindHobbyView()
     }
 
     func sesacImageChangeIntToUIImage(sesacimage: Int) -> UIImage {

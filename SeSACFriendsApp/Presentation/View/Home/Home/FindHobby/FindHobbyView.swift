@@ -8,12 +8,12 @@
 import UIKit
 import SnapKit
 
-final class FindHobby: UIView, ViewRepresentable {
+final class FindHobbyView: UIView, ViewRepresentable {
 
-    let searchController: UISearchController = {
-        let searchController = UISearchController()
-        searchController.searchBar.searchTextField.placeholder = "띄어쓰기로 복수 입력이 가능해요"
-        return searchController
+    let searchBar: UISearchBar = {
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 80, height: 0))
+        searchBar.searchTextField.placeholder = "띄어쓰기로 복수 입력이 가능해요"
+        return searchBar
     }()
     let aroundHobbyLabel: UILabel = {
         let label = UILabel()
@@ -22,7 +22,13 @@ final class FindHobby: UIView, ViewRepresentable {
         return label
     }()
     let aroundHobbyCollectionView: UICollectionView = {
-        let collectionView = UICollectionView()
+        let layout = LeftAlignedCollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.scrollDirection = .vertical
+        collectionView.collectionViewLayout = layout
         return collectionView
     }()
     let youWantHobbyLabel: UILabel = {
@@ -32,7 +38,13 @@ final class FindHobby: UIView, ViewRepresentable {
         return label
     }()
     let youWantHobbyCollectionView: UICollectionView = {
-        let collectionView = UICollectionView()
+        let layout = LeftAlignedCollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.scrollDirection = .vertical
+        collectionView.collectionViewLayout = layout
         return collectionView
     }()
     let findSeSACButton: CustomButton = {
@@ -63,5 +75,31 @@ final class FindHobby: UIView, ViewRepresentable {
 
     func setUpConstraint() {
 
+        aroundHobbyLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).inset(32)
+            make.leading.equalToSuperview().inset(16)
+            make.width.equalTo(100)
+        }
+        aroundHobbyCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(aroundHobbyLabel.snp.bottom).offset(16)
+            make.leading.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().inset(16)
+        }
+        youWantHobbyLabel.snp.makeConstraints { make in
+            make.top.equalTo(aroundHobbyCollectionView.snp.bottom).offset(25)
+            make.leading.equalToSuperview().inset(16)
+            make.width.equalTo(100)
+        }
+        youWantHobbyCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(youWantHobbyLabel.snp.bottom).offset(16)
+            make.leading.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().inset(16)
+        }
+        findSeSACButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().inset(16)
+            make.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.height.equalTo(48)
+        }
     }
 }

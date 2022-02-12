@@ -27,7 +27,6 @@ final class MyProfileCoordinator: NSObject, Coordinator {
 
         let profileView = ProfileViewController()
 
-        // 유저 데이터 같이 넘겨주기
         profileView.viewModel = ProfileViewModel(coordinator: self,
                                                  useCase: ProfileUseCase(
                                                     repository: UserRepository(),

@@ -16,7 +16,7 @@ enum ButtonState: String {
     case base
 }
 
-class CustomButton: UIButton {
+final class CustomButton: UIButton {
 
     var buttonState: ButtonState = .inactive {
         didSet {

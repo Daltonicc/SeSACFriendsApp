@@ -46,6 +46,11 @@
 		6A0F591127B6ABDF00EA9047 /* FirebaseRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591027B6ABDF00EA9047 /* FirebaseRepositoryInterface.swift */; };
 		6A0F591327B6ABE700EA9047 /* UserRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591227B6ABE700EA9047 /* UserRepositoryInterface.swift */; };
 		6A0F591527B6ABF100EA9047 /* QueueRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591427B6ABF100EA9047 /* QueueRepositoryInterface.swift */; };
+		6A0F591727B6C25000EA9047 /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591627B6C25000EA9047 /* CollectionViewFlowLayout.swift */; };
+		6A0F591A27B6C36500EA9047 /* FindHobbyViweModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591927B6C36500EA9047 /* FindHobbyViweModel.swift */; };
+		6A0F591D27B6C3BB00EA9047 /* FindHobbyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591C27B6C3BB00EA9047 /* FindHobbyUseCase.swift */; };
+		6A0F591F27B6C40C00EA9047 /* AroundHobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591E27B6C40C00EA9047 /* AroundHobbyCollectionViewCell.swift */; };
+		6A0F592127B6C42C00EA9047 /* YouWantHobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F592027B6C42C00EA9047 /* YouWantHobbyCollectionViewCell.swift */; };
 		6A1C9769279D4A7B00D6490A /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1C9768279D4A7B00D6490A /* UICollectionViewCell+Extension.swift */; };
 		6A92DD83279D6B68005A66E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A92DD82279D6B68005A66E4 /* Images.xcassets */; };
 		6A92DD85279D6F90005A66E4 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6A92DD84279D6F90005A66E4 /* swiftgen.yml */; };
@@ -160,6 +165,11 @@
 		6A0F591027B6ABDF00EA9047 /* FirebaseRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRepositoryInterface.swift; sourceTree = "<group>"; };
 		6A0F591227B6ABE700EA9047 /* UserRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryInterface.swift; sourceTree = "<group>"; };
 		6A0F591427B6ABF100EA9047 /* QueueRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueRepositoryInterface.swift; sourceTree = "<group>"; };
+		6A0F591627B6C25000EA9047 /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		6A0F591927B6C36500EA9047 /* FindHobbyViweModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHobbyViweModel.swift; sourceTree = "<group>"; };
+		6A0F591C27B6C3BB00EA9047 /* FindHobbyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHobbyUseCase.swift; sourceTree = "<group>"; };
+		6A0F591E27B6C40C00EA9047 /* AroundHobbyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundHobbyCollectionViewCell.swift; sourceTree = "<group>"; };
+		6A0F592027B6C42C00EA9047 /* YouWantHobbyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouWantHobbyCollectionViewCell.swift; sourceTree = "<group>"; };
 		6A1C9768279D4A7B00D6490A /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
 		6A92DD82279D6B68005A66E4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6A92DD84279D6F90005A66E4 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
@@ -371,6 +381,7 @@
 				6A0AB7B92798E8C0009C80E9 /* CustomTextField.swift */,
 				6A0AB7BC27993F32009C80E9 /* CustomButton.swift */,
 				6AAC709D279DBB36003FCD27 /* BaseViewController.swift */,
+				6A0F591627B6C25000EA9047 /* CollectionViewFlowLayout.swift */,
 			);
 			path = BaseAndCustom;
 			sourceTree = "<group>";
@@ -447,6 +458,8 @@
 			children = (
 				6A0F590727B55A8400EA9047 /* FindHobbyViewController.swift */,
 				6A0F590927B55ADE00EA9047 /* FindHobbyView.swift */,
+				6A0F591E27B6C40C00EA9047 /* AroundHobbyCollectionViewCell.swift */,
+				6A0F592027B6C42C00EA9047 /* YouWantHobbyCollectionViewCell.swift */,
 			);
 			path = FindHobby;
 			sourceTree = "<group>";
@@ -459,6 +472,22 @@
 				6A0F591427B6ABF100EA9047 /* QueueRepositoryInterface.swift */,
 			);
 			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		6A0F591827B6C35A00EA9047 /* FindHobby */ = {
+			isa = PBXGroup;
+			children = (
+				6A0F591927B6C36500EA9047 /* FindHobbyViweModel.swift */,
+			);
+			path = FindHobby;
+			sourceTree = "<group>";
+		};
+		6A0F591B27B6C3A700EA9047 /* FindHobby */ = {
+			isa = PBXGroup;
+			children = (
+				6A0F591C27B6C3BB00EA9047 /* FindHobbyUseCase.swift */,
+			);
+			path = FindHobby;
 			sourceTree = "<group>";
 		};
 		6A1C976A279D4C6B00D6490A /* Presentation */ = {
@@ -599,6 +628,7 @@
 		6AA1380D27AE68150076CF40 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				6A0F591827B6C35A00EA9047 /* FindHobby */,
 				6A0F58EB27B0E71C00EA9047 /* Home */,
 				6AA1380E27AE681A0076CF40 /* MyProfile */,
 			);
@@ -618,6 +648,7 @@
 		6AA1381327AE71C00076CF40 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				6A0F591B27B6C3A700EA9047 /* FindHobby */,
 				6A0F58EC27B0E72500EA9047 /* Home */,
 				6AA1381427AE71E90076CF40 /* MyProfile */,
 			);
@@ -953,6 +984,7 @@
 				6A0F591327B6ABE700EA9047 /* UserRepositoryInterface.swift in Sources */,
 				6A0AB7D5279D0919009C80E9 /* Observable.swift in Sources */,
 				6A0AB7C7279C3BB9009C80E9 /* OnboardingCollectionViewCell.swift in Sources */,
+				6A0F592127B6C42C00EA9047 /* YouWantHobbyCollectionViewCell.swift in Sources */,
 				6AAC70B6279FF24F003FCD27 /* Login2UseCase.swift in Sources */,
 				6A1C9769279D4A7B00D6490A /* UICollectionViewCell+Extension.swift in Sources */,
 				6A0AB7BF2799410A009C80E9 /* UIView+Extension.swift in Sources */,
@@ -974,10 +1006,12 @@
 				6AA137ED27AA22650076CF40 /* MyProfileTableViewCell.swift in Sources */,
 				6AAC7094279D9372003FCD27 /* ViewRepresentable.swift in Sources */,
 				6AE4580D279679FD006B142C /* SceneDelegate.swift in Sources */,
+				6A0F591F27B6C40C00EA9047 /* AroundHobbyCollectionViewCell.swift in Sources */,
 				6AA137EB27A94CB90076CF40 /* ProfileView.swift in Sources */,
 				6AAC70CE27A020BA003FCD27 /* EmailView.swift in Sources */,
 				6AA1382D27AFF5C00076CF40 /* CustomAlertView.swift in Sources */,
 				6AA137B327A500AA0076CF40 /* APIService.swift in Sources */,
+				6A0F591727B6C25000EA9047 /* CollectionViewFlowLayout.swift in Sources */,
 				6A0F591527B6ABF100EA9047 /* QueueRepositoryInterface.swift in Sources */,
 				6AA137D027A795970076CF40 /* ShopViewController.swift in Sources */,
 				6AA137CE27A7954C0076CF40 /* HomeViewController.swift in Sources */,
@@ -987,6 +1021,7 @@
 				6A0F58EF27B0EC2F00EA9047 /* Images+Generated.swift in Sources */,
 				6AA1382527AFA3B90076CF40 /* UserDefaultRepository.swift in Sources */,
 				6AA1382A27AFE7640076CF40 /* FirebaseIDToken.swift in Sources */,
+				6A0F591A27B6C36500EA9047 /* FindHobbyViweModel.swift in Sources */,
 				6A0F590427B4071400EA9047 /* NetworkError.swift in Sources */,
 				6AAC709E279DBB36003FCD27 /* BaseViewController.swift in Sources */,
 				6AAC70D027A020C2003FCD27 /* EmailViewController.swift in Sources */,
@@ -1027,6 +1062,7 @@
 				6AA137F327AA29750076CF40 /* UIImage+Extension.swift in Sources */,
 				6AAC70D427A020D5003FCD27 /* GenderViewController.swift in Sources */,
 				6AA1382827AFA5D50076CF40 /* UserDefaultKey.swift in Sources */,
+				6A0F591D27B6C3BB00EA9047 /* FindHobbyUseCase.swift in Sources */,
 				6AAC70B4279FCE59003FCD27 /* OnboardingViewModel.swift in Sources */,
 				6A0AB7B327987319009C80E9 /* UIButton+Extension.swift in Sources */,
 				6A0AB7DC279D10E1009C80E9 /* LoginView.swift in Sources */,

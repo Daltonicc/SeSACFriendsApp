@@ -47,14 +47,17 @@ final class HomeViewController: BaseViewController {
     override func setViewConfig() {
         super.setViewConfig()
 
+        // 위치 권한 설정
         locationManager = CLLocationManager()
         locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
 
+        // 센터 마커 설정
         mainView.mapView.showZoomControls = false
         mainView.mapView.mapView.addCameraDelegate(delegate: self)
         centerMarker.iconImage = NMFOverlayImage(image: Asset.Home.markerImage.image.resized(to: CGSize(width: 34, height: 45)))
 
+        // 버튼 세팅
         mainView.gpsButton.rx.tap
             .bind { [weak self] in
                 self?.viewModel?.fetchAroundUserData(region: self?.requestGreedRegion ?? 0,
@@ -70,13 +73,24 @@ final class HomeViewController: BaseViewController {
         viewModel?.checkLookingForGender(allButton: mainView.allGenderButton,
                                          manButton: mainView.manButton,
                                          womanButton: mainView.womanButton,
-                                         region: requestGreedRegion,
-                                         latitude: requestLatitude,
-                                         longitude: requestLongitude,
-                                         mapView: mainView.mapView.mapView,
-                                         completion: { [weak self] errorMessage in
-            self?.mainView.makeToast(errorMessage)
+                                         completion: { [weak self] in
+            self?.viewModel?.fetchAroundUserData(region: self?.requestGreedRegion ?? 0,
+                                                 latitude: self?.requestLatitude ?? 0,
+                                                 longitude: self?.requestLongitude ?? 0,
+                                                 mapView: self?.mainView.mapView.mapView ?? NMFMapView(),
+                                                 completion: { [weak self] errorMessage in
+                self?.mainView.makeToast(errorMessage)
+            })
         })
+
+        mainView.statusButton.rx.tap
+            .bind { [weak self] in
+                self?.addPressAnimationToButton(self?.mainView.statusButton ?? CustomButton()) { [weak self] _ in
+                    self?.viewModel?.showFindHobbyView()
+                }
+            }
+            .disposed(by: disposeBag)
+
     }
 }
 
@@ -91,6 +105,7 @@ extension HomeViewController: NMFMapViewCameraDelegate {
         centerMarker.mapView = mapView
 
         requestGreedRegion = Int(String(requestLatitude.changeToGreedLatitude) + String(requestLongitude.changeToGreedLongitude))!
+
     }
 
     func mapViewCameraIdle(_ mapView: NMFMapView) {

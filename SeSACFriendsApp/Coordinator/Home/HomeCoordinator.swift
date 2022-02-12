@@ -23,6 +23,19 @@ final class HomeCoordinator: NSObject, Coordinator {
 
     }
 
+    func showFindHobbyView() {
+
+        let findHobbyView = FindHobbyViewController()
+
+        findHobbyView.viewModel = FindHobbyViewModel(coordinator: self,
+                                                     useCase: HomeUseCase(
+                                                        repository: QueueRepository(),
+                                                        firebaseRepository: FirebaseRepository()))
+
+        presenter.pushViewController(findHobbyView, animated: true)
+
+    }
+
     func finish() {
 
         parentCoordinator?.childDidFinish(self, completion: {
