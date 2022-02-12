@@ -31,7 +31,7 @@ final class HomeCoordinator: NSObject, Coordinator {
                                                      yourRegion: region,
                                                      yourLatitude: yourLatitude,
                                                      yourLongitude: yourLongitude,
-                                                     useCase: HomeUseCase(
+                                                     useCase: FindHobbyUseCase(
                                                         repository: QueueRepository(),
                                                         firebaseRepository: FirebaseRepository()))
 

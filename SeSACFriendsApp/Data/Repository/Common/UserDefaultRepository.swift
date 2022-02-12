@@ -48,12 +48,17 @@ final class UserDefaultsRepository {
     static func fetchFirstLoginCheck() -> Bool {
         return UserDefaults.standard.bool(forKey: UserDefaultKey.firstLoginCheck)
     }
+
     static func fetchUserNickname() -> String {
         return UserDefaults.standard.string(forKey: UserDefaultKey.nickname)!
     }
 
     static func fetchCredentialIdForFirebase() -> String {
         return UserDefaults.standard.string(forKey: UserDefaultKey.credentialId)!
+    }
+
+    static func fetchUserIDToken() -> String {
+        return UserDefaults.standard.string(forKey: UserDefaultKey.idToken)!
     }
 
     static func requestRegisterUser() -> [String: Any] {

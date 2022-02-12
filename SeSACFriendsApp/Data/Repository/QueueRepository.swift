@@ -38,9 +38,39 @@ final class QueueRepository: QueueRepositoryInterface {
         }
     }
 
+    func requestFindFriends(parameter: [String: Any], completion: @escaping (QueueNetworkError?) -> Void) {
+
+        let provider = MoyaProvider<SeSACFriendsAPI>()
+        provider.request(.requestFindFriends(parameter: parameter)) { (result) in
+            switch result {
+            case let .success(response):
+                let statusCode = response.statusCode
+                print("상태코드 :\(statusCode)")
+
+                let statusCodeCheck = self.statusCodeCheck(statusCode: statusCode)
+
+                if statusCodeCheck == nil {
+                    completion(nil)
+                } else {
+                    completion(statusCodeCheck)
+                }
+
+            case let .failure(moyaError):
+                let errorCode = moyaError.errorCode
+                print("에러코드: \(errorCode)")
+                print(moyaError.localizedDescription)
+            }
+        }
+    }
+
     func statusCodeCheck(statusCode: Int) -> QueueNetworkError? {
         switch statusCode {
         case 200: return nil
+        case 201: return .tooMuchReportUser
+        case 203: return .selfishPenaltyFirst
+        case 204: return .selfishPenaltySecond
+        case 205: return .selfishPenaltyThird
+        case 206: return .unknownGender
         case 401: return .firebaseIdTokenExpired
         case 406: return .notRegisteredUser
         case 500: return .serverError

@@ -16,6 +16,7 @@ enum SeSACFriendsAPI {
 
     // Home
     case findSeSACAroundYou(parameter: [String: Any])
+    case requestFindFriends(parameter: [String: Any])
 
     // Profile
     case updateUserData(parameter: [String: Any])
@@ -38,6 +39,7 @@ extension SeSACFriendsAPI: TargetType {
 
         // Home
         case .findSeSACAroundYou: return "/queue/onqueue"
+        case .requestFindFriends: return "/queue"
 
         // Profile
         case .updateUserData: return "/user/update/mypage"
@@ -54,6 +56,7 @@ extension SeSACFriendsAPI: TargetType {
 
         // Home
         case .findSeSACAroundYou: return .post
+        case .requestFindFriends: return .post
 
         // Profile
         case .updateUserData: return .post
@@ -73,6 +76,8 @@ extension SeSACFriendsAPI: TargetType {
         // Home
         case .findSeSACAroundYou(let parameter):
             return .requestParameters(parameters: parameter, encoding: URLEncoding.httpBody)
+        case .requestFindFriends(let parameter):
+            return .requestParameters(parameters: parameter, encoding: URLEncoding(arrayEncoding: .noBrackets))
 
         // Profile
         case .updateUserData(let parameter):
@@ -87,7 +92,7 @@ extension SeSACFriendsAPI: TargetType {
         default:
             return [
                 "Content-Type": "application/x-www-form-urlencoded",
-                "idtoken": UserDefaults.standard.string(forKey: UserDefaultKey.idToken)!
+                "idtoken": UserDefaultsRepository.fetchUserIDToken()
             ]
         }
     }

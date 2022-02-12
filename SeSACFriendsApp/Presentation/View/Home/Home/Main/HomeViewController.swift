@@ -60,6 +60,7 @@ final class HomeViewController: BaseViewController {
         // 버튼 세팅
         mainView.gpsButton.rx.tap
             .bind { [weak self] in
+                self?.mainView.mapView.mapView.positionMode = .compass
                 self?.viewModel?.fetchAroundUserData(region: self?.requestGreedRegion ?? 0,
                                                      latitude: self?.requestLatitude ?? 0,
                                                      longitude: self?.requestLongitude ?? 0,

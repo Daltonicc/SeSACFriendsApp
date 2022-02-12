@@ -52,6 +52,7 @@
 		6A0F591F27B6C40C00EA9047 /* AroundHobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F591E27B6C40C00EA9047 /* AroundHobbyCollectionViewCell.swift */; };
 		6A0F592127B6C42C00EA9047 /* YouWantHobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F592027B6C42C00EA9047 /* YouWantHobbyCollectionViewCell.swift */; };
 		6A0F592327B7939A00EA9047 /* BaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F592227B7939A00EA9047 /* BaseCollectionView.swift */; };
+		6A0F592627B7DC9B00EA9047 /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = 6A0F592527B7DC9B00EA9047 /* RxKeyboard */; };
 		6A1C9769279D4A7B00D6490A /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1C9768279D4A7B00D6490A /* UICollectionViewCell+Extension.swift */; };
 		6A92DD83279D6B68005A66E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A92DD82279D6B68005A66E4 /* Images.xcassets */; };
 		6A92DD85279D6F90005A66E4 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6A92DD84279D6F90005A66E4 /* swiftgen.yml */; };
@@ -255,6 +256,7 @@
 				6AA1383827B008D00076CF40 /* SnapKit in Frameworks */,
 				6AA1380327AE1D980076CF40 /* FirebaseAuth in Frameworks */,
 				E630DCBF2FEE6DDAED9D4118 /* Pods_SeSACFriendsApp.framework in Frameworks */,
+				6A0F592627B7DC9B00EA9047 /* RxKeyboard in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -856,6 +858,7 @@
 				6AA1380427AE1D980076CF40 /* FirebaseMessaging */,
 				6AA1380727AE1DA80076CF40 /* Toast */,
 				6AA1383727B008D00076CF40 /* SnapKit */,
+				6A0F592527B7DC9B00EA9047 /* RxKeyboard */,
 			);
 			productName = SeSACFriendsApp;
 			productReference = 6AE45807279679FD006B142C /* SeSACFriendsApp.app */;
@@ -891,6 +894,7 @@
 				6AA1380127AE1D980076CF40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				6AA1380627AE1DA80076CF40 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				6AA1383627B008CF0076CF40 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				6A0F592427B7DC9A00EA9047 /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 			);
 			productRefGroup = 6AE45808279679FD006B142C /* Products */;
 			projectDirPath = "";
@@ -1300,6 +1304,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6A0F592427B7DC9A00EA9047 /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		6AA137F427AE1D3F0076CF40 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -1343,6 +1355,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6A0F592527B7DC9B00EA9047 /* RxKeyboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A0F592427B7DC9A00EA9047 /* XCRemoteSwiftPackageReference "RxKeyboard" */;
+			productName = RxKeyboard;
+		};
 		6AA137F527AE1D3F0076CF40 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6AA137F427AE1D3F0076CF40 /* XCRemoteSwiftPackageReference "Moya" */;

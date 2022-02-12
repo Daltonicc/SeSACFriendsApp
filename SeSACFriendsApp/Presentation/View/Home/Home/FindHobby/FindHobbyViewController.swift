@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxKeyboard
 import SnapKit
 
 final class FindHobbyViewController: BaseViewController {
@@ -31,11 +32,7 @@ final class FindHobbyViewController: BaseViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        viewModel?.fetchHobbyData(completion: { [weak self] errorMessage in
-            self?.mainView.makeToast(errorMessage)
-            self?.mainView.aroundHobbyCollectionView.reloadData()
-            self?.mainView.youWantHobbyCollectionView.reloadData()
-        })
+        keyBoardConfig()
     }
 
     override func navigationItemConfig() {
@@ -60,11 +57,59 @@ final class FindHobbyViewController: BaseViewController {
         mainView.youWantHobbyCollectionView.delegate = self
         mainView.youWantHobbyCollectionView.dataSource = self
         mainView.youWantHobbyCollectionView.register(YouWantHobbyCollectionViewCell.self, forCellWithReuseIdentifier: YouWantHobbyCollectionViewCell.identifier)
+
+        mainView.findSeSACButton.rx.tap
+            .bind { [weak self] in
+                self?.addPressAnimationToButton(self?.mainView.findSeSACButton ?? CustomButton()) { _ in
+                    self?.viewModel?.startToFindFriends(completion: { [weak self] errorMessage in
+                        self?.mainView.makeToast(errorMessage)
+                    })
+                }
+            }
+            .disposed(by: disposeBag)
+
+        viewModel?.fetchHobbyData(completion: { [weak self] errorMessage in
+            self?.mainView.makeToast(errorMessage)
+            self?.mainView.aroundHobbyCollectionView.reloadData()
+            self?.mainView.youWantHobbyCollectionView.reloadData()
+        })
     }
 
     override func textfieldConfig() {
+
         mainView.searchBar.searchTextField.delegate = self
         mainView.searchBar.searchTextField.addTarget(self, action: #selector(searchTextFieldDidChange(textfield:)), for: .editingChanged)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        mainView.searchBar.searchTextField.endEditing(true)
+    }
+
+    func keyBoardConfig() {
+
+        RxKeyboard.instance.visibleHeight
+            .skip(1)
+            .drive(onNext: { [weak self] keyboardVisibleHeight in
+                UIView.animate(withDuration: 0) {
+                    if keyboardVisibleHeight == 0.0 {
+                        self?.mainView.findSeSACButton.snp.remakeConstraints({ make in
+                            make.leading.equalToSuperview().inset(16)
+                            make.trailing.equalToSuperview().inset(16)
+                            make.bottom.equalToSuperview().inset(20)
+                            make.height.equalTo(48)
+                        })
+                    } else {
+                        self?.mainView.findSeSACButton.snp.remakeConstraints({ make in
+                            make.leading.equalToSuperview()
+                            make.trailing.equalToSuperview()
+                            make.bottom.equalToSuperview().inset(keyboardVisibleHeight)
+                            make.height.equalTo(48)
+                        })
+                    }
+                }
+                self?.view.layoutIfNeeded()
+            })
+            .disposed(by: disposeBag)
     }
 
     @objc func searchTextFieldDidChange(textfield: UITextField) {
@@ -91,6 +136,8 @@ extension FindHobbyViewController: UITextFieldDelegate {
             viewModel?.youWantHobbyList.append(text)
             viewModel?.youAddHobbyList.append(text)
             mainView.youWantHobbyCollectionView.reloadData()
+            textField.text = ""
+            textField.resignFirstResponder()
         }
         return true
     }

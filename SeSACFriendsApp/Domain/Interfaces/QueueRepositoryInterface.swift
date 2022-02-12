@@ -9,4 +9,5 @@ import Foundation
 
 protocol QueueRepositoryInterface {
     func fetchAroundUserData(parameter: [String: Any], completion: @escaping (Result<OtherUserDataList, QueueNetworkError>) -> Void)
+    func requestFindFriends(parameter: [String: Any], completion: @escaping (QueueNetworkError?) -> Void)
 }

@@ -10,7 +10,7 @@ import UIKit
 final class FindHobbyViewModel {
 
     weak var coordinator: HomeCoordinator?
-    let useCase: HomeUseCase
+    let useCase: FindHobbyUseCase
 
     var yourRegion: Int
     var yourLatitude: Double
@@ -20,7 +20,7 @@ final class FindHobbyViewModel {
     var youWantHobbyList: [String] = []
     var youAddHobbyList: [String] = []
 
-    init(coordinator: HomeCoordinator, yourRegion: Int, yourLatitude: Double, yourLongitude: Double, useCase: HomeUseCase) {
+    init(coordinator: HomeCoordinator, yourRegion: Int, yourLatitude: Double, yourLongitude: Double, useCase: FindHobbyUseCase) {
         self.coordinator = coordinator
         self.yourRegion = yourRegion
         self.yourLatitude = yourLatitude
@@ -53,5 +53,24 @@ final class FindHobbyViewModel {
             }
         }
     }
-    
+
+    func startToFindFriends(completion: @escaping (String) -> Void) {
+
+        let parameter: [String: Any] = [
+            "type": 2,
+            "region": yourRegion,
+            "long": yourLongitude,
+            "lat": yourLatitude,
+            "hf": youWantHobbyList
+        ]
+        print(parameter)
+
+        useCase.requestFindFriends(parameter: parameter) { error in
+            if let error = error {
+                completion(error.errorDescription!)
+            } else {
+                // 다음 뷰로 이동.
+            }
+        }
+    }
 }
