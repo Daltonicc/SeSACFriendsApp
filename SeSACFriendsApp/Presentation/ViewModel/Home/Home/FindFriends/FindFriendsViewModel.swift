@@ -16,4 +16,8 @@ final class FindFriendsViewModel {
         self.coordinator = coordinator
         self.useCase = useCase
     }
+
+    deinit {
+        print("FindFriendsViewModel Deinit")
+    }
 }

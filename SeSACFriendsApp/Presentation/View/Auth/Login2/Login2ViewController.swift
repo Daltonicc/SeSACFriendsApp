@@ -45,8 +45,6 @@ final class Login2ViewController: BaseViewController {
     override func setViewConfig() {
         super.setViewConfig()
 
-        mainView.numberTextField.mainTextField.delegate = self
-
         mainView.authButton.rx.tap
             .bind { [weak self] in
                 self?.addPressAnimationToButton(self?.mainView.authButton ?? CustomButton()) { _ in
@@ -63,8 +61,9 @@ final class Login2ViewController: BaseViewController {
     override func textfieldConfig() {
         super.textfieldConfig()
 
-        viewModel?.checkValidation(textField: mainView.numberTextField.mainTextField, button: mainView.authButton)
+        mainView.numberTextField.mainTextField.delegate = self
         mainView.numberTextField.mainTextField.addTarget(self, action: #selector(numberTextFieldDidChange(textfield:)), for: .editingChanged)
+        viewModel?.checkValidation(textField: mainView.numberTextField.mainTextField, button: mainView.authButton)
     }
 
     override func navigationItemConfig() {

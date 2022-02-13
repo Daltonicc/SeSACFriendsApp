@@ -18,6 +18,10 @@ final class FindHobbyViewController: BaseViewController {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("FindHobbyViewController Deinit")
+    }
+
     override func loadView() {
         super.loadView()
         self.view = mainView

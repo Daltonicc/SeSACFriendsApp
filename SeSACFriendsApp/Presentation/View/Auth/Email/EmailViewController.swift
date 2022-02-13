@@ -39,8 +39,6 @@ final class EmailViewController: BaseViewController {
     override func setViewConfig() {
         super.setViewConfig()
 
-        mainView.emailTextField.mainTextField.delegate = self
-
         mainView.nextButton.rx.tap
             .bind { [weak self] in
                 self?.addPressAnimationToButton(self?.mainView.nextButton ?? CustomButton()) {[weak self] _ in
@@ -53,8 +51,9 @@ final class EmailViewController: BaseViewController {
     override func textfieldConfig() {
         super.textfieldConfig()
 
-        viewModel.checkValidation(textField: mainView.emailTextField.mainTextField, button: mainView.nextButton)
+        mainView.emailTextField.mainTextField.delegate = self
         mainView.emailTextField.mainTextField.addTarget(self, action: #selector(emailTextFieldDidChange(textfield:)), for: .editingChanged)
+        viewModel.checkValidation(textField: mainView.emailTextField.mainTextField, button: mainView.nextButton)
     }
 
     override func navigationItemConfig() {

@@ -26,40 +26,9 @@ final class ProfileView: UIView, ViewRepresentable {
 
     // MARK: - Card View
 
-    let cardView: UIView = {
-        let view = UIView()
+    let cardView: CustomCardView = {
+        let view = CustomCardView()
         return view
-    }()
-    let cardBackgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = Asset.ProfileDetail.seSACBackground.image
-        imageView.layer.cornerRadius = 10
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-    let cardSesacImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = Asset.ProfileDetail.seSACImage.image
-        return imageView
-    }()
-    let titleView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.gray3.cgColor
-        return view
-    }()
-    let nameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "김새싹"
-        label.font = .title1m
-        return label
-    }()
-    let detailButton: UIButton = {
-        let button = UIButton()
-        button.tintColor = .black
-        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        return button
     }()
 
     // MARK: - Detail View
@@ -158,6 +127,8 @@ final class ProfileView: UIView, ViewRepresentable {
 
         setUpView()
         setUpConstraint()
+
+//        cardView.cardButton.isHidden = true
     }
 
     required init?(coder: NSCoder) {
@@ -170,13 +141,6 @@ final class ProfileView: UIView, ViewRepresentable {
 
         scrollView.addSubview(cardView)
         scrollView.addSubview(detailView)
-
-        cardView.addSubview(cardBackgroundImageView)
-        cardView.addSubview(cardSesacImageView)
-        cardView.addSubview(titleView)
-
-            titleView.addSubview(nameLabel)
-            titleView.addSubview(detailButton)
 
         detailView.addSubview(genderLabel)
         detailView.addSubview(manButton)
@@ -205,33 +169,6 @@ final class ProfileView: UIView, ViewRepresentable {
             make.trailing.equalTo(scrollView).inset(16)
             make.height.equalTo(252)
             make.width.equalTo(UIScreen.main.bounds.width - 32)
-        }
-        cardBackgroundImageView.snp.makeConstraints { make in
-            make.top.equalTo(cardView)
-            make.leading.trailing.equalTo(cardView)
-            make.height.equalTo(194)
-        }
-        cardSesacImageView.snp.makeConstraints { make in
-            make.bottom.equalTo(cardView).offset(-60)
-            make.centerX.equalTo(cardView)
-            make.width.height.equalTo(184)
-        }
-        titleView.snp.makeConstraints { make in
-            make.top.equalTo(cardBackgroundImageView.snp.bottom)
-            make.leading.trailing.equalTo(cardView)
-            make.height.equalTo(58)
-        }
-        nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleView).inset(16)
-            make.bottom.equalTo(titleView).inset(16)
-            make.leading.equalTo(titleView).inset(16)
-        }
-        detailButton.snp.makeConstraints { make in
-            make.top.equalTo(titleView).inset(16)
-            make.bottom.equalTo(titleView).inset(16)
-            make.trailing.equalTo(titleView).inset(16)
-            make.leading.equalTo(nameLabel.snp.trailing).offset(40)
-            make.width.equalTo(16)
         }
 
         // MARK: - Detail View

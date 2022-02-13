@@ -88,7 +88,7 @@ final class ProfileViewController: BaseViewController {
 
     func userDataConfig() {
 
-        mainView.nameLabel.text = viewModel?.userData?.yourName
+        mainView.cardView.nameLabel.text = viewModel?.userData?.yourName
         mainView.hobbyTextField.mainTextField.text = viewModel?.userData?.hobby
         mainView.ageRangeLabel.text = "\(viewModel!.userData!.ageMin) - \(viewModel!.userData!.ageMax)"
 

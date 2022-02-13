@@ -27,6 +27,10 @@ final class HomeViewController: BaseViewController {
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("HomeViewController Deinit")
+    }
+
     override func loadView() {
         super.loadView()
 

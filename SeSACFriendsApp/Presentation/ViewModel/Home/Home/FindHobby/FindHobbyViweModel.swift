@@ -34,6 +34,10 @@ final class FindHobbyViewModel {
         self.useCase = useCase
     }
 
+    deinit {
+        print("FindHobbyViewModel Deinit")
+    }
+
     func fetchHobbyData(completion: @escaping (String?) -> Void) {
 
         let parameter: [String: Any] = [

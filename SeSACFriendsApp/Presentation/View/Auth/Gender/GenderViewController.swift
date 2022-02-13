@@ -35,8 +35,6 @@ final class GenderViewController: BaseViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-
-        print("idToken값: \(UserDefaults.standard.string(forKey: "uidToken")!)")
     }
 
     override func setViewConfig() {

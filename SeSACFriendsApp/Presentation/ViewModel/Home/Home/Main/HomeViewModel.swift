@@ -30,6 +30,10 @@ final class HomeViewModel {
         self.useCase = useCase
     }
 
+    deinit {
+        print("HomeViewModel Deinit")
+    }
+
     func fetchAroundUserData(region: Int, latitude: Double, longitude: Double, mapView: NMFMapView, completion: @escaping (String?) -> Void) {
 
         let parameter: [String: Any] = [

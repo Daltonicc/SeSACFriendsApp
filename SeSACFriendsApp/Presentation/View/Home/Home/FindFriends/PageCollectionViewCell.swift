@@ -10,13 +10,12 @@ import SnapKit
 
 final class PageCollectionViewCell: UICollectionViewCell {
 
-    var viewlabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
-        return label
+    let cardTableView: UITableView = {
+        let tableView = UITableView()
+        return tableView
     }()
+
+    var item = 0
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,13 +31,47 @@ final class PageCollectionViewCell: UICollectionViewCell {
 
     func setUpView() {
 
-        self.addSubview(viewlabel)
+        addSubview(cardTableView)
+
+        cardTableView.delegate = self
+        cardTableView.dataSource = self
+        cardTableView.register(CardTableViewCell.self, forCellReuseIdentifier: CardTableViewCell.identifier)
     }
 
     func setUpConstraints() {
 
-        viewlabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        cardTableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
+
+    func cellConfig(item: Int) {
+
+        if item == 0 {
+
+        } else {
+
+        }
+    }
+}
+
+extension PageCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CardTableViewCell.identifier, for: indexPath) as? CardTableViewCell else { return UITableViewCell() }
+
+        cell.cellConfig(item: item)
+
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 272
+    }
+
 }

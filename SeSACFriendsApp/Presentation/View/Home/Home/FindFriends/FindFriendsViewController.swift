@@ -32,6 +32,10 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
 
     let disposeBag = DisposeBag()
 
+    deinit {
+        print("FindFriendsViewController Deinit")
+    }
+
     override func loadView() {
         super.loadView()
 
@@ -99,7 +103,16 @@ extension FindFriendsViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PageCollectionViewCell.identifier, for: indexPath) as? PageCollectionViewCell else { return UICollectionViewCell() }
-        cell.viewlabel.text = "\(indexPath.row + 1)번째 뷰"
+        let tableViewCell = cell.cardTableView.dequeueReusableCell(withIdentifier: CardTableViewCell.identifier, for: indexPath) as? CardTableViewCell
+
+        if indexPath.item == 0 {
+//            tableViewCell!.cardView.cardButton.setTitle("요청하기", for: .normal)
+            cell.item = 0
+        } else {
+//            tableViewCell!.cardView.cardButton.setTitle("수락하기", for: .normal)
+            cell.item = 1
+        }
+
         return cell
 
     }

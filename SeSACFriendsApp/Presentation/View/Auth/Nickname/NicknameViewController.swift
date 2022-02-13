@@ -52,9 +52,8 @@ final class NicknameViewController: BaseViewController {
         super.textfieldConfig()
 
         mainView.nicknameTextField.mainTextField.delegate = self
-
-        viewModel.checkValidation(textField: mainView.nicknameTextField.mainTextField, button: mainView.nextButton)
         mainView.nicknameTextField.mainTextField.addTarget(self, action: #selector(nicknameTextFieldDidChange(textfield:)), for: .editingChanged)
+        viewModel.checkValidation(textField: mainView.nicknameTextField.mainTextField, button: mainView.nextButton)
     }
 
     override func navigationItemConfig() {
