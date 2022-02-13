@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 final class FindFriendsViewModel {
 
@@ -19,5 +20,16 @@ final class FindFriendsViewModel {
 
     deinit {
         print("FindFriendsViewModel Deinit")
+    }
+
+    func suspendFindFriends(completion: @escaping (String) -> Void) {
+
+        useCase.suspendFindFriends { [weak self] error in
+            if let error = error {
+                completion(error.errorDescription!)
+            } else {
+                self?.coordinator?.presenter.popToRootViewController(animated: true)
+            }
+        }
     }
 }

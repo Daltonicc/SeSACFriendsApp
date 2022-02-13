@@ -43,6 +43,7 @@ extension UserNetworkError: LocalizedError {
 
 enum QueueNetworkError: Int, Error {
     case tooMuchReportUser = 201
+    case youAlreadyMatched = 2010
     case selfishPenaltyFirst = 203
     case selfishPenaltySecond = 204
     case selfishPenaltyThird = 205
@@ -58,6 +59,8 @@ extension QueueNetworkError: LocalizedError {
         switch self {
         case .tooMuchReportUser:
             return "신고가 누적되어 이용하실 수 없습니다."
+        case .youAlreadyMatched:
+            return "누군가와 취미를 함께하기로 약속하셨어요!"
         case .selfishPenaltyFirst:
             return "약속 취소 패널티로, 1분동안 이용하실 수 없습니다."
         case .selfishPenaltySecond:

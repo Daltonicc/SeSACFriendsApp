@@ -44,15 +44,6 @@ final class PageCollectionViewCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
     }
-
-    func cellConfig(item: Int) {
-
-        if item == 0 {
-
-        } else {
-
-        }
-    }
 }
 
 extension PageCollectionViewCell: UITableViewDelegate, UITableViewDataSource {

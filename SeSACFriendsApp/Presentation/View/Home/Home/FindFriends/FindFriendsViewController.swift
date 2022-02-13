@@ -36,11 +36,6 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
         print("FindFriendsViewController Deinit")
     }
 
-    override func loadView() {
-        super.loadView()
-
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -86,6 +81,14 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
                 self?.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
+
+        suspendBarButton.rx.tap
+            .bind { [weak self] in
+                self?.viewModel?.suspendFindFriends(completion: { errorMessage in
+                    self?.view.makeToast(errorMessage)
+                })
+            }
+            .disposed(by: disposeBag)
     }
 
     func customMenuBar(scrollTo index: Int) {
@@ -103,13 +106,10 @@ extension FindFriendsViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PageCollectionViewCell.identifier, for: indexPath) as? PageCollectionViewCell else { return UICollectionViewCell() }
-        let tableViewCell = cell.cardTableView.dequeueReusableCell(withIdentifier: CardTableViewCell.identifier, for: indexPath) as? CardTableViewCell
 
         if indexPath.item == 0 {
-//            tableViewCell!.cardView.cardButton.setTitle("요청하기", for: .normal)
             cell.item = 0
         } else {
-//            tableViewCell!.cardView.cardButton.setTitle("수락하기", for: .normal)
             cell.item = 1
         }
 
