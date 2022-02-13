@@ -17,6 +17,29 @@ final class FindFriendsUseCase {
         self.firebaseRepository = firebaseRepository
     }
 
+    func fetchAroundUserData(parameter: [String: Any], completion: @escaping (Result<OtherUserDataList, QueueNetworkError>) -> Void) {
+
+        repository.fetchAroundUserData(parameter: parameter) { (result) in
+            switch result {
+            case let .success(data):
+                completion(.success(data))
+            case let .failure(error):
+                if error == .firebaseIdTokenExpired {
+                    self.firebaseRepository.refreshIDToken {
+                        self.repository.fetchAroundUserData(parameter: parameter, completion: { (result) in
+                            switch result {
+                            case let .success(data): completion(.success(data))
+                            case let .failure(error): completion(.failure(error))
+                            }
+                        })
+                    }
+                } else {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+
     func suspendFindFriends(completion: @escaping (QueueNetworkError?) -> Void) {
 
         repository.suspendFindFriends { [weak self] error in

@@ -80,6 +80,15 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
             }
             .disposed(by: disposeBag)
 
+        suspendBarButton.rx.tap
+            .bind { [weak self] in
+                self?.viewModel?.suspendFindFriendsCase = .tapFindingSuspendButton
+                self?.viewModel?.suspendFindFriends(completion: { errorMessage in
+                    self?.view.makeToast(errorMessage)
+                })
+            }
+            .disposed(by: disposeBag)
+
     }
 
     override func navigationItemConfig() {
@@ -93,15 +102,6 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
         backBarButton.rx.tap
             .bind { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
-            }
-            .disposed(by: disposeBag)
-
-        suspendBarButton.rx.tap
-            .bind { [weak self] in
-                self?.viewModel?.suspendFindFriendsCase = .tapFindingSuspendButton
-                self?.viewModel?.suspendFindFriends(completion: { errorMessage in
-                    self?.view.makeToast(errorMessage)
-                })
             }
             .disposed(by: disposeBag)
     }
@@ -135,6 +135,16 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
         let indexPath = IndexPath(row: index, section: 0)
         pageCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
+
+    func checkButtonIsHidden() {
+        if viewModel?.friendsNameArray.isEmpty ?? true {
+            changeHobbyButton.isHidden = false
+            reloadButton.isHidden = false
+        } else {
+            changeHobbyButton.isHidden = true
+            reloadButton.isHidden = true
+        }
+    }
 }
 
 extension FindFriendsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -147,14 +157,23 @@ extension FindFriendsViewController: UICollectionViewDelegate, UICollectionViewD
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PageCollectionViewCell.identifier, for: indexPath) as? PageCollectionViewCell else { return UICollectionViewCell() }
 
-        if indexPath.item == 0 {
-            cell.item = 0
-            cell.cellConfig(item: 0)
-        } else {
-            cell.item = 1
-            cell.cellConfig(item: 1)
-        }
-
+        viewModel?.fetchAroundUserData(completion: { [weak self] errorMessage in
+            self?.view.makeToast(errorMessage)
+            self?.checkButtonIsHidden()
+            if indexPath.item == 0 {
+                cell.item = 0
+                cell.friendsNameArray = self?.viewModel?.friendsNameArray ?? []
+                cell.friendsSeSACImageArray = self?.viewModel?.friendsSeSACImageArray ?? []
+                cell.friendsBackgroundImage = self?.viewModel?.friendsBackgroundImage ?? []
+                cell.requestCellConfig()
+                
+            } else {
+                cell.item = 1
+                cell.acceptCellConfig()
+                self?.changeHobbyButton.isHidden = false
+                self?.reloadButton.isHidden = false
+            }
+        })
         return cell
 
     }

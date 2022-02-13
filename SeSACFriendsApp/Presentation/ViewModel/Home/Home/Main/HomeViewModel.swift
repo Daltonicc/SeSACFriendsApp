@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import NMapsMap
 
-final class HomeViewModel {
+final class HomeViewModel: ViewModel {
 
     weak var coordinator: HomeCoordinator?
 
@@ -139,15 +139,4 @@ final class HomeViewModel {
         coordinator?.showFindHobbyView(region: yourRegion, yourLatitude: yourLatitude, yourLongitude: yourLongitude)
     }
 
-    func sesacImageChangeIntToUIImage(sesacimage: Int) -> UIImage {
-
-        switch sesacimage {
-        case 0: return Asset.Home.basicSeSACImage.image
-        case 1: return Asset.Home.strongSeSACImage.image
-        case 2: return Asset.Home.mintSeSACImage.image
-        case 3: return Asset.Home.basicSeSACImage.image
-        case 4: return Asset.Home.goldSeSACImage.image
-        default: return Asset.Home.basicSeSACImage.image
-        }
-    }
 }

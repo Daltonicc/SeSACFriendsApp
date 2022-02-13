@@ -45,6 +45,13 @@ internal enum Asset {
     internal static let matchedFriendsImage = ImageAsset(name: "MatchedFriendsImage")
     internal static let mintSeSACImage = ImageAsset(name: "MintSeSACImage")
     internal static let purpleSeSACImage = ImageAsset(name: "PurpleSeSACImage")
+    internal enum SeSACImage {
+      internal static let image1 = ImageAsset(name: "Image1")
+      internal static let image2 = ImageAsset(name: "Image2")
+      internal static let image3 = ImageAsset(name: "Image3")
+      internal static let image4 = ImageAsset(name: "Image4")
+      internal static let image5 = ImageAsset(name: "Image5")
+    }
     internal static let searchingFriendsImage = ImageAsset(name: "SearchingFriendsImage")
     internal static let strongSeSACImage = ImageAsset(name: "StrongSeSACImage")
     internal static let reloadImage = ImageAsset(name: "reloadImage")

@@ -11,7 +11,7 @@ import RxCocoa
 import RxKeyboard
 import SnapKit
 
-final class FindHobbyViewModel {
+final class FindHobbyViewModel: ViewModel {
 
     weak var coordinator: HomeCoordinator?
     let useCase: FindHobbyUseCase
@@ -79,7 +79,10 @@ final class FindHobbyViewModel {
             if let error = error {
                 completion(error.errorDescription!)
             } else {
-                self?.coordinator?.showFindFriendsView()
+                self?.coordinator?.showFindFriendsView(region: self?.yourRegion ?? 0,
+                                                       yourLatitude: self?.yourLatitude ?? 0,
+                                                       yourLongitude: self?.yourLongitude ?? 0,
+                                                       youWantHobbyList: self?.youWantHobbyList ?? [])
             }
         }
     }

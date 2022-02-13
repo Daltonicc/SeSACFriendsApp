@@ -7,21 +7,68 @@
 
 import Foundation
 import Alamofire
+import UIKit
 
-final class FindFriendsViewModel {
+enum SuspendFindFriendsCase {
+    case tapFindingSuspendButton
+    case tapChangeHobbyButton
+}
+
+final class FindFriendsViewModel: ViewModel {
 
     weak var coordinator: HomeCoordinator?
     let useCase: FindFriendsUseCase
 
+    var yourRegion: Int
+    var yourLatitude: Double
+    var yourLongitude: Double
+    var youWantHobbyList: [String] = []
+
+    var friendsNameArray: [String] = []
+    var friendsSeSACImageArray: [UIImage] = []
+    var friendsBackgroundImage: [UIImage] = []
+
     var suspendFindFriendsCase: SuspendFindFriendsCase?
 
-    init(coordinator: HomeCoordinator, useCase: FindFriendsUseCase) {
+    init(coordinator: HomeCoordinator, yourRegion: Int, yourLatitude: Double, yourLongitude: Double, youWantHobbyList: [String], useCase: FindFriendsUseCase) {
         self.coordinator = coordinator
+        self.yourRegion = yourRegion
+        self.yourLatitude = yourLatitude
+        self.yourLongitude = yourLongitude
+        self.youWantHobbyList = youWantHobbyList
         self.useCase = useCase
     }
 
     deinit {
         print("FindFriendsViewModel Deinit")
+    }
+
+    func fetchAroundUserData(completion: @escaping (String?) -> Void) {
+
+        let parameter: [String: Any] = [
+            "region": yourRegion,
+            "lat": yourLatitude,
+            "long": yourLongitude
+        ]
+
+        // 중복 취미 안쌓이게 처리;; 여러 명 쌓이는 중.
+        useCase.fetchAroundUserData(parameter: parameter) { [weak self] (result) in
+            switch result {
+            case let .success(data):
+                for i in data.otherUsers {
+                    for j in i.wantHobby {
+                        if self?.youWantHobbyList.contains(j) ?? false {
+                            self?.friendsNameArray.append(i.nickname)
+                            self?.friendsBackgroundImage.append((self?.sesacBackgroundImageIntToUIImage(backgroundImage: i.backgroundImage))!)
+                            self?.friendsSeSACImageArray.append((self?.sesacImageChangeIntToUIImage(sesacimage: i.sesacImage))!)
+                        }
+                    }
+                }
+                completion(nil)
+            case let .failure(error):
+                completion(error.errorDescription)
+            }
+        }
     }
 
     func suspendFindFriends(completion: @escaping (String) -> Void) {
@@ -39,9 +86,4 @@ final class FindFriendsViewModel {
             }
         }
     }
-}
-
-enum SuspendFindFriendsCase {
-    case tapFindingSuspendButton
-    case tapChangeHobbyButton
 }

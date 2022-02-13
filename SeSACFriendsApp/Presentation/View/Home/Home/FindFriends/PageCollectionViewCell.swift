@@ -21,6 +21,11 @@ final class PageCollectionViewCell: UICollectionViewCell {
     }()
 
     var item = 0
+    var friendsCount = 0
+
+    var friendsNameArray: [String] = []
+    var friendsSeSACImageArray: [UIImage] = []
+    var friendsBackgroundImage: [UIImage] = []
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,20 +63,26 @@ final class PageCollectionViewCell: UICollectionViewCell {
         
     }
 
-    func cellConfig(item: Int) {
+    func requestCellConfig() {
 
-        if item == 0 {
+        if friendsNameArray.isEmpty {
             emptyImageView.image = Asset.Home.emptyAroundImage.image
         } else {
-            emptyImageView.image = Asset.Home.emptyRequestImage.image
+            emptyImageView.isHidden = true
+            cardTableView.reloadData()
         }
+    }
+
+    func acceptCellConfig() {
+
+        emptyImageView.image = Asset.Home.emptyRequestImage.image
     }
 }
 
 extension PageCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return friendsNameArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,6 +90,12 @@ extension PageCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CardTableViewCell.identifier, for: indexPath) as? CardTableViewCell else { return UITableViewCell() }
 
         cell.cellConfig(item: item)
+
+        let row = indexPath.row
+
+        cell.cardView.nameLabel.text = friendsNameArray[row]
+        cell.cardView.cardSesacImageView.image = friendsSeSACImageArray[row]
+        cell.cardView.cardBackgroundImageView.image = friendsBackgroundImage[row]
 
         return cell
     }

@@ -132,6 +132,7 @@
 		6AEA436D27B90E6000BFD56F /* PageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA436C27B90E6000BFD56F /* PageCollectionViewCell.swift */; };
 		6AEA436F27B934B700BFD56F /* CustomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA436E27B934B700BFD56F /* CustomCardView.swift */; };
 		6AEA437127B938B800BFD56F /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA437027B938B800BFD56F /* CardTableViewCell.swift */; };
+		6AEA437327B96D4900BFD56F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA437227B96D4900BFD56F /* ViewModel.swift */; };
 		E630DCBF2FEE6DDAED9D4118 /* Pods_SeSACFriendsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 763EF621F280237A9391E457 /* Pods_SeSACFriendsApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -256,6 +257,7 @@
 		6AEA436C27B90E6000BFD56F /* PageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCollectionViewCell.swift; sourceTree = "<group>"; };
 		6AEA436E27B934B700BFD56F /* CustomCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCardView.swift; sourceTree = "<group>"; };
 		6AEA437027B938B800BFD56F /* CardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
+		6AEA437227B96D4900BFD56F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		763EF621F280237A9391E457 /* Pods_SeSACFriendsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACFriendsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC69A5A2F0778F0A33669F28 /* Pods-SeSACFriendsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACFriendsApp.release.xcconfig"; path = "Target Support Files/Pods-SeSACFriendsApp/Pods-SeSACFriendsApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -316,6 +318,7 @@
 		6A0AB78C27985F4C009C80E9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				6AEA437227B96D4900BFD56F /* ViewModel.swift */,
 				6AAC70D527A03ED5003FCD27 /* Onboarding */,
 				6AAC70D627A03EDC003FCD27 /* Auth */,
 				6AA1380D27AE68150076CF40 /* Home */,
@@ -1102,6 +1105,7 @@
 				6A0F592F27B8AF2C00EA9047 /* FindFriendsViewController.swift in Sources */,
 				6AA137C827A78C780076CF40 /* TabBarCoordinator.swift in Sources */,
 				6A0F593127B8AFB400EA9047 /* FindFriendsViewModel.swift in Sources */,
+				6AEA437327B96D4900BFD56F /* ViewModel.swift in Sources */,
 				6A0AB7CA279CFC68009C80E9 /* Coordinator.swift in Sources */,
 				6AA1381227AE715F0076CF40 /* ProfileViewModel.swift in Sources */,
 				6A0F58EF27B0EC2F00EA9047 /* Images+Generated.swift in Sources */,

@@ -37,10 +37,14 @@ final class HomeCoordinator: NSObject, Coordinator {
 
     }
 
-    func showFindFriendsView() {
+    func showFindFriendsView(region: Int, yourLatitude: Double, yourLongitude: Double, youWantHobbyList: [String]) {
 
         let findFriendsView = FindFriendsViewController()
         findFriendsView.viewModel = FindFriendsViewModel(coordinator: self,
+                                                         yourRegion: region,
+                                                         yourLatitude: yourLatitude,
+                                                         yourLongitude: yourLongitude,
+                                                         youWantHobbyList: youWantHobbyList,
                                                          useCase: FindFriendsUseCase(
                                                             repository: QueueRepository(),
                                                             firebaseRepository: FirebaseRepository()))
