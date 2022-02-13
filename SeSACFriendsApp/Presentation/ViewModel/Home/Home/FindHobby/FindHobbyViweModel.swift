@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxKeyboard
+import SnapKit
 
 final class FindHobbyViewModel {
 
@@ -19,6 +23,8 @@ final class FindHobbyViewModel {
     var hobbyList: [String] = []
     var youWantHobbyList: [String] = []
     var youAddHobbyList: [String] = []
+
+    let disposeBag = DisposeBag()
 
     init(coordinator: HomeCoordinator, yourRegion: Int, yourLatitude: Double, yourLongitude: Double, useCase: FindHobbyUseCase) {
         self.coordinator = coordinator
@@ -65,12 +71,39 @@ final class FindHobbyViewModel {
         ]
         print(parameter)
 
-        useCase.requestFindFriends(parameter: parameter) { error in
+        useCase.requestFindFriends(parameter: parameter) { [weak self] error in
             if let error = error {
                 completion(error.errorDescription!)
             } else {
-                // 다음 뷰로 이동.
+                self?.coordinator?.showFindFriendsView()
             }
         }
+    }
+
+    func showKeyboard(findButton: CustomButton, view: UIView) {
+
+        RxKeyboard.instance.visibleHeight
+            .skip(1)
+            .drive(onNext: { keyboardVisibleHeight in
+                UIView.animate(withDuration: 0) {
+                    if keyboardVisibleHeight == 0.0 {
+                        findButton.snp.remakeConstraints({ make in
+                            make.leading.equalToSuperview().inset(16)
+                            make.trailing.equalToSuperview().inset(16)
+                            make.bottom.equalToSuperview().inset(20)
+                            make.height.equalTo(48)
+                        })
+                    } else {
+                        findButton.snp.remakeConstraints({ make in
+                            make.leading.equalToSuperview()
+                            make.trailing.equalToSuperview()
+                            make.bottom.equalToSuperview().inset(keyboardVisibleHeight)
+                            make.height.equalTo(48)
+                        })
+                    }
+                }
+                view.layoutIfNeeded()
+            })
+            .disposed(by: disposeBag)
     }
 }
