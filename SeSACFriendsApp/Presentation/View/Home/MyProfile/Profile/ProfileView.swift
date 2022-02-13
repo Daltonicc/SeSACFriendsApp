@@ -128,7 +128,7 @@ final class ProfileView: UIView, ViewRepresentable {
         setUpView()
         setUpConstraint()
 
-//        cardView.cardButton.isHidden = true
+        cardView.cardButton.isHidden = true
     }
 
     required init?(coder: NSCoder) {

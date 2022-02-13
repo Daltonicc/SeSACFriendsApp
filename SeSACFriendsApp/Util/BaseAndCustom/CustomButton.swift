@@ -14,6 +14,8 @@ enum ButtonState: String {
     case cancel
     case disable
     case base
+    case request
+    case accept
 }
 
 final class CustomButton: UIButton {
@@ -59,6 +61,12 @@ final class CustomButton: UIButton {
             backgroundColor = .gray6
         case .base:
             setTitleColor(.black, for: .normal)
+        case .request:
+            backgroundColor = .error
+            setTitleColor(.white, for: .normal)
+        case .accept:
+            backgroundColor = .success
+            setTitleColor(.white, for: .normal)
         }
     }
 }

@@ -46,9 +46,11 @@ final class CardTableViewCell: UITableViewCell {
     func cellConfig(item: Int) {
 
         if item == 0 {
-            cardView.cardButton.setTitle("요청하기", for: .normal) 
+            cardView.cardButton.setTitle("요청하기", for: .normal)
+            cardView.cardButton.buttonState = .request
         } else {
             cardView.cardButton.setTitle("수락하기", for: .normal)
+            cardView.cardButton.buttonState = .accept
         }
     }
 }

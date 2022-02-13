@@ -27,6 +27,20 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
         collectionView.isPagingEnabled = true
         return collectionView
     }()
+    let changeHobbyButton: CustomButton = {
+        let button = CustomButton()
+        button.setTitle("취미 변경하기", for: .normal)
+        button.buttonState = .fill
+        return button
+    }()
+    let reloadButton: CustomButton = {
+        let button = CustomButton()
+        button.buttonState = .outline
+        button.setImage(Asset.Home.reloadImage.image.resized(to: CGSize(width: 25, height: 25)), for: .normal)
+        button.layer.borderColor = UIColor.baseGreen.cgColor
+        button.layer.borderWidth = 1
+        return button
+    }()
 
     var viewModel: FindFriendsViewModel?
 
@@ -39,7 +53,6 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
     }
 
     override func setViewConfig() {
@@ -47,17 +60,9 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
 
         view.addSubview(customMenuBar)
         view.addSubview(pageCollectionView)
-
-        customMenuBar.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalTo(40)
-        }
-        pageCollectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
-            make.top.equalTo(customMenuBar.snp.bottom)
-        }
+        view.addSubview(changeHobbyButton)
+        view.addSubview(reloadButton)
+        setUpConstraints()
 
         customMenuBar.delegate = self
         customMenuBar.indicatorViewWidthConstraint.constant = self.view.frame.width / 2
@@ -65,6 +70,15 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
         pageCollectionView.delegate = self
         pageCollectionView.dataSource = self
         pageCollectionView.register(PageCollectionViewCell.self, forCellWithReuseIdentifier: PageCollectionViewCell.identifier)
+
+        changeHobbyButton.rx.tap
+            .bind { [weak self] in
+                self?.viewModel?.suspendFindFriendsCase = .tapChangeHobbyButton
+                self?.viewModel?.suspendFindFriends(completion: { [weak self] errorMessage in
+                    self?.view.makeToast(errorMessage)
+                })
+            }
+            .disposed(by: disposeBag)
 
     }
 
@@ -84,11 +98,37 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
 
         suspendBarButton.rx.tap
             .bind { [weak self] in
+                self?.viewModel?.suspendFindFriendsCase = .tapFindingSuspendButton
                 self?.viewModel?.suspendFindFriends(completion: { errorMessage in
                     self?.view.makeToast(errorMessage)
                 })
             }
             .disposed(by: disposeBag)
+    }
+
+    func setUpConstraints() {
+
+        customMenuBar.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalTo(40)
+        }
+        pageCollectionView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.top.equalTo(customMenuBar.snp.bottom)
+        }
+        changeHobbyButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(16)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalTo(48)
+        }
+        reloadButton.snp.makeConstraints { make in
+            make.leading.equalTo(changeHobbyButton.snp.trailing).offset(8)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.trailing.equalToSuperview().inset(16)
+            make.width.height.equalTo(48)
+        }
     }
 
     func customMenuBar(scrollTo index: Int) {
@@ -109,8 +149,10 @@ extension FindFriendsViewController: UICollectionViewDelegate, UICollectionViewD
 
         if indexPath.item == 0 {
             cell.item = 0
+            cell.cellConfig(item: 0)
         } else {
             cell.item = 1
+            cell.cellConfig(item: 1)
         }
 
         return cell

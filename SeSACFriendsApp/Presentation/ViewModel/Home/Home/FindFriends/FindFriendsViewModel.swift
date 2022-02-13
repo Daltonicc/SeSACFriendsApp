@@ -13,6 +13,8 @@ final class FindFriendsViewModel {
     weak var coordinator: HomeCoordinator?
     let useCase: FindFriendsUseCase
 
+    var suspendFindFriendsCase: SuspendFindFriendsCase?
+
     init(coordinator: HomeCoordinator, useCase: FindFriendsUseCase) {
         self.coordinator = coordinator
         self.useCase = useCase
@@ -28,8 +30,18 @@ final class FindFriendsViewModel {
             if let error = error {
                 completion(error.errorDescription!)
             } else {
-                self?.coordinator?.presenter.popToRootViewController(animated: true)
+                // 어떤 버튼 눌렀는지에 따라 분기처리.
+                switch self?.suspendFindFriendsCase {
+                case .tapChangeHobbyButton: self?.coordinator?.presenter.popViewController(animated: true)
+                case .tapFindingSuspendButton: self?.coordinator?.presenter.popToRootViewController(animated: true)
+                default: self?.coordinator?.presenter.popViewController(animated: true)
+                }
             }
         }
     }
+}
+
+enum SuspendFindFriendsCase {
+    case tapFindingSuspendButton
+    case tapChangeHobbyButton
 }
