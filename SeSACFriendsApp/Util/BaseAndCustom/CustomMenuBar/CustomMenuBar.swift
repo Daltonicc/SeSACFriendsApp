@@ -26,10 +26,10 @@ final class CustomMenuBar: UIView {
     var indicatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .black
+        view.backgroundColor = .baseGreen
         return view
     }()
-    var indicatorViewLeadingConstraint:NSLayoutConstraint!
+    var indicatorViewLeadingConstraint: NSLayoutConstraint!
     var indicatorViewWidthConstraint: NSLayoutConstraint!
 
     override init(frame: CGRect) {
@@ -63,12 +63,12 @@ final class CustomMenuBar: UIView {
 
         customTabBarCollectionView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(55)
+            make.height.equalTo(38)
         }
 
         indicatorViewWidthConstraint = indicatorView.widthAnchor.constraint(equalToConstant: self.frame.width / 2)
         indicatorViewWidthConstraint.isActive = true
-        indicatorView.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        indicatorView.heightAnchor.constraint(equalToConstant: 2).isActive = true
         indicatorViewLeadingConstraint = indicatorView.leadingAnchor.constraint(equalTo: self.leadingAnchor)
         indicatorViewLeadingConstraint.isActive = true
         indicatorView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
@@ -78,7 +78,13 @@ final class CustomMenuBar: UIView {
 extension CustomMenuBar: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomMenuBarCell.identifier, for: indexPath) as! CustomMenuBarCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomMenuBarCell.identifier, for: indexPath) as? CustomMenuBarCell else { return UICollectionViewCell() }
+
+        if indexPath.item == 0 {
+            cell.tablabel.text = "주변 새싹"
+        } else {
+            cell.tablabel.text = "받은 요청"
+        }
 
         return cell
     }
@@ -98,7 +104,7 @@ extension CustomMenuBar: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CustomMenuBarCell else {return}
-        cell.tablabel.textColor = .lightGray
+        cell.tablabel.textColor = .gray6
     }
 }
 

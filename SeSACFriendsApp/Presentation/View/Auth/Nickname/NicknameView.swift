@@ -28,6 +28,7 @@ final class NicknameView: UIView, ViewRepresentable {
     let nextButton: CustomButton = {
         let button = CustomButton()
         button.buttonState = .disable
+        button.setTitleColor(.white, for: .normal)
         button.setTitle("다음", for: .normal)
         return button
     }()

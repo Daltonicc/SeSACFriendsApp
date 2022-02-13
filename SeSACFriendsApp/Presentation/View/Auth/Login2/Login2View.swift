@@ -48,6 +48,7 @@ final class Login2View: UIView, ViewRepresentable {
     let authButton: CustomButton = {
         let button = CustomButton()
         button.buttonState = .disable
+        button.setTitleColor(.white, for: .normal)
         button.setTitle("인증하고 시작하기", for: .normal)
         return button
     }()

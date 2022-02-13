@@ -1,5 +1,5 @@
 //
-//  CustomMenuBarCell.swift
+//  PageCollectionViewCell.swift
 //  SeSACFriendsApp
 //
 //  Created by 박근보 on 2022/02/13.
@@ -8,22 +8,15 @@
 import UIKit
 import SnapKit
 
-class CustomMenuBarCell: UICollectionViewCell {
+final class PageCollectionViewCell: UICollectionViewCell {
 
-    var tablabel: UILabel = {
+    var viewlabel: UILabel = {
         let label = UILabel()
-        label.text = "Tab"
+        label.textColor = .black
         label.textAlignment = .center
-        label.font = .title3m
-        label.textColor = .gray6
+        label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
         return label
     }()
-
-    override var isSelected: Bool {
-        didSet{
-            self.tablabel.textColor = isSelected ? .baseGreen : .gray6
-        }
-    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,12 +32,12 @@ class CustomMenuBarCell: UICollectionViewCell {
 
     func setUpView() {
 
-        self.addSubview(tablabel)
+        self.addSubview(viewlabel)
     }
 
     func setUpConstraints() {
 
-        tablabel.snp.makeConstraints { make in
+        viewlabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
     }

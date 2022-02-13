@@ -38,6 +38,7 @@ final class QueueRepository: QueueRepositoryInterface {
         }
     }
 
+    // nil값은 성공으로 간주
     func requestFindFriends(parameter: [String: Any], completion: @escaping (QueueNetworkError?) -> Void) {
 
         let provider = MoyaProvider<SeSACFriendsAPI>()
