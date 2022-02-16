@@ -9,7 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-final class MyProfileViewModel {
+final class MyProfileViewModel: ViewModel {
 
     weak var coordinator: MyProfileCoordinator?
 

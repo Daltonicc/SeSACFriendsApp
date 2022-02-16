@@ -32,7 +32,8 @@ extension OnQueueResponseDTO {
 
 extension FromQueueDB {
     func toDomain() -> OtherUserData {
-        return .init(nickname: nick,
+        return .init(userId: uid,
+                     nickname: nick,
                      userLatitude: lat,
                      userLongitude: long,
                      reputation: reputation,

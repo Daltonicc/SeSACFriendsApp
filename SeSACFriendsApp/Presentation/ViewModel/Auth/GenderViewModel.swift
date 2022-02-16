@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class GenderViewModel {
+final class GenderViewModel: ViewModel {
 
     weak var coordinator: AuthCoordinator?
     let useCase: GenderUseCase

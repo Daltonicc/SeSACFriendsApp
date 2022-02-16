@@ -11,7 +11,7 @@ import RxCocoa
 
 // 유효성 검사 로직 필요
 
-final class EmailViewModel {
+final class EmailViewModel: ViewModel {
 
     weak var coordinator: AuthCoordinator?
 

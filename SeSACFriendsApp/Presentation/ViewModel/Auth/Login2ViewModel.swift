@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Moya
 
-final class Login2ViewModel {
+final class Login2ViewModel: ViewModel {
 
     weak var coordinator: AuthCoordinator?
     let useCase: Login2UseCase

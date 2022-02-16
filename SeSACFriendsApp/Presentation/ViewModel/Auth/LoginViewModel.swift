@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class LoginViewModel {
+final class LoginViewModel: ViewModel {
 
     weak var coordinator: AuthCoordinator?
     let useCase: LoginUseCase

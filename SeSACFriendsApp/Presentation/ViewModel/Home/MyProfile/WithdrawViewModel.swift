@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WithdrawViewModel {
+final class WithdrawViewModel: ViewModel {
 
     weak var coordinator: MyProfileCoordinator?
 

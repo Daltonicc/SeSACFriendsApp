@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class BirthViewModel {
+final class BirthViewModel: ViewModel {
 
     weak var coordinator: AuthCoordinator?
 

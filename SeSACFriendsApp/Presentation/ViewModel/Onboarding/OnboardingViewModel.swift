@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class OnboardingViewModel {
+final class OnboardingViewModel: ViewModel {
 
     weak var coordinator: AuthCoordinator?
 

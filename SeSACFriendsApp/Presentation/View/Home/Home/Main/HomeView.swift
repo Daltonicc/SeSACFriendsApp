@@ -57,8 +57,7 @@ final class HomeView: UIView, ViewRepresentable {
     }()
     let gpsButton: CustomButton = {
         let button = CustomButton()
-        button.setImage(Asset.Home.gpsImage.image, for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        button.setImage(Asset.Home.gpsImage.image.resized(to: CGSize(width: 30, height: 30)), for: .normal)
         button.layer.shadowOpacity = 0.5
         button.layer.shadowRadius = 5
         button.layer.shadowColor = UIColor.gray.cgColor
@@ -68,8 +67,7 @@ final class HomeView: UIView, ViewRepresentable {
     let statusButton: CustomButton = {
         let button = CustomButton()
         button.backgroundColor = .black
-        button.setImage(Asset.Home.basicStatusFriendsImage.image, for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        button.setImage(Asset.Home.basicStatusFriendsImage.image.resized(to: CGSize(width: 50, height: 50)), for: .normal)
         button.layer.cornerRadius = 32
         button.tintColor = .white
         return button

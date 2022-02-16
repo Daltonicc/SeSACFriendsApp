@@ -8,7 +8,7 @@
 import Foundation
 
 struct OtherUserData {
-
+    let userId: String
     let nickname: String
     let userLatitude: Double
     let userLongitude: Double

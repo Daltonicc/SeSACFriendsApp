@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
 
         }
-//        UNUserNotificationCenter.current().requestAuthorization(options: [.badge,.sound,.alert], completionHandler: { (granted,error) in })
         application.registerForRemoteNotifications()
 
         // 메시지 대리자 설정
@@ -87,6 +86,10 @@ extension AppDelegate: MessagingDelegate {
 /*
  개선사항
  1. 온보딩뷰 레이아웃(비율로 적절하게. 작은화면에서도 어색함 없게 배치)
+ 2. 사용자상태에따라 분기처리(열거형으로 처리 ㄱ)
+ 3. 다른클래스에서 호출되지 않는 메서드들 접근제어 처리.
+ 4. 파베인증하고 로그인할 때, FCM토큰 갱신 로직 짜기.
+
 
 
  이슈
@@ -99,8 +102,8 @@ extension AppDelegate: MessagingDelegate {
 
 
  궁금한거
- 1. 네비에서 팝해줄때도 코디네이터 이용하는지?
- 2. UseCase가 하는 일이 너무 없음. 특히 Profile에서. 그냥 중개하는 역할만 하고 있음.
+ 1. 네비에서 팝해줄때도 코디네이터 이용하는지? -> 이용함
+ 2. UseCase가 하는 일이 너무 없음. 특히 Profile에서. 그냥 중개하는 역할만 하고 있음. -> 파베토큰 갱신 같은 건 유즈케이스에서 처리해서 다시 레포로 보내버리기 등 역할 ㄱ
 
  새로 시도해본 거
  1. SwiftGen
@@ -114,6 +117,8 @@ extension AppDelegate: MessagingDelegate {
   - 기본적인 룰을 적용시킴으로써 필요없는 코드 제거(프린트문 등), 통일성 있는 코드 작성 목적
  6. RxSwift, RxCocoa
   - 기초적인 부분들에만 우선활용, 아직 Input, Output구조는 시도 못함.
+ 7. RxKeyboard
+ 
 
 
  시도해봐야할 거

@@ -16,7 +16,6 @@ extension FindHobbyViewController: UICollectionViewDelegate, UICollectionViewDat
         } else {
             return viewModel?.youWantHobbyList.count ?? 0
         }
-
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
