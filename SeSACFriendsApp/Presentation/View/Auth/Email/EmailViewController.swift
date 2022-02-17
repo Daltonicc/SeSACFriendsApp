@@ -21,8 +21,6 @@ final class EmailViewController: BaseViewController {
     let mainView = EmailView()
     var viewModel = EmailViewModel()
 
-    let disposeBag = DisposeBag()
-
     deinit {
         print("Email Deinit")
     }

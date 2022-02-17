@@ -16,8 +16,6 @@ final class FindHobbyViewController: BaseViewController {
     let mainView = FindHobbyView()
     var viewModel: FindHobbyViewModel?
 
-    let disposeBag = DisposeBag()
-
     deinit {
         print("FindHobbyViewController Deinit")
     }
@@ -47,15 +45,8 @@ final class FindHobbyViewController: BaseViewController {
             .disposed(by: disposeBag)
     }
 
-    override func setViewConfig() {
-
-        mainView.aroundHobbyCollectionView.delegate = self
-        mainView.aroundHobbyCollectionView.dataSource = self
-        mainView.aroundHobbyCollectionView.register(AroundHobbyCollectionViewCell.self, forCellWithReuseIdentifier: AroundHobbyCollectionViewCell.identifier)
-
-        mainView.youWantHobbyCollectionView.delegate = self
-        mainView.youWantHobbyCollectionView.dataSource = self
-        mainView.youWantHobbyCollectionView.register(YouWantHobbyCollectionViewCell.self, forCellWithReuseIdentifier: YouWantHobbyCollectionViewCell.identifier)
+    override func buttonConfig() {
+        super.buttonConfig()
 
         mainView.findSeSACButton.rx.tap
             .bind { [weak self] in
@@ -66,6 +57,17 @@ final class FindHobbyViewController: BaseViewController {
                 }
             }
             .disposed(by: disposeBag)
+    }
+
+    override func setViewConfig() {
+
+        mainView.aroundHobbyCollectionView.delegate = self
+        mainView.aroundHobbyCollectionView.dataSource = self
+        mainView.aroundHobbyCollectionView.register(AroundHobbyCollectionViewCell.self, forCellWithReuseIdentifier: AroundHobbyCollectionViewCell.identifier)
+
+        mainView.youWantHobbyCollectionView.delegate = self
+        mainView.youWantHobbyCollectionView.dataSource = self
+        mainView.youWantHobbyCollectionView.register(YouWantHobbyCollectionViewCell.self, forCellWithReuseIdentifier: YouWantHobbyCollectionViewCell.identifier)
 
         viewModel?.fetchHobbyData(completion: { [weak self] errorMessage in
             self?.mainView.makeToast(errorMessage)

@@ -48,6 +48,10 @@ final class AppCoordinator: NSObject, Coordinator {
 
     }
 
+    func finish() {
+
+    }
+
     func childDidFinish(_ child: Coordinator?, completion: () -> Void) {
         print("차일드 코디 확인1: \(childCoordinators)")
         for (index, coordinator) in childCoordinators.enumerated() {

@@ -44,8 +44,6 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
 
     var viewModel: FindFriendsViewModel?
 
-    let disposeBag = DisposeBag()
-
     deinit {
         print("FindFriendsViewController Deinit")
     }
@@ -62,6 +60,7 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
         view.addSubview(pageCollectionView)
         view.addSubview(changeHobbyButton)
         view.addSubview(reloadButton)
+        
         setUpConstraints()
 
         customMenuBar.delegate = self
@@ -71,6 +70,11 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
         pageCollectionView.dataSource = self
         pageCollectionView.register(PageCollectionViewCell.self, forCellWithReuseIdentifier: PageCollectionViewCell.identifier)
 
+    }
+
+    override func buttonConfig() {
+        super.buttonConfig()
+        
         changeHobbyButton.rx.tap
             .bind { [weak self] in
                 self?.viewModel?.suspendFindFriendsCase = .tapChangeHobbyButton

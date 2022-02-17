@@ -46,16 +46,18 @@ final class FindHobbyViewModel: ViewModel {
             "long": yourLongitude
         ]
 
+        //취미 중복되는거 처리하긴 했으나, 코드가 너무 더러움 개선필요
         useCase.fetchAroundUserData(parameter: parameter) { [weak self] (result) in
             switch result {
             case let .success(data):
                 self?.hobbyList = data.recommendHobbyList
                 for i in data.otherUsers {
                     for j in i.wantHobby {
-                        self?.hobbyList.append(j)
+                        if !(self?.hobbyList.contains(j) ?? false) {
+                            self?.hobbyList.append(j)
+                        }
                     }
                 }
-                print(self?.hobbyList)
                 completion(nil)
 
             case let .failure(error):

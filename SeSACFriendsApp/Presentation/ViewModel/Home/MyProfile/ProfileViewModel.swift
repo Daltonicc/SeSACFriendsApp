@@ -115,6 +115,6 @@ final class ProfileViewModel: ViewModel {
     }
 
     func withdrawButtonConfig() {
-        coordinator?.showWithdrawView()
+        coordinator?.showAlertView(alertStyle: .withdraw)
     }
 }

@@ -20,8 +20,6 @@ final class GenderViewController: BaseViewController {
     let mainView = GenderView()
     var viewModel: GenderViewModel?
 
-    let disposeBag = DisposeBag()
-
     deinit {
         print("Gender Deinit")
     }

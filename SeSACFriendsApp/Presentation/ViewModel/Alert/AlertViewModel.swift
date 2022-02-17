@@ -1,5 +1,5 @@
 //
-//  WithdrawViewModel.swift
+//  AlertViewModel.swift
 //  SeSACFriendsApp
 //
 //  Created by 박근보 on 2022/02/06.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-final class WithdrawViewModel: ViewModel {
+final class AlertViewModel: ViewModel {
 
-    weak var coordinator: MyProfileCoordinator?
+    weak var coordinator: Coordinator?
 
-    let useCase: WithdrawUseCase
+    let useCase: AlertUseCase
 
-    init(coordinator: MyProfileCoordinator, useCase: WithdrawUseCase) {
+    init(coordinator: Coordinator, useCase: AlertUseCase) {
         self.coordinator = coordinator
         self.useCase = useCase
     }
@@ -26,7 +26,7 @@ final class WithdrawViewModel: ViewModel {
                 completion(error.errorDescription)
             } else {
                 // 에러 없으면 업뎃 성공!
-                self?.coordinator?.finish()
+                self?.coordinator?.finish()  
             }
         }
     }

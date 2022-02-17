@@ -19,8 +19,6 @@ final class ProfileViewController: BaseViewController {
     let mainView = ProfileView()
     var viewModel: ProfileViewModel?
 
-    let disposeBag = DisposeBag()
-
     deinit {
         print("Profile Deinit")
     }

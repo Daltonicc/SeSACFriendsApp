@@ -8,6 +8,12 @@
 import UIKit
 import SnapKit
 
+enum CustomAlertStyle: String {
+    case withdraw
+    case friendsRequest
+    case friendsAccept
+}
+
 final class CustomAlertView: UIView, ViewRepresentable {
 
     let alertView: UIView = {
@@ -47,10 +53,17 @@ final class CustomAlertView: UIView, ViewRepresentable {
         return button
     }()
 
+    var alertViewStyle: CustomAlertStyle = .withdraw {
+        didSet {
+            setUpConfig()
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         setUpView()
+        setUpConfig()
         setUpConstraint()
     }
 
@@ -66,6 +79,21 @@ final class CustomAlertView: UIView, ViewRepresentable {
         alertView.addSubview(subtitleLabel)
         alertView.addSubview(cancelButton)
         alertView.addSubview(okButton)
+    }
+
+    func setUpConfig() {
+
+        switch alertViewStyle {
+        case .withdraw:
+            titleLabel.text = "정말 탈퇴하시겠습니까?"
+            subtitleLabel.text = "탈퇴하시면 새싹 프렌즈를 이용할 수 없어요ㅠ"
+        case .friendsRequest:
+            titleLabel.text = "취미 같이 하기를 요청할게요!"
+            subtitleLabel.text = "요청이 수락되면 30분 후에 리뷰를 남길 수 있어요"
+        case .friendsAccept:
+            titleLabel.text = "취미 같이 하기를 수락할까요?"
+            subtitleLabel.text = "요청을 수락하면 채팅창에서 대화를 나눌 수 있어요"
+        }
     }
 
     func setUpConstraint() {

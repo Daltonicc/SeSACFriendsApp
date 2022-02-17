@@ -38,4 +38,10 @@ extension ViewModel {
         default: return Asset.Home.Background.backgroundImage1.image
         }
     }
+
+    func removeDuplication(in array: [String]) -> [String] {
+        let set = Set(array)
+        let duplicationRemovedArray = Array(set)
+        return duplicationRemovedArray
+    }
 }

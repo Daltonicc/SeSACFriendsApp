@@ -1,5 +1,5 @@
 //
-//  WithdrawUseCase.swift
+//  AlertUseCase.swift
 //  SeSACFriendsApp
 //
 //  Created by 박근보 on 2022/02/06.
@@ -7,13 +7,15 @@
 
 import UIKit
 
-final class WithdrawUseCase {
+final class AlertUseCase {
 
     let repository: UserRepositoryInterface
+    let queueRepository: QueueRepositoryInterface
     let firebaseRepository: FirebaseRepositoryInterface
 
-    init(repository: UserRepositoryInterface, firebaseRepository: FirebaseRepositoryInterface) {
+    init(repository: UserRepositoryInterface, queueRepository: QueueRepositoryInterface, firebaseRepository: FirebaseRepositoryInterface) {
         self.repository = repository
+        self.queueRepository = queueRepository
         self.firebaseRepository = firebaseRepository
     }
 

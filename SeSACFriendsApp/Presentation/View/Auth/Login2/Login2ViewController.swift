@@ -21,8 +21,6 @@ final class Login2ViewController: BaseViewController {
     let mainView = Login2View()
     var viewModel: Login2ViewModel?
 
-    let disposeBag = DisposeBag()
-
     deinit {
         print("Login2 Deinit")
     }

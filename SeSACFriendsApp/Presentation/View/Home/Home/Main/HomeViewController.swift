@@ -25,8 +25,6 @@ final class HomeViewController: BaseViewController {
     var requestLatitude: Double = 0
     var requestLongitude: Double = 0
 
-    let disposeBag = DisposeBag()
-
     deinit {
         print("HomeViewController Deinit")
     }
@@ -48,20 +46,9 @@ final class HomeViewController: BaseViewController {
 
     }
 
-    override func setViewConfig() {
-        super.setViewConfig()
+    override func buttonConfig() {
+        super.buttonConfig()
 
-        // 위치 권한 설정
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
-
-        // 센터 마커 설정
-        mainView.mapView.showZoomControls = false
-        mainView.mapView.mapView.addCameraDelegate(delegate: self)
-        centerMarker.iconImage = NMFOverlayImage(image: Asset.Home.markerImage.image.resized(to: CGSize(width: 34, height: 45)))
-
-        // 버튼 세팅
         mainView.gpsButton.rx.tap
             .bind { [weak self] in
                 self?.mainView.mapView.mapView.positionMode = .compass
@@ -82,7 +69,21 @@ final class HomeViewController: BaseViewController {
                 }
             }
             .disposed(by: disposeBag)
-        
+    }
+
+    override func setViewConfig() {
+        super.setViewConfig()
+
+        // 위치 권한 설정
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+
+        // 센터 마커 설정
+        mainView.mapView.showZoomControls = false
+        mainView.mapView.mapView.addCameraDelegate(delegate: self)
+        centerMarker.iconImage = NMFOverlayImage(image: Asset.Home.markerImage.image.resized(to: CGSize(width: 34, height: 45)))
+
         viewModel?.checkLookingForGender(allButton: mainView.allGenderButton,
                                          manButton: mainView.manButton,
                                          womanButton: mainView.womanButton,
@@ -95,7 +96,6 @@ final class HomeViewController: BaseViewController {
                 self?.mainView.makeToast(errorMessage)
             })
         })
-
     }
 }
 

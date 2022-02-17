@@ -15,8 +15,6 @@ final class OnboardingViewController: BaseViewController {
     var viewModel = OnboardingViewModel()
     let mainView = OnboardingView()
 
-    let disposeBag = DisposeBag()
-
     deinit {
         print("Onboarding Deinit")
     }

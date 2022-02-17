@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class BaseViewController: UIViewController {
 
@@ -15,6 +17,8 @@ class BaseViewController: UIViewController {
         barButton.tintColor = .black
         return barButton
     }()
+
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +26,7 @@ class BaseViewController: UIViewController {
         setViewConfig()
         textfieldConfig()
         navigationItemConfig()
+        buttonConfig()
     }
 
     func setViewConfig() {
@@ -30,4 +35,5 @@ class BaseViewController: UIViewController {
 
     func textfieldConfig() {}
     func navigationItemConfig() {}
+    func buttonConfig() {}
 }

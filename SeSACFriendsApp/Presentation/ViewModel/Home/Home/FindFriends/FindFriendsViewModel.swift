@@ -27,6 +27,7 @@ final class FindFriendsViewModel: ViewModel {
     var friendsNameArray: [String] = []
     var friendsSeSACImageArray: [UIImage] = []
     var friendsBackgroundImage: [UIImage] = []
+    var friendsIDArray: [String] = []
 
     var suspendFindFriendsCase: SuspendFindFriendsCase?
 
@@ -51,19 +52,23 @@ final class FindFriendsViewModel: ViewModel {
             "long": yourLongitude
         ]
 
-        // 중복 취미 안쌓이게 처리;; 여러 명 쌓이는 중.
+        // 중복 취미 안쌓이게 처리. -> 처리는 했지만 너무 코드가 더러움;; 개선 필요.
         useCase.fetchAroundUserData(parameter: parameter) { [weak self] (result) in
             switch result {
             case let .success(data):
                 for i in data.otherUsers {
                     for j in i.wantHobby {
                         if self?.youWantHobbyList.contains(j) ?? false {
-                            self?.friendsNameArray.append(i.nickname)
-                            self?.friendsBackgroundImage.append((self?.sesacBackgroundImageIntToUIImage(backgroundImage: i.backgroundImage))!)
-                            self?.friendsSeSACImageArray.append((self?.sesacImageChangeIntToUIImage(sesacimage: i.sesacImage))!)
+                            if !(self?.friendsNameArray.contains(i.nickname) ?? false) {
+                                self?.friendsNameArray.append(i.nickname)
+                                self?.friendsBackgroundImage.append((self?.sesacBackgroundImageIntToUIImage(backgroundImage: i.backgroundImage))!)
+                                self?.friendsSeSACImageArray.append((self?.sesacImageChangeIntToUIImage(sesacimage: i.sesacImage))!)
+                                self?.friendsIDArray.append(i.userId)
+                            }
                         }
                     }
                 }
+
                 completion(nil)
             case let .failure(error):
                 completion(error.errorDescription)
@@ -85,5 +90,9 @@ final class FindFriendsViewModel: ViewModel {
                 }
             }
         }
+    }
+
+    func showRequestView() {
+        coordinator?.showAlertView(alertStyle: .friendsRequest)
     }
 }

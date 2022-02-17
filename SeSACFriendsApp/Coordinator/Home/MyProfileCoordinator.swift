@@ -34,20 +34,6 @@ final class MyProfileCoordinator: NSObject, Coordinator {
         presenter.pushViewController(profileView, animated: true)
     }
 
-    func showWithdrawView() {
-
-        let withdrawView = WithdrawViewController()
-
-        withdrawView.viewModel = WithdrawViewModel(coordinator: self,
-                                                   useCase: WithdrawUseCase(
-                                                    repository: UserRepository(),
-                                                    firebaseRepository: FirebaseRepository()))
-        withdrawView.modalTransitionStyle = .crossDissolve
-        withdrawView.modalPresentationStyle = .overCurrentContext
-
-        presenter.present(withdrawView, animated: true, completion: nil)
-    }
-
     func finish() {
 
         parentCoordinator?.childDidFinish(self, completion: { [weak self] in

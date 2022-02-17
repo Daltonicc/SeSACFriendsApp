@@ -20,8 +20,6 @@ final class BirthViewController: BaseViewController {
     let mainView = BirthView()
     var viewModel = BirthViewModel()
 
-    let disposeBag = DisposeBag()
-
     deinit {
         print("Birth Deinit")
     }

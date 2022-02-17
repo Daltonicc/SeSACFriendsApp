@@ -17,8 +17,6 @@ final class MyProfileViewController: BaseViewController {
 
     var userData: UserData?
 
-    let disposeBag = DisposeBag()
-
     deinit {
         print("MyProfile Deinit")
     }
@@ -36,14 +34,8 @@ final class MyProfileViewController: BaseViewController {
 
     }
 
-    override func setViewConfig() {
-        super.setViewConfig()
-
-        mainView.tableView.delegate = self
-        mainView.tableView.dataSource = self
-        mainView.tableView.register(MyProfileTableViewCell.self, forCellReuseIdentifier: MyProfileTableViewCell.identifier)
-
-        self.mainView.yourNameLabel.text = UserDefaultsRepository.fetchUserNickname()
+    override func buttonConfig() {
+        super.buttonConfig()
 
         mainView.topButton.rx.tap
             .bind { [weak self] in
@@ -54,9 +46,14 @@ final class MyProfileViewController: BaseViewController {
             .disposed(by: disposeBag)
     }
 
-    override func textfieldConfig() {
-        super.textfieldConfig()
+    override func setViewConfig() {
+        super.setViewConfig()
 
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        mainView.tableView.register(MyProfileTableViewCell.self, forCellReuseIdentifier: MyProfileTableViewCell.identifier)
+
+        self.mainView.yourNameLabel.text = UserDefaultsRepository.fetchUserNickname()
     }
 }
 

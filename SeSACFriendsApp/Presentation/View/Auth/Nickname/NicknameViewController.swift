@@ -21,8 +21,6 @@ final class NicknameViewController: BaseViewController {
     let mainView = NicknameView()
     var viewModel = NicknameViewModel()
 
-    let disposeBag = DisposeBag()
-
     deinit {
         print("Nickname Deinit")
     }

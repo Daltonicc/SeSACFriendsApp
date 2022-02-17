@@ -26,6 +26,7 @@ final class PageCollectionViewCell: UICollectionViewCell {
     var friendsNameArray: [String] = []
     var friendsSeSACImageArray: [UIImage] = []
     var friendsBackgroundImage: [UIImage] = []
+    var friendsIDArray: [String] = []
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,6 +78,10 @@ final class PageCollectionViewCell: UICollectionViewCell {
 
         emptyImageView.image = Asset.Home.emptyRequestImage.image
     }
+
+    @objc func cardButtonClicked(selectedButton: CustomButton) {
+        
+    }
 }
 
 extension PageCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
@@ -96,6 +101,9 @@ extension PageCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
         cell.cardView.nameLabel.text = friendsNameArray[row]
         cell.cardView.cardSesacImageView.image = friendsSeSACImageArray[row]
         cell.cardView.cardBackgroundImageView.image = friendsBackgroundImage[row]
+
+        cell.cardView.cardButton.tag = row
+        cell.cardView.cardButton.addTarget(self, action: #selector(cardButtonClicked(selectedButton:)), for: .touchUpInside)
 
         return cell
     }
