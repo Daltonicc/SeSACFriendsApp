@@ -20,6 +20,8 @@ final class PageCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
 
+    var viewModel: FindFriendsViewModel?
+
     var item = 0
     var friendsCount = 0
 
@@ -80,7 +82,9 @@ final class PageCollectionViewCell: UICollectionViewCell {
     }
 
     @objc func cardButtonClicked(selectedButton: CustomButton) {
-        
+        addPressAnimationToButton(selectedButton) { [weak self] _ in
+            self?.viewModel?.showRequestView(friendsID: self?.friendsIDArray[selectedButton.tag] ?? "")
+        }
     }
 }
 

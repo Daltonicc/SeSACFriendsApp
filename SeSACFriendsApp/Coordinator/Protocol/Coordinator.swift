@@ -22,7 +22,7 @@ protocol Coordinator: AnyObject {
 extension Coordinator {
 
     // alert 관련 메서드들
-    func showAlertView(alertStyle: CustomAlertStyle) {
+    func showAlertView(alertStyle: CustomAlertStyle, friendsID: String?) {
 
         let alertView = AlertViewController()
 
@@ -31,6 +31,7 @@ extension Coordinator {
                                                     repository: UserRepository(),
                                                     queueRepository: QueueRepository(),
                                                     firebaseRepository: FirebaseRepository()))
+        alertView.viewModel?.friendsID = friendsID
         alertView.mainView.alertViewStyle = alertStyle
         alertView.modalTransitionStyle = .crossDissolve
         alertView.modalPresentationStyle = .overCurrentContext

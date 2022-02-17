@@ -166,11 +166,14 @@ extension FindFriendsViewController: UICollectionViewDelegate, UICollectionViewD
             self?.checkButtonIsHidden()
             if indexPath.item == 0 {
                 cell.item = 0
+                cell.viewModel = self?.viewModel
+
                 cell.friendsNameArray = self?.viewModel?.friendsNameArray ?? []
                 cell.friendsSeSACImageArray = self?.viewModel?.friendsSeSACImageArray ?? []
                 cell.friendsBackgroundImage = self?.viewModel?.friendsBackgroundImage ?? []
+                cell.friendsIDArray = self?.viewModel?.friendsIDArray ?? []
+
                 cell.requestCellConfig()
-                
             } else {
                 cell.item = 1
                 cell.acceptCellConfig()

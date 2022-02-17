@@ -68,7 +68,6 @@ final class FindFriendsViewModel: ViewModel {
                         }
                     }
                 }
-
                 completion(nil)
             case let .failure(error):
                 completion(error.errorDescription)
@@ -92,7 +91,8 @@ final class FindFriendsViewModel: ViewModel {
         }
     }
 
-    func showRequestView() {
-        coordinator?.showAlertView(alertStyle: .friendsRequest)
+    func showRequestView(friendsID: String) {
+        coordinator?.showAlertView(alertStyle: .friendsRequest, friendsID: friendsID)
+        print("showRequest")
     }
 }

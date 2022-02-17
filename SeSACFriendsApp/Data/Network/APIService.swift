@@ -18,6 +18,7 @@ enum SeSACFriendsAPI {
     case findSeSACAroundYou(parameter: [String: Any])
     case requestFindFriends(parameter: [String: Any])
     case suspendFindFriends
+    case hobbyRequest(parameter: [String: Any])
 
     // Profile
     case updateUserData(parameter: [String: Any])
@@ -41,6 +42,7 @@ extension SeSACFriendsAPI: TargetType {
         // Home
         case .findSeSACAroundYou: return "/queue/onqueue"
         case .requestFindFriends, .suspendFindFriends: return "/queue"
+        case .hobbyRequest: return "/queue/hobbyrequest"
 
         // Profile
         case .updateUserData: return "/user/update/mypage"
@@ -59,6 +61,7 @@ extension SeSACFriendsAPI: TargetType {
         case .findSeSACAroundYou: return .post
         case .requestFindFriends: return .post
         case .suspendFindFriends: return .delete
+        case .hobbyRequest: return .post
 
         // Profile
         case .updateUserData: return .post
@@ -82,6 +85,8 @@ extension SeSACFriendsAPI: TargetType {
             return .requestParameters(parameters: parameter, encoding: URLEncoding(arrayEncoding: .noBrackets))
         case .suspendFindFriends:
             return .requestPlain
+        case .hobbyRequest(let parameter):
+            return .requestParameters(parameters: parameter, encoding: URLEncoding.httpBody)
 
         // Profile
         case .updateUserData(let parameter):
