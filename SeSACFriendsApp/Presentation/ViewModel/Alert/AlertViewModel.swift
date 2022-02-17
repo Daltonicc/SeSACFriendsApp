@@ -45,4 +45,18 @@ final class AlertViewModel: ViewModel {
             }
         }
     }
+
+    func hobbyAccept(completion: @escaping (String?) -> Void) {
+
+        let parameter: [String: Any] = [
+            "otheruid": friendsID ?? ""
+        ]
+        useCase.hobbyAccept(parameter: parameter) { error in
+            if let error = error {
+                completion(error.errorDescription!)
+            } else {
+                // 채팅뷰로 보내기
+            }
+        }
+    }
 }

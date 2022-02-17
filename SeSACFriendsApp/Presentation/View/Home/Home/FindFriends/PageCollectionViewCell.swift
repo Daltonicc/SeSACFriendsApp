@@ -30,6 +30,11 @@ final class PageCollectionViewCell: UICollectionViewCell {
     var friendsBackgroundImage: [UIImage] = []
     var friendsIDArray: [String] = []
 
+    var acceptFriendsNameArray: [String] = []
+    var acceptFriendsSeSACImageArray: [UIImage] = []
+    var acceptFriendsBackgroundImage: [UIImage] = []
+    var acceptFriendsIDArray: [String] = []
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -78,12 +83,23 @@ final class PageCollectionViewCell: UICollectionViewCell {
 
     func acceptCellConfig() {
 
-        emptyImageView.image = Asset.Home.emptyRequestImage.image
+        if acceptFriendsNameArray.isEmpty {
+            emptyImageView.image = Asset.Home.emptyRequestImage.image
+        } else {
+            emptyImageView.isHidden = true
+            cardTableView.reloadData()
+        }
     }
 
-    @objc func cardButtonClicked(selectedButton: CustomButton) {
+    @objc func requestCardButtonClicked(selectedButton: CustomButton) {
         addPressAnimationToButton(selectedButton) { [weak self] _ in
             self?.viewModel?.showRequestView(friendsID: self?.friendsIDArray[selectedButton.tag] ?? "")
+        }
+    }
+
+    @objc func acceptCardButtonClicked(selectedButton: CustomButton) {
+        addPressAnimationToButton(selectedButton) { [weak self] _ in
+            self?.viewModel?.showAcceptView(friendsID: self?.acceptFriendsIDArray[selectedButton.tag] ?? "")
         }
     }
 }
@@ -91,7 +107,13 @@ final class PageCollectionViewCell: UICollectionViewCell {
 extension PageCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friendsNameArray.count
+
+        if item == 0 {
+            return friendsNameArray.count
+        } else {
+            return acceptFriendsNameArray.count
+        }
+
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,12 +124,21 @@ extension PageCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
 
         let row = indexPath.row
 
-        cell.cardView.nameLabel.text = friendsNameArray[row]
-        cell.cardView.cardSesacImageView.image = friendsSeSACImageArray[row]
-        cell.cardView.cardBackgroundImageView.image = friendsBackgroundImage[row]
+        if item == 0 {
+            cell.cardView.nameLabel.text = friendsNameArray[row]
+            cell.cardView.cardSesacImageView.image = friendsSeSACImageArray[row]
+            cell.cardView.cardBackgroundImageView.image = friendsBackgroundImage[row]
 
-        cell.cardView.cardButton.tag = row
-        cell.cardView.cardButton.addTarget(self, action: #selector(cardButtonClicked(selectedButton:)), for: .touchUpInside)
+            cell.cardView.cardButton.tag = row
+            cell.cardView.cardButton.addTarget(self, action: #selector(requestCardButtonClicked(selectedButton:)), for: .touchUpInside)
+        } else {
+            cell.cardView.nameLabel.text = acceptFriendsNameArray[row]
+            cell.cardView.cardSesacImageView.image = acceptFriendsSeSACImageArray[row]
+            cell.cardView.cardBackgroundImageView.image = acceptFriendsBackgroundImage[row]
+
+            cell.cardView.cardButton.tag = row
+            cell.cardView.cardButton.addTarget(self, action: #selector(acceptCardButtonClicked(selectedButton:)), for: .touchUpInside)
+        }
 
         return cell
     }

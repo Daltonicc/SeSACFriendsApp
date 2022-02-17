@@ -29,6 +29,11 @@ final class FindFriendsViewModel: ViewModel {
     var friendsBackgroundImage: [UIImage] = []
     var friendsIDArray: [String] = []
 
+    var acceptFriendsNameArray: [String] = []
+    var acceptFriendsSeSACImageArray: [UIImage] = []
+    var acceptFriendsBackgroundImage: [UIImage] = []
+    var acceptFriendsIDArray: [String] = []
+
     var suspendFindFriendsCase: SuspendFindFriendsCase?
 
     init(coordinator: HomeCoordinator, yourRegion: Int, yourLatitude: Double, yourLongitude: Double, youWantHobbyList: [String], useCase: FindFriendsUseCase) {
@@ -60,13 +65,19 @@ final class FindFriendsViewModel: ViewModel {
                     for j in i.wantHobby {
                         if self?.youWantHobbyList.contains(j) ?? false {
                             if !(self?.friendsNameArray.contains(i.nickname) ?? false) {
+                                self?.friendsIDArray.append(i.userId)
                                 self?.friendsNameArray.append(i.nickname)
                                 self?.friendsBackgroundImage.append((self?.sesacBackgroundImageIntToUIImage(backgroundImage: i.backgroundImage))!)
                                 self?.friendsSeSACImageArray.append((self?.sesacImageChangeIntToUIImage(sesacimage: i.sesacImage))!)
-                                self?.friendsIDArray.append(i.userId)
                             }
                         }
                     }
+                }
+                for i in data.otherRequestUsers {
+                    self?.acceptFriendsIDArray.append(i.userId)
+                    self?.acceptFriendsNameArray.append(i.nickname)
+                    self?.acceptFriendsBackgroundImage.append((self?.sesacBackgroundImageIntToUIImage(backgroundImage: i.backgroundImage))!)
+                    self?.acceptFriendsSeSACImageArray.append((self?.sesacImageChangeIntToUIImage(sesacimage: i.sesacImage))!)
                 }
                 completion(nil)
             case let .failure(error):
@@ -93,6 +104,9 @@ final class FindFriendsViewModel: ViewModel {
 
     func showRequestView(friendsID: String) {
         coordinator?.showAlertView(alertStyle: .friendsRequest, friendsID: friendsID)
-        print("showRequest")
+    }
+
+    func showAcceptView(friendsID: String) {
+        coordinator?.showAlertView(alertStyle: .friendsAccept, friendsID: friendsID)
     }
 }

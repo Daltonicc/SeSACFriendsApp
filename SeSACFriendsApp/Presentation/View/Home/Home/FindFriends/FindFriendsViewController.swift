@@ -51,6 +51,11 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+
+        viewModel?.fetchAroundUserData(completion: { [weak self] errorMessage in
+            self?.view.makeToast(errorMessage)
+            self?.pageCollectionView.reloadData()
+        })
     }
 
     override func setViewConfig() {
@@ -140,8 +145,8 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
         pageCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 
-    func checkButtonIsHidden() {
-        if viewModel?.friendsNameArray.isEmpty ?? true {
+    func checkButtonIsHidden(array: [String]) {
+        if array.isEmpty {
             changeHobbyButton.isHidden = false
             reloadButton.isHidden = false
         } else {
@@ -161,28 +166,31 @@ extension FindFriendsViewController: UICollectionViewDelegate, UICollectionViewD
 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PageCollectionViewCell.identifier, for: indexPath) as? PageCollectionViewCell else { return UICollectionViewCell() }
 
-        viewModel?.fetchAroundUserData(completion: { [weak self] errorMessage in
-            self?.view.makeToast(errorMessage)
-            self?.checkButtonIsHidden()
-            if indexPath.item == 0 {
-                cell.item = 0
-                cell.viewModel = self?.viewModel
+        cell.viewModel = viewModel
+        if indexPath.item == 0 {
+            checkButtonIsHidden(array: viewModel?.friendsNameArray ?? [])
+            cell.item = 0
 
-                cell.friendsNameArray = self?.viewModel?.friendsNameArray ?? []
-                cell.friendsSeSACImageArray = self?.viewModel?.friendsSeSACImageArray ?? []
-                cell.friendsBackgroundImage = self?.viewModel?.friendsBackgroundImage ?? []
-                cell.friendsIDArray = self?.viewModel?.friendsIDArray ?? []
+            cell.friendsNameArray = viewModel?.friendsNameArray ?? []
+            cell.friendsSeSACImageArray = viewModel?.friendsSeSACImageArray ?? []
+            cell.friendsBackgroundImage = viewModel?.friendsBackgroundImage ?? []
+            cell.friendsIDArray = viewModel?.friendsIDArray ?? []
 
-                cell.requestCellConfig()
-            } else {
-                cell.item = 1
-                cell.acceptCellConfig()
-                self?.changeHobbyButton.isHidden = false
-                self?.reloadButton.isHidden = false
-            }
-        })
+            cell.requestCellConfig()
+        } else {
+            checkButtonIsHidden(array: viewModel?.acceptFriendsNameArray ?? [])
+            cell.item = 1
+
+            cell.acceptFriendsNameArray = viewModel?.acceptFriendsNameArray ?? []
+            cell.acceptFriendsSeSACImageArray = viewModel?.acceptFriendsSeSACImageArray ?? []
+            cell.acceptFriendsBackgroundImage = viewModel?.acceptFriendsBackgroundImage ?? []
+            cell.acceptFriendsIDArray = viewModel?.acceptFriendsIDArray ?? []
+
+            cell.acceptCellConfig()
+
+            cell.cardTableView.reloadData()
+        }
         return cell
-
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -194,6 +202,7 @@ extension FindFriendsViewController: UICollectionViewDelegate, UICollectionViewD
         let itemAt = Int(targetContentOffset.pointee.x / self.view.frame.width)
         let indexPath = IndexPath(item: itemAt, section: 0)
         customMenuBar.customTabBarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+        
     }
 }
 

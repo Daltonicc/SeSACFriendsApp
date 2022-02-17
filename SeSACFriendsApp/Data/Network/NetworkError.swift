@@ -45,8 +45,10 @@ enum QueueNetworkError: Int, Error {
     case tooMuchReportUser = 201
     case youAlreadyMatched = 2010 // 201 - 1
     case friendAlreadyRequest = 2011 // 201 - 2
+    case friendAlreadyMatchedWithSomeone = 2012 // 201 - 3
     case friendSuspendFinding = 202
     case selfishPenaltyFirst = 203
+    case yourRequestIsAccepted = 2030 // 203 - 1
     case selfishPenaltySecond = 204
     case selfishPenaltyThird = 205
     case unknownGender = 206
@@ -65,8 +67,12 @@ extension QueueNetworkError: LocalizedError {
             return "누군가와 취미를 함께하기로 약속하셨어요!"
         case .friendAlreadyRequest:
             return "이미 상대방이 취미 함께하기 요청을 보냈어요!"
+        case .friendAlreadyMatchedWithSomeone:
+            return "상대방이 이미 다른 사람과 취미를 함께 하는 중입니다."
         case .friendSuspendFinding:
             return "상대방이 취미 함께 하기를 그만두었습니다"
+        case .yourRequestIsAccepted:
+            return "앗! 누군가가 나의 취미 함께 하기를 수락하였어요!"
         case .selfishPenaltyFirst:
             return "약속 취소 패널티로, 1분동안 이용하실 수 없습니다."
         case .selfishPenaltySecond:

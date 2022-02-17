@@ -12,4 +12,5 @@ protocol QueueRepositoryInterface {
     func requestFindFriends(parameter: [String: Any], completion: @escaping (QueueNetworkError?) -> Void)
     func suspendFindFriends(completion: @escaping (QueueNetworkError?) -> Void)
     func hobbyRequest(parameter: [String: Any], completion: @escaping (QueueNetworkError?) -> Void)
+    func hobbyAccept(parameter: [String: Any], completion: @escaping (QueueNetworkError?) -> Void)
 }

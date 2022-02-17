@@ -55,7 +55,32 @@ final class AlertUseCase {
                             completion(nil)
                         })
                     }
-                case .friendAlreadyRequest: print("friendAlreadyRequest") // 나중에 처리 ㄱ
+                case .friendAlreadyRequest:
+                    self?.hobbyAccept(parameter: parameter, completion: completion) // 나중에 실험 및 확인 필요
+
+                default: completion(error)
+                }
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
+    func hobbyAccept(parameter: [String: Any], completion: @escaping (QueueNetworkError?) -> Void) {
+
+        queueRepository.hobbyAccept(parameter: parameter) { [weak self] error in
+            if let error = error {
+                // 토큰 에러일 경우에만 파베 레포로 넘겨서 갱신요청.
+                // 다른 에러면 그대로 뷰모델로 넘겨줌.
+                // 성공하면 nil값 넘겨줌.
+                switch error {
+                case .firebaseIdTokenExpired:
+                    self?.firebaseRepository.refreshIDToken {
+                        self?.queueRepository.hobbyAccept(parameter: parameter, completion: { _ in
+                            completion(nil)
+                        })
+                    }
+                case .yourRequestIsAccepted: print("yourRequestIsAccepted") // 나중에 처리 ㄱ
 
                 default: completion(error)
                 }
