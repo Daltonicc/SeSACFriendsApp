@@ -59,7 +59,9 @@ final class AlertViewController: BaseViewController {
             mainView.okButton.rx.tap
                 .bind { [weak self] in
                     self?.addPressAnimationToButton(self?.mainView.okButton ?? CustomButton(), completion: { [weak self] _ in
-
+                        self?.viewModel?.hobbyAccept(completion: { [weak self] message in
+                            self?.mainView.makeToast(message)
+                        })
                     })
                 }
                 .disposed(by: disposeBag)

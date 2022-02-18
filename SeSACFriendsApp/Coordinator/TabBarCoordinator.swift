@@ -28,11 +28,11 @@ final class TabBarCoordinator: NSObject, Coordinator {
                                 tabBartitle: "홈",
                                 tabBarImage: Asset.MainTab.home.image.resized(to: CGSize(width: 20, height: 20)))
         let homeCoordinator = HomeCoordinator(presenter: home)
-        homeCoordinator.parentCoordinator = self
         homeRoot.viewModel = HomeViewModel(coordinator: homeCoordinator,
                                            useCase: HomeUseCase(
                                             repository: QueueRepository(),
                                             firebaseRepository: FirebaseRepository()))
+        homeCoordinator.parentCoordinator = self
         childCoordinators.append(homeCoordinator)
 
         let shop = tabBarConfig(rootViewController: ShopViewController(),
@@ -54,8 +54,8 @@ final class TabBarCoordinator: NSObject, Coordinator {
                                      tabBartitle: "내정보",
                                      tabBarImage: Asset.MainTab.profile.image.resized(to: CGSize(width: 20, height: 20)))
         let myProfileCoordinator = MyProfileCoordinator(presenter: myProfile)
-        myProfileCoordinator.parentCoordinator = self
         myProfileRoot.viewModel = MyProfileViewModel(coordinator: myProfileCoordinator)
+        myProfileCoordinator.parentCoordinator = self
         childCoordinators.append(myProfileCoordinator)
 
         tabBarController.tabBar.tintColor = .baseGreen
