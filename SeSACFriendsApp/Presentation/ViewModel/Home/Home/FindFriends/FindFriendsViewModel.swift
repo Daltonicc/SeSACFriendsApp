@@ -102,6 +102,22 @@ final class FindFriendsViewModel: ViewModel {
         }
     }
 
+    func checkMyQueueState(completion: @escaping (String?) -> Void) {
+
+        useCase.checkMyQueueState { (result) in
+            switch result {
+            case let .success(data):
+                if data.matched == 1 {
+                    
+                } else {
+                    completion(nil)
+                }
+            case let .failure(error):
+                completion(error.errorDescription)
+            }
+        }
+    }
+
     func showRequestView(friendsID: String) {
         coordinator?.showAlertView(alertStyle: .friendsRequest, friendsID: friendsID)
     }

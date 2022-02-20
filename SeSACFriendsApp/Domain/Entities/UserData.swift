@@ -8,7 +8,6 @@
 import Foundation
 
 struct UserData {
-
     var yourName: String
     var gender: Int
     var hobby: String

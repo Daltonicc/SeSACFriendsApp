@@ -56,6 +56,10 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
             self?.view.makeToast(errorMessage)
             self?.pageCollectionView.reloadData()
         })
+
+        viewModel?.checkMyQueueState(completion: { [weak self] errorMessage in
+            self?.view.makeToast(errorMessage)
+        })
     }
 
     override func setViewConfig() {
@@ -82,10 +86,12 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
         
         changeHobbyButton.rx.tap
             .bind { [weak self] in
-                self?.viewModel?.suspendFindFriendsCase = .tapChangeHobbyButton
-                self?.viewModel?.suspendFindFriends(completion: { [weak self] errorMessage in
-                    self?.view.makeToast(errorMessage)
-                })
+                self?.addPressAnimationToButton(self?.changeHobbyButton ?? CustomButton()) { [weak self] _ in
+                    self?.viewModel?.suspendFindFriendsCase = .tapChangeHobbyButton
+                    self?.viewModel?.suspendFindFriends(completion: { [weak self] errorMessage in
+                        self?.view.makeToast(errorMessage)
+                    })
+                }
             }
             .disposed(by: disposeBag)
 
@@ -95,6 +101,17 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
                 self?.viewModel?.suspendFindFriends(completion: { errorMessage in
                     self?.view.makeToast(errorMessage)
                 })
+            }
+            .disposed(by: disposeBag)
+
+        reloadButton.rx.tap
+            .bind { [weak self] in
+                self?.addPressAnimationToButton(self?.reloadButton ?? CustomButton()) { [weak self] _ in
+                    self?.viewModel?.fetchAroundUserData(completion: { [weak self] errorMessage in
+                        self?.view.makeToast(errorMessage)
+                        self?.pageCollectionView.reloadData()
+                    })
+                }
             }
             .disposed(by: disposeBag)
 
@@ -191,6 +208,17 @@ extension FindFriendsViewController: UICollectionViewDelegate, UICollectionViewD
             cell.cardTableView.reloadData()
         }
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        viewModel?.fetchAroundUserData(completion: { [weak self] errorMessage in
+            self?.view.makeToast(errorMessage)
+            if indexPath.item == 0 {
+                self?.checkButtonIsHidden(array: self?.viewModel?.friendsNameArray ?? [])
+            } else {
+                self?.checkButtonIsHidden(array: self?.viewModel?.acceptFriendsNameArray ?? [])
+            }
+        })
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

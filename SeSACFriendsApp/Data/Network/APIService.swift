@@ -18,6 +18,7 @@ enum SeSACFriendsAPI {
     case findSeSACAroundYou(parameter: [String: Any])
     case requestFindFriends(parameter: [String: Any])
     case suspendFindFriends
+    case checkMyQueueState
     case hobbyRequest(parameter: [String: Any])
     case hobbyAccept(parameter: [String: Any])
 
@@ -43,6 +44,7 @@ extension SeSACFriendsAPI: TargetType {
         // Home
         case .findSeSACAroundYou: return "/queue/onqueue"
         case .requestFindFriends, .suspendFindFriends: return "/queue"
+        case .checkMyQueueState: return "queue/myQueueState"
         case .hobbyRequest: return "/queue/hobbyrequest"
         case .hobbyAccept: return "/queue/hobbyaccept"
 
@@ -63,6 +65,7 @@ extension SeSACFriendsAPI: TargetType {
         case .findSeSACAroundYou: return .post
         case .requestFindFriends: return .post
         case .suspendFindFriends: return .delete
+        case .checkMyQueueState: return .get
         case .hobbyRequest, .hobbyAccept: return .post
 
         // Profile
@@ -85,7 +88,7 @@ extension SeSACFriendsAPI: TargetType {
             return .requestParameters(parameters: parameter, encoding: URLEncoding.httpBody)
         case .requestFindFriends(let parameter):
             return .requestParameters(parameters: parameter, encoding: URLEncoding(arrayEncoding: .noBrackets))
-        case .suspendFindFriends:
+        case .suspendFindFriends, .checkMyQueueState:
             return .requestPlain
         case .hobbyRequest(let parameter), .hobbyAccept(parameter: let parameter):
             return .requestParameters(parameters: parameter, encoding: URLEncoding.httpBody)

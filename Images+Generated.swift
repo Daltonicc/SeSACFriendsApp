@@ -37,6 +37,14 @@ internal enum Asset {
     }
     internal static let basicSeSACImage = ImageAsset(name: "BasicSeSACImage")
     internal static let basicStatusFriendsImage = ImageAsset(name: "BasicStatusFriendsImage")
+    internal enum Chat {
+      internal static let cancelImage = ImageAsset(name: "CancelImage")
+      internal static let plusMenuImage = ImageAsset(name: "PlusMenuImage")
+      internal static let reportImage = ImageAsset(name: "ReportImage")
+      internal static let reviewImage = ImageAsset(name: "ReviewImage")
+      internal static let sendFillImage = ImageAsset(name: "SendFillImage")
+      internal static let sendImage = ImageAsset(name: "SendImage")
+    }
     internal static let emptyAroundImage = ImageAsset(name: "EmptyAroundImage")
     internal static let emptyRequestImage = ImageAsset(name: "EmptyRequestImage")
     internal static let goldSeSACImage = ImageAsset(name: "GoldSeSACImage")

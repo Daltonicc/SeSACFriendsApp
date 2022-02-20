@@ -74,6 +74,7 @@ final class PageCollectionViewCell: UICollectionViewCell {
     func requestCellConfig() {
 
         if friendsNameArray.isEmpty {
+            emptyImageView.isHidden = false
             emptyImageView.image = Asset.Home.emptyAroundImage.image
         } else {
             emptyImageView.isHidden = true
@@ -84,6 +85,7 @@ final class PageCollectionViewCell: UICollectionViewCell {
     func acceptCellConfig() {
 
         if acceptFriendsNameArray.isEmpty {
+            emptyImageView.isHidden = false
             emptyImageView.image = Asset.Home.emptyRequestImage.image
         } else {
             emptyImageView.isHidden = true

@@ -7,6 +7,7 @@
 
 import Foundation
 import Moya
+import UIKit
 
 final class QueueRepository: QueueRepositoryInterface {
 
@@ -55,7 +56,6 @@ final class QueueRepository: QueueRepositoryInterface {
                 } else {
                     completion(statusCodeCheck)
                 }
-
             case let .failure(moyaError):
                 let errorCode = moyaError.errorCode
                 print("에러코드: \(errorCode)")
@@ -80,13 +80,41 @@ final class QueueRepository: QueueRepositoryInterface {
                 } else {
                     completion(statusCodeCheck)
                 }
-
             case let .failure(moyaError):
                 let errorCode = moyaError.errorCode
                 print("에러코드: \(errorCode)")
                 print(moyaError.localizedDescription)
             }
         }
+    }
+
+    func checkMyQueueState(completion: @escaping (Result<MyQueueStateData, QueueNetworkError>) -> Void) {
+
+        let provider = MoyaProvider<SeSACFriendsAPI>()
+        provider.request(.checkMyQueueState) { (result) in
+            switch result {
+            case let .success(response):
+                let statusCode = response.statusCode
+                let statusCodeCheck = self.statusCodeCheckForMyQueueState(statusCode: statusCode)
+                print("상태코드 :\(statusCode)")
+
+                if let data = try? response.map(MyQueueStateResponseDTO.self).toDomain() {
+                    print(data)
+                    if statusCodeCheck == nil {
+                        completion(.success(data))
+                    } else {
+                        completion(.failure(statusCodeCheck!))
+                    }
+                } else {
+                    completion(.failure(statusCodeCheck!))
+                }
+            case let .failure(moyaError):
+                let errorCode = moyaError.errorCode
+                print("에러코드: \(errorCode)")
+                print(moyaError.localizedDescription)
+            }
+        }
+        
     }
 
     func hobbyRequest(parameter: [String: Any], completion: @escaping (QueueNetworkError?) -> Void) {
@@ -105,7 +133,6 @@ final class QueueRepository: QueueRepositoryInterface {
                 } else {
                     completion(statusCodeCheck)
                 }
-
             case let .failure(moyaError):
                 let errorCode = moyaError.errorCode
                 print("에러코드: \(errorCode)")
@@ -130,7 +157,6 @@ final class QueueRepository: QueueRepositoryInterface {
                 } else {
                     completion(statusCodeCheck)
                 }
-
             case let .failure(moyaError):
                 let errorCode = moyaError.errorCode
                 print("에러코드: \(errorCode)")
@@ -159,6 +185,17 @@ final class QueueRepository: QueueRepositoryInterface {
         switch statusCode {
         case 200: return nil
         case 201: return .youAlreadyMatched
+        case 401: return .firebaseIdTokenExpired
+        case 406: return .notRegisteredUser
+        case 500: return .serverError
+        default: return .serverError
+        }
+    }
+
+    func statusCodeCheckForMyQueueState(statusCode: Int) -> QueueNetworkError? {
+        switch statusCode {
+        case 200: return nil
+        case 201: return .yourFindinghaveSuspended
         case 401: return .firebaseIdTokenExpired
         case 406: return .notRegisteredUser
         case 500: return .serverError

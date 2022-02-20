@@ -11,6 +11,7 @@ protocol QueueRepositoryInterface {
     func fetchAroundUserData(parameter: [String: Any], completion: @escaping (Result<OtherUserDataList, QueueNetworkError>) -> Void)
     func requestFindFriends(parameter: [String: Any], completion: @escaping (QueueNetworkError?) -> Void)
     func suspendFindFriends(completion: @escaping (QueueNetworkError?) -> Void)
+    func checkMyQueueState(completion: @escaping (Result<MyQueueStateData, QueueNetworkError>) -> Void)
     func hobbyRequest(parameter: [String: Any], completion: @escaping (QueueNetworkError?) -> Void)
     func hobbyAccept(parameter: [String: Any], completion: @escaping (QueueNetworkError?) -> Void)
 }
