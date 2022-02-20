@@ -27,7 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appCoordinator = AppCoordinator(window: window!)
 
         if firstLoginCheck {
-            appCoordinator?.startHome()
+//            appCoordinator?.startHome()
+            window?.rootViewController = UINavigationController(rootViewController: ChatViewController())
         } else {
             firstLoginCheck = true
             UserDefaultsRepository.saveFirstLoginCheck(check: firstLoginCheck)

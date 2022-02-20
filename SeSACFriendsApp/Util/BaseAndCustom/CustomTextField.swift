@@ -12,7 +12,8 @@ enum TextFieldState: String {
     case inactive
     case focus
     case active
-    case disable
+    case chat
+    case chatFocus
     case error
     case success
 }
@@ -37,6 +38,11 @@ final class CustomTextFieldView: UIView {
         label.text = "실패 이유"
         label.isHidden = true
         return label
+    }()
+    var sendButton: UIButton = {
+        let button = UIButton()
+        button.setImage(Asset.Home.Chat.sendImage.image, for: .normal)
+        return button
     }()
 
     var textFieldState: TextFieldState = .inactive {
@@ -64,6 +70,7 @@ final class CustomTextFieldView: UIView {
         addSubview(mainTextField)
         addSubview(lineView)
         addSubview(statusLabel)
+        addSubview(sendButton)
         
     }
 
@@ -71,6 +78,7 @@ final class CustomTextFieldView: UIView {
 
         statusLabel.isHidden = true
         mainTextField.isEnabled = true
+        sendButton.isHidden = true
 
         switch textFieldState {
         case .inactive:
@@ -79,10 +87,21 @@ final class CustomTextFieldView: UIView {
             animatedColor(color: .focus)
         case .active:
             animatedColor(color: .gray3)
-        case .disable:
-            lineView.backgroundColor = .white
-            mainTextField.backgroundColor = .gray3
-            mainTextField.isEnabled = false
+        case .chat:
+            lineView.isHidden = true
+            mainTextField.backgroundColor = .gray1
+            mainTextField.placeholder = "메세지를 입력하세요"
+            sendButton.isHidden = false
+            sendButton.setImage(Asset.Home.Chat.sendImage.image.resized(to: CGSize(width: 30, height: 30)), for: .normal)
+            layer.cornerRadius = 10
+            backgroundColor = .gray1
+
+            mainTextField.snp.remakeConstraints { make in
+                make.leading.equalTo(self.snp.leading).inset(16)
+                make.centerY.equalToSuperview()
+            }
+        case .chatFocus:
+            sendButton.setImage(Asset.Home.Chat.sendFillImage.image.resized(to: CGSize(width: 30, height: 30)), for: .normal)
         case .error:
             animatedColor(color: .error)
             statusLabel.isHidden = false
@@ -104,7 +123,6 @@ final class CustomTextFieldView: UIView {
 
         mainTextField.snp.makeConstraints { make in
             make.leading.equalTo(self.snp.leading).inset(16)
-            make.trailing.equalTo(self.snp.trailing).inset(16)
             make.top.equalTo(self.snp.top).inset(10)
         }
         lineView.snp.makeConstraints { make in
@@ -117,6 +135,11 @@ final class CustomTextFieldView: UIView {
             make.leading.equalTo(self.snp.leading).inset(16)
             make.trailing.equalTo(self.snp.trailing).inset(16)
             make.top.equalTo(lineView.snp.bottom).offset(16)
+        }
+        sendButton.snp.makeConstraints { make in
+            make.leading.equalTo(mainTextField.snp.trailing).offset(5)
+            make.trailing.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
         }
     }
 }
