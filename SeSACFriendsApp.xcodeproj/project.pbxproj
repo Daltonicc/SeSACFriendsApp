@@ -139,6 +139,10 @@
 		6AEA438327C26A5200BFD56F /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA438227C26A5200BFD56F /* ChatViewModel.swift */; };
 		6AEA438527C3A37500BFD56F /* MyChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA438427C3A37500BFD56F /* MyChatTableViewCell.swift */; };
 		6AEA438727C3A37F00BFD56F /* YourChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA438627C3A37F00BFD56F /* YourChatTableViewCell.swift */; };
+		6AEA438927C3CD0500BFD56F /* ChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA438827C3CD0500BFD56F /* ChatUseCase.swift */; };
+		6AEA438C27C3D85100BFD56F /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 6AEA438B27C3D85100BFD56F /* SocketIO */; };
+		6AEA438E27C3D91300BFD56F /* ChatResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA438D27C3D91300BFD56F /* ChatResponseDTO.swift */; };
+		6AEA439027C3D93600BFD56F /* ChatData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA438F27C3D93600BFD56F /* ChatData.swift */; };
 		E630DCBF2FEE6DDAED9D4118 /* Pods_SeSACFriendsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 763EF621F280237A9391E457 /* Pods_SeSACFriendsApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -270,6 +274,9 @@
 		6AEA438227C26A5200BFD56F /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		6AEA438427C3A37500BFD56F /* MyChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatTableViewCell.swift; sourceTree = "<group>"; };
 		6AEA438627C3A37F00BFD56F /* YourChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourChatTableViewCell.swift; sourceTree = "<group>"; };
+		6AEA438827C3CD0500BFD56F /* ChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUseCase.swift; sourceTree = "<group>"; };
+		6AEA438D27C3D91300BFD56F /* ChatResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponseDTO.swift; sourceTree = "<group>"; };
+		6AEA438F27C3D93600BFD56F /* ChatData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatData.swift; sourceTree = "<group>"; };
 		763EF621F280237A9391E457 /* Pods_SeSACFriendsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACFriendsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC69A5A2F0778F0A33669F28 /* Pods-SeSACFriendsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACFriendsApp.release.xcconfig"; path = "Target Support Files/Pods-SeSACFriendsApp/Pods-SeSACFriendsApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -284,6 +291,7 @@
 				6AA137F627AE1D3F0076CF40 /* Moya in Frameworks */,
 				6AA1380827AE1DA80076CF40 /* Toast in Frameworks */,
 				6AA137FD27AE1D4E0076CF40 /* RxSwift in Frameworks */,
+				6AEA438C27C3D85100BFD56F /* SocketIO in Frameworks */,
 				6AA137FB27AE1D4E0076CF40 /* RxRelay in Frameworks */,
 				6AA1383827B008D00076CF40 /* SnapKit in Frameworks */,
 				6AA1380327AE1D980076CF40 /* FirebaseAuth in Frameworks */,
@@ -346,6 +354,7 @@
 				6AA1382127AEB5EA0076CF40 /* UserData.swift */,
 				6A0F58FA27B2D46C00EA9047 /* OtherUserData.swift */,
 				6AEA437827BF88C500BFD56F /* MyQueueStateData.swift */,
+				6AEA438F27C3D93600BFD56F /* ChatData.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -487,6 +496,7 @@
 				6A0F58F827B2D32B00EA9047 /* OnQueueResponseDTO.swift */,
 				6A0F590E27B6A5A300EA9047 /* OnQueueRequestDTO.swift */,
 				6AEA437627BF88AF00BFD56F /* MyQueueStateResponseDTO.swift */,
+				6AEA438D27C3D91300BFD56F /* ChatResponseDTO.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -935,6 +945,7 @@
 		6AEA437A27C25AC500BFD56F /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				6AEA438827C3CD0500BFD56F /* ChatUseCase.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -995,6 +1006,7 @@
 				6AA1380727AE1DA80076CF40 /* Toast */,
 				6AA1383727B008D00076CF40 /* SnapKit */,
 				6A0F592527B7DC9B00EA9047 /* RxKeyboard */,
+				6AEA438B27C3D85100BFD56F /* SocketIO */,
 			);
 			productName = SeSACFriendsApp;
 			productReference = 6AE45807279679FD006B142C /* SeSACFriendsApp.app */;
@@ -1031,6 +1043,7 @@
 				6AA1380627AE1DA80076CF40 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				6AA1383627B008CF0076CF40 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				6A0F592427B7DC9A00EA9047 /* XCRemoteSwiftPackageReference "RxKeyboard" */,
+				6AEA438A27C3D85000BFD56F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = 6AE45808279679FD006B142C /* Products */;
 			projectDirPath = "";
@@ -1137,10 +1150,12 @@
 				6A0F591127B6ABDF00EA9047 /* FirebaseRepositoryInterface.swift in Sources */,
 				6AA1381027AE682A0076CF40 /* MyProfileViewModel.swift in Sources */,
 				6AA137D227A795A90076CF40 /* FriendsViewController.swift in Sources */,
+				6AEA439027C3D93600BFD56F /* ChatData.swift in Sources */,
 				6AE4580F279679FD006B142C /* OnboardingViewController.swift in Sources */,
 				6A0AB7CC279D06D6009C80E9 /* UIViewController+Extension.swift in Sources */,
 				6AAC70B8279FF25B003FCD27 /* Login2ViewModel.swift in Sources */,
 				6AAC70A0279E97D2003FCD27 /* AppCoordinator.swift in Sources */,
+				6AEA438927C3CD0500BFD56F /* ChatUseCase.swift in Sources */,
 				6AAC70AB279EBC4E003FCD27 /* LoginToastMessage.swift in Sources */,
 				6AAC70BE27A0070D003FCD27 /* NicknameView.swift in Sources */,
 				6A0AB7D8279D101A009C80E9 /* Login2View.swift in Sources */,
@@ -1234,6 +1249,7 @@
 				6A0F58EA27B0E39700EA9047 /* HomeView.swift in Sources */,
 				6AAC70CC27A020B2003FCD27 /* BirthViewController.swift in Sources */,
 				6A0F58F127B2A3A800EA9047 /* HomeViewModel.swift in Sources */,
+				6AEA438E27C3D91300BFD56F /* ChatResponseDTO.swift in Sources */,
 				6AAC70CA27A020A8003FCD27 /* BirthView.swift in Sources */,
 				6AAC70C427A01F31003FCD27 /* BirthViewModel.swift in Sources */,
 				6AA137E727A9433C0076CF40 /* MyProfileView.swift in Sources */,
@@ -1504,6 +1520,14 @@
 				kind = branch;
 			};
 		};
+		6AEA438A27C3D85000BFD56F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1551,6 +1575,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6AA1383627B008CF0076CF40 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		6AEA438B27C3D85100BFD56F /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6AEA438A27C3D85000BFD56F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

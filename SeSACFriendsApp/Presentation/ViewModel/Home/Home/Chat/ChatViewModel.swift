@@ -9,5 +9,11 @@ import UIKit
 
 final class ChatViewModel: ViewModel {
 
-    
+    weak var coordinator: HomeCoordinator?
+    let useCase: ChatUseCase
+
+    init(coordinator: HomeCoordinator, useCase: ChatUseCase) {
+        self.coordinator = coordinator
+        self.useCase = useCase
+    }
 }

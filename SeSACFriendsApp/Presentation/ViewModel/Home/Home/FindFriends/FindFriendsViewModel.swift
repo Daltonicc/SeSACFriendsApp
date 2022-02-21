@@ -22,7 +22,7 @@ final class FindFriendsViewModel: ViewModel {
     var yourRegion: Int
     var yourLatitude: Double
     var yourLongitude: Double
-    var youWantHobbyList: [String] = []
+    var youWantHobbyList: [String]
 
     var friendsNameArray: [String] = []
     var friendsSeSACImageArray: [UIImage] = []
