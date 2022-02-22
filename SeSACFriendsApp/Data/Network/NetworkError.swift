@@ -95,3 +95,28 @@ extension QueueNetworkError: LocalizedError {
         }
     }
 }
+
+enum ChatError: Int, Error {
+    case cannotSendMessage = 201
+    case firebaseIdTokenExpired = 401
+    case notRegisteredUser = 406
+    case serverError = 500
+    case headerOrBodyError = 501
+}
+
+extension ChatError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .cannotSendMessage:
+            return "매칭 해제 상태입니다. 메세지를 보낼 수 없습니다"
+        case .firebaseIdTokenExpired:
+            return "토큰 만료"
+        case .notRegisteredUser:
+            return "등록되지 않은 유저입니다."
+        case .serverError:
+            return "잠시 후 시도해주세요"
+        case .headerOrBodyError:
+            return "유효하지 않은 요청입니다."
+        }
+    }
+}

@@ -25,6 +25,6 @@ extension ChatResponseDTO {
         return .init(toID: to,
                      FromID: from,
                      chatMessage: chat,
-                     createdDt: createdAt)
+                     createdAt: createdAt)
     }
 }

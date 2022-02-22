@@ -11,5 +11,5 @@ struct ChatData {
     let toID: String
     let FromID: String
     let chatMessage: String
-    let createdDt: String
+    let createdAt: String
 }

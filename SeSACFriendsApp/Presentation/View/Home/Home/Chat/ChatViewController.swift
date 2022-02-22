@@ -13,6 +13,8 @@ final class ChatViewController: BaseViewController {
 
     let mainView = ChatView()
 
+    var list: [ChatData] = []
+
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -55,6 +57,20 @@ final class ChatViewController: BaseViewController {
 
     override func buttonConfig() {
 
+    }
+
+    @objc func getMessage(notification: NSNotification) {
+
+        let chat = notification.userInfo!["chat"] as! String
+        let toID = notification.userInfo!["to"] as! String
+        let fromID = notification.userInfo!["from"] as! String
+        let createdAt = notification.userInfo!["createdAt"] as! String
+
+        let value = ChatData(toID: toID, FromID: fromID, chatMessage: chat, createdAt: createdAt)
+
+        list.append(value)
+        mainView.chatTableView.reloadData()
+        mainView.chatTableView.scrollToRow(at: IndexPath(row: list.count - 1, section: 0), at: .bottom, animated: false)
     }
 
 }

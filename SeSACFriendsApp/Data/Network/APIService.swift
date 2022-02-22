@@ -22,6 +22,9 @@ enum SeSACFriendsAPI {
     case hobbyRequest(parameter: [String: Any])
     case hobbyAccept(parameter: [String: Any])
 
+    // Chat
+    case postChat(parameter: [String: Any], otherUID: String)
+
     // Profile
     case updateUserData(parameter: [String: Any])
     case withdrawUser
@@ -48,6 +51,9 @@ extension SeSACFriendsAPI: TargetType {
         case .hobbyRequest: return "/queue/hobbyrequest"
         case .hobbyAccept: return "/queue/hobbyaccept"
 
+        // Chat
+        case .postChat(_, let otherUID): return "/chat/\(otherUID)"
+
         // Profile
         case .updateUserData: return "/user/update/mypage"
         case .withdrawUser: return "/user/withdraw"
@@ -67,6 +73,9 @@ extension SeSACFriendsAPI: TargetType {
         case .suspendFindFriends: return .delete
         case .checkMyQueueState: return .get
         case .hobbyRequest, .hobbyAccept: return .post
+
+        // Chat
+        case .postChat: return .post
 
         // Profile
         case .updateUserData: return .post
@@ -91,6 +100,10 @@ extension SeSACFriendsAPI: TargetType {
         case .suspendFindFriends, .checkMyQueueState:
             return .requestPlain
         case .hobbyRequest(let parameter), .hobbyAccept(parameter: let parameter):
+            return .requestParameters(parameters: parameter, encoding: URLEncoding.httpBody)
+
+        // Chat
+        case .postChat(let parameter, _):
             return .requestParameters(parameters: parameter, encoding: URLEncoding.httpBody)
 
         // Profile

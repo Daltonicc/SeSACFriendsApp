@@ -12,6 +12,7 @@ final class MyChatTableViewCell: UITableViewCell {
 
     let myChatView: UIView = {
         let view = UIView()
+        view.backgroundColor = .baseGreen
         return view
     }()
     let myChatLabel: UILabel = {
