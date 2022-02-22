@@ -75,7 +75,7 @@ final class FindHobbyViewModel: ViewModel {
             "lat": yourLatitude,
             "hf": youWantHobbyList
         ]
-        print(parameter)
+        UserDefaults.standard.set(youWantHobbyList, forKey: "hobbyList")
 
         useCase.requestFindFriends(parameter: parameter) { [weak self] error in
             if let error = error {
@@ -85,8 +85,11 @@ final class FindHobbyViewModel: ViewModel {
                                                        yourLatitude: self?.yourLatitude ?? 0,
                                                        yourLongitude: self?.yourLongitude ?? 0,
                                                        youWantHobbyList: self?.youWantHobbyList ?? [])
+                let yourState: StatusButtonState = .matchingFriends
+                UserDefaultsRepository.saveHomeStatusButtonState(state: yourState.rawValue)
             }
         }
+
     }
 
     func showKeyboard(findButton: CustomButton, view: UIView) {

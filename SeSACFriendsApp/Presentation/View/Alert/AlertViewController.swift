@@ -61,6 +61,7 @@ final class AlertViewController: BaseViewController {
                     self?.addPressAnimationToButton(self?.mainView.okButton ?? CustomButton(), completion: { [weak self] _ in
                         self?.viewModel?.hobbyAccept(completion: { [weak self] message in
                             self?.mainView.makeToast(message)
+                            self?.dismiss(animated: true, completion: nil)
                         })
                     })
                 }

@@ -17,4 +17,7 @@ enum UserDefaultKey {
     static let birth = "birth"
     static let email = "email"
     static let gender = "gender"
+    static let yourUIDForChat = "yourUID"
+    static let otherUIDForChat = "otherUID"
+    static let homeStatusButtonState = "statusButtonState"
 }

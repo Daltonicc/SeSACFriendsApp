@@ -42,6 +42,7 @@ struct GetUserResponseDTO: Codable {
 extension GetUserResponseDTO {
     func toDomain() -> UserData {
         return .init(yourName: nick,
+                     yourUID: uid,
                      gender: gender,
                      hobby: hobby,
                      sesacImage: sesac,

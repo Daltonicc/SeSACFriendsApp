@@ -37,6 +37,7 @@ final class AlertViewModel: ViewModel {
         let parameter: [String: Any] = [
             "otheruid": friendsID ?? ""
         ]
+        UserDefaultsRepository.saveOtherUIDForChat(otherUID: friendsID ?? "")
         useCase.hobbyRequest(parameter: parameter) { error in
             if let error = error {
                 completion(error.errorDescription!)
@@ -51,11 +52,15 @@ final class AlertViewModel: ViewModel {
         let parameter: [String: Any] = [
             "otheruid": friendsID ?? ""
         ]
-        useCase.hobbyAccept(parameter: parameter) { error in
+        UserDefaultsRepository.saveOtherUIDForChat(otherUID: friendsID ?? "")
+        useCase.hobbyAccept(parameter: parameter) { [weak self] error in
             if let error = error {
                 completion(error.errorDescription!)
             } else {
                 // 채팅뷰로 보내기
+                self?.coordinator?.showChatView()
+                let yourState: StatusButtonState = .matchedFriends
+                UserDefaultsRepository.saveHomeStatusButtonState(state: yourState.rawValue)
             }
         }
     }

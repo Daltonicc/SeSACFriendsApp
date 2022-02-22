@@ -45,6 +45,18 @@ final class UserDefaultsRepository {
         UserDefaults.standard.set(gender, forKey: UserDefaultKey.gender)
     }
 
+    static func saveYourUIDForChat(yourUID: String) {
+        UserDefaults.standard.set(yourUID, forKey: UserDefaultKey.yourUIDForChat)
+    }
+
+    static func saveOtherUIDForChat(otherUID: String) {
+        UserDefaults.standard.set(otherUID, forKey: UserDefaultKey.otherUIDForChat)
+    }
+
+    static func saveHomeStatusButtonState(state: String) {
+        UserDefaults.standard.set(state, forKey: UserDefaultKey.homeStatusButtonState)
+    }
+
     static func fetchFirstLoginCheck() -> Bool {
         return UserDefaults.standard.bool(forKey: UserDefaultKey.firstLoginCheck)
     }
@@ -59,6 +71,27 @@ final class UserDefaultsRepository {
 
     static func fetchUserIDToken() -> String {
         return UserDefaults.standard.string(forKey: UserDefaultKey.idToken)!
+    }
+
+    static func fetchYourUIDForChat() -> String {
+        return UserDefaults.standard.string(forKey: UserDefaultKey.yourUIDForChat)!
+    }
+
+    static func fetchOtherUIDForChat() -> String {
+        return UserDefaults.standard.string(forKey: UserDefaultKey.otherUIDForChat)!
+    }
+
+    static func fetchHomeStatusButtonState() -> StatusButtonState {
+
+        let state = UserDefaults.standard.string(forKey: UserDefaultKey.homeStatusButtonState)!
+        var changeState: StatusButtonState = .normal
+        switch state {
+        case "normal": changeState = .normal
+        case "matchingFriends": changeState = .matchingFriends
+        case "matchedFriends": changeState = .matchedFriends
+        default: print("Default HomeStatusButtoState")
+        }
+        return changeState
     }
 
     static func requestRegisterUser() -> [String: Any] {

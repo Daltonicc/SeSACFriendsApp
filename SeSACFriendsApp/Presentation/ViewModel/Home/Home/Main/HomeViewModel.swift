@@ -24,6 +24,7 @@ final class HomeViewModel: ViewModel {
     var yourRegion: Int = 0
     var yourLatitude: Double = 0
     var yourLongitude: Double = 0
+    var youWantHobbyList: [String] = []
 
     init(coordinator: HomeCoordinator, useCase: HomeUseCase) {
         self.coordinator = coordinator
@@ -137,6 +138,15 @@ final class HomeViewModel: ViewModel {
 
     func showFindHobbyView() {
         coordinator?.showFindHobbyView(region: yourRegion, yourLatitude: yourLatitude, yourLongitude: yourLongitude)
+    }
+
+    func showFindFriendsView() {
+        youWantHobbyList = UserDefaults.standard.object(forKey: "hobbyList") as! [String]
+        coordinator?.showFindFriendsView(region: yourRegion, yourLatitude: yourLatitude, yourLongitude: yourLongitude, youWantHobbyList: youWantHobbyList)
+    }
+
+    func showChatView() {
+        coordinator?.showChatView()
     }
 
 }

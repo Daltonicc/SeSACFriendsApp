@@ -35,6 +35,12 @@ final class HomeViewController: BaseViewController {
         self.view = mainView
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        statusButtonConfig()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -65,10 +71,22 @@ final class HomeViewController: BaseViewController {
         mainView.statusButton.rx.tap
             .bind { [weak self] in
                 self?.addPressAnimationToButton(self?.mainView.statusButton ?? CustomButton()) { [weak self] _ in
-                    self?.viewModel?.showFindHobbyView()
+                    switch self?.mainView.statusButtonState {
+                    case .normal:
+                        self?.viewModel?.showFindHobbyView()
+                    case .matchingFriends:
+                        self?.viewModel?.showFindFriendsView()
+                    case .matchedFriends:
+                        self?.viewModel?.showChatView()
+                    default: print("Default Status")
+                    }
                 }
             }
             .disposed(by: disposeBag)
+    }
+
+    func statusButtonConfig() {
+        mainView.statusButtonState = UserDefaultsRepository.fetchHomeStatusButtonState()
     }
 
     override func setViewConfig() {

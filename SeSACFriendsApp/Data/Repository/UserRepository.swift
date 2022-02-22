@@ -27,8 +27,10 @@ final class UserRepository: UserRepositoryInterface {
 
                 let statusCodeCheck = self.statusCodeCheck(statusCode: statusCode)
                 if let data = try? response.map(GetUserResponseDTO.self).toDomain() {
-                    // 카테고리에서 보여줄 닉네임만 유저디폴트에 저장해놓기
+                    // 카테고리에서 보여줄 닉네임, 채팅에 활용할 내 UID 유저디폴트에 저장해놓기
                     UserDefaultsRepository.saveNickname(nickname: data.yourName)
+                    UserDefaultsRepository.saveYourUIDForChat(yourUID: data.yourUID)
+
                     if statusCodeCheck == nil {
                         completion(.success(data))
                     } else {

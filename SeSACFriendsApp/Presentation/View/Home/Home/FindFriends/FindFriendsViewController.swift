@@ -127,7 +127,7 @@ final class FindFriendsViewController: BaseViewController, CustomMenuBarDelegate
         backBarButton.target = self
         backBarButton.rx.tap
             .bind { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
+                self?.navigationController?.popToRootViewController(animated: true)
             }
             .disposed(by: disposeBag)
     }

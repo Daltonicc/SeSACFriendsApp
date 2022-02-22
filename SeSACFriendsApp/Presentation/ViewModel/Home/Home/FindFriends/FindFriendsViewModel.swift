@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Alamofire
 import UIKit
 
 enum SuspendFindFriendsCase {
@@ -94,12 +93,18 @@ final class FindFriendsViewModel: ViewModel {
             } else {
                 // 어떤 버튼 눌렀는지에 따라 분기처리.
                 switch self?.suspendFindFriendsCase {
-                case .tapChangeHobbyButton: self?.coordinator?.presenter.popViewController(animated: true)
-                case .tapFindingSuspendButton: self?.coordinator?.presenter.popToRootViewController(animated: true)
-                default: self?.coordinator?.presenter.popViewController(animated: true)
+                case .tapChangeHobbyButton:
+                    self?.coordinator?.presenter.popViewController(animated: true)
+                case .tapFindingSuspendButton:
+                    self?.coordinator?.presenter.popToRootViewController(animated: true)
+                default:
+                    self?.coordinator?.presenter.popViewController(animated: true)
                 }
+                let yourState: StatusButtonState = .normal
+                UserDefaultsRepository.saveHomeStatusButtonState(state: yourState.rawValue)
             }
         }
+
     }
 
     func checkMyQueueState(completion: @escaping (String?) -> Void) {

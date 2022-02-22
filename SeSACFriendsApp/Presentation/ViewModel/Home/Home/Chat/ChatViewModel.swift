@@ -9,22 +9,24 @@ import UIKit
 
 final class ChatViewModel: ViewModel {
 
-    weak var coordinator: HomeCoordinator?
+    weak var coordinator: Coordinator?
     let useCase: ChatUseCase
+    let yourUID: String
     let otherUID: String
 
     var chatList: [ChatData] = []
 
-    init(coordinator: HomeCoordinator, otherUID: String, useCase: ChatUseCase) {
+    init(coordinator: Coordinator, yourUID: String, otherUID: String, useCase: ChatUseCase) {
         self.coordinator = coordinator
+        self.yourUID = yourUID
         self.otherUID = otherUID
         self.useCase = useCase
     }
 
-    func postChat(completion: @escaping (String?) -> Void) {
+    func postChat(chatMessage: String, completion: @escaping (String?) -> Void) {
 
         let parameter: [String: Any] = [
-            "chat": "테스트"
+            "chat": chatMessage
         ]
 
         useCase.postChat(parameter: parameter, otherUID: otherUID) { [weak self] (result) in

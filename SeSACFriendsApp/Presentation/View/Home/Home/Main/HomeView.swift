@@ -9,6 +9,12 @@ import UIKit
 import SnapKit
 import NMapsMap
 
+enum StatusButtonState: String {
+    case normal
+    case matchingFriends
+    case matchedFriends
+}
+
 final class HomeView: UIView, ViewRepresentable {
 
     let mapView: NMFNaverMapView = {
@@ -73,11 +79,20 @@ final class HomeView: UIView, ViewRepresentable {
         return button
     }()
 
+    var statusButtonState: StatusButtonState = .normal {
+        didSet {
+            statusButtonConfig()
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         setUpView()
         setUpConstraint()
+        statusButtonConfig()
+
+        UserDefaultsRepository.saveHomeStatusButtonState(state: statusButtonState.rawValue)
     }
 
     required init?(coder: NSCoder) {
@@ -118,6 +133,17 @@ final class HomeView: UIView, ViewRepresentable {
             make.trailing.equalToSuperview().inset(16)
             make.width.height.equalTo(64)
         }
+    }
 
+    func statusButtonConfig() {
+
+        switch statusButtonState {
+        case .normal:
+            statusButton.setImage(Asset.Home.basicStatusFriendsImage.image.resized(to: CGSize(width: 50, height: 50)), for: .normal)
+        case .matchingFriends:
+            statusButton.setImage(Asset.Home.searchingFriendsImage.image.resized(to: CGSize(width: 50, height: 50)), for: .normal)
+        case .matchedFriends:
+            statusButton.setImage(Asset.Home.matchedFriendsImage.image.resized(to: CGSize(width: 50, height: 50)), for: .normal)
+        }
     }
 }

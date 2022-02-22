@@ -1,7 +1,7 @@
 only_rules:
   - colon
   - fatal_error_message
-  - force_cast
+#  - force_cast
   - force_try
 #  - force_unwrapping
   - implicitly_unwrapped_optional

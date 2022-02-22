@@ -25,6 +25,7 @@ final class ChatViewController: BaseViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         mainView.plusView.isHidden = true
+
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -42,7 +43,7 @@ final class ChatViewController: BaseViewController {
         backBarButton.target = self
         backBarButton.rx.tap
             .bind { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
+                self?.navigationController?.popToRootViewController(animated: true)
             }
             .disposed(by: disposeBag)
 
@@ -55,7 +56,12 @@ final class ChatViewController: BaseViewController {
 
         mainView.chatTextView.sendButton.rx.tap
             .bind { [weak self] in
-                self?.viewModel?.postChat()
+                self?.viewModel?.postChat(chatMessage: self?.mainView.chatTextView.mainTextField.text ?? "",
+                                          completion: { errorMessage in
+                    self?.mainView.makeToast(errorMessage)
+                    self?.mainView.chatTextView.mainTextField.text = ""
+                    self?.mainView.chatTableView.reloadData()
+                })
             }
             .disposed(by: disposeBag)
     }
@@ -66,6 +72,8 @@ final class ChatViewController: BaseViewController {
         mainView.chatTableView.dataSource = self
         mainView.chatTableView.register(MyChatTableViewCell.self, forCellReuseIdentifier: MyChatTableViewCell.identifier)
         mainView.chatTableView.register(YourChatTableViewCell.self, forCellReuseIdentifier: YourChatTableViewCell.identifier)
+
+        SocketIOManager.shared.establishConnection()
 
         NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
     }
@@ -83,7 +91,8 @@ final class ChatViewController: BaseViewController {
 
         let value = ChatData(toID: toID, FromID: fromID, chatMessage: chat, createdAt: createdAt)
 
-        list.append(value)
+        viewModel?.chatList.append(value)
+
         mainView.chatTableView.reloadData()
         mainView.chatTableView.scrollToRow(at: IndexPath(row: list.count - 1, section: 0), at: .bottom, animated: false)
     }
@@ -93,7 +102,7 @@ final class ChatViewController: BaseViewController {
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel?.chatList.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,6 +110,14 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         guard let myCell = tableView.dequeueReusableCell(withIdentifier: MyChatTableViewCell.identifier, for: indexPath) as? MyChatTableViewCell else { return UITableViewCell() }
         guard let yourCell = tableView.dequeueReusableCell(withIdentifier: YourChatTableViewCell.identifier, for: indexPath) as? YourChatTableViewCell else { return UITableViewCell() }
 
-        return myCell
+        let data = viewModel?.chatList[indexPath.row]
+
+        if data?.FromID == viewModel?.yourUID {
+            myCell.myChatLabel.text = data?.chatMessage
+            return myCell
+        } else {
+            yourCell.yourChatLabel.text = data?.chatMessage
+            return yourCell
+        }
     }
 }

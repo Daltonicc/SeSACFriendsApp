@@ -38,4 +38,17 @@ extension Coordinator {
 
         presenter.present(alertView, animated: true, completion: nil)
     }
+
+    // Chat
+    func showChatView() {
+
+        let chatView = ChatViewController()
+
+        chatView.viewModel = ChatViewModel(coordinator: self,
+                                           yourUID: UserDefaultsRepository.fetchYourUIDForChat(),
+                                           otherUID: UserDefaultsRepository.fetchOtherUIDForChat(),
+                                           useCase: ChatUseCase(repository: ChatRepository(),
+                                                                firebaseRepository: FirebaseRepository()))
+        presenter.pushViewController(chatView, animated: true)
+    }
 }

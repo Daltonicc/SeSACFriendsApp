@@ -16,7 +16,7 @@ final class YourChatTableViewCell: UITableViewCell {
         view.layer.borderColor = UIColor.gray3.cgColor
         return view
     }()
-    let yourChatLabel: UILabel = {
+    var yourChatLabel: UILabel = {
         let label = UILabel()
         return label
     }()

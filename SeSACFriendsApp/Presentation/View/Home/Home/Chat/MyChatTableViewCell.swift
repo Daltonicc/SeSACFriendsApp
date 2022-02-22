@@ -15,7 +15,7 @@ final class MyChatTableViewCell: UITableViewCell {
         view.backgroundColor = .baseGreen
         return view
     }()
-    let myChatLabel: UILabel = {
+    var myChatLabel: UILabel = {
         let label = UILabel()
         return label
     }()
