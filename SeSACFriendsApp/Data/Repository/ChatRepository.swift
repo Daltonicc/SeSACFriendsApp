@@ -21,7 +21,6 @@ final class ChatRepository: ChatRepositoryInterface {
 
                 let statusCodeCheck = self.statusCodeCheck(statusCode: statusCode)
                 if let data = try? response.map(ChatResponseDTO.self).toDomain() {
-                    print(data)
                     if statusCodeCheck == nil {
                         completion(.success(data))
                     } else {

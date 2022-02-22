@@ -83,7 +83,7 @@ final class UserDefaultsRepository {
 
     static func fetchHomeStatusButtonState() -> StatusButtonState {
 
-        let state = UserDefaults.standard.string(forKey: UserDefaultKey.homeStatusButtonState)!
+        let state = UserDefaults.standard.string(forKey: UserDefaultKey.homeStatusButtonState) ?? "normal"
         var changeState: StatusButtonState = .normal
         switch state {
         case "normal": changeState = .normal

@@ -89,7 +89,12 @@ final class FindFriendsViewModel: ViewModel {
 
         useCase.suspendFindFriends { [weak self] error in
             if let error = error {
+
+                if error == .youAlreadyMatched {
+                    self?.coordinator?.showChatView()
+                }
                 completion(error.errorDescription!)
+
             } else {
                 // 어떤 버튼 눌렀는지에 따라 분기처리.
                 switch self?.suspendFindFriendsCase {

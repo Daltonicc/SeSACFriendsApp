@@ -59,8 +59,8 @@ final class ChatViewController: BaseViewController {
                 self?.viewModel?.postChat(chatMessage: self?.mainView.chatTextView.mainTextField.text ?? "",
                                           completion: { errorMessage in
                     self?.mainView.makeToast(errorMessage)
-                    self?.mainView.chatTextView.mainTextField.text = ""
                     self?.mainView.chatTableView.reloadData()
+                    self?.mainView.chatTextView.mainTextField.text = ""
                 })
             }
             .disposed(by: disposeBag)
@@ -72,6 +72,7 @@ final class ChatViewController: BaseViewController {
         mainView.chatTableView.dataSource = self
         mainView.chatTableView.register(MyChatTableViewCell.self, forCellReuseIdentifier: MyChatTableViewCell.identifier)
         mainView.chatTableView.register(YourChatTableViewCell.self, forCellReuseIdentifier: YourChatTableViewCell.identifier)
+        mainView.chatTableView.separatorStyle = .none
 
         SocketIOManager.shared.establishConnection()
 
@@ -84,6 +85,8 @@ final class ChatViewController: BaseViewController {
 
     @objc func getMessage(notification: NSNotification) {
 
+        print("getMessage!!!!")
+
         let chat = notification.userInfo!["chat"] as! String
         let toID = notification.userInfo!["to"] as! String
         let fromID = notification.userInfo!["from"] as! String
@@ -92,11 +95,11 @@ final class ChatViewController: BaseViewController {
         let value = ChatData(toID: toID, FromID: fromID, chatMessage: chat, createdAt: createdAt)
 
         viewModel?.chatList.append(value)
+        print(viewModel?.chatList)
 
         mainView.chatTableView.reloadData()
-        mainView.chatTableView.scrollToRow(at: IndexPath(row: list.count - 1, section: 0), at: .bottom, animated: false)
+//        mainView.chatTableView.scrollToRow(at: IndexPath(row: viewModel?.chatList.count - 1, section: 0), at: .bottom, animated: false)
     }
-
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {

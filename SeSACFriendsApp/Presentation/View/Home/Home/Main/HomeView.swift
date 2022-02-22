@@ -79,7 +79,7 @@ final class HomeView: UIView, ViewRepresentable {
         return button
     }()
 
-    var statusButtonState: StatusButtonState = .normal {
+    var statusButtonState: StatusButtonState = UserDefaultsRepository.fetchHomeStatusButtonState() {
         didSet {
             statusButtonConfig()
         }

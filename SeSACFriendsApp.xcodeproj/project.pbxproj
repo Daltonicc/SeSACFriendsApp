@@ -140,12 +140,12 @@
 		6AEA438527C3A37500BFD56F /* MyChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA438427C3A37500BFD56F /* MyChatTableViewCell.swift */; };
 		6AEA438727C3A37F00BFD56F /* YourChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA438627C3A37F00BFD56F /* YourChatTableViewCell.swift */; };
 		6AEA438927C3CD0500BFD56F /* ChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA438827C3CD0500BFD56F /* ChatUseCase.swift */; };
-		6AEA438C27C3D85100BFD56F /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 6AEA438B27C3D85100BFD56F /* SocketIO */; };
 		6AEA438E27C3D91300BFD56F /* ChatResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA438D27C3D91300BFD56F /* ChatResponseDTO.swift */; };
 		6AEA439027C3D93600BFD56F /* ChatData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA438F27C3D93600BFD56F /* ChatData.swift */; };
 		6AEA439227C3E23D00BFD56F /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA439127C3E23D00BFD56F /* SocketIOManager.swift */; };
 		6AEA439427C4C46500BFD56F /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA439327C4C46500BFD56F /* ChatRepository.swift */; };
 		6AEA439627C4C48D00BFD56F /* ChatRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA439527C4C48D00BFD56F /* ChatRepositoryInterface.swift */; };
+		6AEA439927C550D900BFD56F /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 6AEA439827C550D900BFD56F /* SocketIO */; };
 		E630DCBF2FEE6DDAED9D4118 /* Pods_SeSACFriendsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 763EF621F280237A9391E457 /* Pods_SeSACFriendsApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -297,7 +297,7 @@
 				6AA137F627AE1D3F0076CF40 /* Moya in Frameworks */,
 				6AA1380827AE1DA80076CF40 /* Toast in Frameworks */,
 				6AA137FD27AE1D4E0076CF40 /* RxSwift in Frameworks */,
-				6AEA438C27C3D85100BFD56F /* SocketIO in Frameworks */,
+				6AEA439927C550D900BFD56F /* SocketIO in Frameworks */,
 				6AA137FB27AE1D4E0076CF40 /* RxRelay in Frameworks */,
 				6AA1383827B008D00076CF40 /* SnapKit in Frameworks */,
 				6AA1380327AE1D980076CF40 /* FirebaseAuth in Frameworks */,
@@ -1015,7 +1015,7 @@
 				6AA1380727AE1DA80076CF40 /* Toast */,
 				6AA1383727B008D00076CF40 /* SnapKit */,
 				6A0F592527B7DC9B00EA9047 /* RxKeyboard */,
-				6AEA438B27C3D85100BFD56F /* SocketIO */,
+				6AEA439827C550D900BFD56F /* SocketIO */,
 			);
 			productName = SeSACFriendsApp;
 			productReference = 6AE45807279679FD006B142C /* SeSACFriendsApp.app */;
@@ -1052,7 +1052,7 @@
 				6AA1380627AE1DA80076CF40 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				6AA1383627B008CF0076CF40 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				6A0F592427B7DC9A00EA9047 /* XCRemoteSwiftPackageReference "RxKeyboard" */,
-				6AEA438A27C3D85000BFD56F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				6AEA439727C550D900BFD56F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = 6AE45808279679FD006B142C /* Products */;
 			projectDirPath = "";
@@ -1532,12 +1532,12 @@
 				kind = branch;
 			};
 		};
-		6AEA438A27C3D85000BFD56F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+		6AEA439727C550D900BFD56F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 15.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1588,9 +1588,9 @@
 			package = 6AA1383627B008CF0076CF40 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		6AEA438B27C3D85100BFD56F /* SocketIO */ = {
+		6AEA439827C550D900BFD56F /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6AEA438A27C3D85000BFD56F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			package = 6AEA439727C550D900BFD56F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
 			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
