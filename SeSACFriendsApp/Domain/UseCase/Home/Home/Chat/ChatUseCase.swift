@@ -9,11 +9,34 @@ import UIKit
 
 final class ChatUseCase {
 
-    let repository: QueueRepositoryInterface
+    let repository: ChatRepositoryInterface
     let firebaseRepository: FirebaseRepositoryInterface
 
-    init(repository: QueueRepositoryInterface, firebaseRepository: FirebaseRepositoryInterface) {
+    init(repository: ChatRepositoryInterface, firebaseRepository: FirebaseRepositoryInterface) {
         self.repository = repository
         self.firebaseRepository = firebaseRepository
+    }
+
+    func postChat(parameter: [String: Any], otherUID: String, completion: @escaping (Result<ChatData, ChatError>) -> Void) {
+
+        repository.postChat(parameter: parameter, otherUID: otherUID) { (result) in
+            switch result {
+            case let .success(data):
+                completion(.success(data))
+            case let .failure(error):
+                if error == .firebaseIdTokenExpired {
+                    self.firebaseRepository.refreshIDToken {
+                        self.repository.postChat(parameter: parameter, otherUID: otherUID, completion: { (result) in
+                            switch result {
+                            case let .success(data): completion(.success(data))
+                            case let .failure(error): completion(.failure(error))
+                            }
+                        })
+                    }
+                } else {
+                    completion(.failure(error))
+                }
+            }
+        }
     }
 }

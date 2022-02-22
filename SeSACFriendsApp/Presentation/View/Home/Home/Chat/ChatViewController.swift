@@ -12,6 +12,7 @@ import RxCocoa
 final class ChatViewController: BaseViewController {
 
     let mainView = ChatView()
+    var viewModel: ChatViewModel?
 
     var list: [ChatData] = []
 
@@ -24,6 +25,12 @@ final class ChatViewController: BaseViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         mainView.plusView.isHidden = true
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        SocketIOManager.shared.closeConnection()
     }
 
     override func navigationItemConfig() {
@@ -45,6 +52,12 @@ final class ChatViewController: BaseViewController {
                 self?.mainView.plusView.isHidden.toggle()
             }
             .disposed(by: disposeBag)
+
+        mainView.chatTextView.sendButton.rx.tap
+            .bind { [weak self] in
+                self?.viewModel?.postChat()
+            }
+            .disposed(by: disposeBag)
     }
 
     override func setViewConfig() {
@@ -53,6 +66,8 @@ final class ChatViewController: BaseViewController {
         mainView.chatTableView.dataSource = self
         mainView.chatTableView.register(MyChatTableViewCell.self, forCellReuseIdentifier: MyChatTableViewCell.identifier)
         mainView.chatTableView.register(YourChatTableViewCell.self, forCellReuseIdentifier: YourChatTableViewCell.identifier)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
     }
 
     override func buttonConfig() {
