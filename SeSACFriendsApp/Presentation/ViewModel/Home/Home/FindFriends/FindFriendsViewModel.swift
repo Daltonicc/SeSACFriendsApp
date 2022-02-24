@@ -87,10 +87,13 @@ final class FindFriendsViewModel: ViewModel {
 
     func suspendFindFriends(completion: @escaping (String) -> Void) {
 
+        let yourState: StatusButtonState = .normal
         useCase.suspendFindFriends { [weak self] error in
             if let error = error {
 
                 if error == .youAlreadyMatched {
+                    yourState = .matchedFriends
+                    UserDefaultsRepository.saveHomeStatusButtonState(state: yourState.rawValue)
                     self?.coordinator?.showChatView()
                 }
                 completion(error.errorDescription!)
@@ -105,7 +108,7 @@ final class FindFriendsViewModel: ViewModel {
                 default:
                     self?.coordinator?.presenter.popViewController(animated: true)
                 }
-                let yourState: StatusButtonState = .normal
+                yourState = .normal
                 UserDefaultsRepository.saveHomeStatusButtonState(state: yourState.rawValue)
             }
         }
