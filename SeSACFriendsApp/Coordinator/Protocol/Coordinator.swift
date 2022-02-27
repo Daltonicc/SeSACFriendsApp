@@ -43,6 +43,8 @@ extension Coordinator {
     func showChatView() {
 
         let chatView = ChatViewController()
+        let yourState: StatusButtonState = .matchedFriends
+        UserDefaultsRepository.saveHomeStatusButtonState(state: yourState.rawValue)
 
         chatView.viewModel = ChatViewModel(coordinator: self,
                                            yourUID: UserDefaultsRepository.fetchYourUIDForChat(),

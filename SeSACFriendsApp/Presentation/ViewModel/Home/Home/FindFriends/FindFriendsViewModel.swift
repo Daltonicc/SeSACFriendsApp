@@ -92,8 +92,6 @@ final class FindFriendsViewModel: ViewModel {
             if let error = error {
 
                 if error == .youAlreadyMatched {
-                    yourState = .matchedFriends
-                    UserDefaultsRepository.saveHomeStatusButtonState(state: yourState.rawValue)
                     self?.coordinator?.showChatView()
                 }
                 completion(error.errorDescription!)

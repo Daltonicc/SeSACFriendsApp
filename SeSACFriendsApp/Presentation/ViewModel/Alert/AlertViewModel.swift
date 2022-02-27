@@ -59,8 +59,6 @@ final class AlertViewModel: ViewModel {
             } else {
                 // 채팅뷰로 보내기
                 self?.coordinator?.showChatView()
-                let yourState: StatusButtonState = .matchedFriends
-                UserDefaultsRepository.saveHomeStatusButtonState(state: yourState.rawValue)
             }
         }
     }
