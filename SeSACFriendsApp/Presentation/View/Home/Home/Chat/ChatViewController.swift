@@ -81,6 +81,23 @@ final class ChatViewController: BaseViewController {
 
     override func buttonConfig() {
 
+        mainView.reportButton.rx.tap
+            .bind { [weak self] in
+
+            }
+            .disposed(by: disposeBag)
+
+        mainView.cancelButton.rx.tap
+            .bind { [weak self] in
+
+            }
+            .disposed(by: disposeBag)
+
+        mainView.reviewButton.rx.tap
+            .bind { [weak self] in
+
+            }
+            .disposed(by: disposeBag)
     }
 
     @objc func getMessage(notification: NSNotification) {
