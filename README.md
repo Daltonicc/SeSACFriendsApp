@@ -20,13 +20,18 @@
     Moya, Socket.IO, Firebase
     SnapKit, SwiftGen, SwiftLint, Toast, RxKeyboard, NMapsMap
 
+### Architecture
+
+* [Clean Architecture 적용기 (1) - MVVM과 Clean Architecture](https://daltonic.tistory.com/43)
+
+
 ### Issue
 
 * 
 
 ### Reflection
 
-* sad
+* 수정중
 
 *****
 
