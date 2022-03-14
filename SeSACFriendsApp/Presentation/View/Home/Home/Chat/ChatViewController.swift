@@ -109,7 +109,7 @@ final class ChatViewController: BaseViewController {
         let fromID = notification.userInfo!["from"] as! String
         let createdAt = notification.userInfo!["createdAt"] as! String
 
-        let value = ChatData(toID: toID, FromID: fromID, chatMessage: chat, createdAt: createdAt)
+        let value = ChatData(toID: toID, fromID: fromID, chatMessage: chat, createdAt: createdAt)
 
         viewModel?.chatList.append(value)
         print(viewModel?.chatList)
@@ -132,7 +132,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
         let data = viewModel?.chatList[indexPath.row]
 
-        if data?.FromID == viewModel?.yourUID {
+        if data?.fromID == viewModel?.yourUID {
             myCell.myChatLabel.text = data?.chatMessage
             return myCell
         } else {

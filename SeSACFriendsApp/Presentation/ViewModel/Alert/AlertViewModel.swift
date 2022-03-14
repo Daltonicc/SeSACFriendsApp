@@ -23,11 +23,9 @@ final class AlertViewModel: ViewModel {
 
         useCase.withdrawUserData { [weak self] error in
             if let error = error {
-                // 에러가 존재하면 관련 에러 토스트 메세지
                 completion(error.errorDescription)
             } else {
-                // 에러 없으면 업뎃 성공!
-                self?.coordinator?.finish()  
+                self?.coordinator?.finish()
             }
         }
     }

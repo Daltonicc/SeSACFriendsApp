@@ -9,7 +9,7 @@ import Foundation
 
 struct ChatData {
     let toID: String
-    let FromID: String
+    let fromID: String
     let chatMessage: String
     let createdAt: String
 }

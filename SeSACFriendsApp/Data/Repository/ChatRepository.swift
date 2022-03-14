@@ -7,7 +7,6 @@
 
 import Foundation
 import Moya
-import UIKit
 
 final class ChatRepository: ChatRepositoryInterface {
 
@@ -17,8 +16,6 @@ final class ChatRepository: ChatRepositoryInterface {
             switch result {
             case let .success(response):
                 let statusCode = response.statusCode
-                print("상태코드 :\(statusCode)")
-
                 let statusCodeCheck = self.statusCodeCheck(statusCode: statusCode)
                 if let data = try? response.map(ChatResponseDTO.self).toDomain() {
                     if statusCodeCheck == nil {
@@ -31,8 +28,6 @@ final class ChatRepository: ChatRepositoryInterface {
                 }
             case let .failure(MoyaError):
                 let errorCode = MoyaError.errorCode
-                print("에러코드: \(errorCode)")
-                print(MoyaError.localizedDescription)
             }
         }
     }

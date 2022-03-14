@@ -5,7 +5,7 @@
 //  Created by 박근보 on 2022/02/21.
 //
 
-import UIKit
+import Foundation
 
 final class ChatUseCase {
 
@@ -19,14 +19,14 @@ final class ChatUseCase {
 
     func postChat(parameter: [String: Any], otherUID: String, completion: @escaping (Result<ChatData, ChatError>) -> Void) {
 
-        repository.postChat(parameter: parameter, otherUID: otherUID) { (result) in
+        repository.postChat(parameter: parameter, otherUID: otherUID) { [weak self] (result) in
             switch result {
             case let .success(data):
                 completion(.success(data))
             case let .failure(error):
                 if error == .firebaseIdTokenExpired {
-                    self.firebaseRepository.refreshIDToken {
-                        self.repository.postChat(parameter: parameter, otherUID: otherUID, completion: { (result) in
+                    self?.firebaseRepository.refreshIDToken {
+                        self?.repository.postChat(parameter: parameter, otherUID: otherUID, completion: { (result) in
                             switch result {
                             case let .success(data): completion(.success(data))
                             case let .failure(error): completion(.failure(error))

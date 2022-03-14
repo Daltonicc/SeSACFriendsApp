@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - Chat
 struct ChatResponseDTO: Codable {
     let id: String
     let v: Int
@@ -23,7 +22,7 @@ struct ChatResponseDTO: Codable {
 extension ChatResponseDTO {
     func toDomain() -> ChatData {
         return .init(toID: to,
-                     FromID: from,
+                     fromID: from,
                      chatMessage: chat,
                      createdAt: createdAt)
     }
