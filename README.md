@@ -25,7 +25,7 @@
 #### MVVM-C + Clean Architecture
 
 * [Clean Architecture 적용기 (1) - MVVM과 Clean Architecture](https://daltonic.tistory.com/43)
-* [Clean Architecture 적용기 (1) - Dependency, Clean Architecture 적용 이유에 대하여](https://daltonic.tistory.com/44)
+* [Clean Architecture 적용기 (2) - Dependency, Clean Architecture 적용 이유에 대하여](https://daltonic.tistory.com/44)
 
 ### Issue
 
